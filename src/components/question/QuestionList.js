@@ -1,0 +1,566 @@
+import "../../css/QuestionBoard.css";
+import "../../css/EnrollQuestion.css";
+import React, { useState, useEffect } from "react";
+import QuestionBoardComponent from "../QuestionBoardComponent";
+import axios from 'axios';
+import EditorComponent from "../community/EditorComponent";
+
+
+const QuestionList = () => {
+  //페이징
+  const [questionList,setQuestionList] = useState([]);
+  const[search,setSearch]=useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages,setTotalpages]=useState(0); 
+  const [popupState, setPopupState] = useState(false);
+  
+  const [title, setTitle]=useState("");
+  const [description, setDescription]=useState("");
+  const [category, setCategory]=useState("카테고리1");
+  const [desc, setDesc] = useState("");
+  const [selectedFiles, setSelectedFiles] = useState([]);
+
+  const handleFileChange = (e) => {
+    const files = Array.from(e.target.files);
+    setSelectedFiles(files);
+    console.log("selectedFiles",selectedFiles)
+  };
+  
+
+
+  function getSearch() {
+    const validation = document.getElementById('searchInput').value;
+    setSearch(validation);
+    console.log(validation);
+  }
+
+  useEffect(() => {
+    
+
+    const apiUrl = '/api/v1/question';
+    const params = {
+      page:1
+    };
+    const queryString = Object.entries(params)
+    .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+    .join('&');
+  
+  const url = `${apiUrl}?${queryString}`;
+  
+    axios.get(url)
+      .then(response => {
+        setQuestionList(response.data.list);
+        console.log(response.data.list);
+        setTotalpages(response.data.cnt % 8 > 0 ? response.data.cnt/8 + 1 : response.data.cnt/8);
+      })
+      .catch(error => {
+        console.error('API 호출 중 에러:', error);
+      });
+  }, []);
+
+  
+
+
+ function getCategoryNum(num){
+  if(num=="Category A"){
+    return 1}else if(num=="Category B"){
+      return 2
+    }
+ }
+ function getSort(sort){
+  if(sort=="ascending"){
+    return "RECENT"
+  }else{
+    return "LAST"
+  }
+ }
+
+
+ function getCategoryArr(categorys){
+  let newCategorys=[];
+  for(let i=0; i< categorys.length;i++){
+    newCategorys.push(getCategoryNum(categorys[i]))
+  }
+  return newCategorys
+ }
+ const optionList = (paging) => {
+  const apiUrl = '/api/v1/question';
+  const sort = getSort(sortingOption);
+  const categoryPks = getCategoryArr(categoryOptions);
+  const levelPks = difficultyOptions;
+  const categoryPk = [];
+  const levelPk = [];
+  const params = {};
+  const pages=paging
+  console.log("!categoryPk",categoryPk)
+  console.log("sort",sort)
+  console.log("level",difficultyOptions)
+  if (sort !== null) {
+    params.sort = sort;
+  }
+  if (categoryPks !== null && categoryPks) {
+    for(let i=0;i<categoryPk.length;i++){
+      categoryPk.push(categoryPks[i])
+    }
+    params.categoryPk = categoryPks;
+  }
+  if (levelPks !== null) {
+    for(let i=0;i<categoryPk.length;i++){
+      levelPk.push(levelPks[i])
+    }
+    params.levelPk = levelPks;
+  }
+  if(search!=null){
+    params.q=search
+  }
+ 
+  params.page=pages
+  console.log(params)
+
+  
+
+  const queryString = Object.entries(params)
+    .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+    .join('&');
+
+  const url = `${apiUrl}?${queryString}`;
+
+  axios.get(url)
+    .then(response => {
+      setQuestionList(response.data.list);
+      console.log(response.data);
+      setTotalpages(response.data.cnt % 8 > 0 ? response.data.cnt/8 + 1 : response.data.cnt/8);
+    })
+    .catch(error => {
+      console.error('API 호출 중 에러:', error);
+    });
+}
+
+ const onSearchClick = () => {
+  const keyword = search
+  const apiUrl = '/api/v1/question';
+  const sort = getSort(sortingOption);
+  const categoryPks = getCategoryArr(categoryOptions);
+  const levelPks = difficultyOptions;
+  const categoryPk = [];
+  const levelPk = [];
+  const params = {};
+  console.log("categoryPk",categoryPk)
+  console.log("sort",sort)
+  console.log("level",difficultyOptions)
+  if (sort !== null) {
+    params.sort = sort;
+  }
+  if (categoryPks !== null) {
+    for(let i=0;i<categoryPk.length;i++){
+      categoryPk.push(categoryPks[i])
+    }
+    params.categoryPk = categoryPks;
+  }
+  if (levelPks !== null) {
+    for(let i=0;i<categoryPk.length;i++){
+      levelPk.push(levelPks[i])
+    }
+    params.levelPk = levelPks;
+  }
+  params.q=search;
+
+  console.log(params)
+
+  
+
+  const queryString = Object.entries(params)
+    .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+    .join('&');
+
+  const url = `${apiUrl}?${queryString}`;
+
+  axios.get(url)
+    .then(response => {
+      setQuestionList(response.data.list);
+      console.log(response.data);
+      setTotalpages(response.data.cnt % 8 > 0 ? response.data.cnt/8 + 1 : response.data.cnt/8);
+    })
+    .catch(error => {
+      console.error('API 호출 중 에러:', error);
+    });
+
+
+ }
+  const [optionState, setoptionState] = useState(false);
+
+  const [difficultyOptions, setDifficultyOptions] = useState([]);
+  const [categoryOptions, setCategoryOptions] = useState([]);
+  const [sortingOption, setSortingOption] = useState("ascending");
+
+  const handleDifficultyChange = (event) => {
+    const { value, checked } = event.target;
+    if (checked) {
+      setDifficultyOptions((prevOptions) => [...prevOptions, value]);
+     
+    } else {
+      setDifficultyOptions((prevOptions) =>
+        prevOptions.filter((option) => option !== value)
+      );
+    }
+  };
+  const handleOtopionState = () => {
+     //초기화
+     setDifficultyOptions([]);
+     setCategoryOptions([]);
+     setSortingOption("ascending");
+     setoptionState(!optionState)
+
+  }
+  const handleCategoryChange = (event) => {
+    const { value, checked } = event.target;
+    if (checked) {
+      setCategoryOptions((prevOptions) => [...prevOptions, value]);
+      
+    } else {
+      setCategoryOptions((prevOptions) =>
+        prevOptions.filter((option) => option !== value)
+      );
+    }
+  };
+
+  const handleSortingChange = (event) => {
+    setSortingOption(event.target.value);
+  };
+
+  const handlePrevClick = () => {
+    if (currentPage > 1) {
+      optionList(currentPage-1)
+      setCurrentPage(currentPage - 1);
+
+    }
+  };
+  const buttonClick = (n) => {
+    setCurrentPage(n)
+    
+    optionList(n)
+  
+  }
+  const handleTypeChange = (e) => {
+    setCategory(e.target.value);
+  };
+
+  const handleNextClick = () => {
+    if (currentPage < totalPages) {
+      optionList(currentPage+1)
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handleSubmit = (event) => {
+    setoptionState(false);
+    event.preventDefault();
+    alert(
+      `난이도 선택: ${difficultyOptions.join(
+        ", "
+      )}\n카테고리 선택: ${categoryOptions.join(
+        ", "
+      )}\n정렬 방식: ${sortingOption}`
+    );
+
+   
+  };
+
+  const handleRegisterClick = async  () => {
+    console.log("사용자가 올린 파일 수는",selectedFiles)
+    var imgUrl=[]
+    if(selectedFiles.length>0){
+      for (let i = 0; i < selectedFiles.length; i++){
+        const uploadFile = selectedFiles[i];
+    
+        console.log(uploadFile)
+        try {
+          const presignedResponse = await axios.post("/api/v1/s3/presigned", { 
+            imageName: uploadFile.name,
+            folderName:"question"
+           }, {
+            headers: {
+              Authorization: localStorage.getItem("accessToken"),
+            },
+          });
+      
+          const presignedUrl = presignedResponse.data.presigned_url;
+          console.log("presignedUrl:",presignedUrl)
+          console.log(uploadFile.type)
+          console.log(uploadFile.name)
+    
+          const uploadResponse = await axios.put(presignedUrl, uploadFile, {
+            headers: {
+              "Content-Type": uploadFile.type,
+            },
+          });
+      
+          console.log("S3 업로드 성공", uploadResponse);
+      
+          const imageUrl = uploadResponse.request.responseURL
+          var fileName=""
+          if(uploadFile.type=="image/jpg"){
+            fileName = imageUrl.substring(0, imageUrl.lastIndexOf(".jpg") + 4);
+          }else if(uploadFile.type=="image/png"){
+            fileName = imageUrl.substring(0, imageUrl.lastIndexOf(".png") + 4);
+          }else if(uploadFile.type=="image/jpeg"){
+            fileName = imageUrl.substring(0, imageUrl.lastIndexOf(".jpg") + 4);
+          }
+          console.log(imageUrl)
+          console.log(fileName)
+          imgUrl.push(fileName)
+        
+        } catch (error) {
+          console.error("S3 업로드 실패", error);
+        }
+        
+      }
+
+    }
+    var imgList=[]
+    for(let i=0; i< imgUrl.length;i++){
+      imgList.push({ imgUrl: imgUrl[i] });
+      console.log("imgList넣을게")
+    }
+    console.log("imgUrl",imgUrl)
+     console.log("imgList",imgList)
+    let pk;
+  if(category=="카테고리1"){
+    pk=1
+  }else if(category=="카테고리2"){
+    pk=2
+  }else if(category == "카테고리3"){
+    pk=3
+  }
+  console.log(pk)
+  var data=[]
+  if(imgUrl.length>0){
+data = {
+  question: {
+    categoryPk: pk,
+    title: title,
+    content: desc
+  },imgList
+
+}
+  }
+  else{
+     data = {
+    
+      board: {
+        categoryPk: pk,
+        title: title,
+        content: desc
+      }
+    };
+  }
+  
+    if (title.trim() === "" || desc.trim() === "") {
+      alert("제목과 내용을 입력해주세요.");
+    } else {
+      // 등록 처리
+        console.log(pk)
+        console.log(title)
+        console.log(desc)    
+      axios.post('/api/v1/board', data ,{
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('access')}`
+        }
+       })
+      .then(response => {
+      console.log(localStorage.getItem('access'))
+      console.log(response.data); 
+    
+      })
+      .catch(error => {
+        console.error('API 호출 중 에러:', error);
+     });
+
+     // 등록 처리
+     setTitle("");
+     setDescription("");
+     setCategory("카테고리1");// 등록 후에 type을 다시 기본값으로 설정합니다.
+     setDesc("");
+     setPopupState(false);
+    }
+  };
+  
+ 
+  return (
+    <section>
+      <div className="question-board-container">
+        <div className="question-board-wrapper">
+          <div className="question-board-top-wrapper">
+            <input
+              id="searchInput"
+              className="question-board-input-box"
+              placeholder="검색어를 입력하세요"
+            onChange={getSearch}></input>
+            <div className="question-board-search" onClick={onSearchClick}>검색</div>
+            <div
+              className="question-board-option"
+              onClick={() => handleOtopionState()}
+            >
+              옵션
+            </div>
+            <div className="question-board-enroll-question"  onClick={()=>setPopupState(!popupState)}>문제등록</div>
+          </div>
+          <div className="question-board-middle-wrapper">
+            {optionState && (
+              <div className="question-board-option-box">
+                <form onSubmit={handleSubmit}>
+                  <div className="question-board-option-boxes">
+                    <div className="question-board-option-box1">
+                      <label className="question-board-option-difficult">
+                        난이도 선택 : 
+                        <input
+                          type="checkbox"
+                          value="1"
+                          onChange={handleDifficultyChange}
+                        />{" "}
+                        1
+                        <input
+                          type="checkbox"
+                          value="2"
+                          onChange={handleDifficultyChange}
+                        />{" "}
+                        2
+                        <input
+                          type="checkbox"
+                          value="3"
+                          onChange={handleDifficultyChange}
+                        />{" "}
+                        3
+                        <input
+                          type="checkbox"
+                          value="4"
+                          onChange={handleDifficultyChange}
+                        />{" "}
+                        4
+                        <input
+                          type="checkbox"
+                          value="5"
+                          onChange={handleDifficultyChange}
+                        />{" "}
+                        5
+                        <input
+                          type="checkbox"
+                          value="6"
+                          onChange={handleDifficultyChange}
+                        />{" "}
+                        6
+                      </label>
+                    </div>
+                    <div className="question-board-option-box2">
+                      <label className="question-board-option-category">
+                        카테고리 선택 : 
+                        <br />
+                        <input
+                          type="checkbox"
+                          value="Category A"
+                          onChange={handleCategoryChange}
+                        />{" "}
+                        자료구조
+                        <br />
+                        <input
+                          type="checkbox"
+                          value="Category B"
+                          onChange={handleCategoryChange}
+                        />{" "}
+                        사칙연산
+                        <br />
+                        
+                      </label>
+                    </div>
+                    <div className="question-board-option-box3">
+                      <label className="question-board-option-sort">
+                        정렬 방식 선택 : 
+                        <input 
+                          type="radio"
+                          value="ascending"
+                          checked={sortingOption === "ascending"}
+                          onChange={handleSortingChange}
+                        />{" "}
+                        오름차순
+                        <input
+                          type="radio"
+                          value="descending"
+                          checked={sortingOption === "descending"}
+                          onChange={handleSortingChange}
+                        />{" "}
+                        내림차순
+                      </label>
+                    </div>
+                  </div>
+                  <button className="question-board-option-submit-btn" type="submit"  onClick={() => optionList(1)}>선택</button>
+                </form>
+              </div>
+            )}
+          </div>
+          <div className="question-board-bottom-wrapper">
+            <div className="question-board-contents-wrapper">
+              <QuestionBoardComponent posts={questionList} />
+            </div>
+          </div>
+        </div>
+        
+        <div className="mypage-paging">
+            <button onClick={handlePrevClick}>&lt;</button>
+            {Array.from({ length: totalPages }, (_, i) => (
+              <button key={i} onClick={() => buttonClick(i + 1)}>
+                {i + 1}
+              </button>
+            ))}
+            <button onClick={handleNextClick}>&gt;</button>
+        </div>
+          {popupState && (
+          <div className="enroll-question-popup-container">
+            <div className="enroll-question-popup-wrapper">
+              <div className="enroll-question-popup-title-box">
+                <span className="enroll-question-popup-title">문제 등록</span>
+                <div className="enroll-question-popup-cancel"  onClick={()=>setPopupState(!popupState)}></div>
+              </div>
+              <div className="enroll-question-popup-contents-box">
+                <div className="enroll-question-popup-contents-title-box">
+
+                  <span className="enroll-question-popup-contents-title">제목</span>
+                  <input value={title} onChange={(e) => setTitle(e.target.value)} className="enroll-question-popup-contents-title-input" type="text"/>
+                </div>
+                <div className="enroll-question-popup-contents-description-box">
+                  <span className="enroll-question-popup-contents-description">문제 한줄 설명</span>
+                  <input value={description} onChange={(e) => setDescription(e.target.value)} className="enroll-question-popup-contents-description-input" type="text"/>
+                </div>
+                <div className="enroll-question-popup-contents-category-box">
+                  <span className="enroll-question-popup-contents-category">카테고리</span>
+                  <select value={category} onChange={handleTypeChange}>
+                    <option value="카테고리1">카테고리1</option>
+                    <option value="카테고리2">카테고리2</option>
+                    <option value="카테고리3">카테고리3</option>
+                    <option value="카테고리4">카테고리4</option>
+                  </select>
+                </div>
+                <div className="enroll-question-popup-contents-question-box">
+                  
+                  <span className="enroll-question-popup-contents-question">문제 내용</span>
+                  <input
+	                type="file"
+	                accept="image/jpg, image/png, image/jpeg"
+                  multiple
+                  onChange={handleFileChange}
+                  />
+                  <EditorComponent value={desc} onChange={setDesc} />
+                </div>
+              </div>
+              <div onClick={handleRegisterClick} className="enroll-question-popup-yes">등록</div>
+            </div>
+          </div>
+        )}
+      </div>
+      
+     
+    </section>
+  );
+};
+
+export default QuestionList;

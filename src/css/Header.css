@@ -1,0 +1,107 @@
+/*font*/
+@font-face{
+    font-family:'bitbit';
+    src:url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'),url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2') ;
+ }
+ @font-face {
+    font-family: 'DungGeunMo-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/wooin21/web/fonts/etc/DungGeunMo-Regular.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*header 상단 연보라색 부분*/
+.top_Benner{
+    width: 100%;
+    height: 110px;
+    background-color: #AFB5D6;
+    position: relative;
+    top : 0;
+}
+
+/*logo*/
+.header_logo{
+    cursor: pointer;
+    width: 17.8rem;
+    vertical-align: middle;
+}
+
+/*login, sign in btn*/
+.header_text_btn{
+    font-family: 'DungGeunMo-Regular';
+    position:absolute;
+    top: 10px;
+    left: 90%;
+}
+
+.header_login_btn{
+    font-size: 20px;
+    color: black;
+    margin-right: 20px;
+
+    cursor: pointer;
+}
+
+.header_sign_btn{
+    font-size: 20px;
+    color: black;
+
+    cursor: pointer;
+}
+
+/*category*/
+.header_Benner_wrapper{
+    text-align: center;
+    margin-left: 8%;
+}
+
+.header_Bennrer{
+    list-style: none;
+    list-style-type: none;
+
+    text-decoration: none;
+    text-decoration-line: none;
+}
+
+.header_Benner_contents{
+    padding-top: 14px;
+    font-family: 'DungGeunMo-Regular';
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+
+.header_Benner_item{
+    display: inline-block;
+    color: rgb(59, 59, 59);
+
+    font-size: 1.8rem;
+    font-weight:600;
+
+    text-align: center;
+    cursor: pointer;
+
+    margin-right: 100px;
+
+    color: inherit;
+    text-decoration: none;
+    text-decoration-line: none;
+}
+
+.header_Benner_item a {
+    color: inherit;
+    text-decoration: none;
+    text-decoration-line: none;
+}
+
+.header_Benner_item a:visited {
+    color: inherit; /* 방문한 링크의 색상을 상속 */
+    text-decoration: none;
+    text-decoration-line: none;
+  }
+  
+  .header_Benner_item a:active {
+    color: inherit; /* 클릭 시의 색상을 상속 */
+    text-decoration: none;
+    text-decoration-line: none;
+  }

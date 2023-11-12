@@ -1,0 +1,177 @@
+/*font*/
+@font-face{
+    font-family:'bitbit';
+    src:url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'),url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2') ;
+ }
+
+ @font-face {
+    font-family: 'DungGeunMo-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/wooin21/web/fonts/etc/DungGeunMo-Regular.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.question-board-container{
+    max-width: 90%;
+    height: auto; 
+    margin: 1.92% auto; 
+}
+
+.question-board-wrapper{
+    max-width: 90%;
+    height: auto; 
+    margin: 0 auto;
+}
+
+.question-board-top-wrapper{
+    display: flex;
+    margin-bottom: 60px;
+}
+
+.question-board-input-box{
+    width: 950px;
+    height: 50px;
+
+    padding-left: 20px;
+    margin-left: 10px;
+
+    font-size: 18px;
+
+    display: flex;
+}
+
+.question-board-search{
+    width: 80px;
+    height: 50px;
+
+    margin-left: 10px;
+
+    background-color: #8082cc;
+    border: 3px solid #fff;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 24px;
+    color: #fff;
+
+    text-align: center;
+    line-height: 45px;
+
+    cursor: pointer;
+}
+
+.question-board-option{
+    width: 160px;
+    height: 50px;
+
+    margin-left: 65px;
+
+    background-color: #A8A9CF;
+    border: 3px solid #fff;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 24px;
+    color: #fff;
+
+    text-align: center;
+    line-height: 45px;
+
+    cursor: pointer;
+}
+
+.question-board-enroll-question{
+    width: 160px;
+    height: 50px;
+
+    margin-left: 10px;
+
+    background-color: #A8A9CF;
+    border: 3px solid #fff;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 24px;
+    color: #fff;
+
+    text-align: center;
+    line-height: 45px;
+
+    cursor: pointer;
+}
+
+.question-board-middle-wrapper{
+    display: flex;
+    justify-content: center;
+}
+
+.question-board-option-box{
+    width: 97%;
+    margin-right: 15px;
+    margin-bottom: 20px;
+
+    background-color: #A8A9CF;
+    border: 3px solid #fff;
+}
+
+.question-board-option-box{
+    padding: 10px;
+}
+
+.question-board-option-boxes{
+    display: flex;
+    justify-content: center;
+    
+    margin-bottom: 15px;
+}
+
+.question-board-option-difficult{
+    font-family: 'DungGeunMo-Regular';
+    font-size: 20px;
+}
+
+.question-board-option-category{
+    font-family: 'DungGeunMo-Regular';
+    font-size: 20px;
+}
+
+.question-board-option-sort{
+    font-family: 'DungGeunMo-Regular';
+    font-size: 20px;
+}
+
+.question-board-option-box1{
+    padding-right: 25px;
+    margin-right: 25px;
+    border-right: 1px solid black;
+    width: 33%;
+}
+
+.question-board-option-box2{
+    padding-right: 25px;
+    margin-right: 25px;
+    border-right: 1px solid black;
+    width: 33%;
+}
+
+.question-board-option-box3{
+    width: 33%;
+}
+
+.question-board-option-submit-btn{
+    width: 60px;
+    height: 30px;
+
+    background-color: #8082cc;
+    border: 3px solid #fff;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 16px;
+    color: #fff;
+
+    cursor: pointer;
+
+    margin-left: 48.2%;
+}
+
+.question-board-bottom-wrapper{
+    width: 100%;
+    min-height: 597px;
+}

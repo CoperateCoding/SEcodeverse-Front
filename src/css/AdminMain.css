@@ -1,0 +1,302 @@
+/*font*/
+@font-face{
+    font-family:'bitbit';
+    src:url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'),url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2') ;
+ }
+
+ @font-face {
+    font-family: 'DungGeunMo-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/wooin21/web/fonts/etc/DungGeunMo-Regular.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.mainBoard {
+    display: flex;
+}
+
+.left {
+    background-color: #6E6FAF;
+    width: 15%;
+    height: 785px;
+}
+
+.right {
+    background-color: #6E6FAF;
+    width: 85%;
+    height: 785px;
+
+    position: relative;
+}
+
+.menu_contents {
+    margin-top: 7%;
+    position: relative;
+}
+
+.menu_contents img {
+    width: 90%;
+    height: 80%;
+
+}
+
+.menu_contents h1 {
+    position: absolute;
+    opacity: 0.7;
+    font-size: 170%;
+    margin-left: 15%;
+}
+
+.CTFQ {
+
+    margin-top: -25%;
+}
+
+.rightMain {
+    color: white;
+    margin-left: 37%;
+    font-size: 250%;
+}
+
+.right .topBar {
+    display: flex;
+}
+
+.topBar {
+    margin-left: 70%;
+}
+
+.right .createQuestion {
+    margin-left: 2%;
+    background-color: #CCD2F0;
+    color: black;
+    font-size: 40%;
+    height: 10%;
+    width: 20%;
+    text-align: center;
+    border: solid 1px black;
+}
+
+.table {
+    margin-left: 18%;
+    margin-top: 3%;
+}
+
+.ladmin-tabe th {
+    border-collapse: collapse;
+    height: 30px;
+}
+
+.ladmin-tabe tr{
+    border-collapse: collapse;
+    height: 30px;
+}
+
+.ladmin-tabe td{
+    border-collapse: collapse;
+    height: 30px;
+}
+
+.table .Number {
+    width: 90px;
+    border: solid 1px black;
+    background-color: white;
+}
+
+.table .questionName {
+    width: 500px;
+    border: solid 1px black;
+    background-color: white;
+}
+
+.table .Score {
+    width: 90px;
+    border: solid 1px black;
+    background-color: white;
+}
+
+.table .Category {
+    width: 120px;
+    border: solid 1px black;
+    background-color: white;
+}
+
+.table .modify {
+    background-color: #6E6FAF;
+    border: none;
+}
+
+.table .delete {
+    background-color: #6E6FAF;
+    border: none;
+}
+
+.paging {
+    color: white;
+    margin-left: 38%;
+}
+
+.questionEdit {
+    background-color: #6E6FAF;
+    border: solid 2px black;
+    width: 45%;
+    height: 50%;
+    position: absolute;
+    margin-top:191px;
+    margin-left: 30%;
+    color: white;
+    /* display:none; */
+}
+
+.questionOneLine {
+    display: flex;
+    margin-top: 1%;
+    margin-left: 5%;
+}
+
+.questionEdit input {
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.questionEdit select {
+    margin-right: 2%;
+    margin-left: 3%;
+    height: 30px;
+    margin-top: 2.4%;
+}
+
+.questionEdit input {
+    margin-right: 3%;
+    ;
+    margin-top: 2.4%;
+}
+
+.ctfQuestionName {
+    height: 30px;
+}
+
+.ctfQuestionScore {
+    height: 30px;
+}
+
+.questionEdit .ctfRadio {
+    margin-top: 0;
+}
+
+.questionExplan {
+    width: 80%;
+    height: 100px;
+}
+
+.questionOneLine .ctfImgs {
+    background-color: white;
+    margin-left: 12%;
+    width: 50%;
+    height: 90px;
+}
+
+.questionOneLine .imgplus {
+    margin-left: 2%;
+    background-color: white;
+    width: 29%;
+    height: 90px;
+}
+
+.ctfquestionButton img {
+    margin-top: 2%;
+    margin-left: 40%;
+    width: 20%;
+    height: 20%;
+}
+
+.ctfquestionButton {
+    color: black;
+}
+
+.ctfquestionButton h3 {
+    position: absolute;
+    margin-top: -5.5%;
+    margin-left: 45%;
+}
+
+.questionEdit .xButton {
+    margin-left: 95%;
+    width: 4%;
+    height: 5%;
+    position: absolute;
+}
+
+.modify {
+    margin-left: 1px;
+    width: 20px;
+    height: 30px;
+
+}
+
+.menu_contents .yelloButton {
+    margin-left: 5%;
+    width: 80%;
+    height: 20%;
+
+}
+
+.ctfRig {
+    margin-top: 32%;
+}
+
+.CTFT {
+    margin-top: 4%;
+}
+
+.teamtable {
+    margin-left: 25%;
+}
+
+.teamtable .admin-table .Number {
+    width: 90px;
+    border: solid 1px black;
+    background-color: white;
+    border-collapse: collapse;
+    height: 30px;
+}
+
+.teamtable .admin-table .teamName {
+    width: 420px;
+    border: solid 1px black;
+    background-color: white;
+    border-collapse: collapse;
+    height: 30px;
+}
+
+.teamtable .admin-table .totalScore {
+    width: 90px;
+    border: solid 1px black;
+    background-color: white;
+    border-collapse: collapse;
+    height: 30px;
+}
+
+.Leaguetable {
+    margin-left: 10%;
+    margin-top: 2%;
+}
+
+.Leaguetable .Number {
+    width: 90px;
+    border: solid 1px black;
+    background-color: white;
+
+}
+
+.Leaguetable .LeagueName {
+    width: 500px;
+    border: solid 1px black;
+    background-color: white;
+}
+
+.Leaguetable .LeagueDate {
+    width: 400px;
+    border: solid 1px black;
+    background-color: white;
+}

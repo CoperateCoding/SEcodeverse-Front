@@ -1,0 +1,356 @@
+/*font*/
+@font-face{
+    font-family:'bitbit';
+    src:url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'),url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2') ;
+ }
+
+ @font-face {
+    font-family: 'DungGeunMo-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/wooin21/web/fonts/etc/DungGeunMo-Regular.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.community-page-container{
+    max-width: 90%;
+    height: auto; 
+    margin: 1.92% auto; 
+}
+
+/*button*/
+.community-page-button-wrappger{
+    max-width: 90%;
+    height: auto; 
+    margin: 0px auto; 
+
+    text-align: center;
+    line-height: 70px;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 26px;
+    font-weight: bold;
+
+    display: flex;
+    justify-content: center;
+}
+
+/*button - 전체*/
+.community-page-button-item1{
+    width: 220px;
+    height: 70px;
+
+    background-image: url(../img/community_001.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+
+    display: inline-block;
+    margin: 0 10px;
+
+    cursor: pointer;
+    opacity: 0.60;
+    color: #404040;
+}
+
+.community-page-button-item1-clicked {
+    opacity: 1; /* 클릭 시 투명도 증가 */
+    color: #000; /* 클릭 시 글자색 변경 */
+}
+
+/*button - 공지사항*/
+.community-page-button-item2{
+    width: 220px;
+    height: 70px;
+    
+    background-image: url(../img/community_002.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+
+    display: inline-block;
+    margin: 0 10px;
+
+    cursor: pointer;
+    opacity: 0.60;
+    color: #404040;
+}
+
+.community-page-button-item2-clicked {
+    opacity: 1; /* 클릭 시 투명도 증가 */
+    color: #000; /* 클릭 시 글자색 변경 */
+}
+
+
+/*button - 자유게시판*/
+.community-page-button-item3{
+    width: 220px;
+    height: 70px;
+
+    background-image: url(../img/community_003.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+
+    display: inline-block;
+    margin: 0 10px;
+
+    cursor: pointer;
+    opacity: 0.60;
+    color: #404040;
+}
+
+.community-page-button-item3-clicked {
+    opacity: 1; /* 클릭 시 투명도 증가 */
+    color: #000; /* 클릭 시 글자색 변경 */
+}
+
+
+/*button - 코딩게시판*/
+.community-page-button-item4{
+    width: 220px;
+    height: 70px;
+
+    background-image: url(../img/community_004.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+
+    display: inline-block;
+    margin: 0 10px;
+
+    cursor: pointer;
+    opacity: 0.60;
+    color: #404040;
+}
+
+.community-page-button-item4-clicked {
+    opacity: 1; /* 클릭 시 투명도 증가 */
+    color: #000; /* 클릭 시 글자색 변경 */
+}
+
+
+/*button - 취업게시판*/
+.community-page-button-item5{
+    width: 220px;
+    height: 70px;
+
+    background-image: url(../img/community_005.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+
+    display: inline-block;
+    margin: 0 10px;
+
+    cursor: pointer;
+    opacity: 0.60;
+    color: #404040;
+}
+
+.community-page-button-item5-clicked {
+    opacity: 1; /* 클릭 시 투명도 증가 */
+    color: #000; /* 클릭 시 글자색 변경 */
+}
+
+
+/*button - 공모전게시판*/
+.community-page-button-item6{
+    width: 220px;
+    height: 70px;
+
+    background-image: url(../img/community_006.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+
+    display: inline-block;
+    margin: 0 10px;
+
+    cursor: pointer;
+    opacity: 0.60;
+    color: #404040;
+}
+
+.community-page-button-item6-clicked {
+    opacity: 1; /* 클릭 시 투명도 증가 */
+    color: #000; /* 클릭 시 글자색 변경 */
+}
+
+
+/*community-search*/
+.community-page-search-wrapper{
+    height: auto; 
+
+    margin-top: 60px;
+
+    display: flex;
+    justify-content: center;
+    vertical-align: top;
+}
+
+.community-page-search-box{
+    width: 1050px;
+    height: 55px;
+
+    background-color: #fff;
+    border: #A8A9CF solid 3px;
+
+    display: flex;
+    align-items: center;
+}
+
+#search-input{
+    width: 975px;
+    height: 50px;
+
+    padding-left: 20px;
+
+    font-size: 18px;
+
+    outline: none;
+    border: none; 
+    background-color: transparent; 
+
+    display: flex;
+}
+
+.community-page-search-icon{
+    width: 36px;
+    height: 36px;
+
+    background-image: url(../img/search_icon-001.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+
+    background-color: transparent;
+    outline: none;
+    border: none; 
+
+    display: flex;
+    cursor: pointer;
+}
+
+/*게시글 작성 버튼*/
+.community-page-write-box{
+    width: 170px;
+    height: 55px;
+
+    display: inline-block;
+
+    background-color: #A8A9CF;
+    border: 3px solid #fff;
+
+    margin-left:10px;
+
+    text-align: center;
+    line-height: 55px;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 24px;
+    color: #fff;
+
+    cursor: pointer;
+}
+
+/*community-contents*/
+.community-page-contents-wrapper {
+    max-width: 90%;
+    height: 440px; 
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    margin: 30px auto;
+    margin-left: 5.6%; 
+}
+
+
+/*조회 순서 (최신순)*/
+.community-page-search-order {
+    display: inline-block;
+
+    margin-left: 60px;
+
+    text-align: center;
+    line-height: 55px;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 24px;
+    color: #fff;
+
+    cursor: pointer;
+    position:relative;
+
+    z-index: 100;
+}
+
+.accordion-header {
+    width: 160px;
+    height: 55px;
+
+    background-color: #A8A9CF;
+    border: 3px solid #fff;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+}
+  
+.accordion-content {
+    position:absolute;
+    width: 160px;
+    border-left: 3px solid #fff;
+    border-right: 3px solid #fff;
+    border-bottom: 3px solid #fff;
+    background-color: #A8A9CF;
+}
+
+.community-page-search-order-text {
+    text-decoration: none;
+    display: block;
+}
+
+.community-page-search-order-text:visited {
+    color: #fff; /* 클릭 후 변경 */
+}
+
+.community-page-search-order-icon{
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+.community-page-search-order-icon:visited {
+    color: #fff; /* 클릭 후 변경 */
+}
+
+/*게시글 작성 팝업*/
+.community-page-write-box-pop{
+    position: absolute;
+    z-index: 110;
+}
+
+.community-page-middle-contents-wrapper{
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.community-paging{
+    margin-top: 1%;
+    text-align: center;
+}
+
+.community-paging button{
+    cursor: pointer;
+
+    border: none;
+    background-color: transparent;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 20px;
+    font-weight: 800;
+
+    color: #fff;
+}

@@ -1,0 +1,46 @@
+@font-face{
+    font-family:'bitbit';
+    src:url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'),url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2') ;
+ }
+ @font-face {
+    font-family: 'DungGeunMo-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/wooin21/web/fonts/etc/DungGeunMo-Regular.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+section{
+    height: auto;
+    min-height: 100%;
+}
+
+.footer_wrap {
+    width: 100%;
+    height: 80px;
+    color: black;
+    font-size: 11px;
+    position: absolute;
+}
+
+.footer_contents {
+    min-height: 80px;
+    width: 100%; 
+    background-color: #AFB5D6;
+    position:relative;
+}
+
+.footer-coco
+{
+    padding-top: 20px;
+    display: block;
+    font-size: 18px;
+    font-family: 'DungGeunMo-Regular';
+}
+
+.footer-matter-source
+{
+    padding-top: 5px;
+    display: block;
+    font-size: 18px;
+    font-family: 'DungGeunMo-Regular';
+}

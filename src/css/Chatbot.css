@@ -1,0 +1,231 @@
+/*font*/
+@font-face{
+    font-family:'bitbit';
+    src:url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'),url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2') ;
+ }
+
+ @font-face {
+    font-family: 'DungGeunMo-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/wooin21/web/fonts/etc/DungGeunMo-Regular.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.chatbot-container {
+    position: relative;
+    width: 100%; /* 적절한 너비로 설정해주세요 */
+    height: 100%; /* 화면 높이로 설정해주세요 */
+    z-index: 1000;
+}
+  
+
+.chatbot-circle-box{
+    position: fixed;
+
+    bottom: 100px;
+    right: 12.5px;
+
+    width: 100px;
+    height: 100px;
+    
+    background-color: #fff;
+    border: solid 8px #CCD2F0;
+    border-radius: 50%;
+
+    cursor: pointer;
+}
+
+.chatbot-circle-image{
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+
+    background-image: url(../img/mascot_01.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 180% 180%;
+
+}
+
+.chatbot-popup-wrapper{
+    overflow-y: scroll;
+    position: absolute;
+
+    width: 680px;
+    height: 765px;
+
+    bottom: 0;
+    right: 0;
+
+    border: 1px solid #3A4370;
+    background-color: #fff;
+
+    padding: 10px;
+}
+
+.chatbot-popup-x-button{
+    float: right;
+
+    width: 30px;
+    height: 30px;
+
+    background-image: url(../img/x.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+
+    cursor: pointer;
+}
+
+.chatbot-popup-upper-layer{
+    width: 100%;
+    height: 30px;
+
+    padding-bottom: 15px;
+
+    border-bottom: 2px solid #3A4370;
+}
+
+.chatbot-popup-chat-layer{
+    overflow-y: scroll;
+    width: 90%;
+    min-height: 280px;
+    height: auto;
+
+    margin-left: 5%;
+    margin-top: 30px;
+}
+
+/*채팅 메시지*/
+.bot {
+    padding: 10px;
+    background-color: #CCD2F0; /* 챗봇의 배경색 */
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 20px;
+
+    display: flex;
+}
+  
+.user {
+    padding: 15px;
+    background-color: #e2f5e2; /* 사용자의 배경색 */
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 20px;
+
+}
+
+/*AI 아이콘*/
+.chatbot-popup-icon-wrapper{
+    width: 60px;
+    height: 60px;
+
+    border-radius: 50%;
+    margin-right: 30px;
+}
+
+.chatbot-popup-icon-image{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+
+    background-image: url(../img/mascot_01.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 150% 150%;
+    background-color: white;
+}
+
+.chatbot-popup-user-input{
+    width: 500px;
+    height: 40px;
+    margin-left: 5%;
+
+    position: fixed;
+
+    bottom: 100px;
+    right: 150px;
+}
+
+.chatbot-popup-user-submit{
+    height: 46px;
+
+    font-family: 'DungGeunMo-Regular';
+    color: #FFFFFF;
+    background-color: #A8A9CF;
+    border: 3px solid #A8A9CF;
+
+    margin-left: 2px;
+    margin-right: 3px;
+
+    cursor: pointer;
+
+    position: fixed;
+    bottom: 100px;
+    right: 90px;
+
+}
+
+.chatbot-popup-user-menu{
+    height: 46px;
+
+    font-family: 'DungGeunMo-Regular';
+    color: #FFFFFF;
+    background-color: #A8A9CF;
+    border: 3px solid #A8A9CF;
+
+    cursor: pointer;
+
+    position: fixed;
+    bottom: 100px;
+    right: 46px;
+
+}
+
+.chatbot-popup-fast-question{
+    width: 90%;
+    height: auto;
+
+    background-color: #CCD2F0;
+    margin-left: 5%;
+    margin-top: 40px;
+}
+
+.chatbot-popup-fast-question-text{
+    display: block;
+    padding: 20px 10px 0 10px;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 20px;
+}
+
+.chatbot-popup-fast-question-list{
+    list-style-type: none;
+    padding: 10px;
+}
+
+.chatbot-popup-fast-question-list li{
+    background-color: #ffffff;
+    margin: 0 0 10px 0;
+    padding: 5px;
+    cursor: pointer;
+
+    font-size: 16px;
+    color: #666666;
+}
+
+.chatbot-popup-main-text{
+    display: block;
+    float: left;
+
+    font-family: 'bitbit';
+    font-size: 36px;
+}
+
+.chatbot-input-user-form{
+    width: 100%;
+    height: 70px;
+
+    background-color: #ffffff;
+}

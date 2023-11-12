@@ -1,0 +1,394 @@
+/*상단*/
+.myPage-user{
+    margin:1% auto;
+    width:80%;
+    height:125px;;
+    display: flex;
+}
+
+.myPageName{
+    margin-top: 15px;
+    margin-left:40px;
+    color:white;
+}
+
+.myPage-user-name{
+    display: block;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size:36px;
+    font-weight: 700;
+
+    margin-bottom: 20px;
+}
+
+.myPage-user-grade{
+    display: block;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size:36px;
+    font-weight: 700;
+}
+
+.mypageHeader{
+    margin: 0 auto;
+
+    width:80%;
+    height:60px;;
+  
+    background-color: white;
+
+    display:flex;
+}
+
+.mypageHeader button{
+    border:solid 1px gray;
+    width:20%;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size:22px;
+
+    cursor: pointer;
+}
+
+.mypage-main-wrapper{
+    margin: 1% auto;
+}
+
+.mypageMain{
+    margin: 1% auto;
+
+    width:79.4%;
+    height:515px;
+
+    background-color: #A8A9CF;
+    border:solid 5px white;
+
+    background-image: url(../img/mypage.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.mypageCircle{
+    width:120px;
+    height:120px;
+
+    position:relative;
+    
+    background-color: white;
+    border-radius: 50%;
+    border: #CCD2F0 5px solid;
+
+    background-image: url(../img/grade_06.jpg);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: 100% 100%;
+}
+
+/*중단*/
+.myBoard-wrapper{
+    max-width: 90%;
+    height: auto; 
+
+    display: flex;
+    justify-content: center;
+
+    margin: 20px auto; 
+    flex-wrap: wrap;
+
+    margin-bottom: 1%;
+}
+
+.mypage-myBoard{
+    width: 280px;
+    height: 210px;
+    
+    display: inline-block;
+    margin: 10px 10px 0px 10px;
+
+    background-image: url(../img/community-box.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+
+    cursor: pointer;
+}
+
+.myPage-myBoard-coding-grade{
+    width: 42px;
+    height:42px;
+
+    background-image: url(../img/grade_01.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+
+    margin-top:15px;
+    margin-left:15px;
+    border:1px gray solid;
+
+    border-radius: 50%;
+
+    display: inline-block;
+}
+
+.myPage-myBoard-post-title{
+    font-size:24px;
+    font-weight: 800;
+
+    margin-top: 10px;
+    margin-left:20px;
+    
+    display: block;
+}
+
+.myPage-myBoard-post-contents{
+    margin-left:20px;
+    font-size:14px;
+}
+
+.myBorderBottom{
+    margin-top:60px;
+    width:500px;
+    height:55px;
+    display:flex;
+}
+
+.myBorderBottom{
+    display:flex;
+}
+
+.myPage-under-wrapper{
+    display: flex;
+    padding-top: 48px;
+    margin-left: 20px;
+}
+
+.myPage-heart{
+    width:20px;
+    height:20px;
+
+    background-image: url(../img/hart.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+
+    margin-top: 1px;
+    margin-right: 5px;
+}
+
+.myPage-heart-count{
+    font-size: 18px;
+    font-weight: 400;
+
+    margin-right: 15px;
+}
+
+.myPage-comment{
+    width:30px;
+    height:30px;
+
+    background-image: url(../img/comment.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: 100% 100%;
+
+    margin-top: -4px;
+    margin-right: 5px;
+}
+
+.myPage-comment-count{
+    font-size: 18px;
+    font-weight: 400;
+    margin-right: 15px;
+}
+
+.myPage-date{
+    font-size: 18px;
+    font-weight: 400;
+}
+
+/*선택 버튼*/
+.selectedButton {
+    background-color: #9FA9D8; /* 선택한 버튼의 배경 색상 */
+    color: #ffffff; /* 선택한 버튼의 폰트 색상 */
+  }
+  
+.question-wrapper{
+    width:80%;
+    height:auto;
+
+    margin-left: 10%;
+    margin-top: 2%;
+
+    display: flex;
+}
+
+/*문제 표*/
+.mypage-question-table{
+    border-collapse: collapse;
+    line-height: 36px;
+    text-align: center;
+
+    border: solid 3px #807FD0;
+}
+
+.mypage-question-table tr {
+    height:38px;
+  }
+
+.mypage-question-number{
+    width: 90px;
+    border: solid 1px #A8A9CF;
+    background-color: white;
+}
+
+.mypage-question-name{
+    width: 300px;
+    border: solid 1px #A8A9CF;
+    background-color: white;
+}
+
+.mypage-question-description{
+    width: 740px;
+    border: solid 1px #A8A9CF;
+    background-color: white;
+}
+
+.mypage-question-grade{
+    width: 60px;
+    border: solid 1px #A8A9CF;
+    background-color: white;
+}
+
+.mypage-question-table thead{
+    font-family: 'DungGeunMo-Regular';
+    font-weight: 800;
+    font-size: 18px;
+}
+
+/*paging*/
+.mypage-paging{
+    margin-top: 1%;
+    text-align: center;
+}
+
+.mypage-paging button{
+    cursor: pointer;
+
+    border: none;
+    background-color: transparent;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 20px;
+    font-weight: 800;
+}
+
+tbody .mypage-question-grade img{
+
+    width: 26px;
+    height: 26px;
+}
+
+.myPage-board-upper-wrapper{
+    padding-left: 15px;
+    padding-top: 17px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.myPage-board-name{
+    display: block;
+}
+
+.myPage-board-user{
+    display: block;
+}
+
+/*코딩뱃지확인 css*/
+.mypage-prev-button{
+    width: 50px;
+    height: 100px;
+
+    margin-right:45px;
+
+    cursor: pointer;
+    
+    background-image: url(../img/left_button.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+}
+
+.mypage-next-button{
+    width: 50px;
+    height: 100px;
+
+    margin-left:45px;
+
+    cursor: pointer;
+    
+    background-image: url(../img/rifht_button.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+}
+
+.mypage-coding-calendar-wrapper{
+    margin-top: 1.5%;
+    margin-bottom: 1.5%;
+}
+
+.mypage-coding-calendar-background{
+    margin-left: 5%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: white;
+
+    width: 90%;
+    height: 250px;
+}
+
+.mypage-current-calendar{
+    margin-left: 5%;
+}
+
+.mypage-next-calendar{
+    margin-left: 5%;
+}
+
+.mypage-under-space-wrapper{
+    display: flex;
+    margin-bottom: 1%;
+    margin-left: 5%;
+}
+
+.mypage-codingBadge-info-wrapper{
+    width:30%;
+    height: 200px;
+}
+
+.mypage-codingBadge-info-background{
+    background-color: white;
+
+    width:100%;
+    height: 200px;
+}
+
+.mypage-recommend-question-wrapper{
+    width:62.9%;
+    height: 200px;
+}
+
+.mypage-recommend-question-background{
+    margin-left: 3%;
+
+    background-color: white;
+
+    width:100%;
+    height: 200px;
+}

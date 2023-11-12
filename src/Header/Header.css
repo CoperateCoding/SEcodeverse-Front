@@ -1,0 +1,53 @@
+@font-face{
+    font-family:'bitbit';
+    src:url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'),url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2') ;
+ }
+ @font-face {
+    font-family: 'DungGeunMo-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/wooin21/web/fonts/etc/DungGeunMo-Regular.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.Top_Benner{
+    width: 100%;
+    height: 110px;
+    background-color: #CCD2F0;
+    opacity: 0.8;
+    display: flex;
+}
+
+.header_logo{
+    width: 20%;
+}
+
+.header_text_btn{
+    font-family: 'bitbit';
+    float: right;
+}
+
+.header_login_btn{
+    font-size: 16px;
+}
+
+.header_sign_btn{
+    font-size: 16px;
+}
+
+.header_Benner_contents{
+    font-family: 'DungGeunMo-Regular';
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+
+.header_Benner_item{
+    display: inline-block;
+    color: rgb(59, 59, 59);
+    font-size: 1.8rem;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-decoration: none;
+    margin-right: 80px;
+}

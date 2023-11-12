@@ -1,0 +1,118 @@
+/*font*/
+@font-face{
+    font-family:'bitbit';
+    src:url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'),url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2') ;
+ }
+
+ @font-face {
+    font-family: 'DungGeunMo-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/wooin21/web/fonts/etc/DungGeunMo-Regular.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*container*/
+.board-detail-total-container{
+    display: flex;
+    justify-content: center;
+}
+
+.board-detail-total-wrapper{
+    width: 90%;
+    height: auto;
+
+    display: flex;
+    justify-content: center;
+}
+
+.board-detail-background{
+    width: 90%;
+    min-height: 785px;
+
+    background-color: #fff;
+    /* background-image: url(../img/write_editor_background.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover; */
+}
+
+/*코딩뱃지, 게시판 카테고리, 작성자 이름*/
+.board-detail-upper-part{
+    margin-top: 2%;
+    margin-bottom: 1%;
+    margin-left: 2%;
+    margin-right: 2%;
+
+    padding: 10px;
+
+    display: flex;
+
+    border: solid 3px #9FA9D8;
+}
+
+.board-detail-user-badge{
+    width: 100px;
+    height: 100px;
+
+    border-radius: 50%;
+    background-color: black;
+}
+
+.board-detail-info-wrapper{
+    margin-left: 2%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.board-detail-category{
+    display: block;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.board-detail-writer{
+    display: block;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.board-detail-date{
+    display: block;
+    margin-top: 10px;
+
+    font-family: 'DungGeunMo-Regular';
+}
+
+.board-detail-middle-part{
+    margin-top: 2%;
+    margin-bottom: 1%;
+    margin-left: 2%;
+    margin-right: 2%;
+
+    padding:10px;
+
+    display: flex;
+    flex-direction: column;
+
+    border: solid 3px #9FA9D8;
+}
+
+.board-detail-title-box{
+    width: 100%;
+    padding-bottom: 5px;
+
+    font-size: 32px;
+    font-weight: bold;
+
+    border-bottom: 2px solid #CACACA;
+}
+
+.board-detail-contents-box{
+}

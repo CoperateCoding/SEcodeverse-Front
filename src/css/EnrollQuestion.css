@@ -1,0 +1,148 @@
+/*font*/
+@font-face{
+    font-family:'bitbit';
+    src:url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'),url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2') ;
+ }
+
+ @font-face {
+    font-family: 'DungGeunMo-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/wooin21/web/fonts/etc/DungGeunMo-Regular.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.enroll-question-popup-container{
+    overflow-y: scroll;
+
+    width: 90%;
+    min-height: 745px;
+
+    background-color: #60679D;
+    border: 5px solid #ffffff;
+
+    position: fixed;
+    bottom:80px;
+
+    padding: 15px;
+}
+
+.enroll-question-popup-title-box{
+    margin-bottom: 20px;
+}
+
+.enroll-question-popup-title{
+    font-family: 'bitbit';
+    font-size: 40px;
+
+    -webkit-text-stroke: 1px #ffffff;
+}
+
+.enroll-question-popup-cancel{
+    float: right;
+
+    width: 30px;
+    height: 30px;
+
+    /* background-image: url(../img/cancel_btn.png); */
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+
+    cursor: pointer;
+}
+
+.enroll-question-popup-contents-box{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+/*title*/
+.enroll-question-popup-contents-title-box{
+    margin: 15px 0;
+}
+
+.enroll-question-popup-contents-title{
+    font-family: 'DungGeunMo-Regular';
+    font-size: 22px;
+    color: #ffffff;
+
+    margin-right: 15px;
+}
+
+.enroll-question-popup-contents-title-input{
+    width: 1000px;
+    height: 22px;
+
+    font-size: 22px;
+}
+
+/*description*/
+.enroll-question-popup-contents-description-box{
+    margin: 15px 0;
+}
+
+.enroll-question-popup-contents-description{
+    font-family: 'DungGeunMo-Regular';
+    font-size: 22px;
+    color: #ffffff;
+
+    margin-right: 15px;
+}
+
+.enroll-question-popup-contents-description-input{
+    width: 1000px;
+    height: 22px;
+
+    font-size: 22px;
+}
+
+/*category*/
+.enroll-question-popup-contents-category-box{
+    margin: 15px 0;
+}
+
+.enroll-question-popup-contents-category{
+    font-family: 'DungGeunMo-Regular';
+    font-size: 22px;
+    color: #ffffff;
+
+    margin-right: 15px;
+}
+
+/*question*/
+.enroll-question-popup-contents-question-box{
+    margin: 15px 0;
+}
+
+.enroll-question-popup-contents-question{
+    font-family: 'DungGeunMo-Regular';
+    font-size: 22px;
+    color: #ffffff;
+
+    margin-right: 15px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.ql-container.ql-snow{
+    border: none;
+}
+
+.enroll-question-popup-yes{
+    width: 150px;
+    height: 50px;
+
+    background-image: url(../img/community_003.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    margin-left: 47%;
+
+    text-align: center;
+    font-family: 'DungGeunMo-Regular';
+    font-size: 22px;
+    line-height: 45px;
+
+    cursor: pointer;
+}

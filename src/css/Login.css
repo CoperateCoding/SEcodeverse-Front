@@ -1,0 +1,233 @@
+/*font*/
+@font-face{
+    font-family:'bitbit';
+    src:url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'),url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2') ;
+ }
+
+ @font-face {
+    font-family: 'DungGeunMo-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/wooin21/web/fonts/etc/DungGeunMo-Regular.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.login-page-container{
+    max-width: 1000px;
+    height: auto; 
+    margin: 30px auto; 
+}
+
+.login-page-wrapper{
+    max-width: 1000px;
+    height: auto; 
+}
+
+/*login box*/
+.login-page-login-box{
+    width: 1000px;
+    height: auto;
+
+    opacity: 0.8;
+    background-color: #6E6FAF;
+    border: 5px solid white;
+
+    margin: 0 auto; 
+}
+
+.login-page-login-box:hover{
+    opacity: 1;
+}
+
+/*LOGIN*/
+.login-page-login-text{
+    margin: 20px auto;
+    text-align: center;
+    
+    font-family: 'bitbit';
+    font-size: 120px;
+    color: #19224F;
+    -webkit-text-stroke: 3px white;
+}
+
+/*Login inner box*/
+.login-page-login-input-box-wrapper{
+    margin:0px auto;
+
+    width: 800px;
+    height: auto;
+
+    background-color: #787878;
+    border: 3px solid white;
+}
+
+.login-page-login-input-box{
+    width: 600px;
+    margin: 100px auto;
+}
+
+.login-page-login-input-box-total-wrapper{
+    display: inline-block;
+}
+
+/*login inner box right*/
+.login-page-login-check-box{
+    width: 174px;
+    height: 130px;
+
+    background-color: #eeeeee;
+
+    vertical-align: top;
+    margin: 20px auto;
+    float: right;
+
+    text-align: center;
+    line-height: 124px;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 36px;
+
+    border-radius: 5%;
+    cursor: pointer;
+}
+
+/*login inner box left*/
+.login-page-id-input-wrapper{
+    margin: 20px auto;
+    vertical-align: top;
+
+    float: left;
+}
+
+.login-page-id-text{
+    color: white;
+    font-family: 'DungGeunMo-Regular';
+    font-size: 48px;
+
+    margin-right: 20px;
+    vertical-align: top;
+}
+
+.login-page-id-input-box{
+    display: inline-block;
+
+    width: 280px;
+    height: 48px;
+    background-color: white;
+
+    font-size: 20px;
+    
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.login-page-pw-input-wrapper{
+    margin: 20px auto;
+}
+
+.login-page-pw-text{
+    color: white;
+    font-family: 'DungGeunMo-Regular';
+    font-size: 48px;
+
+    margin-right: 20px;
+    vertical-align: top;
+}
+
+.login-page-pw-input-box{
+    display: inline-block;
+
+    width: 280px;
+    height: 48px;
+    background-color: white;
+
+    font-size: 20px;
+
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/*deco-dot*/
+.login-page-deco-wrapper{
+    width: 105px;
+    margin: 10px auto;
+}
+
+.login-page-deco{
+    width: 15px;
+    height: 15px;
+
+    display: inline-block;
+
+    background-color: #E0BFE6;
+
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.login-page-sub-button-wrapper{
+    width: 1000px;
+    height: auto;
+
+    margin: 40px auto;
+
+    display: flex;
+    justify-content: center;
+}
+
+.login-pate-find-id-btn
+{
+    background-image: url(../img/community_001.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+
+    width: 250px;
+    height: 80px;
+    margin: 0 20px;
+    line-height: 75px;
+
+    cursor: pointer;
+    text-align: center;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.login-pate-find-pw-btn{
+    background-image: url(../img/community_002.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+    
+    width: 250px;
+    height: 80px;
+    margin: 0 20px;
+    line-height: 75px;
+
+    cursor: pointer;
+    text-align: center;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.login-pate-sign-up-btn{
+    background-image: url(../img/community_003.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+
+    width: 250px;
+    height: 80px;
+    margin: 0 20px;
+    line-height: 75px;
+
+    cursor: pointer;
+    text-align: center;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 28px;
+    font-weight: 600;
+}

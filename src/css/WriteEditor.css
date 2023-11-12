@@ -1,0 +1,114 @@
+.write-editor-wrapper{
+    display: flex;
+    justify-content: center;
+}
+
+.write-editor-container{
+    width: 90%;
+    height: auto;
+
+    display: flex;
+    justify-content: center;
+}
+
+.write-editor-background{
+    width: 90%;
+    min-height: 785px;
+
+    background-color: #fff;
+    background-image: url(../img/write_editor_background.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+}
+
+.write-editor-upper-part{
+    margin-top: 2%;
+    margin-bottom: 1%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.write-editor-title{
+    width: 87.1%;
+    height: 40px;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 24px;
+    font-weight: 800;
+
+    padding: 5px;
+    margin-right: 2%;
+
+    border:#c0c0c0 1px solid;
+
+    vertical-align: top;
+}
+
+.write-editor-select{
+    width: 10%;
+    height: 51px;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 18px;
+
+    border:#c0c0c0 1px solid;
+
+    vertical-align: top;
+}
+
+.write-editor-middle-part{
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 1%;
+
+    height: 592px;
+}
+
+.write-editor-bottom-part{
+    margin-left: 2%;
+    margin-right: 2%;
+
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 22px;
+    font-weight: 550;
+}
+
+.write-editor-check-button{
+    width: 180px;
+    height: 60px;
+
+    cursor: pointer;
+
+    background-image: url(../img/community_003.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+
+    text-align: center;
+    line-height: 57px;
+
+    margin-right: 1%;
+}
+
+.write-editor-cancel-button{
+    width: 180px;
+    height: 60px;
+
+    cursor: pointer;
+
+    background-image: url(../img/community_001.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+
+    text-align: center;
+    line-height: 57px;
+}
