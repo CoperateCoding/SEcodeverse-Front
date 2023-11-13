@@ -17,6 +17,7 @@ const SignUp = () => {
     const[isNotify,setIsNotify] = useState(false)
     const[isExistenceId,setisExistenceId]= useState(true)
     const[isIdButton,setIsIdButton] = useState(false)
+    //아이디 중복검사까지만 함
     const performInput = () => {
         setinputID('');
         setinputPW('');
