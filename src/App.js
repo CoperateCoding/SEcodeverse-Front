@@ -15,7 +15,7 @@ import AdminMain from './components/AdminMain';
 import MyPageMain from './components/MyPageMain';
 import BoardDeatil from './components/community/BoardDetail';
 import {useEffect, useState} from "react";
-import axios from 'axios'; 
+// import axios from 'axios'; 
 // import logo from './logo.svg';
 import QuestionList from './components/question/QuestionList';
 
