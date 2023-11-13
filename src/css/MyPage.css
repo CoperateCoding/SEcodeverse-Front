@@ -80,10 +80,15 @@
     border-radius: 50%;
     border: #CCD2F0 5px solid;
 
-    background-image: url(../img/grade_06.jpg);
     background-repeat: no-repeat;
     background-position: top center;
     background-size: 100% 100%;
+}
+.mypageCircle img{
+    margin-left:20px;
+    margin-top:20px;
+    width:60%;
+    height:60%;
 }
 
 /*중단*/
@@ -147,6 +152,28 @@
     margin-left:20px;
     font-size:14px;
 }
+
+.signUp-page-id-input-wrapper h1{
+    color:red;
+    font-size:90%;
+    text-align:center;
+    
+}
+
+.signUp-page-nickName-input-wrapper h1{
+    color:red;
+    font-size:90%;
+    text-align:center;
+    
+}
+
+.signUp-buttonSentence{
+    color:red;
+    font-size:90%;
+    text-align:center;
+    
+}
+
 
 .myBorderBottom{
     margin-top:60px;

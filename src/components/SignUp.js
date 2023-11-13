@@ -11,6 +11,12 @@ const SignUp = () => {
     const [inputName, setinputName] = useState('');
     const[checkPW,setCheckPW] = useState('');
     const[message,setmessage]=useState('');
+    const[idSentence,setIDsentence] = useState('중복확인  후 회원가입을 시도해주세요')
+    const[nickNameSentence,setNickNameSentence] = useState('중복확인  후 회원가입을 시도해주세요')
+    const[buttonSentence,setButtonSentence] = useState('아이디와 닉네임 중복확인 후 시도해주세요')
+    const[isNotify,setIsNotify] = useState(false)
+    const[isExistenceId,setisExistenceId]= useState(true)
+    const[isIdButton,setIsIdButton] = useState(false)
     const performInput = () => {
         setinputID('');
         setinputPW('');
@@ -43,6 +49,35 @@ const SignUp = () => {
             performInput();
         }
     };
+
+    const isExistence = () =>{
+        const id = inputID
+        axios
+      .get(`api/v1/user/id/${inputID}/exists`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('access')}`,
+        },
+    
+      })
+      .then((response) => {
+        console.log(response.data)
+        setIsIdButton(true)
+        if(response.data.exists == true){
+            setIDsentence('이미 존재하는 아이디입니다.')
+            setisExistenceId(true)
+        }
+        else{
+            setisExistenceId(false)
+            setIDsentence('사용가능한 아이디입니다.')
+        }
+       
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    }
+
     const handleSignUp = () => {
         
         axios.post('/api/v1/user/signup', {
@@ -80,7 +115,8 @@ const SignUp = () => {
                                     <div className='signUp-page-id-input-wrapper'>
                                         <span className='signUp-page-id-text'>ID</span>
                                         <input type='text' value={inputID} className='signUp-page-id-input-box' placeholder="아이디를 입력하세요" onChange={handleInputChange} onKeyDown={handleKeyDown}></input>
-                                        <div className='id-check-button'>중복 확인</div>
+                                        <div className='id-check-button' onClick={isExistence}>중복 확인</div>
+                                        <h1>{idSentence}</h1>
                                     </div>
                                     <div className='signUp-page-pw-input-wrapper'>
                                         <span className='signUp-page-pw-text'>PW</span>
@@ -94,14 +130,19 @@ const SignUp = () => {
                                         <span className='signUp-page-nickName-text'>닉네임</span>
                                         <input type="text" value={inputNickname} className='signUp-page-nickName-input-box' placeholder="닉네임을 입력하세요" onChange={handleInputChangeNickname} onKeyDown={handleKeyDown}></input>
                                         <div className='nickName-check-button'>중복 확인</div>
+                                        <h1>{nickNameSentence}</h1>
                                     </div>
                                     <div className='signUp-page-name-input-wrapper'>
                                         <span className='signUp-page-name-text'>이름</span>
                                         <input type="text" value={inputName} className='signUp-page-name-input-box' placeholder="이름을 입력하세요" onChange={handleInputChangeName} onKeyDown={handleKeyDown}></input>
                                     </div>
                                 </div>
+                                {isNotify && <h1 className="signUp-buttonSentence">{buttonSentence}</h1>}
+
                                 <div className='signUp-page-input-button-wrapper'>
+                                
                                     <div className='signUp-page-input-button' onClick={handleSignUp}>확인</div>
+                                    
                                 </div>
                             </div>
                         </div>
