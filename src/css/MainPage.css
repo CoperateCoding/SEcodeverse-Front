@@ -1,200 +1,307 @@
-/*font*/
-@font-face{
-    font-family:'bitbit';
-    src:url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'),url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2') ;
- }
- @font-face {
+/*상단*/
+.myPage-user{
+    margin:1% auto;
+    width:80%;
+    height:125px;;
+    display: flex;
+}
+
+.myPageName{
+    margin-top: 15px;
+    margin-left:40px;
+    color:white;
+}
+
+.myPage-user-name{
+    display: block;
+
     font-family: 'DungGeunMo-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/wooin21/web/fonts/etc/DungGeunMo-Regular.woff');
-    font-weight: normal;
-    font-style: normal;
+    font-size:36px;
+    font-weight: 700;
+
+    margin-bottom: 20px;
 }
 
+.myPage-user-grade{
+    display: block;
 
-.main_page_container{
-    width: 80%;
-    height: auto;
-    margin: 0 auto; 
+    font-family: 'DungGeunMo-Regular';
+    font-size:36px;
+    font-weight: 700;
 }
 
-.main_page_wrapper{
-    width: 100%;
-    height: 785px;
+.mypageHeader{
     margin: 0 auto;
+
+    width:80%;
+    height:60px;;
+  
+    background-color: white;
+
+    display:flex;
+}
+
+.mypageHeader button{
+    border:solid 1px gray;
+    width:20%;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size:22px;
+
+    cursor: pointer;
+}
+
+.mypage-main-wrapper{
+    margin: 1% auto;
+}
+
+.mypageMain{
+    margin: 1% auto;
+
+    width:79.4%;
+    height:515px;
+
+    background-color: #A8A9CF;
+    border:solid 5px white;
+
+    background-image: url(../img/mypage.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.mypageCircle{
+    width:120px;
+    height:120px;
+
+    position:relative;
+    
+    background-color: white;
+    border-radius: 50%;
+    border: #CCD2F0 5px solid;
+
+    background-image: url(../img/grade_06.jpg);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: 100% 100%;
+}
+
+/*중단*/
+.myBoard-wrapper{
+    max-width: 90%;
+    height: 460px; 
 
     display: flex;
     justify-content: center;
+
+    margin: 20px auto; 
+    flex-wrap: wrap;
+
+    margin-bottom: 1%;
 }
 
-/*left content*/
-.main_page_left{
-    width: 40%;
-    margin-right: 60px;
+.mypage-myBoard{
+    width: 280px;
+    height: 210px;
+    
+    display: inline-block;
+    margin: 10px;
+
+    background-image: url(../img/community-box.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+
+    cursor: pointer;
 }
 
-.main_page_contents1{
-    width: 100%;
-    height: 675px;
+.myPage-myBoard-coding-grade{
+    width: 42px;
+    height:42px;
 
-    margin-top: 50px;
-    background-color: #ffffff;
+    background-image: url(../img/grade_01.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
 
-    padding:10px;
+    margin-top:15px;
+    margin-left:15px;
+    border:1px gray solid;
+
+    border-radius: 50%;
+
+    display: inline-block;
 }
 
-.main-page-contents1-title-box{
-    padding:20px;
-    background-color: #CCD2F0;
-    text-align: center;
+.myPage-myBoard-post-title{
+    font-size:24px;
+    font-weight: 800;
 
-    margin-bottom: 13px;
+    margin-top: 10px;
+    margin-left:20px;
+    
+    display: block;
 }
 
-.main-page-contents1-font{
-    font-family: 'DungGeunMo-Regular';
-    font-size: 24px;
-    font-weight: bold;
+.myPage-myBoard-post-contents{
+    margin-left:20px;
+    font-size:14px;
 }
 
-.mainPage-post-box{
-    width: 99.4%;
-    height: 75px;
-
-    border:#CCD2F0 2px solid;
-
-    margin-top: 7px;
+.myBorderBottom{
+    margin-top:60px;
+    width:500px;
+    height:55px;
+    display:flex;
 }
 
-.mainPage-post-name{
-    margin-top: 30px;
-    margin-left: 15px;
-
-    font-family: 'DungGeunMo-Regular';
+.myBorderBottom{
+    display:flex;
 }
 
-.mainPage-post-detail{
+.myPage-under-wrapper{
     display: flex;
-    margin-right: 15px;
-    justify-content: end;
-
-    vertical-align: top;
-
-    font-family: 'DungGeunMo-Regular';
+    padding-top: 48px;
+    margin-left: 20px;
 }
 
-/*like*/
-.mainPage-post-like-wrapper{
-    margin-right: 15px;
-
-    display: flex;
-}
-
-.mainPage-post-like-img{
-    width: 15px;
-    height: 15px;
+.myPage-heart{
+    width:20px;
+    height:20px;
 
     background-image: url(../img/hart.png);
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 90% 90%;
-}
+    background-size: 100% 100%;
 
-.mainPage-post-comment-wrapper{
-    margin-right: 15px;
-    display: flex;
-
-}
-
-.mainPage-post-comment-img{
-    width: 15px;
-    height: 15px;
-
-    background-image: url(../img/comment.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 160% 160%;
-
+    margin-top: 1px;
     margin-right: 5px;
 }
 
+.myPage-heart-count{
+    font-size: 18px;
+    font-weight: 400;
 
-/*right content*/
-.main_page_right{
-    width: 50%;
+    margin-right: 15px;
 }
 
-.main_page_contents2{
-    width: 100%;
-    height: 310px;
+.myPage-comment{
+    width:30px;
+    height:30px;
 
-    margin-top: 50px;
-    margin-bottom: 50px;
-    background-color: #ffffff;
-
-    padding:10px;
-}
-
-.main_page_contents3{
-    width: 100%;
-    height: 295px;
-
-    background-color: #ffffff;
-
-    padding:10px;
-}
-
-.main-page-contents2-title-box{
-    padding:10px;
-    background-color: #CCD2F0;
-    text-align: center;
-}
-
-.main-page-contents2-font{
-    font-family: 'DungGeunMo-Regular';
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.main-page-contents2-table{
-    width: 100%;
-    height: 230px;
-    margin-top: 15px;
-    border: 1px solid #CCD2F0 ;
-    border-spacing :0;
-    font-family: 'DungGeunMo-Regular';
-    text-align: center;
-}
-
-.main-page-contents2-table td,th{
-    border: 1px solid #CCD2F0 ;
-}
-
-.main-page-contents2-table th{
-    font-family: 'DungGeunMo-Regular';
-    font-size: 16px;
-    padding:5px
-}
-
-.main-page-contents3-title-box{
-    padding:10px;
-    background-color: #CCD2F0;
-    text-align: center;
-}
-
-.main-page-contents3-font{
-    font-family: 'DungGeunMo-Regular';
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.main-page-contents3-img{
-    margin-top: 20px;
-    margin-left: 32%;
-    width: 35%;
-    height: 200px;
-
-    background-image: url(../img/ctf_none.png);
+    background-image: url(../img/comment.png);
     background-repeat: no-repeat;
     background-position: top center;
-    background-size: cover;
+    background-size: 100% 100%;
+
+    margin-top: -4px;
+    margin-right: 5px;
+}
+
+.myPage-comment-count{
+    font-size: 18px;
+    font-weight: 400;
+    margin-right: 15px;
+}
+
+.myPage-date{
+    font-size: 18px;
+    font-weight: 400;
+}
+
+/*선택 버튼*/
+.selectedButton {
+    background-color: #9FA9D8; /* 선택한 버튼의 배경 색상 */
+    color: #ffffff; /* 선택한 버튼의 폰트 색상 */
+  }
+  
+.question-wrapper{
+    width:80%;
+    height:auto;
+
+    margin-left: 10%;
+    margin-top: 2%;
+
+    display: flex;
+}
+
+/*문제 표*/
+.mypage-question-table{
+    border-collapse: collapse;
+    line-height: 36px;
+    text-align: center;
+
+    border: solid 1px #807FD0;
+}
+
+.mypage-question-table tr {
+    height:38px;
+  }
+
+.mypage-question-number{
+    width: 90px;
+    border: solid 1px #A8A9CF;
+    background-color: white;
+}
+
+.mypage-question-name{
+    width: 300px;
+    border: solid 1px #A8A9CF;
+    background-color: white;
+}
+
+.mypage-question-description{
+    width: 740px;
+    border: solid 1px #A8A9CF;
+    background-color: white;
+}
+
+.mypage-question-grade{
+    width: 60px;
+    border: solid 1px #A8A9CF;
+    background-color: white;
+}
+
+.mypage-question-table thead{
+    font-family: 'DungGeunMo-Regular';
+    font-weight: 800;
+    font-size: 18px;
+}
+
+/*paging*/
+.mypage-paging{
+    margin-top: 1%;
+    text-align: center;
+}
+
+.mypage-paging button{
+    cursor: pointer;
+
+    border: none;
+    background-color: transparent;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 20px;
+    font-weight: 800;
+}
+
+tbody .mypage-question-grade img{
+
+    width: 26px;
+    height: 26px;
+}
+
+.myPage-board-upper-wrapper{
+    padding-left: 15px;
+    padding-top: 17px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.myPage-board-name{
+    display: block;
+}
+
+.myPage-board-user{
+    display: block;
 }
