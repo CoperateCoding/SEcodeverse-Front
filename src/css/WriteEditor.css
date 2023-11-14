@@ -57,12 +57,17 @@
     vertical-align: top;
 }
 
+.write-editor-input-file{
+    margin-left: 2%;
+}
+
 .write-editor-middle-part{
     margin-left: 2%;
     margin-right: 2%;
     margin-bottom: 1%;
+    margin-top: 1% ;
 
-    height: 592px;
+    height: 552px;
 }
 
 .write-editor-bottom-part{
