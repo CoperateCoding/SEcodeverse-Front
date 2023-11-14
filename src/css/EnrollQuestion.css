@@ -32,7 +32,7 @@
 
 .enroll-question-popup-title{
     font-family: 'bitbit';
-    font-size: 40px;
+    font-size: 60px;
 
     -webkit-text-stroke: 1px #ffffff;
 }
@@ -43,7 +43,7 @@
     width: 30px;
     height: 30px;
 
-    /* background-image: url(../img/cancel_btn.png); */
+    background-image: url(../img/cancel_btn.png);
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;
@@ -70,7 +70,7 @@
 }
 
 .enroll-question-popup-contents-title-input{
-    width: 1000px;
+    width: 96%;
     height: 22px;
 
     font-size: 22px;
@@ -90,7 +90,7 @@
 }
 
 .enroll-question-popup-contents-description-input{
-    width: 1000px;
+    width: 89.5%;
     height: 22px;
 
     font-size: 22px;
@@ -120,12 +120,10 @@
     color: #ffffff;
 
     margin-right: 15px;
-    margin-bottom: 10px;
-    display: block;
-}
+    margin-bottom: 20px;
+    margin-top: 20px;
 
-.ql-container.ql-snow{
-    border: none;
+    display: block;
 }
 
 .enroll-question-popup-yes{
@@ -138,6 +136,8 @@
     background-size: cover;
 
     margin-left: 47%;
+    margin-bottom: 10px;
+    margin-top: 15px;
 
     text-align: center;
     font-family: 'DungGeunMo-Regular';
@@ -145,4 +145,13 @@
     line-height: 45px;
 
     cursor: pointer;
+}
+
+.enroll-question-popup-contents-text-box{
+    width: 99.5%;
+    height: 360px;
+
+    background-color: #ffffff;
+
+    margin-top: 20px;
 }
