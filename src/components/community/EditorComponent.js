@@ -13,7 +13,7 @@ const EditorComponent = ({ value, onChange }) => {
         { indent: "-1" },
         { indent: "+1" },
       ],
-      ["link", "image"],
+      ["link"],
       [{ align: [] }, { color: [] }, { background: [] }],
       ["clean"],
     ],
@@ -30,7 +30,6 @@ const EditorComponent = ({ value, onChange }) => {
     "bullet",
     "indent",
     "link",
-    "image",
     "align",
     "color",
     "background",
@@ -39,7 +38,7 @@ const EditorComponent = ({ value, onChange }) => {
   return (
    <div>
       <ReactQuill
-        style={{ height: "550px" }}
+        style={{ height: "500px" }}
         theme="snow"
         modules={modules}
         formats={formats}

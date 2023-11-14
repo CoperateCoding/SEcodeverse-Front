@@ -49,6 +49,12 @@
     cursor: pointer;
 }
 
+.header_sign_btn a{
+    color: inherit;
+    text-decoration: none;
+    text-decoration-line: none;
+}
+
 /*category*/
 .header_Benner_wrapper{
     text-align: center;

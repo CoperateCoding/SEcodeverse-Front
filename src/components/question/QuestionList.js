@@ -3,13 +3,12 @@ import "../../css/EnrollQuestion.css";
 import React, { useState, useEffect } from "react";
 import QuestionBoardComponent from "../QuestionBoardComponent";
 import axios from 'axios';
-import EditorComponent from "../community/EditorComponent";
 
 
 const QuestionList = () => {
   //페이징
   const [questionList,setQuestionList] = useState([]);
-  const[search,setSearch]=useState('');
+  const [search,setSearch]=useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages,setTotalpages]=useState(0); 
   const [popupState, setPopupState] = useState(false);
@@ -532,7 +531,7 @@ data = {
           </div>
         </div>
         
-        <div className="mypage-paging">
+        <div className="question-list-paging">
             <button onClick={handlePrevClick}>&lt;</button>
             {renderPageNumbers()}
             <button onClick={handleNextClick}>&gt;</button>
@@ -564,15 +563,15 @@ data = {
                   </select>
                 </div>
                 <div className="enroll-question-popup-contents-question-box">
-                  
                   <span className="enroll-question-popup-contents-question">문제 내용</span>
                   <input
+                  className="enroll-question-popup-contents-file-input"
 	                type="file"
 	                accept="image/jpg, image/png, image/jpeg"
                   multiple
                   onChange={handleFileChange}
                   />
-                  <EditorComponent value={desc} onChange={setDesc} />
+                  <textarea type="text" className="enroll-question-popup-contents-text-box" value={desc} onChange={(e) => setDesc(e.target.value)} />
                 </div>
               </div>
               <div onClick={handleRegisterClick} className="enroll-question-popup-yes">등록</div>
