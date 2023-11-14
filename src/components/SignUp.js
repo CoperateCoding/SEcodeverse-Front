@@ -13,7 +13,7 @@ const SignUp = () => {
     const[message,setmessage]=useState('');
     const[idSentence,setIDsentence] = useState('중복확인  후 회원가입을 시도해주세요')
     const[nickNameSentence,setNickNameSentence] = useState('중복확인  후 회원가입을 시도해주세요')
-    const[buttonSentence,setButtonSentence] = useState('아이디와 닉네임 중복확인 후 시도해주세요')
+    const[buttonSentence,setButtonSentence] = useState('아이디 및 닉네임 중복확인 후 시도해주세요')
     const[isNotify,setIsNotify] = useState(false)
     const[isExistenceId,setisExistenceId]= useState(true)
     const[isIdButton,setIsIdButton] = useState(false)

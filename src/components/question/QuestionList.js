@@ -184,8 +184,9 @@ const QuestionList = () => {
       console.error('API 호출 중 에러:', error);
     });
 
-
  }
+
+ 
   const [optionState, setoptionState] = useState(false);
 
   const [difficultyOptions, setDifficultyOptions] = useState([]);
@@ -263,6 +264,32 @@ const QuestionList = () => {
     );
 
    
+  };
+  
+  const renderPageNumbers = () => {
+    const pageNumbers = [];
+    const maxVisiblePages = 5;
+    const halfMaxVisiblePages = Math.floor(maxVisiblePages / 2);
+    let startPage = Math.max(currentPage - halfMaxVisiblePages, 1);
+    let endPage = Math.min(startPage + maxVisiblePages - 1, totalPages);
+
+    if (endPage - startPage + 1 < maxVisiblePages) {
+      startPage = Math.max(endPage - maxVisiblePages + 1, 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pageNumbers.push(
+        <button
+          key={i}
+          onClick={() => buttonClick(i)}
+          className={i === currentPage ? "active" : ""}
+        >
+          {i}
+        </button>
+      );
+    }
+
+    return pageNumbers;
   };
 
   const handleRegisterClick = async  () => {
@@ -506,11 +533,7 @@ data = {
         
         <div className="question-list-paging">
             <button onClick={handlePrevClick}>&lt;</button>
-            {Array.from({ length: totalPages }, (_, i) => (
-              <button key={i} onClick={() => buttonClick(i + 1)}>
-                {i + 1}
-              </button>
-            ))}
+            {renderPageNumbers()}
             <button onClick={handleNextClick}>&gt;</button>
         </div>
           {popupState && (
