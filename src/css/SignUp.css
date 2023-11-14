@@ -44,7 +44,7 @@
     text-align: center;
     
     font-family: 'bitbit';
-    font-size: 100px;
+    font-size: 70px;
     color: #19224F;
     -webkit-text-stroke: 3px white;
 }
@@ -54,7 +54,7 @@
     margin:0px auto;
 
     width: 800px;
-    height: auto;
+    height: 552px;
 
     background-color: #787878;
     border: 3px solid white;
@@ -74,7 +74,7 @@
 /*signUp inner box*/
 /*아이디*/
 .signUp-page-id-input-wrapper{
-    margin: 35px auto;
+    margin: 30px auto;
     vertical-align: top;
 }
 
@@ -125,7 +125,7 @@
 
 /*비밀번호*/
 .signUp-page-pw-input-wrapper{
-    margin: 35px auto;
+    margin: 30px auto;
     vertical-align: top;
 }
 
@@ -154,7 +154,7 @@
 
 /*비밀번호 확인*/
 .signUp-page-checkPw-input-wrapper{
-    margin: 35px auto;
+    margin: 30px auto;
     vertical-align: top;
 }
 
@@ -183,7 +183,7 @@
 
 /*닉네임*/
 .signUp-page-nickName-input-wrapper{
-    margin: 35px auto;
+    margin: 30px auto;
     vertical-align: top;
 }
 
@@ -233,7 +233,7 @@
 
 /*이름*/
 .signUp-page-name-input-wrapper{
-    margin: 35px auto;
+    margin: 30px auto;
     vertical-align: top;
 }
 

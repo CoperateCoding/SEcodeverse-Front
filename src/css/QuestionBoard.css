@@ -14,7 +14,7 @@
 .question-board-container{
     max-width: 90%;
     height: auto; 
-    margin: 1.92% auto; 
+    margin: 1.42% auto; 
 }
 
 .question-board-wrapper{
@@ -25,7 +25,7 @@
 
 .question-board-top-wrapper{
     display: flex;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
 }
 
 .question-board-input-box{
@@ -174,4 +174,22 @@
 .question-board-bottom-wrapper{
     width: 100%;
     min-height: 597px;
+}
+
+.question-list-paging{
+    margin-top: 1%;
+    text-align: center;
+}
+
+.question-list-paging button{
+    cursor: pointer;
+
+    border: none;
+    background-color: transparent;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 20px;
+    font-weight: 800;
+
+    color: #fff;
 }
