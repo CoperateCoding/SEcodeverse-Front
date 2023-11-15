@@ -20,6 +20,7 @@ import {useEffect, useState} from "react";
 import QuestionList from './components/question/QuestionList';
 
 import CTFteam from './components/ctf/CTFteam';
+import QuestionDetail from './components/question/QuestionDetail';
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
         <Route path="/signUp" element={<SignUp/>}/>
         <Route  path="/login" element={<Login setAuth ={setAuth}/>}/>
         <Route path="/question" element={<QuestionList/>}/>
+        <Route path="/question/detail" element={<QuestionDetail/>}/>
         <Route path="ctfLeague" element={<CTFLeague/>}/>
         <Route path="ctfTeam" element={<CTFteam/>}/>
         <Route path="ctfquestion" element={<CTFquestion/>}/>
