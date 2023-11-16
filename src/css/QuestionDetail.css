@@ -104,25 +104,67 @@
 
     background-color: #595959;
     border: #ffffff 5px solid;
+
+    overflow-y:auto;
+}
+
+.question-detail-code-bar{
+    width: 99%;
+    height: auto;
+    background-color: #6E6FAF;
+
+    padding: 5px;
 }
 
 .question-detail-code-text-bar{
-    display: block;
-
     font-family: 'DungGeunMo-Regular';
     font-weight: 500;
-    font-size: 20px;
-
-    padding: 5px;
+    font-size: 24px;
 
     color: #ffffff;
-    background-color: #6E6FAF;
+}
+
+.question-detail-code-select-bar{
+    float: right;
+
+    margin-right: 10px;
+}
+
+.question-detail-code-line{
+    margin-right: 16px;
+    text-align: right;
+    vertical-align: top;
+
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.question-detail-code-text-area{
+    width: 100%;
+    min-height: 200px;
+
+    color: #ffffff;
+    font-size: 18px;
+
+    background-color: transparent;
+    border: transparent;
+
+    outline: none;
+    border: none;
+
+    resize: none;
+    overflow: hidden;
 }
 
 .question-detail-result-box{
     height: 14%;
+
     background-color: #595959;
     border: #ffffff 5px solid;
+
+    color: #ffffff;
+
+    overflow-y: scroll;
 }
 
 .question-detail-result-text-bar{
@@ -130,7 +172,7 @@
 
     font-family: 'DungGeunMo-Regular';
     font-weight: 500;
-    font-size: 20px;
+    font-size: 24px;
 
     padding: 5px;
 
@@ -149,6 +191,8 @@
     height: 100%;
     background-color: #595959;
     border: #ffffff 5px solid;
+
+    overflow-y: scroll;
 }
 
 .question-detail-description-text-bar{
@@ -156,12 +200,18 @@
 
     font-family: 'DungGeunMo-Regular';
     font-weight: 500;
-    font-size: 20px;
+    font-size: 24px;
 
     padding: 5px;
 
     color: #ffffff;
     background-color: #6E6FAF;
+}
+
+.question-detail-description-text-content{
+    padding:5px;
+    font-size: 20px;
+    color: #ffffff;
 }
 
 /*bottom*/
@@ -175,6 +225,8 @@
 .question-detail-button-result-check{
     width: 200px;
     height: 60px;
+
+    cursor: pointer;
 
     margin-right: 20px;
 
@@ -195,6 +247,8 @@
     width: 200px;
     height: 60px;
 
+    cursor: pointer;
+
     margin-right: 20px;
 
 
@@ -203,7 +257,7 @@
     
     font-family: 'DungGeunMo-Regular';
     font-weight: bold;
-    font-size: 22px;
+    font-size: 24px;
 
     background-image: url(../img/community_004.png);
     background-repeat: no-repeat;
@@ -215,6 +269,8 @@
     width: 200px;
     height: 60px;
 
+    cursor: pointer;
+
     margin-right: 20px;
 
     text-align: center;
@@ -222,7 +278,7 @@
     
     font-family: 'DungGeunMo-Regular';
     font-weight: bold;
-    font-size: 22px;
+    font-size: 28px;
 
     background-image: url(../img/community_005.png);
     background-repeat: no-repeat;
@@ -234,12 +290,14 @@
     width: 200px;
     height: 60px;
 
+    cursor: pointer;
+
     text-align: center;
     line-height: 55px;
     
     font-family: 'DungGeunMo-Regular';
     font-weight: bold;
-    font-size: 22px;
+    font-size: 24px;
 
     background-image: url(../img/community_006.png);
     background-repeat: no-repeat;
