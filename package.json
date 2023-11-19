@@ -9,6 +9,7 @@
     "axios": "^1.6.0",
     "jquery": "^3.7.1",
     "react": "^18.2.0",
+    "react-calendar": "^4.6.1",
     "react-dom": "^18.2.0",
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.18.0",
@@ -16,7 +17,6 @@
     "web-vitals": "^2.1.4"
   },
   "proxy": "http://localhost:8080",
-
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
