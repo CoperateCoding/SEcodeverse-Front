@@ -177,8 +177,9 @@ const QuestionList = () => {
   axios.get(url)
     .then(response => {
       setQuestionList(response.data.list);
-      console.log(response.data);
+      console.log("검색 데이터 개수",response.data.cnt);
       setTotalpages(response.data.cnt % 8 > 0 ? response.data.cnt/8 + 1 : response.data.cnt/8);
+      console.log("검색 패이징 개수",response.data.cnt/8)
     })
     .catch(error => {
       console.error('API 호출 중 에러:', error);
@@ -412,6 +413,31 @@ data = {
     }
   };
   
+  const renderPageNumbers = () => {
+    const pageNumbers = [];
+    const maxVisiblePages = 5;
+    const halfMaxVisiblePages = Math.floor(maxVisiblePages / 2);
+    let startPage = Math.max(currentPage - halfMaxVisiblePages, 1);
+    let endPage = Math.min(startPage + maxVisiblePages - 1, totalPages);
+
+    if (endPage - startPage + 1 < maxVisiblePages) {
+      startPage = Math.max(endPage - maxVisiblePages + 1, 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pageNumbers.push(
+        <button
+          key={i}
+          onClick={() => buttonClick(i)}
+          className={i === currentPage ? "active" : ""}
+        >
+          {i}
+        </button>
+      );
+    }
+
+    return pageNumbers;
+  };
  
   return (
     <section>
