@@ -1,7 +1,6 @@
 import "../../css/BoardDetail.css";
 import React, { useState } from "react";
 import "react-quill/dist/quill.snow.css";
-import ViewOnlyEditor from "./ViewOnlyEditor";
 
 const BoardDeatil = () => {
   const [content, setContent] = useState(""); // 에디터의 내용을 담을 상태
@@ -28,7 +27,7 @@ const BoardDeatil = () => {
                 <span className="board-detail-title-text">제목입니까</span>
               </div>
               <div className="board-detail-contents-box">
-                <ViewOnlyEditor/>
+                
               </div>
             </div>
             <div className="board-detail-menu-box"></div>
