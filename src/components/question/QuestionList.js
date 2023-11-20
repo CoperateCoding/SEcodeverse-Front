@@ -177,8 +177,9 @@ const QuestionList = () => {
   axios.get(url)
     .then(response => {
       setQuestionList(response.data.list);
-      console.log(response.data);
+      console.log("검색 데이터 개수",response.data.cnt);
       setTotalpages(response.data.cnt % 8 > 0 ? response.data.cnt/8 + 1 : response.data.cnt/8);
+      console.log("검색 패이징 개수",response.data.cnt/8)
     })
     .catch(error => {
       console.error('API 호출 중 에러:', error);
@@ -412,6 +413,8 @@ data = {
     }
   };
   
+ 
+ 
  
   return (
     <section>
