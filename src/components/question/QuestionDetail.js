@@ -33,7 +33,6 @@ const QuestionDetail = () => {
   };
 
 const getCodeLines = () => {
-  // 각 라인을 \n을 기준으로 나누고 빈 라인은 제외
   const lines = code.split('\n');
   console.log(lines)
   return lines.map((line, index) => (

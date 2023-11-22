@@ -13,8 +13,9 @@
 
 .question-board-container{
     max-width: 90%;
+    min-height: 600px;
     height: auto; 
-    margin: 1.42% auto; 
+    margin: 5% auto; 
 }
 
 .question-board-wrapper{
@@ -173,11 +174,11 @@
 
 .question-board-bottom-wrapper{
     width: 100%;
-    min-height: 597px;
+    min-height: 450px;
 }
 
 .question-list-paging{
-    margin-top: 1%;
+    margin-top: 1.3%;
     text-align: center;
 }
 

@@ -47,12 +47,8 @@ function App() {
         <Route  path="/login" element={<Login setAuth ={setAuth}/>}/>
         <Route path="/question" element={<QuestionList/>}/>
         <Route path="/question/detail" element={<QuestionDetail/>}/>
-        <Route path="ctfLeague" element={<CTFLeague/>}/>
-        <Route path="ctfTeam" element={<CTFteam/>}/>
-        <Route path="ctfquestion" element={<CTFquestion/>}/>
-
+        <Route path="/admin" element={<AdminMain/>}/>
       </Routes>
-      <Chatbot></Chatbot>
       <Footer/>
     </div>
   </BrowserRouter>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../../css/CodingBadge.css";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-
+//경험치 바 자동으로 수정하기~!~!
 const CodingBadge = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
 
@@ -37,7 +37,7 @@ const CodingBadge = () => {
                       <span className="mypage-codingBadge-info-text-remain-exp">남은 경험치 : </span>
                     </div>
                     <div className="mypage-codingBadge-info-exp-box">
-                      <div className="mypage-codingBadge-info-exp-gage">38.4%</div>
+                      <div className="mypage-codingBadge-info-exp-gage">38.4%</div> 
                     </div>
                   </div>
                 </div>
