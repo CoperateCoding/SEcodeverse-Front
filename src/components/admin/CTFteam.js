@@ -18,7 +18,7 @@ const CTFteam = () => {
   return (
     <div className="admin-main-board-right">
       <div className="admin-team-board-wrapper">
-        <h1 className="admin-team-board-rightMain">CTF 팀관리</h1>
+        <h1 className="admin-team-board-rightMain">CTF 팀 관리</h1>
         <div className="admin-team-board-topBar">
           <div name="admin-team-board-category-accordion-wrap">
             <div
