@@ -2,7 +2,7 @@ import "../../css/BoardDetail.css";
 import React, { useState } from "react";
 import "react-quill/dist/quill.snow.css";
 import CommentComponent from "./CommentComponent";
-
+//다시보냄
 const BoardDeatil = () => {
   const dummyData = [
     {
