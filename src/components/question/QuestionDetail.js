@@ -32,36 +32,16 @@ const QuestionDetail = () => {
     }
   };
 
-  const getCodeLines = () => {
-    const maxCharsPerLine = 120; // 예시로 50글자로 가정
-  
-    // 글자 수와 \n을 기준으로 나누고 각 줄에 라인 번호를 표시
-    const lines = [];
-    code.split("\n").forEach((line) => {
-      let currentLine = "";
-      for (let i = 0; i < line.length; i++) {
-        currentLine += line[i];
-        if ((i + 1) % maxCharsPerLine === 0 || i === line.length - 1) {
-          lines.push(currentLine);
-          currentLine = "";
-        }
-      }
-      if (line === "") {
-        // 빈 라인일 경우에도 추가
-        lines.push(line);
-      }
-    });
-  
-    // lines 배열에 빈 문자열로 된 라인이 추가되는 경우 필터링
-    const filteredLines = lines.map((line) => line.trim());
-  
-    return filteredLines.map((line, index) => (
-      <div key={index}>
-        <span style={{ marginRight: "8px" }}>{index + 1}</span>
-        {line}
-      </div>
-    ));
-  };
+const getCodeLines = () => {
+  const lines = code.split('\n');
+  console.log(lines)
+  return lines.map((line, index) => (
+    <div key={index} style={{ whiteSpace: 'pre-wrap' }}>
+      <span style={{ marginRight: '8px' }}>{index + 1}</span>
+      {line}
+    </div>
+  ));
+};
 
   const handleCodeChange = (e) => {
     setCode(e.target.value);
@@ -144,7 +124,8 @@ int main() {
 
                 <div
                   className="question-detail-code-area"
-                  style={{ display: "flex" }}
+                  style={{ display: "flex",
+                  width: "100%"}}
                 >
                   <div className="question-detail-code-line">
                     {getCodeLines().map((line, index) => (

@@ -147,11 +147,63 @@
     cursor: pointer;
 }
 
+.enroll-question-text-area-wrap{
+    display: flex;
+    align-items: flex-end;
+
+    margin-top: 20px;
+}
+
 .enroll-question-popup-contents-text-box{
-    width: 99.5%;
+    width: 68.5%;
     height: 360px;
 
     background-color: #ffffff;
+    margin-right: 1%;
 
-    margin-top: 20px;
+    vertical-align: top;
+}
+
+.enroll-question-test-case{
+    width: 30%;
+    height: 366px;
+
+    background-color: #ffffff;
+
+    vertical-align: top;
+}
+
+.enroll-question-test-case-title{
+    font-family: 'DungGeunMo-Regular';
+    font-size: 24px;
+    text-align: center;
+}
+
+.enroll-question-test-case-table{
+    margin-left: 1%;
+    width: 98%;
+    border: #CCD2F0 1px solid;
+}
+
+.enroll-question-test-case-table >tbody> tr{
+    height: 82px;
+}
+
+
+.enroll-question-test-case-table >tbody>tr>.enroll-question-test-case-input{
+    border: #CCD2F0 1px solid;
+    height: 82px;
+}
+
+.enroll-question-test-case-table >tbody>tr>.enroll-question-test-case-result{
+    border: #CCD2F0 1px solid;
+    height: 82px;
+}
+
+.enroll-question-test-case-tbody>tr>td>textarea{
+    border: none;
+    resize: none;
+
+    width: 99%;
+    height: 99%;
 }

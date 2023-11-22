@@ -574,7 +574,46 @@ data = {
                   multiple
                   onChange={handleFileChange}
                   />
-                  <textarea type="text" className="enroll-question-popup-contents-text-box" value={desc} onChange={(e) => setDesc(e.target.value)} />
+                  <div className="enroll-question-text-area-wrap">
+                    <textarea type="text" className="enroll-question-popup-contents-text-box" value={desc} onChange={(e) => setDesc(e.target.value)} />
+                    <div className="enroll-question-test-case">
+                      <p className="enroll-question-test-case-title">테스트 케이스 입력</p>
+                      <table className="enroll-question-test-case-table">
+                        <thead className="enroll-question-test-case-thead">
+                          <tr>
+                            <th className="enroll-question-test-case-input">입력 값</th>
+                            <th className="enroll-question-test-case-result">결과 값</th>
+                          </tr>
+                        </thead>
+                        <tbody className="enroll-question-test-case-tbody">
+                          <tr>
+                            <td className="enroll-question-test-case-input">
+                              <textarea type="text" placeholder="테스트 케이스 1 입력"></textarea>
+                            </td>
+                            <td className="enroll-question-test-case-result">
+                              <textarea type="text" placeholder="테스트 케이스 1 결과"></textarea>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="enroll-question-test-case-input">
+                              <textarea type="text" placeholder="테스트 케이스 2 입력"></textarea>
+                            </td>
+                            <td className="enroll-question-test-case-result">
+                              <textarea type="text" placeholder="테스트 케이스 2 결과"></textarea>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="enroll-question-test-case-input">
+                              <textarea type="text" placeholder="테스트 케이스 3 입력"></textarea>
+                            </td>
+                            <td className="enroll-question-test-case-result">
+                              <textarea type="text" placeholder="테스트 케이스 3 결과"></textarea>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div onClick={handleRegisterClick} className="enroll-question-popup-yes">등록</div>

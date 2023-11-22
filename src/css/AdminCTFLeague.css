@@ -1,0 +1,206 @@
+/*font*/
+@font-face{
+    font-family:'bitbit';
+    src:url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'),url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2') ;
+ }
+
+ @font-face {
+    font-family: 'DungGeunMo-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/wooin21/web/fonts/etc/DungGeunMo-Regular.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.admin-league-board-wrapper{
+    padding: 20px;
+}
+
+.admin-league-board-rightMain{
+    margin: 20px auto;
+    
+    font-family: 'DungGeunMo-Regular';
+    font-size: 45px;
+
+    color: #ffffff;
+
+    text-align: center;
+}
+
+.admin-league-board-topBar{
+    display: flex;
+    justify-content: flex-end;
+
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.admin-league-accordion-header {
+    width: 170px;
+    height: 45px;
+
+    background-color: #A8A9CF;
+    border: 3px solid #fff;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+}
+  
+.ctf-league-accordion-content {
+    position:absolute;
+    width: 170px;
+    
+    border-left: 3px solid #fff;
+    border-right: 3px solid #fff;
+    border-bottom: 3px solid #fff;
+    background-color: #A8A9CF;
+
+    cursor: pointer;
+}
+
+.ctf-league-board-search-order-text {
+    text-decoration: none;
+    display: block;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 20px;
+
+    height: 45px;
+    text-align: center;
+    line-height: 45px;
+}
+
+.ctf-league-board-search-order-icon{
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+.admin-league-board-create-question{
+    width: 150px;
+    height: 45px;
+
+    background-color: #A8A9CF;
+    border: 3px solid #fff;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 20px;
+
+    text-align: center;
+    line-height: 45px;
+
+    margin-left: 10px;
+    margin-right: 88px;
+
+    cursor: pointer;
+}
+
+/* table */
+.admin-league-board-table{
+    width: 100%;
+    height: 500px;
+
+    margin-bottom: 30px;
+}
+
+.admin-league-table{
+    width: 95%;
+    border-spacing: 0px;
+
+    font-size: 20px;
+    font-family: 'DungGeunMo-Regular';
+
+    margin-left: 4.8%;
+}
+
+.admin-league-table>thead>tr{
+    height: 40px;
+}
+
+.admin-league-table>tbody>tr{
+    height: 45px;
+}
+
+.admin-league-table-number{
+    width: 7%;
+
+    background-color: #A8A9CF;
+    border: #CCD2F0 1px solid;
+}
+
+.admin-league-table-name{
+    width: 63%;
+
+    background-color: #A8A9CF;
+    border: #CCD2F0 1px solid;
+}
+
+.admin-league-table-date{
+    background-color: #A8A9CF;
+    border: #CCD2F0 1px solid;
+}
+
+.admin-league-table-modify{
+    width: 3%;
+    border: none;
+}
+
+.admin-league-table-delete{
+    width: 3%;
+    border: none;
+}
+
+.admin-league-paging{
+    text-align: center;
+    color: #fff;
+    font-family: 'DungGeunMo-Regular';
+}
+
+.admin-league-table-modify-img{
+    margin-left: 7px;
+
+    width: 30px;
+    height: 30px;
+
+    background-image: url(../img/modify.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.admin-league-table-delete-img{
+    margin-left: 7px;
+    
+    width: 30px;
+    height: 30px;
+
+    background-image: url(../img/delete.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.leage-number{
+    background-color: #fff;
+    border: 1px solid #CCD2F0;
+}
+
+.leage-name{
+    background-color: #fff;
+    border: 1px solid #CCD2F0;
+}
+
+.leage-date{
+    background-color: #fff;
+    border: 1px solid #CCD2F0;
+}
+
+tbody>tr>.admin-league-table-modify{
+    cursor: pointer;
+}
+
+tbody>tr>.admin-league-table-delete{
+    cursor: pointer;
+}
