@@ -1,0 +1,167 @@
+/*font*/
+@font-face{
+    font-family:'bitbit';
+    src:url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'),url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2') ;
+ }
+
+ @font-face {
+    font-family: 'DungGeunMo-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/wooin21/web/fonts/etc/DungGeunMo-Regular.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.admin-team-board-wrapper{
+    padding: 20px;
+}
+
+.admin-team-board-rightMain{
+    margin: 20px auto;
+    
+    font-family: 'DungGeunMo-Regular';
+    font-size: 45px;
+
+    color: #ffffff;
+
+    text-align: center;
+}
+
+.admin-team-board-topBar{
+    display: flex;
+    justify-content: flex-end;
+
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.admin-team-accordion-header {
+    width: 170px;
+    height: 45px;
+
+    background-color: #A8A9CF;
+    border: 3px solid #fff;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    margin-right: 28px;
+
+    cursor: pointer;
+}
+  
+.ctf-team-accordion-content {
+    position:absolute;
+    width: 170px;
+    
+    border-left: 3px solid #fff;
+    border-right: 3px solid #fff;
+    border-bottom: 3px solid #fff;
+    background-color: #A8A9CF;
+
+    cursor: pointer;
+}
+
+.ctf-team-board-search-order-text {
+    text-decoration: none;
+    display: block;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 20px;
+
+    height: 45px;
+    text-align: center;
+    line-height: 45px;
+}
+
+.ctf-team-board-search-order-icon{
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+.admin-team-board-create-question{
+    width: 150px;
+    height: 45px;
+
+    background-color: #A8A9CF;
+    border: 3px solid #fff;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 20px;
+
+    text-align: center;
+    line-height: 45px;
+
+    margin-left: 10px;
+    margin-right: 88px;
+
+    cursor: pointer;
+}
+
+/* table */
+.admin-team-board-table{
+    width: 100%;
+    height: 500px;
+
+    margin-bottom: 30px;
+}
+
+.admin-team-table{
+    width: 95%;
+    border-spacing: 0px;
+
+    font-size: 20px;
+    font-family: 'DungGeunMo-Regular';
+
+    margin-left: 3%;
+}
+
+.admin-team-table>thead>tr{
+    height: 40px;
+}
+
+.admin-team-table>tbody>tr{
+    height: 45px;
+}
+
+
+.admin-team-table-number{
+    width: 7%;
+
+    background-color: #A8A9CF;
+    border: #CCD2F0 1px solid;
+}
+
+.admin-team-table-name{
+    width: 63%;
+
+    background-color: #A8A9CF;
+    border: #CCD2F0 1px solid;
+}
+
+.admin-team-table-score{
+    background-color: #A8A9CF;
+    border: #CCD2F0 1px solid;
+}
+
+.admin-team-paging{
+    text-align: center;
+    color: #fff;
+    font-family: 'DungGeunMo-Regular';
+}
+
+.team-number{
+    background-color: #fff;
+    border: 1px solid #CCD2F0;
+}
+
+.team-name{
+    background-color: #fff;
+    border: 1px solid #CCD2F0;
+}
+
+.team-score{
+    background-color: #fff;
+    border: 1px solid #CCD2F0;
+}

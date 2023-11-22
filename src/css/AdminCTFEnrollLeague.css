@@ -1,0 +1,122 @@
+/*font*/
+@font-face {
+    font-family: 'DungGeunMo-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/wooin21/web/fonts/etc/DungGeunMo-Regular.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.ctf-league-edit-popup-container{
+    overflow-y: scroll;
+
+    width: 77.8%;
+    min-height: 750px;
+
+    background-color: #60679D;
+    border: 5px solid #ffffff;
+
+    position: fixed;
+    bottom:80px;
+
+    padding: 15px;
+
+    z-index: 10000;
+}
+
+.ctf-league-edit-popup-title-box{
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.ctf-league-edit-popup-title{
+    font-family: 'DungGeunMo-Regular';
+    font-size: 40px;
+    color: #ffffff;
+}
+
+.ctf-league-edit-popup-cancel{
+    float: right;
+
+    width: 30px;
+    height: 30px;
+
+    background-image: url(../img/cancel_btn.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+
+    cursor: pointer;
+}
+
+.ctf-league-edit-popup-contents-box{
+    margin-top: 4%;
+    margin-bottom: 15px;
+}
+
+.ctf-league-edit-popup-contents-title-box{
+    margin-top: 2%;
+}
+
+.ctf-league-edit-popup-contents-title{
+    font-family: 'DungGeunMo-Regular';
+    font-size: 30px;
+    color: #ffffff;
+
+    margin-right: 15px;
+}
+
+.ctf-league-edit-popup-contents-title-input{
+    width: 89%;
+    height: 30px;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 22px;
+}
+
+.ctf-league-edit-popup-contents-description-box{
+    margin-top: 2%;
+}
+
+.ctf-league-edit-popup-contents-description{
+    font-family: 'DungGeunMo-Regular';
+    font-size: 30px;
+    color: #ffffff;
+
+    margin-right: 15px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.ctf-league-edit-popup-contents-description-input{
+    font-family: 'DungGeunMo-Regular';
+    font-size: 22px;
+
+    resize: none;
+    width: 99.5%;
+    height: 430px;
+}
+
+.ctf-league-edit-popup-contents-button-wrapper{
+    margin-top: 45px;
+    display: flex;
+    justify-content: center;
+}
+
+.ctf-league-edit-popup-contents-button{
+    width: 160px;
+    height: 45px;
+
+    text-align: center;
+    line-height: 40px;
+
+
+    background-image: url(../img/community_003.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 24px;
+
+    cursor: pointer;
+}
