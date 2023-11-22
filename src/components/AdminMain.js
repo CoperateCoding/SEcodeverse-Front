@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "../css/AdminMain.css";
-import CTFquestion from "../components/ctf/CTFquestion";
-import CTFLeague from "../components/ctf/CTFLeague";
-import CTFteam from "../components/ctf/CTFteam";
+import CTFquestion from "../components/admin/CTFquestion";
+import CTFLeague from "../components/admin/CTFLeague";
+import CTFteam from "../components/admin/CTFteam";
 
 const AdminMain = () => {
   const [currentScreen, setCurrentScreen] = useState("CTFQuestion");
