@@ -1,0 +1,174 @@
+/*font*/
+@font-face{
+    font-family:'bitbit';
+    src:url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'),url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2') ;
+ }
+
+@font-face {
+    font-family: 'DungGeunMo-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/wooin21/web/fonts/etc/DungGeunMo-Regular.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+.league-main-board-container{
+    display: flex;
+    justify-content: center;
+}
+
+.league-main-board-wrapper{
+    width: 90%;
+    height: 787px;
+}
+
+.league-main-board-title-box{
+    display: flex;
+    justify-content: center;
+
+    margin-top: 20px;
+}
+
+.league-main-board-title{
+    font-family: 'bitbit';
+    font-weight: bolder;
+    font-size: 64px;
+
+    text-shadow: -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 2px 2px 0 #fff;
+}
+
+.league-main-board-description-area{
+    display: flex;
+    justify-content: center;
+
+    margin-top: 20px;
+}
+
+.league-main-board-description-box{
+    width: 1000px;
+    height: 320px;
+
+    background-color: #fff;
+    border: #CCD2F0 solid 6px;
+    border-radius: 20px;
+
+    overflow-y: auto;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 24px;
+
+    padding: 20px;
+}
+
+.league-main-board-button-wrapper{
+    width: 1052px;
+    margin: 2% auto;
+}
+
+.league-main-board-button-area{
+    width: 100%;
+    display: flex;
+}
+
+.league-main-board-team-area{
+    width: 30%;
+
+    display: flex;
+    flex-direction: column;
+    margin-right: 2%;
+}
+
+.league-main-board-team-create{
+    width: 100%;
+    height: 100px;
+
+    background-color: #CCD2F0;
+    border: #fff solid 6px;
+    border-radius: 20px;
+
+    margin-bottom: 2%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 32px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.league-main-board-team-join{
+    width: 100%;
+    height: 100px;
+
+    background-color: #CCD2F0;
+    border: #fff solid 6px;
+    border-radius: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 32px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.league-main-board-join-league{
+    width: 40%;
+    height: auto;
+
+    background-color: #CCD2F0;
+    border: #fff solid 6px;
+    border-radius: 20px;
+
+    margin-left: 2%;
+    margin-right: 2%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 32px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.league-main-board-show-result{
+    width: 40%;
+    height: auto;
+
+    background-color: #CCD2F0;
+    border: #fff solid 6px;
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 32px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.league-main-board-star{
+    width: 200px;
+    height: 100px;
+
+    margin-bottom: 18px;
+
+    background-image: url(../img/star_button.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
