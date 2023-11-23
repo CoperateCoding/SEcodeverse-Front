@@ -12,6 +12,7 @@ const Community = () => {
   const writeContents = () => {
   
   };
+
   useEffect(() => {
     const apiUrl = '/api/v1/board';
     const sort="RECENT"
@@ -44,6 +45,7 @@ const Community = () => {
     });
 
   }, []);
+
 
   //검색창 입력
   const [searchTerm, setSearchTerm] = useState("");

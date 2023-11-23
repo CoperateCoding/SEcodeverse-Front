@@ -24,6 +24,7 @@ import LeagueResult from './components/league/LeagueResult';
 function App() {
 
   const [auth,setAuth] = useState(false);
+
   useEffect(()=>{
     console.log('로그인 인증값',auth)
   },[auth])
@@ -39,7 +40,7 @@ function App() {
         <Route path="/mypage" element={<MyPageMain />} />
         <Route path="/community" element={<Community />} />
         <Route path="/community/write" element={<WriteEditor />} />
-        <Route path="/community/post" element={<BoardDeatil />} />
+        <Route path="/community/post/:pk" element={<BoardDeatil />} />
         <Route path="/signUp" element={<SignUp/>}/>
         <Route  path="/login" element={<Login setAuth ={setAuth}/>}/>
         <Route path="/question" element={<QuestionList/>}/>
