@@ -1,0 +1,129 @@
+@font-face {
+    font-family: 'DungGeunMo-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/wooin21/web/fonts/etc/DungGeunMo-Regular.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.league-category-detail-container{
+    display: flex;
+    justify-content: center;
+}
+
+.league-category-detail-wrapper{
+    width: 90%;
+    height: 785px;
+}
+
+.league-category-detail-upper-box{
+    margin-top: 2%;
+    margin-bottom: 1%;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+
+    cursor: pointer;
+}
+
+.league-category-detail-upper-box a{
+    color: #fff;
+    text-decoration: none;
+}
+
+.league-category-detail-title-box{
+    height: 90px;
+
+    background-color: #CCD2F0;
+    border: #fff solid 6px;
+}
+
+.league-category-detail-title-box>span{
+    font-family: 'DungGeunMo-Regular';
+    font-size: 50px;
+    font-weight: bold;
+
+    line-height: 85px;
+    margin-left: 70px;
+}
+
+.league-category-detail-remain-question{
+    float: right;
+
+    width: 260px;
+    height: 90px;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 22px;
+
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.league-category-detail-remain-question>span{
+    float: right;
+
+    width: 180px;
+    height: 70px;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 22px;
+
+    display: flex;
+    align-items: center;
+}
+
+.league-category-detail-question-list{
+    margin: 2% auto;
+
+    height: 460px;
+    background-color: #CCD2F0;
+    border: #fff solid 6px;
+
+    padding: 20px;
+}
+
+.league-category-detail-question-wrap{
+    height: 460px;
+    width: 1380px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+
+    margin: 0 auto;
+}
+
+.league-category-detail-question-box{
+    width: 250px;
+    height: 150px;
+
+    background-color: #CCCCCC;
+    border: #fff solid 5px;
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 0.5%;
+
+    cursor: pointer;
+}
+
+.league-category-detail-question-name{
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.league-category-detail-question-score{
+    font-size: 18px;
+    font-weight: 400;
+
+    margin-top: 10px;
+}
+

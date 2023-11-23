@@ -16,6 +16,9 @@ import {useEffect, useState} from "react";
 import QuestionList from './components/question/QuestionList';
 import QuestionDetail from './components/question/QuestionDetail';
 import LeagueMain from './components/league/LeagueMain';
+import LeagueCategoryList from './components/league/LeagueCategoryList';
+import LeagueCategoryDetail from './components/league/LeagueCategoryDetail';
+import LeagueResult from './components/league/LeagueResult';
 
 
 function App() {
@@ -30,7 +33,6 @@ function App() {
     <BrowserRouter>
     <div className="App">
     <Header auth={auth} setAuth ={setAuth}/>
-    
       <Routes>
         <Route path="/" element={<MainPage/>}/>
         <Route path="/admin" element={<AdminMain />} />
@@ -44,6 +46,9 @@ function App() {
         <Route path="/question/detail" element={<QuestionDetail/>}/>
         <Route path="/admin" element={<AdminMain/>}/>
         <Route path="/league" element={<LeagueMain/>}/>
+        <Route path="/league/category" element={<LeagueCategoryList/>}/>
+        <Route path="/league/category-detail/:category" element={<LeagueCategoryDetail/>}/>
+        <Route path="/league/result" element={<LeagueResult/>}/>
       </Routes>
       <Footer/>
     </div>

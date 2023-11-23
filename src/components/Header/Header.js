@@ -19,7 +19,7 @@ const Header = ({auth, setAuth}) => {
               <ul className='header_Bennrer'>
                 <li className='header_Benner_item'><Link to="/community">커뮤니티</Link></li>
                 <li className='header_Benner_item'><Link to="/question">문제풀기</Link></li>
-                <li className='header_Benner_item'>CTF</li>
+                <li className='header_Benner_item'><Link to="/league">CTF</Link></li>
                 <li className='header_Benner_item'><Link to="/mypage">마이페이지</Link></li>
               </ul>
             </div>
