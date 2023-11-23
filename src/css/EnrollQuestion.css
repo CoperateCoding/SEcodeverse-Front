@@ -34,7 +34,7 @@
     font-family: 'bitbit';
     font-size: 60px;
 
-    -webkit-text-stroke: 1px #ffffff;
+    text-shadow: -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 2px 2px 0 #fff;
 }
 
 .enroll-question-popup-cancel{
