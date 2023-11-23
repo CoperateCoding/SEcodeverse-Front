@@ -1,8 +1,9 @@
 import { useState } from "react";
-import Chatbot from '../Chatbot';
-import "../../css/LeagueMain.css";
-import "../../css/LeagueJoinPopup.css";
-import "../../css/LeagueCreatePopup.css";
+import { Link } from "react-router-dom";
+import Chatbot from "../Chatbot";
+import "../../css/league/LeagueMain.css";
+import "../../css/league/LeagueJoinPopup.css";
+import "../../css/league/LeagueCreatePopup.css";
 
 const LeagueMain = () => {
   const [title, setTitle] = useState("제 1회 SECodeVerse 리그");
@@ -42,12 +43,16 @@ const LeagueMain = () => {
                 </div>
               </div>
               <div className="league-main-board-join-league">
-                <div className="league-main-board-star"></div>
-                <span>리그참여</span>
+                <Link to="/league/category">
+                  <div className="league-main-board-star"></div>
+                  <span>리그참여</span>
+                </Link>
               </div>
               <div className="league-main-board-show-result">
-                <div className="league-main-board-star"></div>
-                <span>결과조회</span>
+                <Link to="/league/result">
+                  <div className="league-main-board-star"></div>
+                  <span>결과조회</span>
+                </Link>
               </div>
             </div>
           </div>
