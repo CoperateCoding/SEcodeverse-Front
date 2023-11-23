@@ -1,0 +1,187 @@
+/*font*/
+@font-face{
+    font-family:'bitbit';
+    src:url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'),url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2') ;
+ }
+
+ @font-face {
+    font-family: 'DungGeunMo-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/wooin21/web/fonts/etc/DungGeunMo-Regular.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.create-team-popup-container{
+    width: 60%;
+    min-height: 630px;
+
+    background-color: #c5c5dc;
+    border: 5px solid #ffffff;
+
+    position: fixed;
+    bottom:100px;
+
+    padding: 15px;
+
+    background-image: url(../img/league_main.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+}
+
+.create-team-popup-upper-box{
+    margin-bottom: 3%;
+    margin-top: 2%;
+}
+
+.create-team-popup-title{
+    color: #000000;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 56px;
+    font-weight: bold;
+
+    text-align: center;
+}
+
+.create-team-popup-cancel{
+    position: absolute;
+
+    right: 10px;
+    top: 10px;
+
+    width: 30px;
+    height: 30px;
+
+    background-image: url(../img/cancel_btn.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+
+    cursor: pointer;
+}
+
+.create-team-popup-midle-box{
+    display: flex;
+    flex-direction: column;
+    
+    height: 300px;
+}
+
+.create-team-popup-team-name-box{
+    font-family: 'DungGeunMo-Regular';
+    font-size: 40px;
+    color: #000;
+
+    text-align: center;
+    margin-top: 50px;
+}
+
+.create-team-popup-team-name-box span{
+    margin-right: 40px;
+    vertical-align: middle;
+}
+
+.create-team-popup-team-name-box input{
+    width: 400px;
+    height: 36px;
+    
+    vertical-align: middle;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 30px;
+    color: #000;
+}
+
+.create-team-popup-team-password-box{
+    font-family: 'DungGeunMo-Regular';
+    font-size: 40px;
+    color: #000;
+
+    text-align: center;
+    margin-top: 50px;
+}
+
+.create-team-popup-team-password-box span{
+    margin-right: 20px;
+    vertical-align: middle;
+}
+
+.create-team-popup-team-password-box input{
+    width: 400px;
+    height: 36px;
+    
+    vertical-align: middle;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 30px;
+    color: #000;
+}
+
+.create-team-popup-team-description-box{
+    display: flex;
+    justify-content: center;
+
+    margin-top: 4%;
+}
+
+.create-team-popup-team-description{
+    width: 58%;
+    height: 180px;
+
+    background-color: #ffffff;
+    border: #8e94bf solid 2px;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 26px;
+    color: #000;
+    
+    text-align: center;
+}
+
+.create-team-popup-bottom-box{
+    display: flex;
+    justify-content: center;
+
+    margin-top: 150px;
+}
+
+.create-team-popup-check-button{
+    width: 180px;
+    height: 60px;
+
+    background-image: url(../img/community_003.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+
+    text-align: center;
+    line-height: 55px;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 26px;
+    color: #000;
+
+    cursor:pointer;
+
+    margin-right: 1%;
+}
+
+.create-team-popup-cancel-button{
+    width: 180px;
+    height: 60px;
+
+    background-image: url(../img/community_001.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+
+    text-align: center;
+    line-height: 55px;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 26px;
+    color: #000;
+
+    cursor:pointer;
+}
