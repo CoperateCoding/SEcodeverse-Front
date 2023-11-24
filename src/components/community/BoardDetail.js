@@ -4,22 +4,21 @@ import "react-quill/dist/quill.snow.css";
 import CommentComponent from "./CommentComponent";
 import axios from 'axios'
 import { useParams } from 'react-router-dom';
-//다시보냄
 const BoardDeatil = () => {
   const[board,setBoard]=useState();
   const[imgList,setImgList]=useState();
-  const { pk } = useParams();
+  const { commumityPk } = useParams();
   const [commetntList, setCommentList] = useState([]);
-
+  const [isLike, setIsLike] = useState(false);
   useEffect(() => {
    console.log("useEffect")
-   console.log(pk);
-   console.log("pk",pk)
-  const apiUrl = `/api/v1/board/${pk}`;
+   console.log(commumityPk);
+   console.log("pk",commumityPk)
+  const apiUrl = `/api/v1/board/${commumityPk}`;
 
   axios.get(apiUrl)
     .then(response => {
-      console.log(response.data.board)
+      console.log("처음 게시글 정보",response.data.board)
       console.log(response.data.imgList)
       setBoard(response.data.board)
       setImgList(response.data.imgList)
@@ -27,18 +26,18 @@ const BoardDeatil = () => {
     
     })
     .catch(error => {
-      console.error('API 호출 중 에러:', error);
+      console.error('처음 게시글 정보 가져오는 중 에러남:', error);
     });
   
-  const apiUrl1 = `/api/v1/comment/${pk}`
+  const apiUrl1 = `/api/v1/comment/${commumityPk}`
 
   axios.get(apiUrl1)
   .then(response => {
-    console.log(response.data)
+    console.log("처음 댓글 정보",response.data)
     setCommentList(response.data)
   })
   .catch(error => {
-    console.error('API 호출 중 에러:', error);
+    console.error('처음 댓그 정보 가져오는 중 에러남:', error);
   });
 
   }, []);
@@ -60,6 +59,47 @@ const BoardDeatil = () => {
   };
 
   const deletePost = () => {
+    if(localStorage.getItem('access')!=null){
+      const accessToken=localStorage.getItem('access')
+      console.log(accessToken)
+      
+      axios.get('api/v1/token/validate',{
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      }).then(response => {
+        // 응답 처리
+        console.log(response.data);
+        if(response.data.isTokenValid===true){
+          const apiUrl = `/api/v1/board/${commumityPk}`;
+          console.log("token이 유효합니다")
+          axios.delete(apiUrl,{
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("access")}`,
+            },
+          })
+          .then((response) => {
+            console.log("게시글삭제됨")
+          
+          })
+          .catch((error) => {
+            console.error("게시글 삭제 에러:", error);
+          });
+          
+        }else{
+          alert("로그인 후 이용 부탁드립니다.")
+        }
+  
+      })
+      .catch(error => {
+    
+        console.error(error);
+      });
+    }else{
+      alert("로그인 후 이용 바랍니다")
+
+  }
     // 삭제 로직을 여기에 추가
     alert("삭제를 선택했습니다.");
     toggleMenu(); // 메뉴 닫기
@@ -85,27 +125,112 @@ const BoardDeatil = () => {
     };
   }, []);
 
-  const commentRegister =() =>{
-    const data = {
-      boardPK:pk,
-      content:writeComment
-    };
-    axios
-        .post("/api/v1/comment", data, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("access")}`,
-          },
-        })
-        .then((response) => {
-        
-          console.log(response.data);
-          setWriteComment("")
+  const likeHandler=() => {
+    console.log("like클릭함")
+    if(localStorage.getItem('access')!=null){
+      const accessToken=localStorage.getItem('access')
+      console.log(accessToken)
       
-        })
-        .catch((error) => {
-          console.error("API 호출 중 에러:", error);
-        });
+      axios.get('api/v1/token/validate',{
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      }).then(response => {
+        // 응답 처리
+        console.log(response.data);
+        if(response.data.isTokenValid===true){
+          const apiUrl = `/api/v1/likes/${commumityPk}`;
+          console.log("token이 유효합니다")
+          
+          if(isLike===false){
+            setIsLike(true)
+            axios
+            .post(apiUrl,{
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("access")}`,
+              },
+            })
+            .then((response) => {
+              console.log("like누름")
+            
+            })
+            .catch((error) => {
+              console.error("API 호출 중 에러:", error);
+            });
+          }else{
+            setIsLike(false)
+            axios
+            .delete(apiUrl,{
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("access")}`,
+              },
+            })
+            .then((response) => {
+              console.log("like취소됨")
+            })
+            .catch((error) => {
+              console.error("API 호출 중 에러:", error);
+            });
+          }
+          
+        }else{
+          alert("로그인 후 이용 부탁드립니다.")
+        }
+  
+      })
+      .catch(error => {
+    
+        console.error(error);
+      });
+    }else{
+      alert("로그인 후 이용 바랍니다")
+
+  }
+  }
+
+
+  const commentRegister =() =>{
+    console.log("like클릭함")
+    if(localStorage.getItem('access')!=null){
+      const accessToken=localStorage.getItem('access')
+      console.log(accessToken)
+      
+      axios.get('api/v1/token/validate',{
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      }).then(response => {
+        // 응답 처리
+        console.log(response.data);
+        if(response.data.isTokenValid===true){
+          const data = {
+            boardPK:commumityPk,
+            content:writeComment
+          };
+          axios
+              .post("/api/v1/comment", data, {
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${localStorage.getItem("access")}`,
+                },
+              })
+              .then((response) => {
+              
+                console.log(response.data);
+                setWriteComment("")
+            
+              })
+              .catch((error) => {
+                console.error("API 호출 중 에러:", error);
+              });
+        }})
+    }else{
+      alert("로그인 후 이용 바랍니다")
+
+  }
+    
   }
 
   const handleChange = (value) => {
@@ -121,7 +246,11 @@ const BoardDeatil = () => {
         <div className="board-detail-total-wrapper">
           <div className="board-detail-background">
             <div className="board-detail-upper-part">
-              <div className="board-detail-user-badge"></div>
+              <div className="board-detail-user-badge">
+                {imgList && imgList.map((img)=>(
+                  <img src={img}></img>
+                ))}
+              </div>
               <div className="board-detail-info-wrapper">
                 <span className="board-detail-category">{board && board.category.name}</span> 
                 <span className="board-detail-writer">{board &&board.writer}</span>
@@ -139,8 +268,8 @@ const BoardDeatil = () => {
             </div>
 
             <div className="board-detail-menu-box">
-              <div className="board-detail-menu-box-heart-img"></div>
-              <div className="board-detail-menu-box-heart-count">{board &&board.likeCnt}</div>
+              <div className="board-detail-menu-box-heart-img" onClick={likeHandler}></div>
+              <div className="board-detail-menu-box-heart-count" >{board &&board.likeCnt}</div>
               <div className="board-detail-menu-box-comment-img"></div>
               <div className="board-detail-menu-box-comment-count">{board &&board.commentCnt}</div>
               <div className="board-detail-menu-box-write-date">

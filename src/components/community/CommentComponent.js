@@ -7,12 +7,12 @@ import { useParams } from 'react-router-dom';
 const CommentComponent = () => {
   
   const [commentList, setCommentList] = useState([]);
-  const { pk } = useParams();
+  const { commumityPk } = useParams();
   const [board, setBoard] = useState(null);
   const [imgList, setImgList] = useState([]);
 
   useEffect(() => {
-    const apiUrl = `/api/v1/board/${pk}`;
+    const apiUrl = `/api/v1/board/${commumityPk}`;
 
     axios.get(apiUrl)
       .then(response => {
@@ -25,7 +25,7 @@ const CommentComponent = () => {
         console.error('API 호출 중 에러:', error);
       });
   
-    const apiUrl1 = `/api/v1/comment/${pk}`;
+    const apiUrl1 = `/api/v1/comment/${commumityPk}`;
 
     axios.get(apiUrl1)
       .then(response => {
@@ -35,7 +35,7 @@ const CommentComponent = () => {
       .catch(error => {
         console.error('API 호출 중 에러:', error);
       });
-  }, [pk]);
+  }, [commumityPk]);
   
   return (
     <>

@@ -2,13 +2,40 @@ import React, { useEffect, useState} from 'react';
 import { Link ,useNavigate} from 'react-router-dom';
 import '../../css/Header.css';
 import logo from '../../img/SEcodeVerse_logo.png';
-
+import axios from 'axios';
 const Header = ({auth, setAuth}) => {
  
   const navigate = useNavigate();
   const goToLogin = () => {
     navigate('/login')
   }
+  const gotoLogout = () => {
+      console.log("로그아웃할시 가지고 있는 토큰은",localStorage.getItem("accessToken"))
+      if(localStorage.getItem('access')!=null){
+        axios.post('/api/v1/user/logout', {
+
+      
+        } ,{
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("access")}`,
+          },
+          })
+        .then(response => {
+         
+          console.log(response.data)
+          setAuth(false)
+          localStorage.removeItem('access');
+          console.log(localStorage.getItem('access'))
+          navigate('/')
+        })
+        .catch(error => {
+          console.error('API 호출 중 에러:', error);
+        });
+      }
+      
+
+  };
   return (
   
       <header>
@@ -27,7 +54,7 @@ const Header = ({auth, setAuth}) => {
               <span className='header_login_btn' variant="text" >
                 {
                   auth ? 
-                  <span onClick={()=>setAuth(false)}>로그아웃</span>:
+                  <span onClick={()=>gotoLogout()}>로그아웃</span>:
                   <span onClick={()=>goToLogin()}>로그인</span>
                 }
               </span>

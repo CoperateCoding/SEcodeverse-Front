@@ -16,7 +16,7 @@ const BoardComponent = ({ posts }) => {
   
   const handleNavigation = (pk) => {
     console.log("넘어가는 pk",pk)
-    navigate(`/community/post/${pk}`);
+    navigate(`/${pk}`);
   };
 
   return (
