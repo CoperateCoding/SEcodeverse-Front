@@ -19,14 +19,15 @@
     text-align: center;
 
     margin-top: 1%;
-    margin-bottom: 3%;
+    margin-bottom: 2%;
 }
 
 .league-result-score-graph-box{
-    width: 90%;
+    width: 89.4%;
     height: 340px;
 
     background-color: #fff;
+    border: 5px #D4C5DC solid;
 
     margin: 1% auto;
 }
@@ -45,14 +46,18 @@
     height: 300px;
 
     background-color: #fff;
+    border: 5px #D4C5DC solid;
+
     margin-right: 1%;
 }
 
 .league-result-team-graph-box{
-    width: 59%;
+    width: 60%;
     height: 300px;
 
     background-color: #fff;
+    border: 5px #D4C5DC solid;
+
 }
 
 
