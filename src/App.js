@@ -19,13 +19,33 @@ import LeagueMain from './components/league/LeagueMain';
 import LeagueCategoryList from './components/league/LeagueCategoryList';
 import LeagueCategoryDetail from './components/league/LeagueCategoryDetail';
 import LeagueResult from './components/league/LeagueResult';
-
+import axios from 'axios';
 
 function App() {
 
   const [auth,setAuth] = useState(false);
 
   useEffect(()=>{
+    
+    if(localStorage.getItem('access')!=null){
+      const  accessToken=localStorage.getItem('access')
+      axios.get('api/v1/token/validate',{
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      }).then(response => {
+        // 응답 처리
+        console.log(response.data);
+        if(response.data.isTokenValid===true){
+          setAuth(true)
+        }
+
+      })
+      .catch(error => {
+        // 오류 처리
+        console.error(error);
+      });
+    }
     console.log('로그인 인증값',auth)
   },[auth])
 
@@ -39,8 +59,9 @@ function App() {
         <Route path="/admin" element={<AdminMain />} />
         <Route path="/mypage" element={<MyPageMain />} />
         <Route path="/community" element={<Community />} />
-        <Route path="/community/write" element={<WriteEditor />} />
-        <Route path="/community/post/:pk" element={<BoardDeatil />} />
+        <Route path="/communitywrite" element={<WriteEditor />} />
+   
+        <Route path="/:commumityPk" element={<BoardDeatil />} />
         <Route path="/signUp" element={<SignUp/>}/>
         <Route  path="/login" element={<Login setAuth ={setAuth}/>}/>
         <Route path="/question" element={<QuestionList/>}/>
