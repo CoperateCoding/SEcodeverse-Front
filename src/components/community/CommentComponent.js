@@ -36,7 +36,23 @@ const CommentComponent = () => {
         console.error('API 호출 중 에러:', error);
       });
   }, [commumityPk]);
-  
+  const commentDelete = (pk) => {
+    axios
+      .delete(`/api/v1/comment/${pk}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        window.location.reload();
+        
+      })
+      .catch((error) => {
+        console.error("댓글 삭제하는중에 에러남", error);
+      });
+  }
   return (
     <>
       {commentList.map((comment) => (
@@ -45,7 +61,7 @@ const CommentComponent = () => {
           <td className="comment-contents">{comment.content}</td>
           <td className="comment-date">{comment.createAt}</td>
           <td className="comment-modify">수정</td>
-          <td className="comment-delete">삭제</td>
+          <td className="comment-delete"onClick={() => {commentDelete(comment.pk)}}>삭제</td>
         </tr>
       ))}
     </>
