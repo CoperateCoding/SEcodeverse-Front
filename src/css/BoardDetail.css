@@ -90,13 +90,6 @@
     font-weight: bold;
 }
 
-.board-detail-date{
-    display: block;
-    margin-top: 10px;
-
-    font-family: 'DungGeunMo-Regular';
-}
-
 .board-detail-middle-part{
     margin-top: 2%;
     margin-bottom: 1%;
@@ -240,29 +233,29 @@
     display: flex;
 }
 
-.board-detail-menu-box-heart-img{
+.board-detail-menu-box-heart-box{
     border: #959595 1px solid;
-    border-right: none;
-    
-    width: 4%;
+    width: 9%;
+    height: 26px;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.board-detail-menu-box-heart-img{
+    width: 40%;
     height: 26px;
 
     background-image: url(../img/hart.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 60%;
-
-    cursor: pointer;
 }
 
 .board-detail-menu-box-heart-count{
-    border: #959595 1px solid;
-    border-left: none;
-
-    width: 4.5%;
+    width: 40.5%;
     height: 26px;
-
-    text-align: center;
 }
 
 .board-detail-menu-box-comment-img{

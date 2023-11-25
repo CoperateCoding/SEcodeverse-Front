@@ -57,7 +57,7 @@
     margin-top: 2%;
 }
 
-.ctf-league-edit-popup-contents-title{
+.ctf-league-edit-popup-contents-title, .ctf-league-edit-popup-contents-date{
     font-family: 'DungGeunMo-Regular';
     font-size: 30px;
     color: #ffffff;
@@ -93,7 +93,7 @@
 
     resize: none;
     width: 99.5%;
-    height: 430px;
+    height: 300px;
 }
 
 .ctf-league-edit-popup-contents-button-wrapper{
