@@ -1,3 +1,5 @@
+import { Link ,useNavigate} from 'react-router-dom';
+
 function getProperty(obj) {
   if(typeof obj == undefined){
     const value =obj
@@ -25,12 +27,16 @@ function getCategory(num){
 
 
 const QuestionBoardComponent = ({ posts }) => {
-
+  const navigate = useNavigate();
+const goQuestionDetail= (pk) => {
+  console.log("넘어가는 pk",pk)
+  navigate(`/question/detail/${pk}`);
+}
     return (
       <>
         {posts.map((post) => (
         
-          <div className="mypage-myBoard">
+          <div className="mypage-myBoard" onClick={() => goQuestionDetail(post.pk)}>
             <div className="myPage-myBoard-contents-group">
               <div className="myPage-myBoard-coding-grade"></div>
               <div className="myPage-board-upper-wrapper">

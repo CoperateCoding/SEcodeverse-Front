@@ -24,34 +24,40 @@ const WriteEditor = () => {
   const handleTypeChange = (e) => {
     setType(e.target.value);
   };
-  const isUser = () => {
-    if(localStorage.getItem('access')!=null){
-    const accessToken=localStorage.getItem('access')
-    console.log(accessToken)
-    axios.get('api/v1/token/validate',{
-      headers: {
-        Authorization: `Bearer ${accessToken}`
-      }
-    }).then(response => {
-      // 응답 처리
-      console.log(response.data);
-      if(response.data.isTokenValid===true){
-        console.log("token이 유효합니다")
-        handleRegisterClick()
-      }else{
-        alert("로그인 후 이용 부탁드립니다.")
-      }
 
-    })
-    .catch(error => {
+  //토큰 유효성 판단 
+  // const isUser = () => {
+  //   if(localStorage.getItem('access')!=null){
+  //   console.log("게시글 등록 토큰 확인하겠습")
+  //   const accessToken=localStorage.getItem('access')
+  //   console.log("게시글 등록 토큰 ",accessToken)
+  //   axios.get('api/v1/token/validate',{
+  //     headers: {
+  //       Authorization: `Bearer ${accessToken}`
+  //     }
+  //   }).then(response => {
+  //     // 응답 처리
+  //     console.log(response.data);
+  //     if(response.data.isTokenValid===true){
+  //       console.log("token이 유효합니다")
+  //       handleRegisterClick()
+  //     }else{
+  //       alert("로그인 후 이용 부탁드립니다.")
+  //     }
+
+  //   })
+  //   .catch(error => {
   
-      console.error(error);
-    });
-  }else{
-    alert("로그인 후 이용 바랍니다")
-  }
+  //     console.error(error);
+  //   });
+  // }else{
+  //   alert("로그인 후 이용 바랍니다")
+  // }
     
-  }
+  // }
+
+  
+  
   const handleRegisterClick = async () => {
     console.log("사용자가 올린 파일 수는", selectedFiles);
     var imgUrl = [];
@@ -170,6 +176,7 @@ const WriteEditor = () => {
       setTitle("");
       setDesc("");
       setType("자유게시판"); // 등록 후에 type을 다시 기본값으로 설정합니다.
+      setSelectedFiles([])
     }
   };
 
@@ -215,7 +222,7 @@ const WriteEditor = () => {
             <div className="write-editor-bottom-part">
               <div
                 className="write-editor-check-button"
-                onClick={isUser}
+                onClick={handleRegisterClick}
               >
                 등록
               </div>

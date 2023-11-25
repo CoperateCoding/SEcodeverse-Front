@@ -12,13 +12,16 @@ const QuestionList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages,setTotalpages]=useState(0); 
   const [popupState, setPopupState] = useState(false);
-  
+ 
   const [title, setTitle]=useState("");
   const [description, setDescription]=useState("");
-  const [category, setCategory]=useState("카테고리1");
+  const [category, setCategory]=useState("c1");
   const [desc, setDesc] = useState("");
   const [selectedFiles, setSelectedFiles] = useState([]);
-
+  const[level,setLevel]=useState("l1");
+  const[input1,setInput1]=useState("")
+  const[input2,setInput2]=useState("")
+  const[input3,setInput3]=useState("")
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
     setSelectedFiles(files);
@@ -245,6 +248,10 @@ const QuestionList = () => {
   const handleTypeChange = (e) => {
     setCategory(e.target.value);
   };
+  const handleTypeLevelChange = (e) => {
+    setLevel(e.target.value);
+  };
+
 
   const handleNextClick = () => {
     if (currentPage < totalPages) {
@@ -293,127 +300,157 @@ const QuestionList = () => {
     return pageNumbers;
   };
 
-  const handleRegisterClick = async  () => {
-    console.log("사용자가 올린 파일 수는",selectedFiles)
-    var imgUrl=[]
-    if(selectedFiles.length>0){
-      for (let i = 0; i < selectedFiles.length; i++){
+  const handleRegisterClick = async () => {
+    const parseCategory = parseInt(category.replace(/[^\d]/g, ""));
+    const parseLevel = parseInt(level.replace(/[^\d]/g, ""));
+    const testCase1input = document.getElementsByClassName('testcase1input')[0].value;
+    const testCase1output = document.getElementsByClassName('testcase1output')[0].value;
+    const testCase2input = document.getElementsByClassName('testcase2input')[0].value;
+    const testCase2output = document.getElementsByClassName('testcase2output')[0].value;
+    const testCase3input = document.getElementsByClassName('testcase3input')[0].value;
+    const testCase3output = document.getElementsByClassName('testcase3output')[0].value;
+    console.log(parseCategory);
+    console.log(parseLevel);
+    console.log(testCase1input);
+    console.log(testCase1output);
+    console.log(testCase2input);
+    console.log(testCase2output);
+    console.log(testCase3input);
+    console.log(testCase3output);
+    console.log(title);
+    console.log(desc);
+    console.log(description);
+    console.log("사용자가 올린 파일 수는", selectedFiles);
+    var imgUrl = [];
+    if (selectedFiles.length > 0) {
+      for (let i = 0; i < selectedFiles.length; i++) {
         const uploadFile = selectedFiles[i];
-    
-        console.log(uploadFile)
+  
+        console.log(uploadFile);
         try {
-          const presignedResponse = await axios.post("/api/v1/s3/presigned", { 
+          const presignedResponse = await axios.post("/api/v1/s3/presigned", {
             imageName: uploadFile.name,
-            folderName:"question"
-           }, {
+            folderName: "question"
+          }, {
             headers: {
               Authorization: localStorage.getItem("accessToken"),
             },
           });
-      
+  
           const presignedUrl = presignedResponse.data.presigned_url;
-          console.log("presignedUrl:",presignedUrl)
-          console.log(uploadFile.type)
-          console.log(uploadFile.name)
-    
+          console.log("presignedUrl:", presignedUrl);
+          console.log(uploadFile.type);
+          console.log(uploadFile.name);
+  
           const uploadResponse = await axios.put(presignedUrl, uploadFile, {
             headers: {
               "Content-Type": uploadFile.type,
             },
           });
-      
+  
           console.log("S3 업로드 성공", uploadResponse);
-      
-          const imageUrl = uploadResponse.request.responseURL
-          var fileName=""
-          if(uploadFile.type=="image/jpg"){
+  
+          const imageUrl = uploadResponse.request.responseURL;
+          var fileName = "";
+          if (uploadFile.type === "image/jpg") {
             fileName = imageUrl.substring(0, imageUrl.lastIndexOf(".jpg") + 4);
-          }else if(uploadFile.type=="image/png"){
+          } else if (uploadFile.type === "image/png") {
             fileName = imageUrl.substring(0, imageUrl.lastIndexOf(".png") + 4);
-          }else if(uploadFile.type=="image/jpeg"){
+          } else if (uploadFile.type === "image/jpeg") {
             fileName = imageUrl.substring(0, imageUrl.lastIndexOf(".jpg") + 4);
           }
-          console.log(imageUrl)
-          console.log(fileName)
-          imgUrl.push(fileName)
-        
+          console.log(imageUrl);
+          console.log(fileName);
+          imgUrl.push(fileName);
+  
         } catch (error) {
           console.error("S3 업로드 실패", error);
         }
-        
+  
       }
-
+  
     }
-    var imgList=[]
-    for(let i=0; i< imgUrl.length;i++){
-      imgList.push({ imgUrl: imgUrl[i] });
-      console.log("imgList넣을게")
-    }
-    console.log("imgUrl",imgUrl)
-     console.log("imgList",imgList)
-    let pk;
-  if(category=="카테고리1"){
-    pk=1
-  }else if(category=="카테고리2"){
-    pk=2
-  }else if(category == "카테고리3"){
-    pk=3
-  }
-  console.log(pk)
-  var data=[]
-  if(imgUrl.length>0){
-data = {
-  question: {
-    categoryPk: pk,
-    title: title,
-    content: desc
-  },imgList
+    const img = [];
 
-}
-  }
-  else{
-     data = {
-    
-      board: {
-        categoryPk: pk,
-        title: title,
-        content: desc
+    for (let i = 0; i < imgUrl.length; i++) {
+      const imageUrl = imgUrl[i];
+      img.push({ imgUrl: imageUrl });
+    }
+    const testCase = [{
+        input: testCase1input,
+        output: testCase1output
+      },
+      {
+        input: testCase2input,
+        output: testCase2output
+      },
+      {
+        input: testCase3input,
+        output: testCase3output
       }
-    };
-  }
+    ];
+  
+  
+    var data = [];
+    if (imgUrl.length > 0) {
+      data = {
+        question: {
+          categoryPk: parseCategory,
+          levelPk: parseLevel,
+          title: title,
+          intro: desc,
+          content: desc,
+          language: "java/python/c++/c",
+        },
+        img,
+        testCase
+  
+      };
+    } else {
+      data = {
+        question: {
+          categoryPk: parseCategory,
+          levelPk: parseLevel,
+          title: title,
+          intro: desc,
+          content: desc,
+          language: "java/python/c++/c",
+        },
+        testCase
+  
+      };
+    }
   
     if (title.trim() === "" || desc.trim() === "") {
       alert("제목과 내용을 입력해주세요.");
     } else {
       // 등록 처리
-        console.log(pk)
-        console.log(title)
-        console.log(desc)    
-      axios.post('/api/v1/board', data ,{
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('access')}`
-        }
-       })
-      .then(response => {
-      console.log(localStorage.getItem('access'))
-      console.log(response.data); 
-    
-      })
-      .catch(error => {
-        console.error('API 호출 중 에러:', error);
-     });
-
-     // 등록 처리
-     setTitle("");
-     setDescription("");
-     setCategory("카테고리1");// 등록 후에 type을 다시 기본값으로 설정합니다.
-     setDesc("");
-     setPopupState(false);
+  
+      axios.post('/api/v1/question/post', data, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('access')}`
+          }
+        })
+        .then(response => {
+          console.log(localStorage.getItem('access'));
+          console.log(response.data);
+  
+        })
+        .catch(error => {
+          console.error('API 호출 중 에러:', error);
+        });
+  
+      // 등록 처리
+      setTitle("");
+      setDescription("");
+      setCategory("카테고리1"); // 등록 후에 type을 다시 기본값으로 설정합니다.
+      setDesc("");
+      setPopupState(false);
+      setSelectedFiles([])
     }
   };
   
- 
  
  
   return (
@@ -557,12 +594,20 @@ data = {
                   <input value={description} onChange={(e) => setDescription(e.target.value)} className="enroll-question-popup-contents-description-input" type="text"/>
                 </div>
                 <div className="enroll-question-popup-contents-category-box">
+                <span className="enroll-question-popup-contents-category">레벨</span>
+                  <select value={level} onChange={handleTypeLevelChange}>
+                    <option value="l1">1</option>
+                    <option value="l2">2</option>
+                    <option value="l3">3</option>
+                    <option value="l4">4</option>
+                    <option value="l5">5</option>
+                    <option value="l6">6</option>
+                  </select>
                   <span className="enroll-question-popup-contents-category">카테고리</span>
                   <select value={category} onChange={handleTypeChange}>
-                    <option value="카테고리1">카테고리1</option>
-                    <option value="카테고리2">카테고리2</option>
-                    <option value="카테고리3">카테고리3</option>
-                    <option value="카테고리4">카테고리4</option>
+                    <option value="c1">자료구조</option>
+                    <option value="c2">네트워크</option>
+                    <option value="c3">수학</option>
                   </select>
                 </div>
                 <div className="enroll-question-popup-contents-question-box">
@@ -588,26 +633,26 @@ data = {
                         <tbody className="enroll-question-test-case-tbody">
                           <tr>
                             <td className="enroll-question-test-case-input">
-                              <textarea type="text" placeholder="테스트 케이스 1 입력"></textarea>
+                              <textarea type="text" placeholder="테스트 케이스 1 입력" className="testcase1input"></textarea>
                             </td>
                             <td className="enroll-question-test-case-result">
-                              <textarea type="text" placeholder="테스트 케이스 1 결과"></textarea>
+                              <textarea type="text" placeholder="테스트 케이스 1 결과" className="testcase1output"></textarea>
                             </td>
                           </tr>
                           <tr>
                             <td className="enroll-question-test-case-input">
-                              <textarea type="text" placeholder="테스트 케이스 2 입력"></textarea>
+                              <textarea type="text" placeholder="테스트 케이스 2 입력" className="testcase2input"></textarea>
                             </td>
                             <td className="enroll-question-test-case-result">
-                              <textarea type="text" placeholder="테스트 케이스 2 결과"></textarea>
+                              <textarea type="text" placeholder="테스트 케이스 2 결과" className="testcase2output"></textarea>
                             </td>
                           </tr>
                           <tr>
                             <td className="enroll-question-test-case-input">
-                              <textarea type="text" placeholder="테스트 케이스 3 입력"></textarea>
+                              <textarea type="text" placeholder="테스트 케이스 3 입력" className="testcase3input"></textarea>
                             </td>
                             <td className="enroll-question-test-case-result">
-                              <textarea type="text" placeholder="테스트 케이스 3 결과"></textarea>
+                              <textarea type="text" placeholder="테스트 케이스 3 결과" className="testcase3output"></textarea>
                             </td>
                           </tr>
                         </tbody>
