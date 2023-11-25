@@ -1,7 +1,6 @@
 import React, { useCallback,createContext, useState } from 'react';
 import '../css/Login.css'
 import axios from 'axios';
-import {tokenValitation} from './TokenValitation'
 import { useNavigate } from 'react-router-dom';
 
 const Login = ({setAuth}) => {
@@ -49,9 +48,9 @@ const Login = ({setAuth}) => {
           const refreshToken = response.data.refreshToken;
           setAccessToken(accessToken)
           setRefreshToken(refreshToken)
-          console.log("로그인 테스트");
+          console.log("로그인 테스트",localStorage.getItem('access'));
           localStorage.setItem('access',accessToken)
-          tokenValitation(localStorage.getItem('access'));
+
           setAuth(true)
           navigate('/');
   

@@ -12,7 +12,7 @@ const WriteEditor = () => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [selectedFiles, setSelectedFiles] = useState([]);
-
+  const [isValidateUser,setIsValidateUser] = useState(false);
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
     setSelectedFiles(files);
@@ -24,7 +24,34 @@ const WriteEditor = () => {
   const handleTypeChange = (e) => {
     setType(e.target.value);
   };
+  const isUser = () => {
+    if(localStorage.getItem('access')!=null){
+    const accessToken=localStorage.getItem('access')
+    console.log(accessToken)
+    axios.get('api/v1/token/validate',{
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    }).then(response => {
+      // 응답 처리
+      console.log(response.data);
+      if(response.data.isTokenValid===true){
+        console.log("token이 유효합니다")
+        handleRegisterClick()
+      }else{
+        alert("로그인 후 이용 부탁드립니다.")
+      }
 
+    })
+    .catch(error => {
+  
+      console.error(error);
+    });
+  }else{
+    alert("로그인 후 이용 바랍니다")
+  }
+    
+  }
   const handleRegisterClick = async () => {
     console.log("사용자가 올린 파일 수는", selectedFiles);
     var imgUrl = [];
@@ -188,7 +215,7 @@ const WriteEditor = () => {
             <div className="write-editor-bottom-part">
               <div
                 className="write-editor-check-button"
-                onClick={handleRegisterClick}
+                onClick={isUser}
               >
                 등록
               </div>
