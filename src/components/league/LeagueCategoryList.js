@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import CategoryComponent from "./CategoryComponent";
 import "../../css/league/LeagueCategoryList.css";

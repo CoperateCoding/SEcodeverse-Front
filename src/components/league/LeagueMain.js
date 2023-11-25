@@ -1,18 +1,46 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Chatbot from "../Chatbot";
 import "../../css/league/LeagueMain.css";
 import "../../css/league/LeagueJoinPopup.css";
 import "../../css/league/LeagueCreatePopup.css";
 
 const LeagueMain = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("제 1회 SECodeVerse 리그");
   const [description, setDescription] = useState(
-    "- 일시 : 2023-08-13 10:00 ~ 11:00"
+    "- 일시 : 2023-11-24 20:00 ~ 23:00"
   );
 
   const [isCreate, setIsCreate] = useState(false);
   const [isJoin, setIsJoin] = useState(false);
+
+  // 리그 이벤트의 시작 및 종료 시간 설정(임의)
+  const leagueStartTime = new Date("2023-11-25T14:00:00");
+  const leagueEndTime = new Date("2023-11-25T15:00:00");
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // 현재 시간이 리그 이벤트 시간 내에 있는지 확인
+    const currentTime = new Date();
+
+    if (currentTime >= leagueStartTime && currentTime <= leagueEndTime) {
+      setIsOpen(true);
+    } else {
+      setIsOpen(false);
+    }
+  }, [leagueStartTime, leagueEndTime]);
+
+  const handleLeagueCategoryRedirect = () => {
+    if (isOpen) {
+      navigate("/league/category");
+    } else {
+      // 리그가 현재 열려 있지 않은 경우 처리
+      alert("리그는 현재 열려 있지 않습니다");
+    }
+  };
 
   return (
     <section>
@@ -42,11 +70,9 @@ const LeagueMain = () => {
                   <span>팀 참가</span>
                 </div>
               </div>
-              <div className="league-main-board-join-league">
-                <Link to="/league/category">
+              <div className="league-main-board-join-league" onClick={handleLeagueCategoryRedirect}>
                   <div className="league-main-board-star"></div>
                   <span>리그참여</span>
-                </Link>
               </div>
               <div className="league-main-board-show-result">
                 <Link to="/league/result">

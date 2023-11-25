@@ -49,6 +49,7 @@
     border: 5px #D4C5DC solid;
 
     margin-right: 1%;
+    overflow-y: auto;
 }
 
 .league-result-team-graph-box{
@@ -61,3 +62,31 @@
 }
 
 
+.league-result-table{
+    width: 100%;
+    min-height: 300px;
+
+    overflow-y: auto;
+}
+
+.league-result-table-rank{
+    width: 10%;
+}
+
+.league-result-table-name{
+    width: 70%;
+}
+
+.league-result-table-thead{
+    background-color: #CCD2F0;
+}
+
+.league-result-table-tbody > tr > td{
+    text-align: center;
+    border: #CCD2F0 1px solid;
+}
+
+.highlighted-row{
+    background-color: #ffcccb;
+    font-weight: bolder;
+  }
