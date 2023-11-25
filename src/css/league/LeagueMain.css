@@ -59,6 +59,16 @@
     padding: 20px;
 }
 
+.league-main-board-description-notice{
+   overflow-wrap: break-word;
+}
+
+.league-main-board-description-description{
+    overflow-wrap: break-word;
+ }
+ 
+
+
 .league-main-board-button-wrapper{
     width: 1052px;
     margin: 2% auto;

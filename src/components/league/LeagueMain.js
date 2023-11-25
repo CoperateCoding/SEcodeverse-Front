@@ -7,18 +7,24 @@ import "../../css/league/LeagueJoinPopup.css";
 import "../../css/league/LeagueCreatePopup.css";
 
 const LeagueMain = () => {
+  const leagueData = {
+    name : "CTF League Name",
+    openTime : "2023-11-25T05:29:38.541Z",
+    closeTime : "2023-11-26T05:29:38.541Z",
+    memberCnt : 4,
+    notice : "noticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenotice",
+    description : "descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription",
+    
+  };
+  
   const [isOpen, setIsOpen] = useState(false);
-  const [title, setTitle] = useState("제 1회 SECodeVerse 리그");
-  const [description, setDescription] = useState(
-    "- 일시 : 2023-11-24 20:00 ~ 23:00"
-  );
 
   const [isCreate, setIsCreate] = useState(false);
   const [isJoin, setIsJoin] = useState(false);
 
   // 리그 이벤트의 시작 및 종료 시간 설정(임의)
-  const leagueStartTime = new Date("2023-11-25T14:00:00");
-  const leagueEndTime = new Date("2023-11-25T15:00:00");
+  const leagueStartTime = new Date(leagueData.openTime);
+  const leagueEndTime = new Date(leagueData.closeTime);
 
   const navigate = useNavigate();
 
@@ -47,11 +53,18 @@ const LeagueMain = () => {
       <div className="league-main-board-container">
         <div className="league-main-board-wrapper">
           <div className="league-main-board-title-box">
-            <span className="league-main-board-title">{title}</span>
+            <span className="league-main-board-title">{leagueData.name}</span>
           </div>
           <div className="league-main-board-description-area">
             <div className="league-main-board-description-box">
-              {description}
+              <div className="league-main-board-description-notice">
+                <span>[공지사항]</span><br/>
+                {leagueData.notice}<br/><br/>
+              </div>
+              <div className="league-main-board-description-description">
+                <span>[리그설명]</span><br/>
+                <span>{leagueData.description}</span><br/>
+              </div>
             </div>
           </div>
           <div className="league-main-board-button-wrapper">
