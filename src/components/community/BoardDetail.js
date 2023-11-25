@@ -1,48 +1,46 @@
 import "../../css/BoardDetail.css";
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "react-quill/dist/quill.snow.css";
 import CommentComponent from "./CommentComponent";
-import axios from 'axios'
-import { useParams } from 'react-router-dom';
+import axios from "axios";
+import { useParams } from "react-router-dom";
 const BoardDeatil = () => {
-  const[board,setBoard]=useState();
-  const[imgList,setImgList]=useState();
+  const [board, setBoard] = useState();
+  const [imgList, setImgList] = useState();
   const { commumityPk } = useParams();
   const [commetntList, setCommentList] = useState([]);
   const [isLike, setIsLike] = useState(false);
+
   useEffect(() => {
-   console.log("useEffect")
-   console.log(commumityPk);
-   console.log("pk",commumityPk)
-  const apiUrl = `/api/v1/board/${commumityPk}`;
+    console.log("useEffect");
+    console.log(commumityPk);
+    console.log("pk", commumityPk);
+    const apiUrl = `/api/v1/board/${commumityPk}`;
 
-  axios.get(apiUrl)
-    .then(response => {
-      console.log("처음 게시글 정보",response.data.board)
-      console.log(response.data.imgList)
-      setBoard(response.data.board)
-      setImgList(response.data.imgList)
+    axios
+      .get(apiUrl)
+      .then((response) => {
+        console.log("처음 게시글 정보", response.data.board);
+        console.log(response.data.imgList);
+        setBoard(response.data.board);
+        setImgList(response.data.imgList);
+      })
+      .catch((error) => {
+        console.error("처음 게시글 정보 가져오는 중 에러남:", error);
+      });
 
-    
-    })
-    .catch(error => {
-      console.error('처음 게시글 정보 가져오는 중 에러남:', error);
-    });
-  
-  const apiUrl1 = `/api/v1/comment/${commumityPk}`
+    const apiUrl1 = `/api/v1/comment/${commumityPk}`;
 
-  axios.get(apiUrl1)
-  .then(response => {
-    console.log("처음 댓글 정보",response.data)
-    setCommentList(response.data)
-  })
-  .catch(error => {
-    console.error('처음 댓그 정보 가져오는 중 에러남:', error);
-  });
-
+    axios
+      .get(apiUrl1)
+      .then((response) => {
+        console.log("처음 댓글 정보", response.data);
+        setCommentList(response.data);
+      })
+      .catch((error) => {
+        console.error("처음 댓글 정보 가져오는 중 에러남:", error);
+      });
   }, []);
-  
-
 
   const [content, setContent] = useState(""); //글 작성한거
   const [writeComment, setWriteComment] = useState("");
@@ -59,47 +57,45 @@ const BoardDeatil = () => {
   };
 
   const deletePost = () => {
-    if(localStorage.getItem('access')!=null){
-      const accessToken=localStorage.getItem('access')
-      console.log(accessToken)
-      
-      axios.get('api/v1/token/validate',{
-        headers: {
-          Authorization: `Bearer ${accessToken}`
-        }
-      }).then(response => {
-        // 응답 처리
-        console.log(response.data);
-        if(response.data.isTokenValid===true){
-          const apiUrl = `/api/v1/board/${commumityPk}`;
-          console.log("token이 유효합니다")
-          axios.delete(apiUrl,{
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("access")}`,
-            },
-          })
-          .then((response) => {
-            console.log("게시글삭제됨")
-          
-          })
-          .catch((error) => {
-            console.error("게시글 삭제 에러:", error);
-          });
-          
-        }else{
-          alert("로그인 후 이용 부탁드립니다.")
-        }
-  
-      })
-      .catch(error => {
-    
-        console.error(error);
-      });
-    }else{
-      alert("로그인 후 이용 바랍니다")
+    if (localStorage.getItem("access") != null) {
+      const accessToken = localStorage.getItem("access");
+      console.log(accessToken);
 
-  }
+      axios
+        .get("api/v1/token/validate", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((response) => {
+          // 응답 처리
+          console.log(response.data);
+          if (response.data.isTokenValid === true) {
+            const apiUrl = `/api/v1/board/${commumityPk}`;
+            console.log("token이 유효합니다");
+            axios
+              .delete(apiUrl, {
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${localStorage.getItem("access")}`,
+                },
+              })
+              .then((response) => {
+                console.log("게시글삭제됨");
+              })
+              .catch((error) => {
+                console.error("게시글 삭제 에러:", error);
+              });
+          } else {
+            alert("로그인 후 이용 부탁드립니다.");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      alert("로그인 후 이용 바랍니다");
+    }
     // 삭제 로직을 여기에 추가
     alert("삭제를 선택했습니다.");
     toggleMenu(); // 메뉴 닫기
@@ -125,91 +121,89 @@ const BoardDeatil = () => {
     };
   }, []);
 
-  const likeHandler=() => {
-    console.log("like클릭함")
-    if(localStorage.getItem('access')!=null){
-      const accessToken=localStorage.getItem('access')
-      console.log(accessToken)
-      
-      axios.get('api/v1/token/validate',{
-        headers: {
-          Authorization: `Bearer ${accessToken}`
-        }
-      }).then(response => {
-        // 응답 처리
-        console.log(response.data);
-        if(response.data.isTokenValid===true){
-          const apiUrl = `/api/v1/likes/${commumityPk}`;
-          console.log("token이 유효합니다")
-          
-          if(isLike===false){
-            setIsLike(true)
-            axios
-            .post(apiUrl,{
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("access")}`,
-              },
-            })
-            .then((response) => {
-              console.log("like누름")
-            
-            })
-            .catch((error) => {
-              console.error("API 호출 중 에러:", error);
-            });
-          }else{
-            setIsLike(false)
-            axios
-            .delete(apiUrl,{
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("access")}`,
-              },
-            })
-            .then((response) => {
-              console.log("like취소됨")
-            })
-            .catch((error) => {
-              console.error("API 호출 중 에러:", error);
-            });
+  const likeHandler = () => {
+    console.log("like클릭함");
+    if (localStorage.getItem("access") != null) {
+      const accessToken = localStorage.getItem("access");
+      console.log(accessToken);
+
+      axios
+        .get("api/v1/token/validate", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((response) => {
+          // 응답 처리
+          console.log(response.data);
+          if (response.data.isTokenValid === true) {
+            const apiUrl = `/api/v1/likes/${commumityPk}`;
+            console.log("token이 유효합니다");
+
+            if (isLike === false) {
+              setIsLike(true);
+              axios
+                .post(apiUrl, {
+                  headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("access")}`,
+                  },
+                })
+                .then((response) => {
+                  console.log("like누름");
+                })
+                .catch((error) => {
+                  console.error("API 호출 중 에러:", error);
+                });
+            } else {
+              setIsLike(false);
+              axios
+                .delete(apiUrl, {
+                  headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("access")}`,
+                  },
+                })
+                .then((response) => {
+                  console.log("like취소됨");
+                })
+                .catch((error) => {
+                  console.error("API 호출 중 에러:", error);
+                });
+            }
+          } else {
+            alert("로그인 후 이용 부탁드립니다.");
           }
-          
-        }else{
-          alert("로그인 후 이용 부탁드립니다.")
-        }
-  
-      })
-      .catch(error => {
-    
-        console.error(error);
-      });
-    }else{
-      alert("로그인 후 이용 바랍니다")
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      alert("로그인 후 이용 바랍니다");
+    }
+  };
 
-  }
-  }
+  const commentRegister = () => {
+    console.log("like클릭함");
+    if (localStorage.getItem("access") != null) {
+      const accessToken = localStorage.getItem("access");
+      console.log(accessToken);
 
-
-  const commentRegister =() =>{
-    console.log("like클릭함")
-    if(localStorage.getItem('access')!=null){
-      const accessToken=localStorage.getItem('access')
-      console.log(accessToken)
-      
-      axios.get('api/v1/token/validate',{
-        headers: {
-          Authorization: `Bearer ${accessToken}`
-        }
-      }).then(response => {
-        // 응답 처리
-        console.log(response.data);
-        if(response.data.isTokenValid===true){
-          const data = {
-            boardPK:commumityPk,
-            content:writeComment
-          };
-          axios
+      axios
+        .get("api/v1/token/validate", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((response) => {
+          // 응답 처리
+          console.log(response.data);
+          if (response.data.isTokenValid === true) {
+            const data = {
+              boardPK: commumityPk,
+              content: writeComment,
+            };
+            axios
               .post("/api/v1/comment", data, {
                 headers: {
                   "Content-Type": "application/json",
@@ -217,78 +211,98 @@ const BoardDeatil = () => {
                 },
               })
               .then((response) => {
-              
                 console.log(response.data);
-                setWriteComment("")
-            
+                setWriteComment("");
+
+                //작성한 후에 새로운 댓글 목록 가져와서 업데이트 해보는 부분!
+                const apiUrl = `/api/v1/comment/${commumityPk}`;
+                axios
+                  .get(apiUrl)
+                  .then((response) => {
+                    console.log("새로운 댓글 목록", response.data);
+                    setCommentList(response.data);
+                  })
+                  .catch((error) => {
+                    console.error("댓글 목록 가져오는 중 에러남:", error);
+                  });
               })
               .catch((error) => {
                 console.error("API 호출 중 에러:", error);
               });
-        }})
-    }else{
-      alert("로그인 후 이용 바랍니다")
-
-  }
-    
-  }
-
-  const handleChange = (value) => {
-    setContent(value); // 에디터 내용이 변경될 때마다 상태 업데이트
+          }
+        });
+    } else {
+      alert("로그인 후 이용 바랍니다");
+    }
+    setWriteComment("");
   };
+
   const handleCommentChange = (e) => {
     setWriteComment(e.target.value);
-    console.log(writeComment)
+    console.log(writeComment);
   };
-  return(
- <section>
+
+  return (
+    <section>
       <div className="board-detail-total-container">
         <div className="board-detail-total-wrapper">
           <div className="board-detail-background">
             <div className="board-detail-upper-part">
               <div className="board-detail-user-badge">
-                {imgList && imgList.map((img)=>(
-                  <img src={img}></img>
-                ))}
+                {imgList && imgList.map((img) => <img src={img}></img>)}
               </div>
               <div className="board-detail-info-wrapper">
-                <span className="board-detail-category">{board && board.category.name}</span> 
-                <span className="board-detail-writer">{board &&board.writer}</span>
-                <span className="board-detail-date">{board &&board.createAt}</span>
+                <span className="board-detail-category">
+                  {board && board.category.name}
+                </span>
+                <span className="board-detail-writer">
+                  {board && board.writer}
+                </span>
               </div>
             </div>
 
             <div className="board-detail-middle-part">
               <div className="board-detail-title-box">
-                <span className="board-detail-title-text">{board &&board.title}</span>
+                <span className="board-detail-title-text">
+                  {board && board.title}
+                </span>
               </div>
               <div className="board-detail-contents-box">
-               {board &&board.content}
+                {board && board.content}
               </div>
             </div>
 
             <div className="board-detail-menu-box">
-              <div className="board-detail-menu-box-heart-img" onClick={likeHandler}></div>
-              <div className="board-detail-menu-box-heart-count" >{board &&board.likeCnt}</div>
+              <div
+                className="board-detail-menu-box-heart-box"
+                onClick={likeHandler}
+              >
+                <div className="board-detail-menu-box-heart-img"></div>
+                <div className="board-detail-menu-box-heart-count">
+                  {board && board.likeCnt}
+                </div>
+              </div>
+
               <div className="board-detail-menu-box-comment-img"></div>
-              <div className="board-detail-menu-box-comment-count">{board &&board.commentCnt}</div>
+              <div className="board-detail-menu-box-comment-count">
+                {board && board.commentCnt}
+              </div>
               <div className="board-detail-menu-box-write-date">
-              {board &&board.createAt}
+                {board && board.createAt}
               </div>
               <div className="board-detail-menu-box-menu" onClick={toggleMenu}>
                 메뉴
                 {menuVisible && (
-                <div id="menuDropdown" className="board-detail-menu-dropdown">
-                  <div className="menu-option" onClick={editPost}>
-                    수정
+                  <div id="menuDropdown" className="board-detail-menu-dropdown">
+                    <div className="menu-option" onClick={editPost}>
+                      수정
+                    </div>
+                    <div className="menu-option" onClick={deletePost}>
+                      삭제
+                    </div>
                   </div>
-                  <div className="menu-option" onClick={deletePost}>
-                    삭제
-                  </div>
-                </div>
-              )}
+                )}
               </div>
-              
             </div>
 
             <div className="board-detail-bottom-part">
@@ -299,7 +313,10 @@ const BoardDeatil = () => {
                   value={writeComment}
                   onChange={handleCommentChange}
                 />
-                <button className="board-detail-comment-input-button" onClick={commentRegister}>
+                <button
+                  className="board-detail-comment-input-button"
+                  onClick={commentRegister}
+                >
                   작성
                 </button>
               </div>
@@ -322,8 +339,7 @@ const BoardDeatil = () => {
         </div>
       </div>
     </section>
-  )
- 
+  );
 };
 
 export default BoardDeatil;
