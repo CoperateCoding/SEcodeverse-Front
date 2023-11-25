@@ -167,36 +167,50 @@
     display: block;
     text-align: center;
 
-    font-size: 24px;
+    font-size: 22px;
 }
 
 /*Calendar*/
-.react-calendar__navigation {
-    background: #C8B3D3;
-    border-bottom: 4px solid #7F5589;
-    height: 90px;
+.mypage-current-calendar{
+  width: 100%;
+  height: 100%;
+}
+
+.mypage-current-calendar .react-calendar{
+  width: 100%;
+  height: 100%;
+
+  font-family: "DungGeunMo-Regular";
+  font-size: 20px;
+}
+
+.mypage-current-calendar .react-calendar .react-calendar__navigation {
+    background: #FBD9D7;
+    border-bottom: 4px solid #E8BDC7;
+    height: 60px;
+    margin-bottom: 10px;
 
     span {
       font-size: 24px;
       font-weight: 600;
-      color: #7F5589;
+      color: #E8BDC7;
     }
   }
 
   .react-calendar__navigation button:disabled {
-    background-color: #C8B3D3;
+    background-color: #FBD9D7;
 
   }
 
   .react-calendar__navigation button:enabled:hover,
   .react-calendar__navigation button:enabled:focus {
-    background-color: #C8B3D3;
+    background-color: #FBD9D7;
   }
 
   .react-calendar__month-view {
-    padding: 12px 32px;
+    padding: 12px 10px;
     abbr {
-      color: #7F5589;
+      color: #E8BDC7;
       font-size: 18px;
       font-weight: 500;
     }
@@ -209,13 +223,14 @@
     }
   }
 
-  .react-calendar__tile {
+  .mypage-current-calendar .react-calendar__tile {
     text-align: center;
-    height: 48px;
+    height: 58px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    padding: 0;
   }
   
 /*hover, focus, 선택됐을 시 */
@@ -235,16 +250,47 @@
     border-radius: 14px;
   }
 
-  .react-calendar{
-    width: 400px;
-    height: 370px;
-
-    font-family: "DungGeunMo-Regular";
-    font-size: 19.3px;
-  }
-
   .react-calendar__navigation button{
     font-family: "DungGeunMo-Regular";
     font-size: 28px;
     font-weight: bold;
   }
+
+  /* 사용자문제추천 */
+  .mypage-recommend-question-contents-wrapper{
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .recommend-user-wrapper{
+    width: 150px;
+    height: 170px;
+
+    background-color: #ffffff;
+    border-radius: 20px;
+    border: #C8B3D3 5px solid;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .recommend-user-img{
+    width: 120px;
+    height: 120px;
+
+    background-image: url(../img/codingBadge.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    border-bottom: #C8B3D3 2px solid;
+
+    margin-bottom: 10px;
+  }
+.recommend-user-title{
+  text-overflow: ellipsis;
+}
+  

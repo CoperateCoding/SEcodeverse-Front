@@ -7,11 +7,11 @@ const LeagueResult = () => {
   //Close 상태 및 시간 지났을 때만 열리는걸로 처리. (useEffect 사용)
 
   //현재 내가 속한 팀의 pk
-  const userTeam = 3;
+  const userTeam = 12;
 
   //BarChart를 위한 임시 데이터
   const teamDataArray = [
-    { pk: 1, name: "teamName1", score: 5, rank: 10 },
+    { pk: 1, name: "teamName1", score: 15, rank: 10 },
     { pk: 2, name: "teamName2", score: 100, rank: 4 },
     { pk: 3, name: "teamName3", score: 200, rank: 3 },
     { pk: 4, name: "teamName4", score: 55, rank: 6 },
@@ -21,6 +21,8 @@ const LeagueResult = () => {
     { pk: 8, name: "teamName8", score: 500, rank: 1 },
     { pk: 9, name: "teamName9", score: 45, rank: 9 },
     { pk: 10, name: "teamName10", score: 35, rank: 8 },
+    { pk: 11, name: "teamName11", score: 5, rank: 11 },
+    { pk: 12, name: "teamName12", score: 0, rank: 12 },
   ];
 
   //내 팀이 얻은 카테고리 별 점수
@@ -42,15 +44,13 @@ const LeagueResult = () => {
     { category: "데이터베이스", score: 10 },
   ];
 
-  const teamRankData = [];
-  const userTeamIndex = teamDataArray.findIndex((team) => team.pk === userTeam);
+  //위의 배열을 랭크순으로 정렬한 것
+  const teamDataSorted = teamDataArray.slice().sort((a, b) => a.rank - b.rank);
 
-  if (userTeamIndex === 0) {
-    teamRankData.push(teamDataArray[userTeamIndex]);
-  } else {
-    const sortedTeams = teamDataArray.slice(1).sort((a, b) => a.rank - b.rank);
-    teamRankData.push(teamDataArray[userTeamIndex], ...sortedTeams.slice(0, 5));
-  }
+  //랭크별 막대그래프
+  const teamRankData = [];
+  const sortedTeams = teamDataArray.slice(1).sort((a, b) => a.rank - b.rank);
+  teamRankData.push(...sortedTeams.slice(0, 6));
 
   const categoryData = {
     labels: getTeamScore.map((item) => item.category),
@@ -63,10 +63,10 @@ const LeagueResult = () => {
   };
 
   const teamData = {
-    labels: teamRankData.map((item)=> item.name),
+    labels: teamRankData.map((item) => item.name),
     datasets: [
       {
-        data: teamRankData.map((item)=> item.score),
+        data: teamRankData.map((item) => item.score),
         backgroundColor: "rgba(180, 200, 230, 0.7)",
       },
     ],
@@ -93,7 +93,7 @@ const LeagueResult = () => {
                   </tr>
                 </thead>
                 <tbody className="league-result-table-tbody">
-                  {teamDataArray.map((value, index) => (
+                  {teamDataSorted.map((value, index) => (
                     <RankTableComponent
                       key={index}
                       rankData={value}

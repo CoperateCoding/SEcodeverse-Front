@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "../../css/AdminCTFLeague.css";
 import "../../css/AdminCTFEnrollLeague.css";
 import LeaugeTableComponent from "./LeagueTableComponent";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const CTFLeague = () => {
   const [isCreateLeague, setIsCreateLeague] = useState(false);
@@ -20,6 +22,8 @@ const CTFLeague = () => {
   // 아코디언
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("최신순");
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
 
   const toggleAccordion = () => {
     setIsOpen(!isOpen);
@@ -153,6 +157,12 @@ const CTFLeague = () => {
                   className="ctf-league-edit-popup-contents-title-input"
                   type="text"
                 />
+              </div>
+              <div  className="ctf-league-edit-popup-contents-enroll-box">
+                <span className="ctf-league-edit-popup-contents-date">
+                  시작 날짜 선택
+                </span>
+                <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
               </div>
               <div className="ctf-league-edit-popup-contents-description-box">
                 <span className="ctf-league-edit-popup-contents-description">
