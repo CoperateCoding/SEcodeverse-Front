@@ -195,7 +195,7 @@ const BoardDeatil = () => {
     console.log("like클릭함")
     if(localStorage.getItem('access')!=null){
       const accessToken=localStorage.getItem('access')
-      console.log(accessToken)
+      console.log("댓글 확인 토큰 ",accessToken)
       
       axios.get('api/v1/token/validate',{
         headers: {

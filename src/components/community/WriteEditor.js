@@ -26,8 +26,9 @@ const WriteEditor = () => {
   };
   const isUser = () => {
     if(localStorage.getItem('access')!=null){
+    console.log("게시글 등록 토큰 확인하겠습")
     const accessToken=localStorage.getItem('access')
-    console.log(accessToken)
+    console.log("게시글 등록 토큰 ",accessToken)
     axios.get('api/v1/token/validate',{
       headers: {
         Authorization: `Bearer ${accessToken}`
@@ -64,8 +65,8 @@ const WriteEditor = () => {
           const presignedResponse = await axios.post(
             "/api/v1/s3/presigned",
             {
-              imageName: uploadFile.name,
-              folderName: "board",
+              image_name: uploadFile.name,
+              // folderName: "board",
             },
             {
               headers: {

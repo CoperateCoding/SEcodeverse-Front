@@ -61,9 +61,11 @@ function App() {
         <Route path="/community" element={<Community />} />
         <Route path="/communitywrite" element={<WriteEditor />} />
    
-        <Route path="/:commumityPk" element={<BoardDeatil />} />
+        {/* <Route path="/:commumityPk" element={<BoardDeatil />}/> */}
+        
+        <Route path="/community/:commumityPk" element={<BoardDeatil />}/>
         <Route path="/signUp" element={<SignUp/>}/>
-        <Route  path="/login" element={<Login setAuth ={setAuth}/>}/>
+        <Route path="/login" element={<Login setAuth ={setAuth}/>}/>
         <Route path="/question" element={<QuestionList/>}/>
         <Route path="/question/detail" element={<QuestionDetail/>}/>
         <Route path="/admin" element={<AdminMain/>}/>
