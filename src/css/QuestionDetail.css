@@ -110,7 +110,7 @@
 
 .question-detail-code-bar{
     width: 99%;
-    height: auto;
+    height: 30px;
     background-color: #6E6FAF;
 
     padding: 5px;
@@ -304,3 +304,42 @@
     background-position: top center;
     background-size: 100% 100%;
 }
+
+.question-detail-code-select-bar {
+    position: relative;
+    width: 150px;
+    height: 30px;
+    border-radius: 4px;
+    border: 1px solid #6E6FAF;
+    vertical-align: top;
+  }
+
+  .question-detail-code-select-bar select {
+    width: inherit;
+    height: inherit;
+    background: transparent;
+    border: 0 none;
+    outline: 0 none;
+    padding: 0 5px;
+    position: relative;
+    z-index: 3;
+
+    font-size: 18px;
+  }
+
+  .question-detail-code-select-bar option {
+    width: inherit;
+    height: 35px;
+    background: transparent;
+    border: 0 none;
+    outline: 0 none;
+    padding: 0 5px;
+    position: relative;
+    z-index: 3;
+
+    font-size: 18px;
+  }
+
+  .question-detail-code-select-bar select::-ms-expand {
+    display: none;
+  }

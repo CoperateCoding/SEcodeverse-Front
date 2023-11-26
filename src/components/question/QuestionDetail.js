@@ -20,7 +20,7 @@ const QuestionDetail = () => {
   const [result, setResult] = useState("");
 
   const [isPopup, setIsPopup] = useState(false);
-  const [isSuccess, setSuccess] = useState(false);
+  const [isSuccess, setSuccess] = useState(true);
 
   useEffect(() => {
     console.log(questionPk);
@@ -129,7 +129,9 @@ const QuestionDetail = () => {
     setCode(e.target.value);
   };
 
-  const handleChangeLanguage = () => {
+  const handleChangeLanguage = (event) => {
+    const selectedValue = event.target.value;
+    setSelectedLanguage(selectedValue)
     const languageCodeMap = {
       Java: "public class Main {\n  public static void main(String args[]) {\n  System.out.println(1);\n }\n}",
       Python: "print(1)",
@@ -146,13 +148,45 @@ int main() {
 }`,
     };
 
-    // 각 언어 순환
+    const languages = ["Java", "Python", "C", "C++"];
+    // const currentIndex = languages.indexOf(selectedLanguage);
+    // const nextIndex = (currentIndex + 1) % languages.length;
+
+    // setSelectedLanguage(languages[nextIndex]);
+    // setCode(languageCodeMap[languages[nextIndex]]);
+
+    const selectedIndex = languages.indexOf(selectedValue);
+
+  if (selectedIndex !== -1) {
+    // 선택된 언어가 languages 배열에 있다면 코드를 설정
+    setCode(languageCodeMap[languages[selectedIndex]]);
+  }
+  };
+
+  const handleChangeNextLangue = () => {
     const languages = ["Java", "Python", "C", "C++"];
     const currentIndex = languages.indexOf(selectedLanguage);
     const nextIndex = (currentIndex + 1) % languages.length;
+
+    const languageCodeMap = {
+      Java: "public class Main {\n  public static void main(String args[]) {\n  System.out.println(1);\n }\n}",
+      Python: "print(1)",
+      C: `#include <stdio.h>\n
+int main() {
+    printf("Hello SEcodeVerse!");
+    return 0;
+}`,
+      "C++": `#include <iostream>
+using namespace std;\n
+int main() {
+    cout << "Hello SEcodeVerse!" << endl;
+    return 0;
+}`,
+    };
+
     setSelectedLanguage(languages[nextIndex]);
     setCode(languageCodeMap[languages[nextIndex]]);
-  };
+  }
 
   const handleResetCode = () => {
     // 여기에서 초기화를 위한 코드를 추가
@@ -253,7 +287,7 @@ int main() {
             </div>
             <div
               className="question-detail-button-change-language"
-              onClick={handleChangeLanguage}
+              onClick={handleChangeNextLangue}
             >
               {selectedLanguage}
             </div>
@@ -266,8 +300,8 @@ int main() {
           </div>
         </div>
       </div>
-      {isPopup && isSuccess && <SuccessResult onClose={() => setIsPopup(!isPopup)}/>}
-      {isPopup && !isSuccess && <FailResult onClose={() => setIsPopup(!isPopup)}/>}
+      {isPopup && isSuccess && <SuccessResult onClose={() => setIsPopup(false)} />}
+      {isPopup && !isSuccess && <FailResult onClose={() => setIsPopup(false)} />}
     </section>
   );
 };
