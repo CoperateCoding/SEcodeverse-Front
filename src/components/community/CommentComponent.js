@@ -37,64 +37,32 @@ const CommentComponent = () => {
         setLoading(false);
       });
   }, [commumityPk]);
-
-  const handleEditClick = (index) => {
-    const selectedComment = commentList[index];
-
-    if (selectedComment) {
-      setEditedCommentIndex(index);
-      setEditedCommentContent(selectedComment.content);
-    }
-  };
-
-  const handleCancelClick = () => {
-    setEditedCommentIndex(null);
-    setEditedCommentContent("");
-  };
-
-  const handleSaveClick = (index, editedContent) => {
-    // Implement the logic to save the edited comment content
-    // You may want to make an API call to update the comment on the server
-    const updatedCommentList = [...commentList];
-    updatedCommentList[index].content = editedContent;
-
-    setCommentList(updatedCommentList);
-    handleCancelClick();
-  };
-
-  if (loading) {
-    return <div>Loading...</div>;
+  const commentDelete = (pk) => {
+    axios
+      .delete(`/api/v1/comment/${pk}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        window.location.reload();
+        
+      })
+      .catch((error) => {
+        console.error("댓글 삭제하는중에 에러남", error);
+      });
   }
-
   return (
     <>
       {commentList.map((comment, index) => (
         <tr key={index}>
           <td className="comment-writer">{comment.user.name}</td>
-          <td className="comment-contents">
-            {editedCommentIndex === index ? (
-              <textarea
-                value={editedCommentContent}
-                onChange={(e) => setEditedCommentContent(e.target.value)}
-              />
-            ) : (
-              comment.content
-            )}
-          </td>
-          <td className="comment-date">{new Date(comment.createAt).toLocaleString()}</td>
-          <td className="comment-modify">
-            {editedCommentIndex === index ? (
-              <>
-                <button onClick={handleCancelClick}>취소</button>
-                <button onClick={() => handleSaveClick(index, editedCommentContent)}>저장</button>
-              </>
-            ) : (
-              <button onClick={() => handleEditClick(index)}>수정</button>
-            )}
-          </td>
-          <td className="comment-delete">
-            <button>삭제</button>
-          </td>
+          <td className="comment-contents">{comment.content}</td>
+          <td className="comment-date">{comment.createAt}</td>
+          <td className="comment-modify">수정</td>
+          <td className="comment-delete"onClick={() => {commentDelete(comment.pk)}}>삭제</td>
         </tr>
       ))}
     </>

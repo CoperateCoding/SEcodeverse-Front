@@ -163,7 +163,7 @@ const Community = () => {
 
   }
   const goToWrite = () => {
-    navigate('/communitywrite')
+    navigate('/community/write')
   }
   //상단 버튼
   const [selectedButton, setSelectedButton] = useState(1);
