@@ -41,13 +41,18 @@ const QuestionDetail = () => {
   }, []);
 
   const handleExecuteCode = () => {
-    const FormattedCode = code.replace(/\n/g, "\\n");
 
-    const apiUrl = "/api/v1/question/solveQuestion";
+
+   
+    const FormattedCode = code.replace(/\n/g, '\n');
+    
+    const apiUrl = '/api/v1/question/solveQuestion';
+   
 
     const params = new URLSearchParams();
     params.append("userCode", FormattedCode);
     params.append("languageNum", "2");
+    params.append("questionPk",questionPk);
 
     axios
       .get(apiUrl, { params })
