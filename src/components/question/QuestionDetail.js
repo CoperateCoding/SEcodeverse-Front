@@ -41,7 +41,7 @@ const QuestionDetail = () => {
   const handleExecuteCode = () => {
 
    
-    const FormattedCode = code.replace(/\n/g, '\\n');
+    const FormattedCode = code.replace(/\n/g, '\n');
     
     const apiUrl = '/api/v1/question/solveQuestion';
    
