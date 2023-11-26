@@ -1,25 +1,25 @@
-import "../../css/BoardDetail.css";
 import React, { useState, useEffect } from "react";
-import "react-quill/dist/quill.snow.css";
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
+// ... (다른 import 문들)
+
 const CommentComponent = () => {
-  
   const [commentList, setCommentList] = useState([]);
   const { commumityPk } = useParams();
   const [board, setBoard] = useState(null);
   const [imgList, setImgList] = useState([]);
+  const [editedCommentIndex, setEditedCommentIndex] = useState(null);
+  const [editedCommentContent, setEditedCommentContent] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const apiUrl = `/api/v1/board/${commumityPk}`;
 
     axios.get(apiUrl)
       .then(response => {
-        console.log(response.data.board)
-        console.log(response.data.imgList)
-        setBoard(response.data.board)
-        setImgList(response.data.imgList)
+        setBoard(response.data.board);
+        setImgList(response.data.imgList);
       })
       .catch(error => {
         console.error('API 호출 중 에러:', error);
@@ -29,11 +29,12 @@ const CommentComponent = () => {
 
     axios.get(apiUrl1)
       .then(response => {
-        console.log(response.data)
-        setCommentList(response.data)
+        setCommentList(response.data);
+        setLoading(false);
       })
       .catch(error => {
         console.error('API 호출 중 에러:', error);
+        setLoading(false);
       });
   }, [commumityPk]);
   const commentDelete = (pk) => {
@@ -55,8 +56,8 @@ const CommentComponent = () => {
   }
   return (
     <>
-      {commentList.map((comment) => (
-        <tr key={comment.number}>
+      {commentList.map((comment, index) => (
+        <tr key={index}>
           <td className="comment-writer">{comment.user.name}</td>
           <td className="comment-contents">{comment.content}</td>
           <td className="comment-date">{comment.createAt}</td>
