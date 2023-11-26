@@ -1,21 +1,26 @@
 import "../../css/QuestionDetail.css";
 import React, { useState, useEffect } from "react";
-import { useNavigate , useParams } from "react-router-dom";
-import axios from 'axios';
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import SuccessResult from "./SuccessResult";
+import FailResult from "./FailResult";
 // import { resolveObjectKey } from "chart.js/dist/helpers/helpers.core";
 
 const QuestionDetail = () => {
   const [selectedLanguage, setSelectedLanguage] = useState("Java");
   const { questionPk } = useParams();
-  const [question,setQuestion]=useState([]);
-  const[img,setImg]=useState([]);
-  const[testcase,setTestcase]=useState([]);
+  const [question, setQuestion] = useState([]);
+  const [img, setImg] = useState([]);
+  const [testcase, setTestcase] = useState([]);
   const [code, setCode] = useState(`public class Main {
     public static void main(String args[]) {
       System.out.println("Hello SEcodeVerse!");
     }
 }`);
   const [result, setResult] = useState("");
+
+  const [isPopup, setIsPopup] = useState(false);
+  const [isSuccess, setSuccess] = useState(false);
 
   useEffect(() => {
     console.log(questionPk);
@@ -27,28 +32,23 @@ const QuestionDetail = () => {
       .then((response) => {
         console.log("처음 문제 정보", response.data);
         setQuestion(response.data.question);
-        setImg(response.data.img)
-        setTestcase(response.data.testCase)
-      
+        setImg(response.data.img);
+        setTestcase(response.data.testCase);
       })
       .catch((error) => {
         console.error("처음 문제 정보 가져오는 중 에러남:", error);
       });
-
-   
   }, []);
 
   const handleExecuteCode = () => {
+    const FormattedCode = code.replace(/\n/g, "\\n");
 
-   
-    const FormattedCode = code.replace(/\n/g, '\\n');
-    
-    const apiUrl = '/api/v1/question/solveQuestion';
-   
+    const apiUrl = "/api/v1/question/solveQuestion";
+
     const params = new URLSearchParams();
-    params.append('userCode', FormattedCode);
-    params.append('languageNum', '2');
-  
+    params.append("userCode", FormattedCode);
+    params.append("languageNum", "2");
+
     axios
       .get(apiUrl, { params })
       .then((response) => {
@@ -57,68 +57,68 @@ const QuestionDetail = () => {
         console.log(result);
       })
       .catch((error) => {
-        console.error('문제 푸는 페이지에서 에러남', error);
+        console.error("문제 푸는 페이지에서 에러남", error);
       });
   };
-  
+
   // 사용 예시
- 
-//   const handleExecuteCode = async () => {
-    
-//     const apiUrl = '/api/v1/question/solveQuestion';
-// console.log("보내기 전 코드 확인", code);
 
-// const params = {
-//   // userCode: "public class Main{\n    public static void main(String[] args){\n    System.out.println(1);\n}\n}",
-//   userCode:code,
-//   languageNum: 1
-// };
+  //   const handleExecuteCode = async () => {
 
-// const queryString = Object.entries(params)
-//   .map(([key, value]) => `${key}=${value}`)
-//   .join('&');
+  //     const apiUrl = '/api/v1/question/solveQuestion';
+  // console.log("보내기 전 코드 확인", code);
 
-// const url = `${apiUrl}?${queryString}`;
-// console.log(params)
-// axios
-//   .get(url)
-//   .then((response) => {
-//     setResult(response.data);
-//     console.log(response.data);
-//   })
-//   .catch((error) => {
-//     console.error('문제 푸는 페이지에서 에러남', error);
-//   });
-//     // try {
-//     //   // 여기에 코드 실행을 위한 백엔드 API 호출 또는 클라이언트 내 실행 로직 추가
-//     //   // 예: 백엔드 API 호출
-//     //   const response = await fetch("YOUR_BACKEND_API_ENDPOINT", {
-//     //     method: "POST",
-//     //     headers: {
-//     //       "Content-Type": "application/json",
-//     //     },
-//     //     body: JSON.stringify({ code, language: selectedLanguage }),
-//     //   });
+  // const params = {
+  //   // userCode: "public class Main{\n    public static void main(String[] args){\n    System.out.println(1);\n}\n}",
+  //   userCode:code,
+  //   languageNum: 1
+  // };
 
-//     //   // 결과 처리
-//     //   const resultData = await response.json();
-//     //   setResult(resultData.result);
-//     // } catch (error) {
-//     //   console.error("Error executing code:", error);
-//     //   setResult(`Error: ${error.message}`);
-//     // }
-//   };
+  // const queryString = Object.entries(params)
+  //   .map(([key, value]) => `${key}=${value}`)
+  //   .join('&');
 
-const getCodeLines = () => {
-  const lines = code.split('\n');
-  console.log(lines)
-  return lines.map((line, index) => (
-    <div key={index} style={{ whiteSpace: 'pre-wrap' }}>
-      <span style={{ marginRight: '8px' }}>{index + 1}</span>
-      {line}
-    </div>
-  ));
-};
+  // const url = `${apiUrl}?${queryString}`;
+  // console.log(params)
+  // axios
+  //   .get(url)
+  //   .then((response) => {
+  //     setResult(response.data);
+  //     console.log(response.data);
+  //   })
+  //   .catch((error) => {
+  //     console.error('문제 푸는 페이지에서 에러남', error);
+  //   });
+  //     // try {
+  //     //   // 여기에 코드 실행을 위한 백엔드 API 호출 또는 클라이언트 내 실행 로직 추가
+  //     //   // 예: 백엔드 API 호출
+  //     //   const response = await fetch("YOUR_BACKEND_API_ENDPOINT", {
+  //     //     method: "POST",
+  //     //     headers: {
+  //     //       "Content-Type": "application/json",
+  //     //     },
+  //     //     body: JSON.stringify({ code, language: selectedLanguage }),
+  //     //   });
+
+  //     //   // 결과 처리
+  //     //   const resultData = await response.json();
+  //     //   setResult(resultData.result);
+  //     // } catch (error) {
+  //     //   console.error("Error executing code:", error);
+  //     //   setResult(`Error: ${error.message}`);
+  //     // }
+  //   };
+
+  const getCodeLines = () => {
+    const lines = code.split("\n");
+    console.log(lines);
+    return lines.map((line, index) => (
+      <div key={index} style={{ whiteSpace: "pre-wrap" }}>
+        <span style={{ marginRight: "8px" }}>{index + 1}</span>
+        {line}
+      </div>
+    ));
+  };
 
   const handleCodeChange = (e) => {
     setCode(e.target.value);
@@ -167,12 +167,16 @@ int main() {
         <div className="question-detail-total-wrapper">
           <div className="question-detail-upper-contents-wrapper">
             <div className="question-detail-star-box">
-              <span className="question-detail-question-level">{question.levelPk}</span>
+              <span className="question-detail-question-level">
+                {question.levelPk}
+              </span>
             </div>
             <div className="question-detail-text-box">
-              <span className="question-detail-question-name">{question.title}</span>
+              <span className="question-detail-question-name">
+                {question.title}
+              </span>
               <span className="question-detail-question-description">
-               {question.intro}
+                {question.intro}
               </span>
             </div>
           </div>
@@ -197,8 +201,7 @@ int main() {
 
                 <div
                   className="question-detail-code-area"
-                  style={{ display: "flex",
-                  width: "100%"}}
+                  style={{ display: "flex", width: "100%" }}
                 >
                   <div className="question-detail-code-line">
                     {getCodeLines().map((line, index) => (
@@ -231,7 +234,10 @@ int main() {
             </div>
           </div>
           <div className="question-detail-bottom-contents-wrapper">
-            <div className="question-detail-button-result-check">
+            <div
+              className="question-detail-button-result-check"
+              onClick={() => setIsPopup(!isPopup)}
+            >
               채점 결과 확인
             </div>
             <div
@@ -255,6 +261,8 @@ int main() {
           </div>
         </div>
       </div>
+      {isPopup && isSuccess && <SuccessResult onClose={() => setIsPopup(!isPopup)}/>}
+      {isPopup && !isSuccess && <FailResult onClose={() => setIsPopup(!isPopup)}/>}
     </section>
   );
 };
