@@ -70,18 +70,34 @@ const CommentComponent = () => {
 
   const handleEditClick = (index) => {
     const selectedComment = commentList[index];
+    axios
+      .patch(`/api/v1/comment/${index}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        window.location.reload();
+        
+      })
+      .catch((error) => {
+        console.error("댓글 수정하는중에 에러남", error);
+      });
 
     if (selectedComment) {
       setEditedCommentIndex(index);
       setEditedCommentContent(selectedComment.content);
     }
+
   };
 
   return (
     <>
       {commentList.map((comment, index) => (
         <tr key={index}>
-          <td className="comment-writer">{comment.user.name}</td>
+          <td className="comment-writer">{comment.nickname}</td>
           <td className="comment-contents">
             {editedCommentIndex === index ? (
               <textarea
@@ -100,7 +116,7 @@ const CommentComponent = () => {
                 <button onClick={() => handleSaveClick(index, editedCommentContent)}>저장</button>
               </>
             ) : (
-              <button onClick={() => handleEditClick(index)}>수정</button>
+              <button onClick={() => handleEditClick(comment.pk)}>수정</button>
             )}
           </td>
           <td className="comment-delete"onClick={() => {commentDelete(comment.pk)}}>
