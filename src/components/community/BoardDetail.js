@@ -239,7 +239,6 @@ const BoardDeatil = () => {
 
   const handleCommentChange = (e) => {
     setWriteComment(e.target.value);
-    console.log(writeComment);
   };
 
   return (
@@ -267,8 +266,7 @@ const BoardDeatil = () => {
                   {board && board.title}
                 </span>
               </div>
-              <div className="board-detail-contents-box">
-                {board && board.content}
+              <div className="board-detail-contents-box" dangerouslySetInnerHTML={{ __html: board && board.content }}>
               </div>
             </div>
 
