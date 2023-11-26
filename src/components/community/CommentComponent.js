@@ -60,28 +60,49 @@ const CommentComponent = () => {
     setEditedCommentContent("");
   };
 
-  const handleSaveClick = (index, editedContent) => {
+  const handleSaveClick = (index, editedContent,pk) => {
+
     const updatedCommentList = [...commentList];
     updatedCommentList[index].content = editedContent;
-
+    const data = {
+      content: editedContent
+    };
+    
+    axios
+      .patch(`/api/v1/comment/${pk}`, data, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        }
+      })
+      .then((response) => {
+        console.log(response.data);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error("댓글 수정 중에 에러 발생", error);
+      });
     setCommentList(updatedCommentList);
     handleCancelClick();
   };
 
   const handleEditClick = (index) => {
     const selectedComment = commentList[index];
+    console.log(index)
+   
 
     if (selectedComment) {
       setEditedCommentIndex(index);
       setEditedCommentContent(selectedComment.content);
     }
+
   };
 
   return (
     <>
       {commentList.map((comment, index) => (
         <tr key={index}>
-          <td className="comment-writer">{comment.user.name}</td>
+          <td className="comment-writer">{comment.nickname}</td>
           <td className="comment-contents">
             {editedCommentIndex === index ? (
               <textarea
@@ -97,7 +118,7 @@ const CommentComponent = () => {
             {editedCommentIndex === index ? (
               <>
                 <button onClick={handleCancelClick}>취소</button>
-                <button onClick={() => handleSaveClick(index, editedCommentContent)}>저장</button>
+                <button onClick={() => handleSaveClick(index, editedCommentContent,comment.pk)}>저장</button>
               </>
             ) : (
               <button onClick={() => handleEditClick(index)}>수정</button>

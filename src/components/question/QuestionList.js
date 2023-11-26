@@ -197,6 +197,7 @@ const QuestionList = () => {
   const [difficultyOptions, setDifficultyOptions] = useState([]);
   const [categoryOptions, setCategoryOptions] = useState([]);
   const [sortingOption, setSortingOption] = useState("ascending");
+  const [testDesc,setTestDesc]= useState('');
 
   const handleDifficultyChange = (event) => {
     const { value, checked } = event.target;
@@ -400,6 +401,7 @@ const QuestionList = () => {
           title: title,
           intro: desc,
           content: desc,
+          testcaseDescription:testDesc,
           language: "java/python/c++/c",
         },
         img,
@@ -413,6 +415,7 @@ const QuestionList = () => {
           title: title,
           intro: desc,
           content: desc,
+          testcaseDescription:testDesc,
           language: "java/python/c++/c",
         },
         testCase,
@@ -667,8 +670,8 @@ const QuestionList = () => {
                     <textarea
                       type="text"
                       className="enroll-question-popup-contents-testcase-box"
-                      value={desc}
-                      onChange={(e) => setDesc(e.target.value)}
+                      value={testDesc}
+                      onChange={(e) => setTestDesc(e.target.value)}
                     />
                     <div className="enroll-question-test-case">
                       <table className="enroll-question-test-case-table">
