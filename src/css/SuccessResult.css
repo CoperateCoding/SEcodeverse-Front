@@ -1,0 +1,220 @@
+/*font*/
+@font-face{
+    font-family:'bitbit';
+    src:url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'),url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2') ;
+ }
+
+@font-face {
+    font-family: 'DungGeunMo-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/wooin21/web/fonts/etc/DungGeunMo-Regular.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.success-container{
+    position: fixed;
+
+    width: 60%;
+    height: 745px;
+
+    bottom:100px;
+    right: 20%;
+
+    z-index: 10000;
+
+    background-color: #9091C0;
+    border: 5px solid #ffffff;
+}
+
+.success-wrapper{
+    padding: 20px;
+}
+
+.success-top-wrapper{
+    height: 80px;
+    text-align: center;
+}
+
+.success-title{
+    vertical-align: top;
+
+    font-family: 'bitbit';
+    font-size: 80px;
+
+    text-shadow: -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 2px 2px 0 #fff;
+}
+
+.success-img{
+    vertical-align: top;
+
+    display: inline-block;
+
+    width: 80px;
+    height: 80px;
+
+    background-image: url(../img/mascot_01.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 220% 220%;
+}
+
+.success-cancel-img{
+    position: absolute;
+
+    right: 10px;
+    top: 10px;
+
+    width: 30px;
+    height: 30px;
+
+    background-image: url(../img/cancel_btn.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+
+    cursor: pointer;
+}
+
+.success-middle-wrapper{
+    width: 100%;
+    margin: 1% 0;
+}
+
+.success-result-table{
+    font-family: 'DungGeunMo-Regular';
+
+    width: 100%;
+    margin-top: 4%;
+    margin-bottom: 1%;
+
+    border-spacing: 0px;
+    border: #CCD2F0 solid 3px;
+}
+
+.success-result-table-title{
+    background-color: #CCD2F0;
+
+    font-size: 24px;
+    font-weight: 100;
+}
+
+.success-result-table-label{
+    background-color: #fff;
+
+    font-size: 20px;
+    font-weight: 100;
+}
+
+.success-result-table-thead>tr>th{
+    height: 40px;
+    border: #CCD2F0 solid 1px;
+}
+
+.success-result-table-tbody>tr>td{
+    height: 40px;
+
+    text-align: center;
+
+    border: #CCD2F0 solid 1px;
+    background-color: #fff;
+
+    font-size: 20px;
+    font-weight: 100;
+}
+
+.success-result-table-label > th{
+    width: 25%;
+}
+
+.success-bottom-wrapper{
+    width: 100%;
+    margin: 1% 0;
+}
+
+.success-comment-table{
+    font-family: 'DungGeunMo-Regular';
+
+    width: 100%;
+    margin-top: 4%;
+    margin-bottom: 1%;
+
+    border-spacing: 0px;
+    border: #CCD2F0 solid 3px;
+}
+
+.success-comment-thead>tr>th{
+    height: 40px;
+
+    border: #CCD2F0 solid 1px;
+    background-color: #CCD2F0;
+
+    font-size: 24px;
+}
+
+.success-comment-tbody>tr>td{
+    border: #CCD2F0 solid 1px;
+    background-color: #fff;
+
+    font-size: 20px;
+    height: 320px;
+}
+
+.success-comment-ai{
+    width: 60%;
+    overflow-wrap: break-word;
+
+    padding: 10px;
+
+    vertical-align: top;
+}
+
+.success-comment-similar{
+    width: 40%;
+    padding: 10px;
+
+    vertical-align: top;
+}
+
+ /* 사용자문제추천 */
+ .success-comment-similar > .mypage-recommend-question-contents-wrapper{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .success-comment-similar > .recommend-user-wrapper{
+    width: 100%;
+    height: 55px;
+
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: #9091C0 2px solid;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin-bottom: 5px;
+  }
+
+  .success-comment-similar > .recommend-user-wrapper > .recommend-user-img{
+    width: 50px;
+    height: 50px;
+
+    background-image: url(../img/codingBadge.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+
+    border-right: #9091C0 2px solid;
+    border-bottom: none;
+
+    margin-bottom: 0;
+    margin-right: 15px;
+  }
+
+  .success-comment-similar > .recommend-user-title{
+    text-overflow: ellipsis;
+}
+  
