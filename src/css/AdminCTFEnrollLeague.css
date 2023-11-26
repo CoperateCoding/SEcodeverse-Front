@@ -10,7 +10,7 @@
     overflow-y: scroll;
 
     width: 77.8%;
-    min-height: 750px;
+    min-height: 745px;
 
     background-color: #60679D;
     border: 5px solid #ffffff;
@@ -57,7 +57,7 @@
     margin-top: 2%;
 }
 
-.ctf-league-edit-popup-contents-title, .ctf-league-edit-popup-contents-date{
+.ctf-league-edit-popup-contents-title, .ctf-league-edit-popup-contents-date, .ctf-league-edit-popup-contents-count{
     font-family: 'DungGeunMo-Regular';
     font-size: 30px;
     color: #ffffff;
@@ -67,6 +67,14 @@
 
 .ctf-league-edit-popup-contents-title-input{
     width: 89%;
+    height: 30px;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 22px;
+}
+
+.ctf-league-edit-popup-contents-count-input{
+    width: 5%;
     height: 30px;
 
     font-family: 'DungGeunMo-Regular';
@@ -93,7 +101,7 @@
 
     resize: none;
     width: 99.5%;
-    height: 300px;
+    height: 200px;
 }
 
 .ctf-league-edit-popup-contents-button-wrapper{
@@ -119,4 +127,16 @@
     font-size: 24px;
 
     cursor: pointer;
+}
+
+.ctf-league-edit-popup-contents-date-box, .ctf-league-edit-popup-contents-count-box{
+    margin-top: 2%;
+}
+
+.ctf-league-edit-popup-contents-date-picker{
+    margin-right: 1%;
+}
+
+.ctf-league-edit-popup-contents-date{
+    margin-right: 1%;
 }
