@@ -158,11 +158,44 @@ const CTFLeague = () => {
                   type="text"
                 />
               </div>
-              <div  className="ctf-league-edit-popup-contents-enroll-box">
+              <div className="ctf-league-edit-popup-contents-date-box">
                 <span className="ctf-league-edit-popup-contents-date">
                   시작 날짜 선택
                 </span>
-                <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
+                <DatePicker
+                  className="ctf-league-edit-popup-contents-date-picker"
+                  showTimeSelect
+                  timeFormat="HH:mm"
+                  timeIntervals={15}
+                  dateFormat="yyyy-MM-dd HH:mm"
+                  timeCaption="Time"
+                  selected={startDate}
+                  onChange={(date) => setStartDate(date)}
+                />
+              </div>
+              <div className="ctf-league-edit-popup-contents-date-box">
+                <span className="ctf-league-edit-popup-contents-date">
+                  종료 날짜 선택
+                </span>
+                <DatePicker
+                  className="ctf-league-edit-popup-contents-date-picker"
+                  showTimeSelect
+                  timeFormat="HH:mm"
+                  timeIntervals={15}
+                  dateFormat="yyyy-MM-dd HH:mm"
+                  timeCaption="Time"
+                  selected={endDate}
+                  onChange={(date) => setEndDate(date)}
+                />
+              </div>
+              <div className="ctf-league-edit-popup-contents-count-box">
+                <span className="ctf-league-edit-popup-contents-count">
+                  인원수
+                </span>
+                <input
+                  className="ctf-league-edit-popup-contents-count-input"
+                  type="number"
+                />
               </div>
               <div className="ctf-league-edit-popup-contents-description-box">
                 <span className="ctf-league-edit-popup-contents-description">
@@ -175,7 +208,12 @@ const CTFLeague = () => {
               </div>
             </div>
             <div className="ctf-league-edit-popup-contents-button-wrapper">
-              <div className="ctf-league-edit-popup-contents-button" onClick={toggleCreateLeague}>확인</div>
+              <div
+                className="ctf-league-edit-popup-contents-button"
+                onClick={toggleCreateLeague}
+              >
+                확인
+              </div>
             </div>
           </div>
         </div>
