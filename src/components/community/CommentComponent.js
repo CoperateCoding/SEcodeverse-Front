@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-// ... (다른 import 문들)
 
 const CommentComponent = () => {
   const [commentList, setCommentList] = useState([]);
@@ -37,6 +36,7 @@ const CommentComponent = () => {
         setLoading(false);
       });
   }, [commumityPk]);
+
   const commentDelete = (pk) => {
     axios
       .delete(`/api/v1/comment/${pk}`, {
@@ -54,15 +54,58 @@ const CommentComponent = () => {
         console.error("댓글 삭제하는중에 에러남", error);
       });
   }
+
+  const handleCancelClick = () => {
+    setEditedCommentIndex(null);
+    setEditedCommentContent("");
+  };
+
+  const handleSaveClick = (index, editedContent) => {
+    const updatedCommentList = [...commentList];
+    updatedCommentList[index].content = editedContent;
+
+    setCommentList(updatedCommentList);
+    handleCancelClick();
+  };
+
+  const handleEditClick = (index) => {
+    const selectedComment = commentList[index];
+
+    if (selectedComment) {
+      setEditedCommentIndex(index);
+      setEditedCommentContent(selectedComment.content);
+    }
+  };
+
   return (
     <>
       {commentList.map((comment, index) => (
         <tr key={index}>
           <td className="comment-writer">{comment.user.name}</td>
-          <td className="comment-contents">{comment.content}</td>
-          <td className="comment-date">{comment.createAt}</td>
-          <td className="comment-modify">수정</td>
-          <td className="comment-delete"onClick={() => {commentDelete(comment.pk)}}>삭제</td>
+          <td className="comment-contents">
+            {editedCommentIndex === index ? (
+              <textarea
+                value={editedCommentContent}
+                onChange={(e) => setEditedCommentContent(e.target.value)}
+              />
+            ) : (
+              comment.content
+            )}
+          </td>
+          <td className="comment-date">{new Date(comment.createAt).toLocaleString()}</td>
+          <td className="comment-modify">
+            {editedCommentIndex === index ? (
+              <>
+                <button onClick={handleCancelClick}>취소</button>
+                <button onClick={() => handleSaveClick(index, editedCommentContent)}>저장</button>
+              </>
+            ) : (
+              <button onClick={() => handleEditClick(index)}>수정</button>
+            )}
+          </td>
+          <td className="comment-delete"onClick={() => {commentDelete(comment.pk)}}>
+            <button>삭제</button>
+          </td>
         </tr>
       ))}
     </>
