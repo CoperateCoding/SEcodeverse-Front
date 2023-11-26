@@ -60,31 +60,36 @@ const CommentComponent = () => {
     setEditedCommentContent("");
   };
 
-  const handleSaveClick = (index, editedContent) => {
+  const handleSaveClick = (index, editedContent,pk) => {
+
     const updatedCommentList = [...commentList];
     updatedCommentList[index].content = editedContent;
-
+    const data = {
+      content: editedContent
+    };
+    
+    axios
+      .patch(`/api/v1/comment/${pk}`, data, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        }
+      })
+      .then((response) => {
+        console.log(response.data);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error("댓글 수정 중에 에러 발생", error);
+      });
     setCommentList(updatedCommentList);
     handleCancelClick();
   };
 
   const handleEditClick = (index) => {
     const selectedComment = commentList[index];
-    axios
-      .patch(`/api/v1/comment/${index}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("access")}`,
-        },
-      })
-      .then((response) => {
-        console.log(response.data);
-        window.location.reload();
-        
-      })
-      .catch((error) => {
-        console.error("댓글 수정하는중에 에러남", error);
-      });
+    console.log(index)
+   
 
     if (selectedComment) {
       setEditedCommentIndex(index);
@@ -113,10 +118,10 @@ const CommentComponent = () => {
             {editedCommentIndex === index ? (
               <>
                 <button onClick={handleCancelClick}>취소</button>
-                <button onClick={() => handleSaveClick(index, editedCommentContent)}>저장</button>
+                <button onClick={() => handleSaveClick(index, editedCommentContent,comment.pk)}>저장</button>
               </>
             ) : (
-              <button onClick={() => handleEditClick(comment.pk)}>수정</button>
+              <button onClick={() => handleEditClick(index)}>수정</button>
             )}
           </td>
           <td className="comment-delete"onClick={() => {commentDelete(comment.pk)}}>
