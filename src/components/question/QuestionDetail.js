@@ -12,25 +12,29 @@ const QuestionDetail = () => {
   const [question, setQuestion] = useState([]);
   const [img, setImg] = useState([]);
   const [testcase, setTestcase] = useState([]);
+  const [successResult , setSuccessResult] = useState({});
   const [code, setCode] = useState(`public class Main {
     public static void main(String args[]) {
       System.out.println("Hello SEcodeVerse!");
     }
 }`);
   const [result, setResult] = useState("");
-
+  
   const [isPopup, setIsPopup] = useState(false);
   const [isSuccess, setSuccess] = useState(true);
-
+  const [ similar, setSimilar] = useState([]);
   useEffect(() => {
     console.log(questionPk);
     console.log("pk", questionPk);
-    const apiUrl = `/api/v1/question/${questionPk}`;
+    const apiUrl = `/api/v1/question/detail/${questionPk}`;
 
     axios
       .get(apiUrl)
       .then((response) => {
         console.log("처음 문제 정보", response.data);
+        console.log("처음 문제 정보",response.data.question)
+        console.log("처음 이미지 정보",response.data.img)
+        console.log("처음 테스트케이스 정보",response.data.testCase)
         setQuestion(response.data.question);
         setImg(response.data.img);
         setTestcase(response.data.testCase);
@@ -39,80 +43,117 @@ const QuestionDetail = () => {
         console.error("처음 문제 정보 가져오는 중 에러남:", error);
       });
   }, []);
+  const sleep = (ms) => {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  
 
-  const handleExecuteCode = () => {
+  const compiler = async ()=> {
+    const compileResult = []
+    const TestcaseOutput=[]
+    let totalmemory =0
+    let totaltime =0
+    let memory=0
+    let time =0;
+    let isSucess=true
+    console.log("테스트 케이스 보내기 시작합니다.")
+    console.log("테스트케이스의 길이는",testcase.length)
+    for(let i=0; i<testcase.length; i++){
+      console.log("배열들어옴 ")
+      handleExecuteCode(testcase[i],compileResult)
+      await sleep(5000);
+      console.log("받아온 테스트케이스",testcase)
+      console.log("보내는 테스트케이스2 ",testcase[i].pk, testcase[i].input)
+    }
+    await sleep(5000); 
+    console.log("코드 모두 컴파일 후 "+ result)
+    for(let i=0; i<testcase.length;i++){
+      let str = testcase[i].output
+      str = str.replace(/[!@#]|[*()]/g, "\n");
+      TestcaseOutput.push(str)
+    }
+    console.log(compileResult)
 
+    for(let i =0; i<compileResult.length ; i++){
+      const line = compileResult[i].stdout
+      console.log("line",line)
+      const lines = line.split('\n');
+      lines.pop(); 
+      const result = lines.join('\n');
+      if(result != TestcaseOutput[i]){
+        isSucess=false
+        console.log("내 코드 결과",result)
+        console.log("내스트케이스 결과",TestcaseOutput[i])
+      }
+      totalmemory=totalmemory+compileResult[i].memory
+      totaltime = totaltime+parseFloat(compileResult[i].time)
+      console.log("parseInt한 값",parseFloat(compileResult[i].time))
 
+    }
+
+    memory =0
+    time =0
+    setSuccessResult({memory:memory,time:time,lenguage:selectedLanguage})
+    console.log("성공여부",isSucess)
+    if(isSucess==true){
+      setSuccess(true)
    
-    const FormattedCode = code.replace(/\n/g, '\n');
+      
+    }
+    else{
+      setSuccess(false)
+    }
+    await sleep(5000); 
+
+    console.log("successResut",successResult)
+    console.log("인공지능한테보내는 levelpk",question.levelPk)
+    console.log("인공지능한테 보내는 카테고리 pk",question.categoryPk)
+  axios.get('/api/v1/chatbot/similary', {
+      params: {
+        levelPk :question.levelPk,
+        categoryPk :question.categoryPk
+      },
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      console.log("similarData",response.data)
+      setSimilar(response.data)
+    })
+    .catch(error => {
+      // 에러 처리
+      console.error(error);
+    });
     
-    const apiUrl = '/api/v1/question/solveQuestion';
-   
+  }
 
+  const handleExecuteCode = (testcaseValue,compileResult) => {
+    console.log("보내기 시도합니다")
+    const FormattedCode = code.replace(/\n/g, '\n');
+    const apiUrl = '/api/v1/question/solveQuestion';
     const params = new URLSearchParams();
+
     params.append("userCode", FormattedCode);
     params.append("languageNum", "2");
-    params.append("questionPk",questionPk);
+    params.append("testcase",testcaseValue.input);
+
+    console.log("보내는 테스트케이스",testcaseValue.input)
 
     axios
       .get(apiUrl, { params })
       .then((response) => {
         const result = response.data;
         // 결과 처리 로직 작성
-        console.log(result);
+        console.log(result)
+        compileResult.push(result)
+    
+    
       })
       .catch((error) => {
         console.error("문제 푸는 페이지에서 에러남", error);
       });
   };
-
-  // 사용 예시
-
-  //   const handleExecuteCode = async () => {
-
-  //     const apiUrl = '/api/v1/question/solveQuestion';
-  // console.log("보내기 전 코드 확인", code);
-
-  // const params = {
-  //   // userCode: "public class Main{\n    public static void main(String[] args){\n    System.out.println(1);\n}\n}",
-  //   userCode:code,
-  //   languageNum: 1
-  // };
-
-  // const queryString = Object.entries(params)
-  //   .map(([key, value]) => `${key}=${value}`)
-  //   .join('&');
-
-  // const url = `${apiUrl}?${queryString}`;
-  // console.log(params)
-  // axios
-  //   .get(url)
-  //   .then((response) => {
-  //     setResult(response.data);
-  //     console.log(response.data);
-  //   })
-  //   .catch((error) => {
-  //     console.error('문제 푸는 페이지에서 에러남', error);
-  //   });
-  //     // try {
-  //     //   // 여기에 코드 실행을 위한 백엔드 API 호출 또는 클라이언트 내 실행 로직 추가
-  //     //   // 예: 백엔드 API 호출
-  //     //   const response = await fetch("YOUR_BACKEND_API_ENDPOINT", {
-  //     //     method: "POST",
-  //     //     headers: {
-  //     //       "Content-Type": "application/json",
-  //     //     },
-  //     //     body: JSON.stringify({ code, language: selectedLanguage }),
-  //     //   });
-
-  //     //   // 결과 처리
-  //     //   const resultData = await response.json();
-  //     //   setResult(resultData.result);
-  //     // } catch (error) {
-  //     //   console.error("Error executing code:", error);
-  //     //   setResult(`Error: ${error.message}`);
-  //     // }
-  //   };
 
   const getCodeLines = () => {
     const lines = code.split("\n");
@@ -281,7 +322,7 @@ int main() {
             </div>
             <div
               className="question-detail-button-execute-code"
-              onClick={handleExecuteCode}
+              onClick={compiler}
             >
               코드 실행
             </div>
@@ -300,8 +341,8 @@ int main() {
           </div>
         </div>
       </div>
-      {isPopup && isSuccess && <SuccessResult onClose={() => setIsPopup(false)} />}
-      {isPopup && !isSuccess && <FailResult onClose={() => setIsPopup(false)} />}
+      {isPopup && isSuccess && <SuccessResult onClose={() => setIsPopup(false)}  value ={successResult} similar = {similar}/>}
+      {isPopup && !isSuccess && <FailResult onClose={() => setIsPopup(false)} value={successResult }/>}
     </section>
   );
 };

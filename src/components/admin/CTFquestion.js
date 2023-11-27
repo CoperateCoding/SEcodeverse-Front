@@ -14,7 +14,26 @@ const CTFquestion = () => {
 
   const toggleCreateQuestion = () => {
     setIsCreateQuestion(!isCreateQuestion);
-    setPopupTitle("CTF 리그 문제 등록");
+    // const data={
+    //   nane:
+    // }
+    // axios
+    //     .post("/api/v1/board", data, {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         Authorization: `Bearer ${localStorage.getItem("access")}`,
+    //       },
+    //     })
+    //     .then((response) => {
+    //       console.log(localStorage.getItem("access"));
+    //       console.log(response.data);
+    //       navigate("/community");
+    //     })
+
+    // .catch((error) => {
+    //   console.error("API 호출 중 에러:", error);
+    // });
+    // setPopupTitle("CTF 리그 문제 등록");
   }
 
 
