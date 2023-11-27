@@ -14,7 +14,7 @@ const LeagueMain = () => {
     memberCnt : 4,
     notice : "noticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenotice",
     description : "descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription",
-    
+
   };
   
   const [isOpen, setIsOpen] = useState(false);

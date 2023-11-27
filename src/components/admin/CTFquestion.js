@@ -185,6 +185,12 @@ const CTFquestion = () => {
                   </span>
                   <textarea className="ctf-question-edit-popup-contents-description-input" />
                 </div>
+                <div className="ctf-question-edit-popup-contents-answer-box">
+                  <span className="ctf-question-edit-popup-contents-answer">
+                    문제 답안
+                  </span>
+                  <textarea className="ctf-question-edit-popup-contents-answer-input" />
+                </div>
                 <div className="ctf-question-edit-popup-contents-img-box">
                   <input
                     className="ctf-question-edit-popup-contents-input-file"

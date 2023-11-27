@@ -13,8 +13,11 @@
 
 .signUp-page-container{
     max-width: 1000px;
-    height: auto; 
-    margin: 30px auto; 
+    height: 785px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
 }
 
 .signUp-page-wrapper{
@@ -27,15 +30,10 @@
     width: 1000px;
     height: auto;
 
-    opacity: 0.8;
     background-color: #6E6FAF;
     border: 5px solid white;
 
     margin: 0 auto; 
-}
-
-.signUp-page-signUp-box:hover{
-    opacity: 1;
 }
 
 /*SignUp*/
@@ -45,8 +43,9 @@
     
     font-family: 'bitbit';
     font-size: 70px;
+    font-weight: 800;
     color: #19224F;
-    -webkit-text-stroke: 3px white;
+    text-shadow: -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 2px 2px 0 #fff;
 }
 
 /*SignUp inner box*/
@@ -54,7 +53,8 @@
     margin:0px auto;
 
     width: 800px;
-    height: 552px;
+    height: 500;
+    max-height: 552px;
 
     background-color: #787878;
     border: 3px solid white;
@@ -234,6 +234,7 @@
 /*이름*/
 .signUp-page-name-input-wrapper{
     margin: 30px auto;
+    margin-bottom: 10px;
     vertical-align: top;
 }
 
@@ -265,7 +266,7 @@
 .signUp-page-input-button-wrapper{
     display: flex;
 
-    margin-top: 35px;
+    margin-top: 30px;
 
     text-align: center;
     line-height: 36px;
@@ -311,4 +312,31 @@
 
     margin-right: 10px;
     margin-left: 10px;
+}
+
+.signUp-page-id-input-wrapper h1{
+    color:rgb(195, 66, 66);
+    font-size:15px;
+    text-align:center;
+
+    margin-block-start: 0.55em;
+    margin-block-end: 0.55em;
+}
+
+.signUp-page-nickName-input-wrapper h1{
+    color:rgb(195, 66, 66);
+    font-size:15px;
+    text-align:center;
+    
+    margin-block-start: 0.55em;
+    margin-block-end: 0.55em;
+}
+
+.signUp-buttonSentence{
+    color:rgb(195, 66, 66);
+    font-size:15px;
+    text-align:center;
+    
+    margin-block-start: 0.55em;
+    margin-block-end: 0.55em;
 }
