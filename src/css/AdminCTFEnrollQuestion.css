@@ -144,7 +144,7 @@
 
 .ctf-question-edit-popup-contents-description-input{
     width: 99.5%;
-    height: 300px;
+    height: 180px;
 
     resize: none;
     overflow: auto;
@@ -152,6 +152,32 @@
     font-family: 'DungGeunMo-Regular';
     font-size: 22px;
 }
+
+.ctf-question-edit-popup-contents-answer-box{
+    margin-top: 2%;
+}
+
+.ctf-question-edit-popup-contents-answer{
+    font-family: 'DungGeunMo-Regular';
+    font-size: 30px;
+    color: #ffffff;
+
+    margin-right: 15px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.ctf-question-edit-popup-contents-answer-input{
+    width: 99.5%;
+    height: 40px;
+
+    resize: none;
+    overflow: auto;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 22px;
+}
+
 
 .ctf-question-edit-popup-contents-input-file{
     margin-top: 2%;

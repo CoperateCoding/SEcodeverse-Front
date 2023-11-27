@@ -14,7 +14,7 @@ const LeagueMain = () => {
     memberCnt : 4,
     notice : "noticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenotice",
     description : "descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription",
-    
+
   };
   
   // useEffect(() => {
