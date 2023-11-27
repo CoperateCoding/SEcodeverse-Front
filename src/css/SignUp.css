@@ -315,7 +315,7 @@
 }
 
 .signUp-page-id-input-wrapper h1{
-    color:rgb(195, 66, 66);
+    color:red;
     font-size:15px;
     text-align:center;
 
@@ -324,7 +324,7 @@
 }
 
 .signUp-page-nickName-input-wrapper h1{
-    color:rgb(195, 66, 66);
+    color:red;
     font-size:15px;
     text-align:center;
     
@@ -333,7 +333,7 @@
 }
 
 .signUp-buttonSentence{
-    color:rgb(195, 66, 66);
+    color:red;
     font-size:15px;
     text-align:center;
     

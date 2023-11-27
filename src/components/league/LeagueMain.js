@@ -8,15 +8,14 @@ import "../../css/league/LeagueCreatePopup.css";
 
 const LeagueMain = () => {
   const leagueData = {
-    name : "CTF League Name",
-    openTime : "2023-11-25T05:29:38.541Z",
-    closeTime : "2023-11-26T05:29:38.541Z",
-    memberCnt : 4,
-    notice : "noticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenoticenotice",
-    description : "descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription",
-
+    name: "CTF League Name",
+    openTime: "2023-11-25T05:29:38.541Z",
+    closeTime: "2023-11-26T05:29:38.541Z",
+    memberCnt: 4,
+    notice: "notice",
+    description: "description",
   };
-  
+
   // useEffect(() => {
   //   const apiUrl = "/api/v1/ctf/league";
   //   const params = {
@@ -43,11 +42,18 @@ const LeagueMain = () => {
   //       console.error("API 호출 중 에러:", error);
   //     });
   // }, []);
-  
+
   const [isOpen, setIsOpen] = useState(false);
 
   const [isCreate, setIsCreate] = useState(false);
   const [isJoin, setIsJoin] = useState(false);
+
+  const [teamName, setTeamName] = useState("");
+  const [teamPw, setTeamPw] = useState("");
+
+  //이름, pw 정규식 맞는지 확인
+  const [isName, setIsName] = useState(false);
+  const [isPassword, setIsPassword] = useState(false);
 
   // 리그 이벤트의 시작 및 종료 시간 설정(임의)
   const leagueStartTime = new Date(leagueData.openTime);
@@ -75,6 +81,58 @@ const LeagueMain = () => {
     }
   };
 
+  const handleNameInput = (event) => {
+    const inputName = event.target.value;
+
+    if(inputName== "" || inputName == null){
+      setIsName(false);
+    }else{
+      if (/^(?=.*[가-힣])(?=.*[a-zA-Z])[가-힣a-zA-Z0-9]{1,}$/u.test(inputName)) {
+        // 유효한 경우
+        setIsName(true);
+      } else {
+        // 유효하지 않은 경우
+        setIsName(false);
+      }
+    }
+
+    setTeamName(inputName);
+  };
+
+  const handlePasswordInput = (event) => {
+    const inputPassword = event.target.value;
+
+    if (inputPassword == "" || inputPassword == null) {
+      setIsPassword(false);
+    } else {
+      if (/^\d{4}$/.test(inputPassword)) {
+        // 유효한 경우
+        setIsPassword(true);
+      } else {
+        // 유효하지 않은 경우
+        setIsPassword(false);
+      }
+    }
+
+    setTeamPw(inputPassword);
+  };
+
+  const handleCreateCheck = () => {
+    if (isName && isPassword) {
+      setTeamName("");
+      setTeamPw("");
+
+      setIsCreate(!isCreate);
+    } else {
+      if (!isName) {
+        alert("팀 이름은 2~8자 이내의 영어, 한글, 숫자의 조합으로 입력해주세요.");
+      }
+      if (!isPassword) {
+        alert("비밀번호는 4자리의 숫자로 입력해주세요.");
+      }
+    } 
+  };
+
   return (
     <section>
       <div className="league-main-board-container">
@@ -85,12 +143,17 @@ const LeagueMain = () => {
           <div className="league-main-board-description-area">
             <div className="league-main-board-description-box">
               <div className="league-main-board-description-notice">
-                <span>[공지사항]</span><br/>
-                {leagueData.notice}<br/><br/>
+                <span>[공지사항]</span>
+                <br />
+                {leagueData.notice}
+                <br />
+                <br />
               </div>
               <div className="league-main-board-description-description">
-                <span>[리그설명]</span><br/>
-                <span>{leagueData.description}</span><br/>
+                <span>[리그설명]</span>
+                <br />
+                <span>{leagueData.description}</span>
+                <br />
               </div>
             </div>
           </div>
@@ -110,9 +173,12 @@ const LeagueMain = () => {
                   <span>팀 참가</span>
                 </div>
               </div>
-              <div className="league-main-board-join-league" onClick={handleLeagueCategoryRedirect}>
-                  <div className="league-main-board-star"></div>
-                  <span>리그참여</span>
+              <div
+                className="league-main-board-join-league"
+                onClick={handleLeagueCategoryRedirect}
+              >
+                <div className="league-main-board-star"></div>
+                <span>리그참여</span>
               </div>
               <div className="league-main-board-show-result">
                 <Link to="/league/result">
@@ -137,11 +203,23 @@ const LeagueMain = () => {
             <div className="create-team-popup-midle-box">
               <div className="create-team-popup-team-name-box">
                 <span>팀 이름</span>
-                <input type="text" />
+                <input
+                  type="text"
+                  maxLength={8}
+                  minLength={2}
+                  value={teamName}
+                  onChange={handleNameInput}
+                />
+                <div className="team-name-check-box">중복확인</div>
               </div>
               <div className="create-team-popup-team-password-box">
                 <span>비밀번호</span>
-                <input type="text" />
+                <input
+                  type="text"
+                  maxLength={4}
+                  value={teamPw}
+                  onChange={handlePasswordInput}
+                />
               </div>
               <div className="join-team-popup-team-description-box">
                 <div className="join-team-popup-team-description">
@@ -154,7 +232,7 @@ const LeagueMain = () => {
             <div className="create-team-popup-bottom-box">
               <div
                 className="create-team-popup-check-button"
-                onClick={() => setIsCreate(!isCreate)}
+                onClick={handleCreateCheck}
               >
                 확인
               </div>

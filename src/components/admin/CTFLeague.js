@@ -204,6 +204,7 @@ const CTFLeague = () => {
                 <textarea
                   className="ctf-league-edit-popup-contents-description-input"
                   type="text"
+                  maxLength={2000}
                 />
               </div>
             </div>

@@ -202,3 +202,25 @@
     background-position: center;
     background-size: cover;
 }
+
+.team-name-check-box{
+    position: absolute;
+    top: 183px;
+    right: 100px;
+
+    line-height: 36px;
+
+    display: inline-block;
+
+    width: 120px;
+    height: 36px;
+
+    font-size: 20px;
+
+    background-image: url(../../img/community_002.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    cursor: pointer;
+}

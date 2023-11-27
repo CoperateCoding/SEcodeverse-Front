@@ -45,7 +45,7 @@ const SignUp = () => {
   };
 
   const handleInputChange = (event) => {
-    var inputChar = event.target.value;
+    const inputChar = event.target.value;
     setinputID(inputChar);
 
     var ret = false;
@@ -55,7 +55,7 @@ const SignUp = () => {
       ret = false;
     } else {
       // 영어와 숫자로 이루어진 6~12자리 문자열인지 확인
-      if (/^[a-z0-9]{6,12}$/i.test(inputChar)) {
+      if (/^(?=.*[a-zA-Z])[a-z0-9]{6,12}$/u.test(inputChar)) {
         ret = true;
       } else {
         ret = false;
@@ -73,39 +73,61 @@ const SignUp = () => {
   };
 
   const handleInputChangePW = (event) => {
-    var inputChar = event.target.value;
+    const inputChar = event.target.value;
 
-    if(/^[a-zA-Z0-9!@#$%^&*()_+{}|:"<>?~`[\]\\';,./]{12,20}$/.test(inputChar)){
-        setIsAcceptPw(true)
+    if (inputChar == "" || inputChar == null) {
+      setIsAcceptPw(false);
+    } else {
+      if (
+        /^(?=.*[a-zA-Z])(?=.*[~!@#$%^&*()_=+|{};:<>/?])[a-zA-Z0-9~~!@#$%^&*()_=+|{};:<>/?]{12,20}$/.test(
+          inputChar
+        )
+      ) {
+        setIsAcceptPw(true);
+      } else {
+        setIsAcceptPw(false);
+      }
     }
-    else{setIsAcceptPw(false)}
 
     setinputPW(inputChar);
   };
 
   const handleInputChangeNickname = (event) => {
-    var inputChar = event.target.value
+    const inputChar = event.target.value;
     setinputNickname(inputChar);
 
     var ret = false;
     setNickNameBox(true);
 
-    if (/^[가-힣a-zA-Z0-9]{12,20}$/i.test(inputChar)) {
-        ret = true;
+    if (inputChar == "" || inputChar == null) {
+      ret = false;
     } else {
+      if (/^(?=.*[a-zA-Z가-힣])[가-힣a-zA-Z0-9]{12,20}$/u.test(inputChar)) {
+        ret = true;
+      } else {
         ret = false;
+      }
     }
 
-    if(!ret){
-        setNickNameSentence("한글, 영문, 숫자로 이루어진 2~8자리 닉네임을 입력해주세요.");
-    }
-    else{
-        setNickNameSentence("중복확인  후 회원가입을 시도해주세요");
+    if (!ret) {
+      setNickNameSentence(
+        "한글, 영문, 숫자로 이루어진 2~8자리 닉네임을 입력해주세요."
+      );
+    } else {
+      setNickNameSentence("중복확인  후 회원가입을 시도해주세요");
     }
   };
 
   const handleInputChangeName = (event) => {
-    var inputChar = event.target.value
+    var inputChar = event.target.value;
+    var ret = false;
+
+    if (/^(?=.*[가-힣])[가-힣]{2,8}$/u.test(inputChar)) {
+      ret = true;
+    } else {
+      ret = false;
+    }
+
     setinputName(inputChar);
   };
 
@@ -189,17 +211,23 @@ const SignUp = () => {
     }
 
     //비번
-    if(inputPW == checkPW) {
-        setIsSamePw(true)
-        if(isSamePw && isAcceptPw){
-            //이거일 때만 해주세여 ㄱㄱ
+    if (inputPW == checkPW) {
+      setIsSamePw(true);
+      if (isSamePw && isAcceptPw) {
+        //이거일 때만 해주세여 ㄱㄱ
+      } else {
+        if (!isAcceptPw) {
+          alert(
+            "비밀번호는 영문, 숫자, 특수기호가 포함된 12~20자리로 입력해주세요."
+          );
         }
-        else{
-            if(!isAcceptPw){alert("비밀번호는 영문, 숫자, 특수기호가 포함된 12~20자리로 입력해주세요.");}
-            if(!isSamePw) {alert("입력하신 비밀번호가 비밀번호 확인과 일치하지 않습니다.")}
+        if (!isSamePw) {
+          alert("입력하신 비밀번호가 비밀번호 확인과 일치하지 않습니다.");
         }
+      }
+    } else {
+      setIsSamePw(false);
     }
-    else {setIsSamePw(false)}
   };
 
   return (
@@ -269,10 +297,7 @@ const SignUp = () => {
                     >
                       중복 확인
                     </div>
-                    {isNickNameBox&&(
-                        <h1>{nickNameSentence}</h1>
-                    )}
-                    
+                    {isNickNameBox && <h1>{nickNameSentence}</h1>}
                   </div>
                   <div className="signUp-page-name-input-wrapper">
                     <span className="signUp-page-name-text">이름</span>
@@ -283,6 +308,7 @@ const SignUp = () => {
                       placeholder="이름을 입력하세요"
                       onChange={handleInputChangeName}
                       onKeyDown={handleKeyDown}
+                      minLength={2}
                       maxLength={8}
                     ></input>
                   </div>
