@@ -1,8 +1,8 @@
 import RecommendComponent from "../mypage/RecommendComponent";
 import "../../css/FailResult.css";
 
-const FailResult = ({onClose}) => {
-  //유사문제 추천 관련
+const FailResult = ({ onClose ,value }) => { // 괄호 수정
+  // 유사문제 추천 관련
   const questionData = [
     { pk: 1, title: "유사문제 1", img: "" },
     { pk: 2, title: "유사문제 2", img: "" },
@@ -10,6 +10,9 @@ const FailResult = ({onClose}) => {
     { pk: 4, title: "유사문제 4", img: "" },
     { pk: 5, title: "유사문제 5", img: "" },
   ];
+  const onClick=()=>{
+    console.log(value)
+  }
 
   return (
     <div className="fail-container">
@@ -32,19 +35,19 @@ const FailResult = ({onClose}) => {
                 <th>언어</th>
               </tr>
             </thead>
-            <tbody className="fail-result-table-tbody">
+            <tbody className="fail-result-table-tbody" onClick={onClick}>
               <tr>
                 <td>실패..</td>
-                <td>ms</td>
-                <td>KB</td>
-                <td>Java</td>
+                <td>{value.time}</td>
+                <td>{value.memory}</td>
+                <td>{value.lenguage}</td>
               </tr>
             </tbody>
           </table>
         </div>
         <div className="fail-bottom-wrapper">
           <table className="fail-comment-table">
-            <thead className="fail-comment-thead">
+            <thead className="fail-coh mment-thead">
               <tr>
                 <th>AI의 조언</th>
                 <th>유사문제 추천</th>
