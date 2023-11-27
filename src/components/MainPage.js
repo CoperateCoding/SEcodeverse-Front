@@ -10,7 +10,7 @@ const Main_Page_Body = () => {
   const[questionList,setQuestionList] = useState([]);
 
   useEffect(() => {
-    const apiUrl = '/api/v1/board/boards/popular';
+    const apiUrl = '/api/v1/board/popular';
    
     
     axios.get(apiUrl)
@@ -24,7 +24,7 @@ const Main_Page_Body = () => {
       console.error('API 호출 중 에러:', error);
     });
 
-    axios.get('api/v1/question/recent')
+    axios.get('api/v1/question/search/recent')
     .then(response => {
       console.log(response.data)
       setQuestionList(response.data)

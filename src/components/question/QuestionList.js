@@ -34,7 +34,7 @@ const QuestionList = () => {
   }
 
   useEffect(() => {
-    const apiUrl = "/api/v1/question";
+    const apiUrl = "/api/v1/question/search";
     const params = {
       page: 1,
     };
@@ -83,7 +83,7 @@ const QuestionList = () => {
     return newCategorys;
   }
   const optionList = (paging) => {
-    const apiUrl = "/api/v1/question";
+    const apiUrl = "/api/v1/question/search";
     const sort = getSort(sortingOption);
     const categoryPks = getCategoryArr(categoryOptions);
     const levelPks = difficultyOptions;
@@ -140,7 +140,7 @@ const QuestionList = () => {
 
   const onSearchClick = () => {
     const keyword = search;
-    const apiUrl = "/api/v1/question";
+    const apiUrl = "/api/v1/question/search";
     const sort = getSort(sortingOption);
     const categoryPks = getCategoryArr(categoryOptions);
     const levelPks = difficultyOptions;
