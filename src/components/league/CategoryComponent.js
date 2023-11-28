@@ -4,7 +4,7 @@ const CategoryComponent = (props) => {
     const [isClear, setIsClear] = useState(false);
     const { category } = props;
 
-    const imageUrl = isClear ? "/img/ctf_clear.png" : "/img/ctf_none_clear.png";
+    const imageUrl = isClear ? "/images/ctf_clear.png" : "/images/ctf_none_clear.png";
   return (
     <div className="league-category-list-category-box">
       <div className="league-category-list-category-img"

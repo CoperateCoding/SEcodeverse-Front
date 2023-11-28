@@ -4,7 +4,7 @@ import CodingBadge from "./mypage/CodingBadge";
 import MyWrongQuestion from "./mypage/MyWrongQuestion";
 import MyQuestion from "./mypage/MyQuestion";
 import SolveQuestion from "./mypage/SolveQuestion";
-import MyBoarde from "./mypage/MyBoard";
+import MyBoard from "./mypage/MyBoard";
 import Chatbot from "../components/Chatbot";
 import axios from "axios";
 import { UNSAFE_ErrorResponseImpl } from "@remix-run/router";
@@ -120,7 +120,7 @@ const MyPageMain = () => {
         {currentScreen === "wrongQuestion" && <MyWrongQuestion />}
         {currentScreen === "solveQuestion" && <SolveQuestion />}
         {currentScreen === "createQuestion" && <MyQuestion />}
-        {currentScreen === "myBord" && <MyBoarde />}
+        {currentScreen === "myBord" && <MyBoard />}
         <Chatbot></Chatbot>
       </section>
     </>

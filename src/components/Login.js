@@ -1,7 +1,7 @@
 import React, { useCallback,createContext, useState } from 'react';
 import '../css/Login.css'
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = ({setAuth}) => {
 
@@ -94,7 +94,7 @@ const Login = ({setAuth}) => {
                     <div className='login-page-sub-button-wrapper'>
                         <div className='login-pate-find-id-btn'>아이디 찾기</div>
                         <div className='login-pate-find-pw-btn'>비밀번호 찾기</div>
-                        <div className='login-pate-sign-up-btn'>회원가입</div>
+                        <Link to="/signUp"><div className='login-pate-sign-up-btn'>회원가입</div></Link>
                     </div>
                 </div>
             </div>

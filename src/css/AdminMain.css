@@ -30,7 +30,7 @@
     width: 100%;
     height: 787px;
 
-    background-image: url(../img/admin_page.png);
+    background-image: url('../../public/images/admin_page.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100% 100%;
@@ -41,7 +41,7 @@
     width: 300px;
     height: 100px;
 
-    background-image: url(../img/community_001.png);
+    background-image: url('../../public/images/community_001.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -63,7 +63,7 @@
     width: 300px;
     height: 100px;
 
-    background-image: url(../img/community_002.png);
+    background-image: url('../../public/images/community_002.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -84,7 +84,7 @@
     width: 300px;
     height: 100px;
 
-    background-image: url(../img/community_003.png);
+    background-image: url('../../public/images/community_003.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;

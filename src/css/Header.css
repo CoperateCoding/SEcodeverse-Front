@@ -23,7 +23,13 @@
 .header_logo{
     cursor: pointer;
     width: 17.8rem;
+    height: 80px;
     vertical-align: middle;
+
+    background-image: url(../../public/images/SEcodeVerse_logo.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
 }
 
 /*login, sign in btn*/

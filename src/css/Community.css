@@ -39,7 +39,7 @@
     width: 220px;
     height: 70px;
 
-    background-image: url(../img/community_001.png);
+    background-image: url('../../public/images/community_001.png');
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;
@@ -62,7 +62,7 @@
     width: 220px;
     height: 70px;
     
-    background-image: url(../img/community_002.png);
+    background-image: url(../../public/images/community_002.png);
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;
@@ -86,7 +86,7 @@
     width: 220px;
     height: 70px;
 
-    background-image: url(../img/community_003.png);
+    background-image: url(../../public/images/community_003.png);
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;
@@ -110,7 +110,7 @@
     width: 220px;
     height: 70px;
 
-    background-image: url(../img/community_004.png);
+    background-image: url(../../public/images/community_004.png);
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;
@@ -134,7 +134,7 @@
     width: 220px;
     height: 70px;
 
-    background-image: url(../img/community_005.png);
+    background-image: url(../../public/images/community_005.png);
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;
@@ -158,7 +158,7 @@
     width: 220px;
     height: 70px;
 
-    background-image: url(../img/community_006.png);
+    background-image: url(../../public/images/community_006.png);
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;
@@ -218,7 +218,7 @@
     width: 36px;
     height: 36px;
 
-    background-image: url(../img/search_icon-001.png);
+    background-image: url(../../public/images/search_icon-001.png);
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;

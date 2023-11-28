@@ -16,7 +16,7 @@
     min-height: 785px;
 
     background-color: #fff;
-    background-image: url(../img/write_editor_background.png);
+    background-image: url(../../public/images/write_editor_background.png);
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;
@@ -92,7 +92,7 @@
 
     cursor: pointer;
 
-    background-image: url(../img/community_003.png);
+    background-image: url(../../public/images/community_003.png);
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;
@@ -109,7 +109,7 @@
 
     cursor: pointer;
 
-    background-image: url(../img/community_001.png);
+    background-image: url(../../public/images/community_001.png);
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;
