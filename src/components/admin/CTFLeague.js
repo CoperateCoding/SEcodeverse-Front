@@ -13,9 +13,43 @@ const CTFLeague = () => {
     setIsCreateLeague(!isCreateLeague);
     setPopupTitle("CTF 리그 수정");
   };
+  const leagueRegister =() => {
 
-  const toggleCreateLeague = () => {
     setIsCreateLeague(!isCreateLeague);
+    const inputElements = document.getElementsByClassName('ctf-league-edit-popup-contents-title-input');
+    const count = document.getElementsByClassName('ctf-league-edit-popup-contents-count-input');
+    const notic = document.getElementsByClassName('ctf-league-edit-popup-contents-description-input');
+    
+    if (inputElements.length > 0) {
+      const inputElement = inputElements[0];
+      const inputValue = inputElement.value;
+      console.log("name", inputValue);
+    } else {
+      console.log("해당 className을 가진 input 요소를 찾을 수 없습니다.");
+    }
+    
+    if (count.length > 0) {
+      const countElement = count[0];
+      const countValue = countElement.value;
+      console.log("인원수", countValue);
+    } else {
+      console.log("해당 className을 가진 count input 요소를 찾을 수 없습니다.");
+    }
+    
+    if (notic.length > 0) {
+      const noticElement = notic[0];
+      const noticValue = noticElement.value;
+      console.log("notic", noticValue);
+    } else {
+      console.log("해당 className을 가진 notic input 요소를 찾을 수 없습니다.");
+    }
+
+    const start = startDate
+    const end = endDate
+    console.log(start)
+    console.log(end)
+
+
 //     const api ='api/v1/admin/league/post'
 //     data={name : ,
 //         openTime:,
@@ -24,6 +58,10 @@ const CTFLeague = () => {
 //   notice,
 // description}
 //     axios.post()
+  }
+  const toggleCreateLeague = () => {
+    setIsCreateLeague(!isCreateLeague);
+    
     setPopupTitle("CTF 리그 등록");
   };
 
@@ -219,7 +257,7 @@ const CTFLeague = () => {
             <div className="ctf-league-edit-popup-contents-button-wrapper">
               <div
                 className="ctf-league-edit-popup-contents-button"
-                onClick={toggleCreateLeague}
+                onClick={leagueRegister}
               >
                 확인
               </div>

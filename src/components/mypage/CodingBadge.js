@@ -4,7 +4,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import RecommendComponent from "./RecommendComponent";
 
-const CodingBadge = () => {
+const CodingBadge = (badge) => {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   //날짜별로 달력 출력하는거
@@ -96,7 +96,9 @@ const CodingBadge = () => {
               <div className="mypage-codingBadge-info-background">
                 <div className="mypage-codingBadge-info-contents">
                   <div className="mypage-codingBadge-info-img-box">
-                    <div className="mypage-codingBadge-info-img"></div>
+                    <div className="mypage-codingBadge-info-img">
+                      <img src={badge}></img>
+                    </div>
                   </div>
                   <div className="mypage-codingBadge-info-box">
                     <div className="mypage-codingBadge-info-text-box">
@@ -126,9 +128,10 @@ const CodingBadge = () => {
                     사용자 문제 추천
                   </span>
                   <div className="mypage-recommend-question-contents-wrapper">
-                    {questionData.map((value, index) => (
+                    Coming Soon~
+                    {/* {questionData.map((value, index) => (
                       <RecommendComponent key={index} question={value} />
-                    ))}
+                    ))} */}
                   </div>
                 </div>
               </div>
