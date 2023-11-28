@@ -14,7 +14,7 @@ const Community = () => {
   };
 
   useEffect(() => {
-    const apiUrl = '/api/v1/board';
+    const apiUrl = '/api/v1/board/';
     const sort="RECENT"
     const categorPk=1
     const page=1

@@ -7,6 +7,10 @@ import "../../css/league/LeagueJoinPopup.css";
 import "../../css/league/LeagueCreatePopup.css";
 import TeamView from "./TeamView";
 
+import axios from 'axios';
+
+import TeamView from "./TeamView";
+
 const LeagueMain = () => {
   const leagueData = {
     name: "CTF League Name",
@@ -17,32 +21,17 @@ const LeagueMain = () => {
     description: "description",
   };
 
-  // useEffect(() => {
-  //   const apiUrl = "/api/v1/ctf/league";
-  //   const params = {
-  //     page: 1,
-  //   };
-  //   const queryString = Object.entries(params)
-  //     .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-  //     .join("&");
-
-  //   const url = `${apiUrl}?${queryString}`;
-
-  //   axios
-  //     .get(url)
-  //     .then((response) => {
-  //       setQuestionList(response.data.list);
-  //       console.log(response.data.list);
-  //       setTotalpages(
-  //         response.data.cnt % 8 > 0
-  //           ? response.data.cnt / 8 + 1
-  //           : response.data.cnt / 8
-  //       );
-  //     })
-  //     .catch((error) => {
-  //       console.error("API 호출 중 에러:", error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    const apiUrl = "/api/v1/ctf/league/current";
+    axios.get(apiUrl)
+      .then((response) => {
+       
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("API 호출 중 에러:", error);
+      });
+  }, []);
 
   const [isOpen, setIsOpen] = useState(false);
 
