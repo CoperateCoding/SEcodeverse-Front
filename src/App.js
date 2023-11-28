@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Header from "./components/Header/Header"
 import Footer from './components/Footer/Footer';
@@ -51,31 +51,29 @@ function App() {
 
 
   return (
-    <BrowserRouter>
-    <div className="App">
-    <Header auth={auth} setAuth ={setAuth}/>
-      <Routes>
-        <Route path="/" element={<MainPage/>}/>
-        <Route path="/admin" element={<AdminMain />} />
-        <Route path="/mypage" element={<MyPageMain />} />
-        <Route path="/community" element={<Community />} />
-        <Route path="/community/write" element={<WriteEditor />} />
-   
-        <Route path="/community/post/:commumityPk" element={<BoardDeatil />}/>
-
-        <Route path="/signUp" element={<SignUp/>}/>
-        <Route path="/login" element={<Login setAuth ={setAuth}/>}/>
-        <Route path="/question" element={<QuestionList/>}/>
-        <Route path="/question/detail/:questionPk" element={<QuestionDetail/>}/>
-        <Route path="/admin" element={<AdminMain/>}/>
-        <Route path="/league" element={<LeagueMain/>}/>
-        <Route path="/league/category" element={<LeagueCategoryList/>}/>
-        <Route path="/league/category-detail/:category" element={<LeagueCategoryDetail/>}/>
-        <Route path="/league/result" element={<LeagueResult/>}/>
-      </Routes>
-      <Footer/>
-    </div>
-  </BrowserRouter>
+    <HashRouter>
+  <div className="App">
+    <Header auth={auth} setAuth={setAuth} />
+    <Routes>
+      <Route path="/" element={<MainPage />} />
+      <Route path="/admin" element={<AdminMain />} />
+      <Route path="/mypage" element={<MyPageMain />} />
+      <Route path="/community" element={<Community />} />
+      <Route path="/community/write" element={<WriteEditor />} />
+      <Route path="/community/post/:commumityPk" element={<BoardDeatil />} />
+      <Route path="/signUp" element={<SignUp />} />
+      <Route path="/login" element={<Login setAuth={setAuth} />} />
+      <Route path="/question" element={<QuestionList />} />
+      <Route path="/question/detail/:questionPk" element={<QuestionDetail />} />
+      <Route path="/admin" element={<AdminMain />} />
+      <Route path="/league" element={<LeagueMain />} />
+      <Route path="/league/category" element={<LeagueCategoryList />} />
+      <Route path="/league/category-detail/:category" element={<LeagueCategoryDetail />} />
+      <Route path="/league/result" element={<LeagueResult />} />
+    </Routes>
+    <Footer />
+  </div>
+</HashRouter>
   );
 
 
