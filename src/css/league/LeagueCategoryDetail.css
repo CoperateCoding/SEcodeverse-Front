@@ -127,3 +127,8 @@
     margin-top: 10px;
 }
 
+.submitted {
+    background-color: #9091C0;
+    color: #fff;
+    /* 다른 스타일 속성들 추가 가능 */
+  }

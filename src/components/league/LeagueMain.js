@@ -5,7 +5,11 @@ import Chatbot from "../Chatbot";
 import "../../css/league/LeagueMain.css";
 import "../../css/league/LeagueJoinPopup.css";
 import "../../css/league/LeagueCreatePopup.css";
+
 import axios from 'axios';
+
+import TeamView from "./TeamView";
+
 const LeagueMain = () => {
   const leagueData = {
     name: "CTF League Name",
@@ -44,6 +48,10 @@ const LeagueMain = () => {
   const leagueStartTime = new Date(leagueData.openTime);
   const leagueEndTime = new Date(leagueData.closeTime);
 
+  //team 있냐?
+  const [isTeamPopup, setIsTeamPopup] = useState(false);
+  const [isTeam, setIsTeam] = useState(false); //나중에 팀 있는지 없는지 검사 추가좀
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -69,10 +77,12 @@ const LeagueMain = () => {
   const handleNameInput = (event) => {
     const inputName = event.target.value;
 
-    if(inputName== "" || inputName == null){
+    if (inputName == "" || inputName == null) {
       setIsName(false);
-    }else{
-      if (/^(?=.*[가-힣])(?=.*[a-zA-Z])[가-힣a-zA-Z0-9]{1,}$/u.test(inputName)) {
+    } else {
+      if (
+        /^(?=.*[가-힣])(?=.*[a-zA-Z])[가-힣a-zA-Z0-9]{1,}$/u.test(inputName)
+      ) {
         // 유효한 경우
         setIsName(true);
       } else {
@@ -108,15 +118,43 @@ const LeagueMain = () => {
       setTeamPw("");
 
       setIsCreate(!isCreate);
+      setIsTeam(true);
     } else {
       if (!isName) {
-        alert("팀 이름은 2~8자 이내의 영어, 한글, 숫자의 조합으로 입력해주세요.");
+        alert(
+          "팀 이름은 2~8자 이내의 영어, 한글, 숫자의 조합으로 입력해주세요."
+        );
       }
       if (!isPassword) {
         alert("비밀번호는 4자리의 숫자로 입력해주세요.");
       }
-    } 
+    }
   };
+
+  const handelCreateClick = () => {
+    if(isTeam){
+      alert("이미 팀에 속해있습니다.");
+      setIsCreate(false);
+    }
+    else{
+      setIsCreate(true);
+    }
+  }
+
+  const handleJoinClick = () => {
+    setIsJoin(!isJoin);
+    setIsTeam(true);
+  }
+
+  const handleViewClick = () => {
+    setIsTeamPopup(!isTeamPopup);
+  };
+
+  const handleWithdrawClick = () => {
+    setIsTeam(false);
+    alert("탈퇴되었습니다.");
+    setIsTeamPopup(!isTeamPopup);
+  }
 
   return (
     <section>
@@ -147,16 +185,26 @@ const LeagueMain = () => {
               <div className="league-main-board-team-area">
                 <div
                   className="league-main-board-team-create"
-                  onClick={() => setIsCreate(!isCreate)}
+                  onClick={handelCreateClick}
                 >
                   <span>팀 생성</span>
                 </div>
-                <div
-                  className="league-main-board-team-join"
-                  onClick={() => setIsJoin(!isJoin)}
-                >
-                  <span>팀 참가</span>
-                </div>
+                {isTeam && (
+                  <div
+                    className="league-main-board-team-join"
+                    onClick={handleViewClick}
+                  >
+                    <span>팀 조회</span>
+                  </div>
+                )}
+                {!isTeam && (
+                  <div
+                    className="league-main-board-team-join"
+                    onClick={handleJoinClick}
+                  >
+                    <span>팀 참가</span>
+                  </div>
+                )}
               </div>
               <div
                 className="league-main-board-join-league"
@@ -182,7 +230,7 @@ const LeagueMain = () => {
               </div>
               <div
                 className="create-team-popup-cancel"
-                onClick={() => setIsCreate(!isCreate)}
+                onClick={handelCreateClick}
               ></div>
             </div>
             <div className="create-team-popup-midle-box">
@@ -223,7 +271,7 @@ const LeagueMain = () => {
               </div>
               <div
                 className="create-team-popup-cancel-button"
-                onClick={() => setIsCreate(!isCreate)}
+                onClick={()=>setIsCreate(!isCreate)}
               >
                 취소
               </div>
@@ -238,7 +286,7 @@ const LeagueMain = () => {
               </div>
               <div
                 className="join-team-popup-cancel"
-                onClick={() => setIsJoin(!isJoin)}
+                onClick={handleJoinClick}
               ></div>
             </div>
             <div className="join-team-popup-midle-box">
@@ -261,19 +309,20 @@ const LeagueMain = () => {
             <div className="join-team-popup-bottom-box">
               <div
                 className="join-team-popup-check-button"
-                onClick={() => setIsJoin(!isJoin)}
+                onClick={()=>setIsJoin(!isJoin)}
               >
                 확인
               </div>
-              <join
+              <div
                 className="join-team-popup-cancel-button"
-                onClick={() => setIsJoin(!isJoin)}
+                onClick={()=>setIsJoin(!isJoin)}
               >
                 취소
-              </join>
+              </div>
             </div>
           </div>
         )}
+        {isTeamPopup && <TeamView handlePopup={handleViewClick} handleWithdraw={handleWithdrawClick}></TeamView>}
       </div>
       <Chatbot></Chatbot>
     </section>

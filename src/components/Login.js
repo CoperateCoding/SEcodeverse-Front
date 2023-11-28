@@ -92,8 +92,6 @@ const Login = ({setAuth}) => {
                         </div>
                     </div>
                     <div className='login-page-sub-button-wrapper'>
-                        <div className='login-pate-find-id-btn'>아이디 찾기</div>
-                        <div className='login-pate-find-pw-btn'>비밀번호 찾기</div>
                         <Link to="/signUp"><div className='login-pate-sign-up-btn'>회원가입</div></Link>
                     </div>
                 </div>
