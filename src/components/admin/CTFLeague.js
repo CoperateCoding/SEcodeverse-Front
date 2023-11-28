@@ -4,7 +4,7 @@ import "../../css/AdminCTFEnrollLeague.css";
 import LeaugeTableComponent from "./LeagueTableComponent";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
+import axios from 'axios'
 const CTFLeague = () => {
   const [isCreateLeague, setIsCreateLeague] = useState(false);
   const [popupTitle, setPopupTitle] = useState("CTF 리그 등록");
@@ -16,6 +16,14 @@ const CTFLeague = () => {
 
   const toggleCreateLeague = () => {
     setIsCreateLeague(!isCreateLeague);
+//     const api ='api/v1/admin/league/post'
+//     data={name : ,
+//         openTime:,
+//       closeTime:,
+//     memberCnt,
+//   notice,
+// description}
+//     axios.post()
     setPopupTitle("CTF 리그 등록");
   };
 
