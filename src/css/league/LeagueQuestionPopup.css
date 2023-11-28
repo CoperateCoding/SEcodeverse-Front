@@ -1,0 +1,133 @@
+/*font*/
+@font-face{
+    font-family:'bitbit';
+    src:url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'),url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2') ;
+ }
+
+@font-face {
+    font-family: 'DungGeunMo-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/wooin21/web/fonts/etc/DungGeunMo-Regular.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.league-question-container{
+    position: fixed;
+
+    width: 60%;
+    height: 720px;
+
+    bottom:100px;
+    right: 20%;
+
+    z-index: 10000;
+
+    background-color: #9091C0;
+    border: 5px solid #ffffff;
+}
+
+.league-question-wrapper{
+    padding: 20px;
+}
+
+.league-question-top-wrapper{
+    height: 70px;
+    text-align: center;
+}
+
+.league-question-title{
+    vertical-align: top;
+
+    font-family: 'bitbit';
+    font-size: 50px;
+
+    text-shadow: -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 2px 2px 0 #fff;
+}
+
+.league-question-img{
+    vertical-align: top;
+
+    display: inline-block;
+
+    width: 70px;
+    height: 70px;
+
+    background-image: url(../../../public/images/mascot_01.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 220% 220%;
+}
+
+.league-question-cancel-img{
+    position: absolute;
+
+    right: 10px;
+    top: 10px;
+
+    width: 30px;
+    height: 30px;
+
+    background-image: url(../../../public/images/cancel_btn.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+
+    cursor: pointer;
+}
+
+.league-question-middle-wrapper{
+    width: 100%;
+    height: 540px;
+    margin-bottom: 30px;
+}
+
+.league-question-description{
+    height: 520px;
+    background-color: #fff;
+
+    padding: 15px;
+    font-size: 18px;
+
+    overflow-y: auto;
+    overflow-wrap: break-word;
+}
+
+.league-question-bottom-wrapper{
+    width: 100%;
+    height: 80px;
+}
+
+.league-question-answer{
+    width: 90%;
+    height: 35px;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+
+    margin-right: 1%;
+
+    vertical-align: middle;
+    resize: none;
+}
+
+.league-question-submit{
+    width: 8%;
+    height: 40px;
+
+    font-size: 18px;
+    font-weight: 400;
+    font-family: 'DungGeunMo-Regular';
+
+    background-image: url(../../../public/images/community_001.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: 100% 100%;
+
+    background-color: transparent;
+    border: none;
+
+    vertical-align: middle;
+
+    cursor: pointer;
+}
