@@ -254,12 +254,6 @@ int main() {
                   />
                 </div>
               </div>
-              <div className="question-detail-result-box">
-                <span className="question-detail-result-text-bar">
-                  실행 결과
-                </span>
-                <div className="question-detail-show-result">{result}</div>
-              </div>
             </div>
             <div className="question-detail-right-contents-wrapper">
               <div className="question-detail-description-box">
@@ -278,12 +272,6 @@ int main() {
               onClick={() => setIsPopup(!isPopup)}
             >
               채점 결과 확인
-            </div>
-            <div
-              className="question-detail-button-execute-code"
-              onClick={handleExecuteCode}
-            >
-              코드 실행
             </div>
             <div
               className="question-detail-button-change-language"
