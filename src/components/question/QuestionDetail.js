@@ -59,41 +59,41 @@ const QuestionDetail = () => {
     let isSucess=true
     console.log("테스트 케이스 보내기 시작합니다.")
     console.log("테스트케이스의 길이는",testcase.length)
-    // for(let i=0; i<testcase.length; i++){
-    //   console.log("배열들어옴 ")
-    //   handleExecuteCode(testcase[i],compileResult)
-    //   await sleep(5000);
-    //   console.log("받아온 테스트케이스",testcase)
-    //   console.log("보내는 테스트케이스2 ",testcase[i].pk, testcase[i].input)
-    // }
-    // await sleep(5000); 
-    // console.log("코드 모두 컴파일 후 "+ result)
-    // for(let i=0; i<testcase.length;i++){
-    //   let str = testcase[i].output
-    //   str = str.replace(/[!@#]|[*()]/g, "\n");
-    //   TestcaseOutput.push(str)
-    // }
-    // console.log(compileResult)
+    for(let i=0; i<testcase.length; i++){
+      console.log("배열들어옴 ")
+      handleExecuteCode(testcase[i],compileResult)
+      await sleep(5000);
+      console.log("받아온 테스트케이스",testcase)
+      console.log("보내는 테스트케이스2 ",testcase[i].pk, testcase[i].input)
+    }
+    await sleep(5000); 
+    console.log("코드 모두 컴파일 후 "+ result)
+    for(let i=0; i<testcase.length;i++){
+      let str = testcase[i].output
+      str = str.replace(/[!@#]|[*()]/g, "\n");
+      TestcaseOutput.push(str)
+    }
+    console.log(compileResult)
 
-    // for(let i =0; i<compileResult.length ; i++){
-    //   const line = compileResult[i].stdout
-    //   console.log("line",line)
-    //   const lines = line.split('\n');
-    //   lines.pop(); 
-    //   const result = lines.join('\n');
-    //   if(result != TestcaseOutput[i]){
-    //     isSucess=false
-    //     console.log("내 코드 결과",result)
-    //     console.log("내스트케이스 결과",TestcaseOutput[i])
-    //   }
-    //   totalmemory=totalmemory+compileResult[i].memory
-    //   totaltime = totaltime+parseFloat(compileResult[i].time)
-    //   console.log("parseInt한 값",parseFloat(compileResult[i].time))
+    for(let i =0; i<compileResult.length ; i++){
+      const line = compileResult[i].stdout
+      console.log("line",line)
+      const lines = line.split('\n');
+      lines.pop(); 
+      const result = lines.join('\n');
+      if(result != TestcaseOutput[i]){
+        isSucess=false
+        console.log("내 코드 결과",result)
+        console.log("내스트케이스 결과",TestcaseOutput[i])
+      }
+      totalmemory=totalmemory+compileResult[i].memory
+      totaltime = totaltime+parseFloat(compileResult[i].time)
+      console.log("parseInt한 값",parseFloat(compileResult[i].time))
 
-    // }
+    }
 
-    // memory =totalmemory/compileResult.length
-    // time =totaltime/compileResult.length
+    memory =totalmemory/compileResult.length
+    time =totaltime/compileResult.length
     setSuccessResult({memory:memory,time:time,lenguage:selectedLanguage})
     console.log("성공여부",isSucess)
     if(isSucess==true){
@@ -106,56 +106,56 @@ const QuestionDetail = () => {
     }
     await sleep(5000); 
 
-    console.log("successResut",successResult)
-    console.log("인공지능한테보내는 levelpk",question.levelPk)
-    console.log("인공지능한테 보내는 카테고리 pk",question.categoryPk)
-  axios.get('/api/v1/chatbot/similary', {
-      params: {
-        levelPk :question.levelPk,
-        categoryPk :question.categoryPk
-      },
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("access")}`,
-      }
-    })
-    .then(response => {
+  //   console.log("successResut",successResult)
+  //   console.log("인공지능한테보내는 levelpk",question.levelPk)
+  //   console.log("인공지능한테 보내는 카테고리 pk",question.categoryPk)
+  // axios.get('/api/v1/chatbot/similary', {
+  //     params: {
+  //       levelPk :question.levelPk,
+  //       categoryPk :question.categoryPk
+  //     },
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${localStorage.getItem("access")}`,
+  //     }
+  //   })
+  //   .then(response => {
   
-      console.log("비슷한 문제 받아 왔음similarData", response)
-      setSimilar(response.data)
-    })
-    .catch(error => {
-      // 에러 처리
-      console.error(error);
-    });
+  //     console.log("비슷한 문제 받아 왔음similarData", response)
+  //     setSimilar(response.data)
+  //   })
+  //   .catch(error => {
+  //     // 에러 처리
+  //     console.error(error);
+  //   });
 
-    await sleep(10000)
+  //   await sleep(10000)
     
-    const apiUrl = `/api/v1/question/detail/${questionPk}`;
-    //맞으면 1 틀리면 0
-    const data={
-      codeStatus:1,
-      content:code,
-      compileTime : time,
-      memory:memory,
-      accarcy:80
+  //   const apiUrl = `/api/v1/question/detail/${questionPk}`;
+  //   //맞으면 1 틀리면 0
+  //   const data={
+  //     codeStatus:1,
+  //     content:code,
+  //     compileTime : time,
+  //     memory:memory,
+  //     accarcy:80
 
-    }
-    axios
-    .post(apiUrl, data, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("access")}`,
-      },
-    })
-    .then((response) => {
-      console.log(localStorage.getItem("access"));
-      console.log(response.data);
+  //   }
+  //   axios
+  //   .post(apiUrl, data, {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${localStorage.getItem("access")}`,
+  //     },
+  //   })
+  //   .then((response) => {
+  //     console.log(localStorage.getItem("access"));
+  //     console.log(response.data);
   
-    })
-    .catch((error) => {
-      console.error("API 호출 중 에러:", error);
-    });
+  //   })
+  //   .catch((error) => {
+  //     console.error("API 호출 중 에러:", error);
+  //   });
 
     setIsPopup(!isPopup)
   }
@@ -367,8 +367,8 @@ int main() {
           </div>
         </div>
       </div>
-      {isPopup && isSuccess && <SuccessResult onClose={() => setIsPopup(false)}  code ={code} value ={successResult} similar = {similar}/>}
-      {isPopup && !isSuccess && <FailResult onClose={() => setIsPopup(false)} code={code} value={successResult }  similar = {similar}/>}
+      {isPopup && isSuccess && <SuccessResult onClose={() => setIsPopup(false)} value ={successResult} />}
+      {isPopup && !isSuccess && <FailResult onClose={() => setIsPopup(false)} value={successResult } />}
     </section>
   );
 };
