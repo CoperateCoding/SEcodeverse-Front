@@ -10,6 +10,7 @@ import TeamView from "./TeamView";
 import axios from 'axios';
 
 const LeagueMain = () => {
+  const [league, setLeague] = useState()
   const leagueData = {
     name: "CTF League Name",
     openTime: "2023-11-28T05:29:38.541Z",
@@ -20,16 +21,18 @@ const LeagueMain = () => {
   };
 
   useEffect(() => {
-    const apiUrl = "/api/v1/ctf/league/current";
+    const apiUrl = "/api/v1/ctf/league/2";
     axios.get(apiUrl)
       .then((response) => {
        
         console.log(response.data);
-      })
+        setLeague(response.data)
+    })
       .catch((error) => {
         console.error("API 호출 중 에러:", error);
       });
   }, []);
+
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -53,16 +56,33 @@ const LeagueMain = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // 현재 시간이 리그 이벤트 시간 내에 있는지 확인
-    const currentTime = new Date();
+  // useEffect(() => {
 
-    if (currentTime >= leagueStartTime && currentTime <= leagueEndTime) {
-      setIsOpen(true);
-    } else {
-      setIsOpen(false);
-    }
-  }, [leagueStartTime, leagueEndTime]);
+  //   // // 현재 시간이 리그 이벤트 시간 내에 있는지 확인
+  //   // const currentTime = new Date();
+
+  //   // if (currentTime >= leagueStartTime && currentTime <= leagueEndTime) {
+  //   //   setIsOpen(true);
+  //   // } else {
+  //   //   setIsOpen(false);
+  //   // }
+  //   const api = 'api/v1/ctf/league/2'
+  //   axios.get(api, {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${localStorage.getItem("access")}`,
+  //     }
+  //   })
+  //   .then(response => {
+  
+  //     console.log("리그정보", response)
+   
+  //   })
+  //   .catch(error => {
+  //     // 에러 처리
+  //     console.error(error);
+  //   });
+  // }, []);
 
   const handleLeagueCategoryRedirect = () => {
     if (isOpen) {
@@ -160,21 +180,21 @@ const LeagueMain = () => {
       <div className="league-main-board-container">
         <div className="league-main-board-wrapper">
           <div className="league-main-board-title-box">
-            <span className="league-main-board-title">{leagueData.name}</span>
+            <span className="league-main-board-title">리그이름</span>
           </div>
           <div className="league-main-board-description-area">
             <div className="league-main-board-description-box">
               <div className="league-main-board-description-notice">
                 <span>[공지사항]</span>
                 <br />
-                {leagueData.notice}
+            {league && league.name}
                 <br />
                 <br />
               </div>
               <div className="league-main-board-description-description">
                 <span>[리그설명]</span>
                 <br />
-                <span>{leagueData.description}</span>
+                <span>  {league && league.description}</span>
                 <br />
               </div>
             </div>
@@ -256,8 +276,8 @@ const LeagueMain = () => {
               <div className="join-team-popup-team-description-box">
                 <div className="join-team-popup-team-description">
                   <p>[주의사항]</p>
-                  <p>1. 팀은 한 사람당 하나만 생성이 가능합니다.</p>
-                  <p>2. 팀 이름은 한번 생성하면 바꿀 수 없습니다.</p>
+                  <p>{league && league.notice}</p>
+                  {/* <p>2. 팀 이름은 한번 생성하면 바꿀 수 없습니다.</p> */}
                 </div>
               </div>
             </div>
