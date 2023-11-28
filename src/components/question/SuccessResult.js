@@ -16,7 +16,7 @@ const SuccessResult = ({ onClose, value, code, similar }) => {
 
   useEffect(() => {
     console.log("similar 잘 받았니?", similar.response);
-    console.log("similar 길이는", similar.response.length);
+    // console.log("similar 길이는", similar.response.length);
 
     // 비동기 요청을 위한 배열
     const requests = [];
@@ -125,7 +125,7 @@ const SuccessResult = ({ onClose, value, code, similar }) => {
                   )}
                 </td>
                 <td className="success-comment-similar">
-                  {question.map((question) => (
+                  {question && question.map((question) => (
                     <RecommendComponent key={question.pk} question={question} />
                   ))}
                 </td>
