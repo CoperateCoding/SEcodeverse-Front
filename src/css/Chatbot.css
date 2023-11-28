@@ -87,7 +87,7 @@
 }
 
 .chatbot-popup-chat-layer{
-    overflow-y: scroll;
+    overflow-y: auto;
     width: 90%;
     min-height: 280px;
     height: auto;
