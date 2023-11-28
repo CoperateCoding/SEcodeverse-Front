@@ -37,7 +37,7 @@
     text-align: center;
     line-height: 88px;
 
-    background-image: url(../img/question_star.png);
+    background-image: url(../../public/images/question_star.png);
     background-repeat: no-repeat;
     background-position: top center;
     background-size: 100% 100%;
@@ -211,7 +211,7 @@
     font-weight: bold;
     font-size: 22px;
 
-    background-image: url(../img/community_003.png);
+    background-image: url(../../public/images/community_003.png);
     background-repeat: no-repeat;
     background-position: top center;
     background-size: 100% 100%;
@@ -232,7 +232,7 @@
     font-weight: bold;
     font-size: 28px;
 
-    background-image: url(../img/community_005.png);
+    background-image: url(../../public/images/community_005.png);
     background-repeat: no-repeat;
     background-position: top center;
     background-size: 100% 100%;
@@ -251,7 +251,7 @@
     font-weight: bold;
     font-size: 24px;
 
-    background-image: url(../img/community_006.png);
+    background-image: url(../../public/images/community_006.png);
     background-repeat: no-repeat;
     background-position: top center;
     background-size: 100% 100%;
