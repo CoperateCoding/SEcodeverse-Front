@@ -64,7 +64,7 @@
     background-color: #A8A9CF;
     border:solid 5px white;
 
-    background-image: url(../img/mypage.png);
+    background-image: url(../../public/images/mypage.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -112,7 +112,7 @@
     display: inline-block;
     margin: 10px;
 
-    background-image: url(../img/community-box.png);
+    background-image: url(../../public/images/community-box.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100% 100%;
@@ -124,7 +124,6 @@
     width: 42px;
     height:42px;
 
-    /* background-image: url(../img/grade_01.jpg); */
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100% 100%;
@@ -179,7 +178,7 @@
     width:20px;
     height:20px;
 
-    background-image: url(../img/hart.png);
+    background-image: url(../../public/images/hart.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100% 100%;
@@ -199,7 +198,7 @@
     width:30px;
     height:30px;
 
-    background-image: url(../img/comment.png);
+    background-image: url(../../public/images/comment.png);
     background-repeat: no-repeat;
     background-position: top center;
     background-size: 100% 100%;

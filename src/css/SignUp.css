@@ -107,7 +107,7 @@
 
     margin-left: 30px;
 
-    background-image: url(../img/community_003.png);
+    background-image: url(../../public/images/community_003.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -216,7 +216,7 @@
 
     margin-left: 30px;
 
-    background-image: url(../img/community_003.png);
+    background-image: url(../../public/images/community_003.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -286,7 +286,7 @@
 
     margin: 0 auto;
 
-    background-image: url(../img/community_002.png);
+    background-image: url(../../public/images/community_002.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;

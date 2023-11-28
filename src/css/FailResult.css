@@ -52,7 +52,7 @@
     width: 80px;
     height: 80px;
 
-    background-image: url(../img/mascot_02.png);
+    background-image: url(../../public/images/mascot_02.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 220% 220%;
@@ -67,7 +67,7 @@
     width: 30px;
     height: 30px;
 
-    background-image: url(../img/cancel_btn.png);
+    background-image: url(../../public/images/cancel_btn.png);
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;
@@ -202,7 +202,7 @@
     width: 50px;
     height: 50px;
 
-    background-image: url(../img/codingBadge.png);
+    background-image: url(../../public/images/codingBadge.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;

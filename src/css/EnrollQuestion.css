@@ -44,7 +44,7 @@
     width: 30px;
     height: 30px;
 
-    background-image: url(../img/cancel_btn.png);
+    background-image: url(../../public/images/cancel_btn.png);
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;
@@ -190,7 +190,7 @@
     width: 150px;
     height: 50px;
 
-    background-image: url(../img/community_003.png);
+    background-image: url(../../public/images/community_003.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;

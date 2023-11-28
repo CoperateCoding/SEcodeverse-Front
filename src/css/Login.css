@@ -176,7 +176,7 @@
 
 .login-pate-find-id-btn
 {
-    background-image: url(../img/community_001.png);
+    background-image: url(../../public/images/community_001.png);
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;
@@ -195,7 +195,7 @@
 }
 
 .login-pate-find-pw-btn{
-    background-image: url(../img/community_002.png);
+    background-image: url(../../public/images/community_002.png);
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;
@@ -214,7 +214,7 @@
 }
 
 .login-pate-sign-up-btn{
-    background-image: url(../img/community_003.png);
+    background-image: url(../../public/images/community_003.png);
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;
@@ -230,4 +230,14 @@
     font-family: 'DungGeunMo-Regular';
     font-size: 28px;
     font-weight: 600;
+}
+
+.login-page-sub-button-wrapper a{
+    text-decoration: none;
+    color: #000000;
+}
+
+.login-page-sub-button-wrapper a:visited{
+    text-decoration: none;
+    color: #000000;
 }

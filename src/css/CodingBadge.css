@@ -87,7 +87,7 @@
     width: 210px;
     height: 210px;
 
-    background-image: url(../img/codingBadge.png);
+    background-image: url('../../public/images/codingBadge.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -281,7 +281,7 @@
     width: 120px;
     height: 120px;
 
-    background-image: url(../img/codingBadge.png);
+    background-image: url('../../public/images/codingBadge.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;

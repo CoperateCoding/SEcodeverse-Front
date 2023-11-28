@@ -164,7 +164,7 @@
     width: 30px;
     height: 30px;
 
-    background-image: url(../img/modify.png);
+    background-image: url('../../public/images/modify.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -176,7 +176,7 @@
     width: 30px;
     height: 30px;
 
-    background-image: url(../img/delete.png);
+    background-image: url('../../public/images/delete.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;

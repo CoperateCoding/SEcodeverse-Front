@@ -197,7 +197,7 @@
 
     margin-bottom: 18px;
 
-    background-image: url(../../img/star_button.png);
+    background-image: url('../../../public/images/star_button.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -217,7 +217,7 @@
 
     font-size: 20px;
 
-    background-image: url(../../img/community_002.png);
+    background-image: url('../../../public/images/community_002.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
