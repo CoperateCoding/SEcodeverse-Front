@@ -14,12 +14,14 @@ const MyPageMain = () => {
   const [username, setUsername] = useState("");
   const [codingBadge, setCodingBadge] = useState("");
   const [codingBadgeImg, setCodingBadgeImg] = useState("");
+  const[user,setUser]=useState();
 
   const handleButtonClick = (screen) => {
     setCurrentScreen(screen);
     setSelectedButton(screen);
   };
   useEffect(() => {
+    
     const apiUrl = "/api/v1/user/info/my";
 
     axios
@@ -33,6 +35,7 @@ const MyPageMain = () => {
         console.log(response.data);
         setUsername(response.data.nickName);
         setCodingBadge(response.data.badgeName);
+        setUser(response.data)
         if ((response.data.badName = "알")) {
           setCodingBadgeImg(
             "https://secodeverse-bucket2.s3.ap-northeast-2.amazonaws.com/coding_badge/%EC%95%8C.jpg"
@@ -116,7 +119,7 @@ const MyPageMain = () => {
             내 게시글
           </button>
         </div>
-        {currentScreen === "codingBadge" && <CodingBadge badge = {codingBadgeImg}/>}
+        {currentScreen === "codingBadge" && <CodingBadge />}
         {currentScreen === "wrongQuestion" && <MyWrongQuestion />}
         {currentScreen === "solveQuestion" && <SolveQuestion />}
         {currentScreen === "createQuestion" && <MyQuestion />}

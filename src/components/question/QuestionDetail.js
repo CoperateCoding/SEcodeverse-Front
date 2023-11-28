@@ -92,13 +92,13 @@ const QuestionDetail = () => {
 
     // }
 
-    // memory =0
-    // time =0
+    // memory =totalmemory/compileResult.length
+    // time =totaltime/compileResult.length
     setSuccessResult({memory:memory,time:time,lenguage:selectedLanguage})
     console.log("성공여부",isSucess)
     if(isSucess==true){
       setSuccess(true)
-   
+      
       
     }
     else{
@@ -115,19 +115,47 @@ const QuestionDetail = () => {
         categoryPk :question.categoryPk
       },
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
       }
     })
     .then(response => {
-      console.log("similarData",response.data)
+  
+      console.log("비슷한 문제 받아 왔음similarData", response)
       setSimilar(response.data)
     })
     .catch(error => {
       // 에러 처리
       console.error(error);
     });
-    await sleep(5000)
+
+    await sleep(10000)
+    
+    const apiUrl = `/api/v1/question/detail/${questionPk}`;
+    //맞으면 1 틀리면 0
+    const data={
+      codeStatus:1,
+      content:code,
+      compileTime : time,
+      memory:memory,
+      accarcy:80
+
+    }
+    axios
+    .post(apiUrl, data, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+      },
+    })
+    .then((response) => {
+      console.log(localStorage.getItem("access"));
+      console.log(response.data);
   
+    })
+    .catch((error) => {
+      console.error("API 호출 중 에러:", error);
+    });
 
     setIsPopup(!isPopup)
   }
@@ -137,26 +165,30 @@ const QuestionDetail = () => {
     const FormattedCode = code.replace(/\n/g, '\n');
     const apiUrl = '/api/v1/question/solveQuestion';
     const params = new URLSearchParams();
-
+    
     params.append("userCode", FormattedCode);
-    params.append("languageNum", "2");
+    params.append("languageNum","2");
     params.append("testcase",testcaseValue.input);
 
     console.log("보내는 테스트케이스",testcaseValue.input)
 
     axios
-      .get(apiUrl, { params })
-      .then((response) => {
-        const result = response.data;
-        // 결과 처리 로직 작성
-        console.log(result)
-        compileResult.push(result)
-    
-    
-      })
-      .catch((error) => {
-        console.error("문제 푸는 페이지에서 에러남", error);
-      });
+  .get(apiUrl, {
+    params: params,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("access")}`,
+    },
+  })
+  .then((response) => {
+    const result = response.data;
+    console.log(result);
+    compileResult.push(result);
+  })
+  .catch((error) => {
+    console.log(localStorage.getItem('access'));
+    console.error("문제 푸는 페이지에서 에러남", error);
+  });
   };
 
   const getCodeLines = () => {

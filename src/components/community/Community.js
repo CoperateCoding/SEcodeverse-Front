@@ -102,7 +102,7 @@ const Community = () => {
     }
   };
   const getList = (value,selectsort,category,pageing) => {
-    const apiUrl = '/api/v1/board';
+    const apiUrl = '/api/v1/board/';
     const sort=selectsort
     const page=pageing
     let params={}

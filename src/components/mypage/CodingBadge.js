@@ -1,12 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../css/CodingBadge.css";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import RecommendComponent from "./RecommendComponent";
 
-const CodingBadge = (badge) => {
+const CodingBadge = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
 
+//  const [userInfo, setUserInfo] = useState();
+ const [badgeimg,setBadgeImg] = useState();
+ const[exp,setExp] = useState()
+ const[badgeName,setBadgeName]=useState()
+  useEffect(() => {
+    // console.log("뱃지",user)
+    // console.log("뱃지",user.user.badgeName)
+    // // setUserInfo(user)
+    // console.log(user)
+    // setBadgeName(user.user.badgeName)
+    // setExp(user.user.exp)
+    // setBadgeImg(user.codingBadgeImg)
+    // console.log("뱃지 이름",user.user.badgeName)
+    // console.log(user.codingBadgeImg)
+    // console.log("코뎅뱃지 이미지",codingBadgeImg)
+  
+  }, []);
   //날짜별로 달력 출력하는거
   const dayList = [
     { date: "2023-10-21T05:29:38.541Z", question: 3 },
@@ -97,25 +114,25 @@ const CodingBadge = (badge) => {
                 <div className="mypage-codingBadge-info-contents">
                   <div className="mypage-codingBadge-info-img-box">
                     <div className="mypage-codingBadge-info-img">
-                      <img src={badge}></img>
+                      {/* <img src={badgeimg && badgeimg}></img> */}
                     </div>
                   </div>
                   <div className="mypage-codingBadge-info-box">
                     <div className="mypage-codingBadge-info-text-box">
                       <span className="mypage-codingBadge-info-text-badge-name">
-                        {expData.badgeName}
+                        {/* {badgeName && badgeName} */}
                       </span>
                       <span className="mypage-codingBadge-info-text-exp">
-                        - 누적 경험치 : {expData.exp}
+                        {/* - 누적 경험치 : {exp && exp} */}
                       </span>
                       <span className="mypage-codingBadge-info-text-remain-exp">
-                        - 다음 레벨까지 :{limitExp - expData.exp}
+                        {/* - 다음 레벨까지 :{exp && limitExp - exp} */}
                       </span>
                     </div>
                     <div className="mypage-codingBadge-info-exp-box">
-                      <div className="mypage-codingBadge-info-exp-gage">
-                        {((expData.exp / limitExp) * 100).toFixed(3)}%
-                      </div>
+                      {/* <div className="mypage-codingBadge-info-exp-gage"  style={exp && { width: `${((exp / limitExp) * 100).toFixed(3)}%` }}>
+                        {exp && ((exp / limitExp) * 100).toFixed(3)}%
+                      </div> */}
                     </div>
                   </div>
                 </div>

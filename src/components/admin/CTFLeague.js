@@ -4,7 +4,7 @@ import "../../css/AdminCTFEnrollLeague.css";
 import LeaugeTableComponent from "./LeagueTableComponent";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import axios from 'axios'
+import axios from "axios";
 const CTFLeague = () => {
   const [isCreateLeague, setIsCreateLeague] = useState(false);
   const [popupTitle, setPopupTitle] = useState("CTF 리그 등록");
@@ -18,31 +18,28 @@ const CTFLeague = () => {
     setIsCreateLeague(!isCreateLeague);
     const inputElements = document.getElementsByClassName('ctf-league-edit-popup-contents-title-input');
     const count = document.getElementsByClassName('ctf-league-edit-popup-contents-count-input');
-    const notic = document.getElementsByClassName('ctf-league-edit-popup-contents-description-input');
-    
-    if (inputElements.length > 0) {
+    const content = document.getElementsByClassName('ctf-league-edit-popup-contents-description-input');
+    const notic = document.getElementsByClassName('ctf-league-edit-popup-contents-description-input')
+  
       const inputElement = inputElements[0];
       const inputValue = inputElement.value;
       console.log("name", inputValue);
-    } else {
-      console.log("해당 className을 가진 input 요소를 찾을 수 없습니다.");
-    }
-    
-    if (count.length > 0) {
+   
+  
       const countElement = count[0];
       const countValue = countElement.value;
       console.log("인원수", countValue);
-    } else {
-      console.log("해당 className을 가진 count input 요소를 찾을 수 없습니다.");
-    }
-    
-    if (notic.length > 0) {
+   
+ 
+      const contentElement = content[0];
+      const contentValue = contentElement.value;
+      console.log("content", contentValue);
+ 
+  
       const noticElement = notic[0];
       const noticValue = noticElement.value;
       console.log("notic", noticValue);
-    } else {
-      console.log("해당 className을 가진 notic input 요소를 찾을 수 없습니다.");
-    }
+  
 
     const start = startDate
     const end = endDate
@@ -50,18 +47,43 @@ const CTFLeague = () => {
     console.log(end)
 
 
-//     const api ='api/v1/admin/league/post'
-//     data={name : ,
-//         openTime:,
-//       closeTime:,
-//     memberCnt,
-//   notice,
-// description}
-//     axios.post()
+    const api ='api/v1/admin/league/post'
+    const data={name : inputValue ,
+        openTime: start,
+      closeTime: end,
+    memberCnt:countValue,
+  notice:noticValue,
+description:contentValue}
+axios
+.post("/api/v1/admin/ctf/league/post", data, {
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem("access")}`,
+  },
+})
+.then((response) => {
+
+  console.log(response.data);
+
+})
+.catch((error) => {
+  console.error("API 호출 중 에러:", error);
+});
   }
+
   const toggleCreateLeague = () => {
     setIsCreateLeague(!isCreateLeague);
     
+
+    //     const api ='api/v1/admin/league/post'
+    //     data={name : ,
+    //         openTime:,
+    //       closeTime:,
+    //     memberCnt,
+    //   notice,
+    // description}
+    //     axios.post()
+
     setPopupTitle("CTF 리그 등록");
   };
 
@@ -243,15 +265,27 @@ const CTFLeague = () => {
                   type="number"
                 />
               </div>
-              <div className="ctf-league-edit-popup-contents-description-box">
-                <span className="ctf-league-edit-popup-contents-description">
-                  리그 설명
-                </span>
-                <textarea
-                  className="ctf-league-edit-popup-contents-description-input"
-                  type="text"
-                  maxLength={2000}
-                />
+              <div className="ctf-league-edit-popup-contents-boxes">
+                <div className="ctf-league-edit-popup-contents-description-box">
+                  <span className="ctf-league-edit-popup-contents-description">
+                    리그 설명
+                  </span>
+                  <textarea
+                    className="ctf-league-edit-popup-contents-description-input"
+                    type="text"
+                    maxLength={2000}
+                  />
+                </div>
+                <div className="ctf-league-edit-popup-contents-notice-box">
+                  <span className="ctf-league-edit-popup-contents-description">
+                    주의사항
+                  </span>
+                  <textarea
+                    className="ctf-league-edit-popup-contents-description-input"
+                    type="text"
+                    maxLength={2000}
+                  />
+                </div>
               </div>
             </div>
             <div className="ctf-league-edit-popup-contents-button-wrapper">
