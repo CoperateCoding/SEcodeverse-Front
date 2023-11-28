@@ -4,7 +4,7 @@ import "../../css/AdminCTFEnrollLeague.css";
 import LeaugeTableComponent from "./LeagueTableComponent";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import axios from 'axios'
+import axios from "axios";
 const CTFLeague = () => {
   const [isCreateLeague, setIsCreateLeague] = useState(false);
   const [popupTitle, setPopupTitle] = useState("CTF 리그 등록");
@@ -16,14 +16,14 @@ const CTFLeague = () => {
 
   const toggleCreateLeague = () => {
     setIsCreateLeague(!isCreateLeague);
-//     const api ='api/v1/admin/league/post'
-//     data={name : ,
-//         openTime:,
-//       closeTime:,
-//     memberCnt,
-//   notice,
-// description}
-//     axios.post()
+    //     const api ='api/v1/admin/league/post'
+    //     data={name : ,
+    //         openTime:,
+    //       closeTime:,
+    //     memberCnt,
+    //   notice,
+    // description}
+    //     axios.post()
     setPopupTitle("CTF 리그 등록");
   };
 
@@ -205,15 +205,27 @@ const CTFLeague = () => {
                   type="number"
                 />
               </div>
-              <div className="ctf-league-edit-popup-contents-description-box">
-                <span className="ctf-league-edit-popup-contents-description">
-                  리그 설명
-                </span>
-                <textarea
-                  className="ctf-league-edit-popup-contents-description-input"
-                  type="text"
-                  maxLength={2000}
-                />
+              <div className="ctf-league-edit-popup-contents-boxes">
+                <div className="ctf-league-edit-popup-contents-description-box">
+                  <span className="ctf-league-edit-popup-contents-description">
+                    리그 설명
+                  </span>
+                  <textarea
+                    className="ctf-league-edit-popup-contents-description-input"
+                    type="text"
+                    maxLength={2000}
+                  />
+                </div>
+                <div className="ctf-league-edit-popup-contents-notice-box">
+                  <span className="ctf-league-edit-popup-contents-description">
+                    주의사항
+                  </span>
+                  <textarea
+                    className="ctf-league-edit-popup-contents-description-input"
+                    type="text"
+                    maxLength={2000}
+                  />
+                </div>
               </div>
             </div>
             <div className="ctf-league-edit-popup-contents-button-wrapper">
