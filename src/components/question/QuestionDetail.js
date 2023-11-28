@@ -315,12 +315,6 @@ int main() {
               채점 결과 확인
             </div>
             <div
-              className="question-detail-button-execute-code"
-              onClick={compiler}
-            >
-              코드 실행
-            </div>
-            <div
               className="question-detail-button-change-language"
               onClick={handleChangeNextLangue}
             >

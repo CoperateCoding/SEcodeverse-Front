@@ -10,6 +10,9 @@
     font-style: normal;
 }
 
+section{
+    height: 100%;
+}
 
 .main_page_container{
     width: 80%;
