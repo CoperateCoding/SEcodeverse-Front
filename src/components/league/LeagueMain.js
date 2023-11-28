@@ -9,8 +9,8 @@ import "../../css/league/LeagueCreatePopup.css";
 const LeagueMain = () => {
   const leagueData = {
     name: "CTF League Name",
-    openTime: "2023-11-25T05:29:38.541Z",
-    closeTime: "2023-11-26T05:29:38.541Z",
+    openTime: "2023-11-28T05:29:38.541Z",
+    closeTime: "2023-11-30T05:29:38.541Z",
     memberCnt: 4,
     notice: "notice",
     description: "description",
@@ -77,7 +77,7 @@ const LeagueMain = () => {
       navigate("/league/category");
     } else {
       // 리그가 현재 열려 있지 않은 경우 처리
-      alert("리그는 현재 열려 있지 않습니다");
+      // alert("리그는 현재 열려 있지 않습니다");
     }
   };
 
