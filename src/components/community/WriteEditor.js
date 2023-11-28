@@ -24,38 +24,6 @@ const WriteEditor = () => {
   const handleTypeChange = (e) => {
     setType(e.target.value);
   };
-
-  //토큰 유효성 판단 
-  // const isUser = () => {
-  //   if(localStorage.getItem('access')!=null){
-  //   console.log("게시글 등록 토큰 확인하겠습")
-  //   const accessToken=localStorage.getItem('access')
-  //   console.log("게시글 등록 토큰 ",accessToken)
-  //   axios.get('api/v1/token/validate',{
-  //     headers: {
-  //       Authorization: `Bearer ${accessToken}`
-  //     }
-  //   }).then(response => {
-  //     // 응답 처리
-  //     console.log(response.data);
-  //     if(response.data.isTokenValid===true){
-  //       console.log("token이 유효합니다")
-  //       handleRegisterClick()
-  //     }else{
-  //       alert("로그인 후 이용 부탁드립니다.")
-  //     }
-
-  //   })
-  //   .catch(error => {
-  
-  //     console.error(error);
-  //   });
-  // }else{
-  //   alert("로그인 후 이용 바랍니다")
-  // }
-    
-  // }
-
   
   
   const handleRegisterClick = async () => {
@@ -158,7 +126,7 @@ const WriteEditor = () => {
       console.log(title);
       console.log(desc);
       axios
-        .post("/api/v1/board", data, {
+        .post("/api/v1/board/", data, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("access")}`,

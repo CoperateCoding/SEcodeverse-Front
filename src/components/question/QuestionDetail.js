@@ -46,9 +46,10 @@ const QuestionDetail = () => {
   const sleep = (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-  
+  const [ai,setAI]=useState('')
 
   const compiler = async ()=> {
+   
     const compileResult = []
     const TestcaseOutput=[]
     let totalmemory =0
@@ -58,41 +59,41 @@ const QuestionDetail = () => {
     let isSucess=true
     console.log("테스트 케이스 보내기 시작합니다.")
     console.log("테스트케이스의 길이는",testcase.length)
-    for(let i=0; i<testcase.length; i++){
-      console.log("배열들어옴 ")
-      handleExecuteCode(testcase[i],compileResult)
-      await sleep(5000);
-      console.log("받아온 테스트케이스",testcase)
-      console.log("보내는 테스트케이스2 ",testcase[i].pk, testcase[i].input)
-    }
-    await sleep(5000); 
-    console.log("코드 모두 컴파일 후 "+ result)
-    for(let i=0; i<testcase.length;i++){
-      let str = testcase[i].output
-      str = str.replace(/[!@#]|[*()]/g, "\n");
-      TestcaseOutput.push(str)
-    }
-    console.log(compileResult)
+    // for(let i=0; i<testcase.length; i++){
+    //   console.log("배열들어옴 ")
+    //   handleExecuteCode(testcase[i],compileResult)
+    //   await sleep(5000);
+    //   console.log("받아온 테스트케이스",testcase)
+    //   console.log("보내는 테스트케이스2 ",testcase[i].pk, testcase[i].input)
+    // }
+    // await sleep(5000); 
+    // console.log("코드 모두 컴파일 후 "+ result)
+    // for(let i=0; i<testcase.length;i++){
+    //   let str = testcase[i].output
+    //   str = str.replace(/[!@#]|[*()]/g, "\n");
+    //   TestcaseOutput.push(str)
+    // }
+    // console.log(compileResult)
 
-    for(let i =0; i<compileResult.length ; i++){
-      const line = compileResult[i].stdout
-      console.log("line",line)
-      const lines = line.split('\n');
-      lines.pop(); 
-      const result = lines.join('\n');
-      if(result != TestcaseOutput[i]){
-        isSucess=false
-        console.log("내 코드 결과",result)
-        console.log("내스트케이스 결과",TestcaseOutput[i])
-      }
-      totalmemory=totalmemory+compileResult[i].memory
-      totaltime = totaltime+parseFloat(compileResult[i].time)
-      console.log("parseInt한 값",parseFloat(compileResult[i].time))
+    // for(let i =0; i<compileResult.length ; i++){
+    //   const line = compileResult[i].stdout
+    //   console.log("line",line)
+    //   const lines = line.split('\n');
+    //   lines.pop(); 
+    //   const result = lines.join('\n');
+    //   if(result != TestcaseOutput[i]){
+    //     isSucess=false
+    //     console.log("내 코드 결과",result)
+    //     console.log("내스트케이스 결과",TestcaseOutput[i])
+    //   }
+    //   totalmemory=totalmemory+compileResult[i].memory
+    //   totaltime = totaltime+parseFloat(compileResult[i].time)
+    //   console.log("parseInt한 값",parseFloat(compileResult[i].time))
 
-    }
+    // }
 
-    memory =0
-    time =0
+    // memory =0
+    // time =0
     setSuccessResult({memory:memory,time:time,lenguage:selectedLanguage})
     console.log("성공여부",isSucess)
     if(isSucess==true){
@@ -125,7 +126,10 @@ const QuestionDetail = () => {
       // 에러 처리
       console.error(error);
     });
-    
+    await sleep(5000)
+  
+
+    setIsPopup(!isPopup)
   }
 
   const handleExecuteCode = (testcaseValue,compileResult) => {
@@ -302,6 +306,7 @@ int main() {
                   문제 설명
                 </span>
                 <div className="question-detail-description-text-content">
+                {/* {isPopup && } */}
                   {question.content}
                 </div>
               </div>
@@ -310,7 +315,8 @@ int main() {
           <div className="question-detail-bottom-contents-wrapper">
             <div
               className="question-detail-button-result-check"
-              onClick={() => setIsPopup(!isPopup)}
+              onClick={compiler}
+       
             >
               채점 결과 확인
             </div>
@@ -329,8 +335,8 @@ int main() {
           </div>
         </div>
       </div>
-      {isPopup && isSuccess && <SuccessResult onClose={() => setIsPopup(false)}  value ={successResult} similar = {similar}/>}
-      {isPopup && !isSuccess && <FailResult onClose={() => setIsPopup(false)} value={successResult }/>}
+      {isPopup && isSuccess && <SuccessResult onClose={() => setIsPopup(false)}  code ={code} value ={successResult} similar = {similar}/>}
+      {isPopup && !isSuccess && <FailResult onClose={() => setIsPopup(false)} code={code} value={successResult }  similar = {similar}/>}
     </section>
   );
 };
