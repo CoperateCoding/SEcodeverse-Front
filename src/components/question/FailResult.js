@@ -1,9 +1,10 @@
 import RecommendComponent from "../mypage/RecommendComponent";
 import "../../css/FailResult.css";
-import React, { useState,useEffect, similar } from "react";
-import axios from 'axios'
+import React, { useState, useEffect, similar } from "react";
+import axios from "axios";
 
-const FailResult = ({ onClose ,value }) => { // 괄호 수정
+const FailResult = ({ onClose, value, code, similar}) => {
+  // 괄호 수정
   // 유사문제 추천 관련
   // const questionData = [
   //   { pk: 1, title: "유사문제 1", img: "" },
@@ -12,27 +13,30 @@ const FailResult = ({ onClose ,value }) => { // 괄호 수정
   //   { pk: 4, title: "유사문제 4", img: "" },
   //   { pk: 5, title: "유사문제 5", img: "" },
   // ];
-  const [question,setQuestion] = useState([ ]);
-  const onClick=()=>{
-    console.log(value)
-  }
+  const [question, setQuestion] = useState([]);
+  const [aiReview, setAIreview] = useState("");
+  const [isReview, setIsReview] = useState(false);
+
+  const onClick = () => {
+    console.log(value);
+  };
   useEffect(() => {
     console.log("similar 잘 받았니?", similar.response);
     console.log("similar 길이는", similar.response.length);
-  
+
     // 비동기 요청을 위한 배열
     const requests = [];
-  
+
     for (let i = 0; i < 5; i++) {
       console.log("배열 들어옴");
       const questionPk = similar.response[i];
       console.log("문제 상세조회에서 questionPk는", questionPk);
       const apiUrl = `/api/v1/question/detail/${questionPk}`;
-  
+
       // 비동기 요청을 배열에 추가
       requests.push(axios.get(apiUrl));
     }
-  
+
     // 모든 비동기 요청이 완료된 후에 처리
     Promise.all(requests)
       .then((responses) => {
@@ -41,7 +45,7 @@ const FailResult = ({ onClose ,value }) => { // 괄호 수정
           title: response.data.question.title,
           levelPk: response.data.question.levelPk,
         }));
-  
+
         console.log("questions = ", questions);
         setQuestion(questions);
       })
@@ -49,6 +53,32 @@ const FailResult = ({ onClose ,value }) => { // 괄호 수정
         console.error("상세조회에서 호출 중 에러:", error);
       });
   }, []);
+
+  const onClickReview = () => {
+    setIsReview(true);
+    const apiUrl = "/api/v1/chatbot/codeReview";
+    axios
+      .post(
+        apiUrl,
+        {
+          code: code,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        console.log("ai 조언", response.data);
+        setAIreview(response.data.response);
+      })
+      .catch((error) => {
+        // 에러 처리
+        console.error("ai조언중 에러남", error);
+      });
+    // await sleep(50000);
+  };
 
   return (
     <div className="fail-container">
@@ -91,7 +121,17 @@ const FailResult = ({ onClose ,value }) => { // 괄호 수정
             </thead>
             <tbody className="fail-comment-tbody">
               <tr>
-                <td className="fail-comment-ai">ai 조언</td>
+                <td className="fail-comment-ai">
+                  {!isReview && (
+                    <button
+                      className="ai-review-button"
+                      onClick={onClickReview}
+                    >
+                      조언보기
+                    </button>
+                  )}
+                  {isReview && <>ai 조언</>}
+                </td>
                 <td className="fail-comment-similar">
                   {question.map((value, index) => (
                     <RecommendComponent key={index} question={value} />

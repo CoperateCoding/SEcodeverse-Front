@@ -9,8 +9,6 @@ import TeamView from "./TeamView";
 
 import axios from 'axios';
 
-import TeamView from "./TeamView";
-
 const LeagueMain = () => {
   const leagueData = {
     name: "CTF League Name",
