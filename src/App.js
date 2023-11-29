@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route, BrowserRouter } from 'react-router-dom';
 import './App.css';
 import Header from "./components/Header/Header"
 import Footer from './components/Footer/Footer';
@@ -51,11 +51,11 @@ function App() {
 
 
   return (
-    <HashRouter>
+    <BrowserRouter>
   <div className="App">
     <Header auth={auth} setAuth={setAuth} />
     <Routes>
-      <Route path="/" element={<MainPage />} />
+      <Route path="" element={<MainPage />} />
       <Route path="/admin" element={<AdminMain />} />
       <Route path="/mypage" element={<MyPageMain />} />
       <Route path="/community" element={<Community />} />
@@ -73,7 +73,7 @@ function App() {
     </Routes>
     <Footer />
   </div>
-</HashRouter>
+</BrowserRouter>
   );
 
 

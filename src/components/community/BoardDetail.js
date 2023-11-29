@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import "react-quill/dist/quill.snow.css";
 import CommentComponent from "./CommentComponent";
 import axios from "axios";
-import { useNavigate , useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const BoardDeatil = () => {
   const [board, setBoard] = useState();
@@ -26,7 +26,7 @@ const BoardDeatil = () => {
       .get(apiUrl)
       .then((response) => {
         console.log("처음 게시글 정보", response.data.board);
-        console.log("처음 이미지 정보",response.data.imgList);
+        console.log("처음 이미지 정보", response.data.imgList);
         setBoard(response.data.board);
         setImgList(response.data.imgList);
       })
@@ -52,7 +52,6 @@ const BoardDeatil = () => {
   };
 
   const editPost = () => {
-   
     alert("수정을 선택했습니다.");
     toggleMenu(); // 메뉴 닫기
   };
@@ -67,7 +66,7 @@ const BoardDeatil = () => {
       })
       .then((response) => {
         console.log(response.data);
-        navigate('/community');
+        navigate("/community");
       })
       .catch((error) => {
         console.error("게시글 삭제 중 에러", error);
@@ -98,17 +97,7 @@ const BoardDeatil = () => {
 
   const likeHandler = () => {
     axios
-    .get(`/api/v1/likes/${commumityPk}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("access")}`,
-      },
-    })
-    .then((response) => {
-      console.log(response.data);
-      if(response.data===false){
-        axios
-      .post(`/api/v1/likes/${commumityPk}`, {
+      .get(`/api/v1/likes/${commumityPk}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("access")}`,
@@ -116,36 +105,44 @@ const BoardDeatil = () => {
       })
       .then((response) => {
         console.log(response.data);
-        
+        if (response.data === false) {
+          axios
+            .post(
+              `/api/v1/likes/${commumityPk}`,
+              {},
+              {
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${localStorage.getItem("access")}`,
+                },
+              }
+            )
+            .then((response) => {
+              console.log(response.data);
+            })
+            .catch((error) => {
+              console.error("좋아요 누르는중 에러남", error);
+            });
+        } else {
+          axios
+            .delete(`/api/v1/likes/${commumityPk}`, {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("access")}`,
+              },
+            })
+            .then((response) => {
+              console.log(response.data);
+            })
+            .catch((error) => {
+              console.error("좋아요 취소하는중에 에러남", error);
+            });
+        }
+        window.location.reload();
       })
       .catch((error) => {
-        console.error("좋아요 누르는중 에러남", error);
+        console.error("좋아요 목록 확인 중 에러남", error);
       });
-      
-      }
-      else{
-        axios
-        .delete(`/api/v1/likes/${commumityPk}`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("access")}`,
-          },
-        })
-        .then((response) => {
-          console.log(response.data);
-          
-        })
-        .catch((error) => {
-          console.error("좋아요 취소하는중에 에러남", error);
-        });
-      }
-      window.location.reload();
-    
-    })
-    .catch((error) => {
-      console.error("좋아요 목록 확인 중 에러남", error);
-    });
-  
   };
 
   const commentRegister = () => {
@@ -181,9 +178,7 @@ const BoardDeatil = () => {
         <div className="board-detail-total-wrapper">
           <div className="board-detail-background">
             <div className="board-detail-upper-part">
-              <div className="board-detail-user-badge">
-                {imgList && imgList.map((img) => <img src={img.imgUrl}></img>)}
-              </div>
+              <div className="board-detail-user-badge"></div>
               <div className="board-detail-info-wrapper">
                 <span className="board-detail-category">
                   {board && board.category.name}
@@ -200,7 +195,16 @@ const BoardDeatil = () => {
                   {board && board.title}
                 </span>
               </div>
-              <div className="board-detail-contents-box" dangerouslySetInnerHTML={{ __html: board && board.content }}>
+              <div className="board-detail-contents-box">
+                {board && board.content && (
+                  <div dangerouslySetInnerHTML={{ __html: board.content }} />
+                )}
+                {imgList &&
+                  imgList.map((img, index) => (
+                    <div key={index}>
+                      <img src={img.imgUrl} alt={`이미지 ${index}`} />
+                    </div>
+                  ))}
               </div>
             </div>
 
@@ -259,7 +263,7 @@ const BoardDeatil = () => {
                     <th className="comment-contents">내용</th>
                     <th className="comment-date">작성 날짜</th>
                     <th className="comment-modify ">수정</th>
-                    <th className="comment-delete" >삭제</th>
+                    <th className="comment-delete">삭제</th>
                   </tr>
                 </thead>
                 <tbody className="board-detail-comment-table-tbody">

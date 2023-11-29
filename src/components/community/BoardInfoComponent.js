@@ -1,6 +1,7 @@
 import LevelImage from "../LevelImage";
 
 const BoardInfoComponent = ({info}) => {
+
   return (
     <>
       <div className="board-detail-user-badge"><LevelImage level={info.level}/></div>
