@@ -9,19 +9,14 @@ import Chatbot from "../components/Chatbot";
 import axios from "axios";
 import { UNSAFE_ErrorResponseImpl } from "@remix-run/router";
 const MyPageMain = () => {
-  const [currentScreen, setCurrentScreen] = useState("codingBadge");
+  
   const [selectedButton, setSelectedButton] = useState("codingBadge");
   const [username, setUsername] = useState("");
   const [codingBadge, setCodingBadge] = useState("");
   const [codingBadgeImg, setCodingBadgeImg] = useState("");
-  const[user,setUser]=useState();
+  const [user,setUser]=useState();
 
-  const handleButtonClick = (screen) => {
-    setCurrentScreen(screen);
-    setSelectedButton(screen);
-  };
   useEffect(() => {
-    
     const apiUrl = "/api/v1/user/info/my";
 
     axios
@@ -37,11 +32,19 @@ const MyPageMain = () => {
         setCodingBadge(response.data.badgeName);
         setUser(response.data)
         setCodingBadgeImg(response.data.imgUrl)
+        // console.log(user);
       })
       .catch((error) => {
         console.error("API 호출 중 에러:", error);
       });
   }, []);
+
+  const [currentScreen, setCurrentScreen] = useState("codingBadge");
+  const handleButtonClick = (screen) => {
+    setCurrentScreen(screen);
+    setSelectedButton(screen);
+  };
+
 
   return (
     <>
@@ -95,7 +98,7 @@ const MyPageMain = () => {
             내 게시글
           </button>
         </div>
-        {currentScreen === "codingBadge" && <CodingBadge user = {user} />}
+        {currentScreen === "codingBadge" &&user&& <CodingBadge user = {user} />}
         {currentScreen === "wrongQuestion" && <MyWrongQuestion />}
         {currentScreen === "solveQuestion" && <SolveQuestion />}
         {currentScreen === "createQuestion" && <MyQuestion />}
