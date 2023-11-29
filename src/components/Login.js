@@ -50,6 +50,9 @@ const Login = ({setAuth}) => {
           setRefreshToken(refreshToken)
           console.log("로그인 테스트",localStorage.getItem('access'));
           localStorage.setItem('access',accessToken)
+          console.log("이용자의 타입은?",response.data.roleType)
+          localStorage.setItem('roleType',response.data.roleType)
+          console.log("저장된 유저 타입은 ",localStorage.getItem('roleType'))
 
           setAuth(true)
           navigate('/');
@@ -57,6 +60,7 @@ const Login = ({setAuth}) => {
         })
         .catch(error => {
           console.error('API 호출 중 에러:', error);
+          alert("아이디 및 비밀번호가 일치하지 않습니다 .")
         });
 
       };

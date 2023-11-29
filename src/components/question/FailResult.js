@@ -1,9 +1,10 @@
 import RecommendComponent from "../mypage/RecommendComponent";
 import "../../css/FailResult.css";
-import React, { useState, useEffect, similar } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { isCompositeComponent } from "react-dom/test-utils";
 
-const FailResult = ({ onClose, value, code, similar}) => {
+const FailResult = ({ onClose, value, code, fianlSimilarQuestion}) => {
   // 괄호 수정
   // 유사문제 추천 관련
   // const questionData = [
@@ -19,43 +20,17 @@ const FailResult = ({ onClose, value, code, similar}) => {
 
   const onClick = () => {
     console.log(value);
+    console.log(fianlSimilarQuestion)
+    console.log(code)
   };
   useEffect(() => {
-    // console.log("similar 잘 받았니?", similar.response);
-    // console.log("similar 길이는", similar.response.length);
-
-    // // 비동기 요청을 위한 배열
-    // const requests = [];
-
-    // for (let i = 0; i < 5; i++) {
-    //   console.log("배열 들어옴");
-    //   const questionPk = similar.response[i];
-    //   console.log("문제 상세조회에서 questionPk는", questionPk);
-    //   const apiUrl = `/api/v1/question/detail/${questionPk}`;
-
-    //   // 비동기 요청을 배열에 추가
-    //   requests.push(axios.get(apiUrl));
-    // }
-
-    // // 모든 비동기 요청이 완료된 후에 처리
-    // Promise.all(requests)
-    //   .then((responses) => {
-    //     const questions = responses.map((response) => ({
-    //       pk: response.data.question.pk,
-    //       title: response.data.question.title,
-    //       levelPk: response.data.question.levelPk,
-    //     }));
-
-    //     console.log("questions = ", questions);
-    //     setQuestion(questions);
-    //   })
-    //   .catch((error) => {
-    //     console.error("상세조회에서 호출 중 에러:", error);
-    //   });
+    console.log(value)
   }, []);
 
-  const onClickReview = () => {
-    setIsReview(true);
+  const onClickReview =  () => {
+
+    // console.log(code)
+    // console.log("넘어온 SIMILARqUESTION",fianlSimilarQuestion)
     const apiUrl = "/api/v1/chatbot/codeReview";
     axios
       .post(
@@ -77,9 +52,8 @@ const FailResult = ({ onClose, value, code, similar}) => {
         // 에러 처리
         console.error("ai조언중 에러남", error);
       });
-    // await sleep(50000);
-  };
-
+      setIsReview(true);
+    }
   return (
     <div className="fail-container">
       <div className="fail-wrapper">
@@ -135,9 +109,9 @@ const FailResult = ({ onClose, value, code, similar}) => {
                   
                 </td>
                 <td className="fail-comment-similar">
-                  {/* {question.map((value, index) => (
-                    <RecommendComponent key={index} question={value} />
-                  ))} */}
+                {fianlSimilarQuestion && fianlSimilarQuestion.map((question) => (
+                    <RecommendComponent key={question.pk} question={question} />
+                  ))}
                 </td>
               </tr>
             </tbody>

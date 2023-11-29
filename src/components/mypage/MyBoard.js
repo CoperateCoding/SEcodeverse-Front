@@ -9,7 +9,7 @@ const MyBorde = () => {
   const [boardList, setBoardList] = useState([])
   const [totalPages,setTotalpages]=useState(0); 
   useEffect(() => {
-    const apiUrl = '/api/v1/board/my';
+    const apiUrl = '/api/v1/my/board';
     const page=1
     const params = {
       pageSize:8,
@@ -37,13 +37,13 @@ const MyBorde = () => {
     
     })
     .catch(error => {
-      console.error('API 호출 중 에러:', error);
+      console.error('내 게시물 확인 중 에러:', error);
     });
 
   }, []);
 
   const getList = (paging) => {
-    const apiUrl = '/api/v1/board';
+    const apiUrl = '/api/v1/my/board';
  
     const params = {
       pageSize:8,

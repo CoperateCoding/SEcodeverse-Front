@@ -1,18 +1,26 @@
-function getProperty(obj) {
-  if(typeof obj == undefined){
-    const value =obj
-    return value
-  }
-  else{
-    return obj
-  }
-}
+import { Link ,useNavigate} from 'react-router-dom';
+// function getProperty(obj) {
+//   if(typeof obj == undefined){
+//     const value =obj
+//     return value
+//   }
+//   else{
+//     return obj
+//   }
+// }
+
+
 
 const FavoriteBoardComponent = ({ posts }) => {
+  const navigate = useNavigate();
+  const onClick  = (pk) => {
+    navigate(`/community/post/${pk}`);
+  }
+  
   return (
     <>
       {posts.map((post) => (
-        <div className="mainPage-post-box">
+        <div className="mainPage-post-box" onClick={()=>{onClick(post.boardPk)}}>
           <div className="mainPage-post-name">{post.title}</div>
           <div className="mainPage-post-detail">
             <div className="mainPage-post-like-wrapper">
