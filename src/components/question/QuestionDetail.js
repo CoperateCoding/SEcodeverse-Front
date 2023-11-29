@@ -15,7 +15,7 @@ const QuestionDetail = () => {
   const [successResult , setSuccessResult] = useState({});
   const [code, setCode] = useState(`public class Main {
     public static void main(String args[]) {
-      System.out.println("Hello SEcodeVerse!");
+      System.out.println("Hello SEcodeVerse");
     }
 }`);
   const [result, setResult] = useState("");
@@ -23,6 +23,8 @@ const QuestionDetail = () => {
   const [isPopup, setIsPopup] = useState(false);
   const [isSuccess, setSuccess] = useState(true);
   const [ similar, setSimilar] = useState([]);
+  const similarQuestion =[]
+  const [fianlSimilarQuestion, setFinalSimilarQuestion] = useState([])
   useEffect(() => {
     console.log(questionPk);
     console.log("pk", questionPk);
@@ -79,6 +81,7 @@ const QuestionDetail = () => {
       const line = compileResult[i].stdout
       console.log("line",line)
       const lines = line.split('\n');
+      console.log("lines",lines)
       lines.pop(); 
       const result = lines.join('\n');
       if(result != TestcaseOutput[i]){
@@ -94,7 +97,9 @@ const QuestionDetail = () => {
 
     memory =totalmemory/compileResult.length
     time =totaltime/compileResult.length
-    setSuccessResult({memory:memory,time:time,lenguage:selectedLanguage})
+    const roundMemory = memory.toFixed(2);
+    const roundtIME = time.toFixed(2);
+    setSuccessResult({memory:roundMemory,time:roundtIME,lenguage:selectedLanguage})
     console.log("성공여부",isSucess)
     if(isSucess==true){
       setSuccess(true)
@@ -105,59 +110,65 @@ const QuestionDetail = () => {
       setSuccess(false)
     }
     await sleep(5000); 
-
-  //   console.log("successResut",successResult)
-  //   console.log("인공지능한테보내는 levelpk",question.levelPk)
-  //   console.log("인공지능한테 보내는 카테고리 pk",question.categoryPk)
-  // axios.get('/api/v1/chatbot/similary', {
-  //     params: {
-  //       levelPk :question.levelPk,
-  //       categoryPk :question.categoryPk
-  //     },
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${localStorage.getItem("access")}`,
-  //     }
-  //   })
-  //   .then(response => {
+    let similarArr=[]
+    try {
+      const response = await axios.get('/api/v1/chatbot/similary', {
+        params: {
+          levelPk: question.levelPk,
+          categoryPk: question.categoryPk
+        },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        }
+      });
   
-  //     console.log("비슷한 문제 받아 왔음similarData", response)
-  //     setSimilar(response.data)
-  //   })
-  //   .catch(error => {
-  //     // 에러 처리
-  //     console.error(error);
-  //   });
+      console.log("비슷한 문제 받아 왔음similarData", response.data);
+      setSimilar(response.data);
+  
+       similarArr = response.data.response;
+       console.log("similarArrLenght:",similarArr.length)
+ 
+  
+      for (let i = 0; i < similarArr.length; i++) {
+        try {
+          console.log("for문 들어옴 " ,i)
+          const similarItem = similarArr[i];
+          const detailResponse = await axios.get(`/api/v1/question/detail/${similarItem}`, {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("access")}`,
+            }
+          });
+  
+          console.log("비슷한 문제중 문제 하나 상세조회", detailResponse.data);
 
-  //   await sleep(10000)
+          similarQuestion.push({pk : detailResponse.data.question.pk ,
+            level : detailResponse.data.question.levelPk,
+          title : detailResponse.data.question.title
+         });
+        } catch (error) {
+          console.error("비슷한 문제 상세조회 중 에러", error);
+          similarQuestion.push(null);
+        }
+      }
+   
+     
+  
+      // 상세 정보를 처리하거나 저장할 수 있습니다.
+      // 예를 들어, similarQuestions를 state에 저장하거나 처리할 수 있습니다.
+    } catch (error) {
+      console.error("비슷한 문제 받아오는 중 에러", error);
+    }
     
-  //   const apiUrl = `/api/v1/question/detail/${questionPk}`;
-  //   //맞으면 1 틀리면 0
-  //   const data={
-  //     codeStatus:1,
-  //     content:code,
-  //     compileTime : time,
-  //     memory:memory,
-  //     accarcy:80
+   
+    if(similarQuestion.length === similarArr.length){
+      console.log("similRqUESTION",similarQuestion)
+      setFinalSimilarQuestion(similarQuestion)
+      setIsPopup(!isPopup)
+    }
 
-  //   }
-  //   axios
-  //   .post(apiUrl, data, {
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${localStorage.getItem("access")}`,
-  //     },
-  //   })
-  //   .then((response) => {
-  //     console.log(localStorage.getItem("access"));
-  //     console.log(response.data);
-  
-  //   })
-  //   .catch((error) => {
-  //     console.error("API 호출 중 에러:", error);
-  //   });
 
-    setIsPopup(!isPopup)
   }
 
   const handleExecuteCode = (testcaseValue,compileResult) => {
@@ -250,7 +261,7 @@ int main() {
       Python: "print(1)",
       C: `#include <stdio.h>\n
 int main() {
-    printf("Hello SEcodeVerse!");
+    printf("Hello SEcodeVerse");
     return 0;
 }`,
       "C++": `#include <iostream>
@@ -367,8 +378,8 @@ int main() {
           </div>
         </div>
       </div>
-      {isPopup && isSuccess && <SuccessResult onClose={() => setIsPopup(false)} value ={successResult} />}
-      {isPopup && !isSuccess && <FailResult onClose={() => setIsPopup(false)} value={successResult } />}
+      {isPopup && isSuccess && <SuccessResult onClose={() => setIsPopup(false)} value ={successResult} code ={code} fianlSimilarQuestion = {fianlSimilarQuestion}/>}
+      {isPopup && !isSuccess && <FailResult onClose={() => setIsPopup(false)} value={successResult } code ={code} fianlSimilarQuestion = {fianlSimilarQuestion}/>}
     </section>
   );
 };

@@ -25,6 +25,7 @@ const Header = ({auth, setAuth}) => {
           console.log(response.data)
           setAuth(false)
           localStorage.removeItem('access');
+          localStorage.removeItem('roleType')
           console.log(localStorage.getItem('access'))
           navigate('/')
         })
@@ -35,6 +36,20 @@ const Header = ({auth, setAuth}) => {
       
 
   };
+  const goMyPage = () =>{
+    if(localStorage.getItem('access')===null){
+     alert("로그인 후 이용 가능한 서비스 입니다.")
+    }
+    else{
+      if(localStorage.getItem('roleType')==="USER"){
+        navigate('/mypage')
+      }
+      else{
+        navigate('/admin')
+      }
+      
+    }
+  }
   return (
   
       <header>
@@ -46,7 +61,7 @@ const Header = ({auth, setAuth}) => {
                 <li className='header_Benner_item'><Link to="/community">커뮤니티</Link></li>
                 <li className='header_Benner_item'><Link to="/question">문제풀기</Link></li>
                 <li className='header_Benner_item'><Link to="/league">CTF</Link></li>
-                <li className='header_Benner_item'><Link to="/mypage">마이페이지</Link></li>
+                <li className='header_Benner_item' onClick={ goMyPage}>마이페이지</li>
               </ul>
             </div>
             <div className='header_text_btn'>
