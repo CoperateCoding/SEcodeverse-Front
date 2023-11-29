@@ -55,7 +55,7 @@ const SignUp = () => {
       ret = false;
     } else {
       // 영어와 숫자로 이루어진 6~12자리 문자열인지 확인
-      if (/^(?=.*[a-zA-Z])[a-z0-9]{6,12}$/u.test(inputChar)) {
+      if (/^(?=.*[a-z0-9])[a-z0-9]{6,12}$/u.test(inputChar)) {
         ret = true;
       } else {
         ret = false;
@@ -79,7 +79,7 @@ const SignUp = () => {
       setIsAcceptPw(false);
     } else {
       if (
-        /^(?=.*[a-zA-Z])(?=.*[~!@#$%^&*()_=+|{};:<>/?])[a-zA-Z0-9~~!@#$%^&*()_=+|{};:<>/?]{12,20}$/.test(
+        /^(?=.*[a-zA-Z0-9])(?=.*[~!@#$%^&*()_=+|{};:<>/?])[a-zA-Z0-9~~!@#$%^&*()_=+|{};:<>/?]{12,20}$/.test(
           inputChar
         )
       ) {
@@ -194,39 +194,36 @@ const SignUp = () => {
     if (isExistenceId == true || isExistenceNickName == true) {
       setIsNotyfy(true);
     } else {
-      axios
-        .post("/api/v1/user/signup", {
-          id: inputID,
-          pw: inputPW,
-          name: inputName,
-          nickname: inputNickname,
-        })
-        .then((response) => {
-          console.log(response.data);
-          navigate("/login");
-        })
-        .catch((error) => {
-          console.error("API 호출 중 에러:", error);
-        });
-    }
-
-    //비번
-    if (inputPW == checkPW) {
-      setIsSamePw(true);
-      if (isSamePw && isAcceptPw) {
-        //이거일 때만 해주세여 ㄱㄱ
+      if (inputPW == checkPW) {
+        setIsSamePw(true);
+        if (isSamePw && isAcceptPw) {
+          axios
+            .post("/api/v1/user/signup", {
+              id: inputID,
+              pw: inputPW,
+              name: inputName,
+              nickname: inputNickname,
+            })
+            .then((response) => {
+              console.log(response.data);
+              navigate("/login");
+            })
+            .catch((error) => {
+              console.error("API 호출 중 에러:", error);
+            });
+        } else {
+          if (!isAcceptPw) {
+            alert(
+              "비밀번호는 영문, 숫자, 특수기호가 포함된 12~20자리로 입력해주세요."
+            );
+          }
+          if (!isSamePw) {
+            alert("입력하신 비밀번호가 비밀번호 확인과 일치하지 않습니다.");
+          }
+        }
       } else {
-        if (!isAcceptPw) {
-          alert(
-            "비밀번호는 영문, 숫자, 특수기호가 포함된 12~20자리로 입력해주세요."
-          );
-        }
-        if (!isSamePw) {
-          alert("입력하신 비밀번호가 비밀번호 확인과 일치하지 않습니다.");
-        }
+        setIsSamePw(false);
       }
-    } else {
-      setIsSamePw(false);
     }
   };
 
