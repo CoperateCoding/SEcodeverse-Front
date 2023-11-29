@@ -130,7 +130,9 @@ const FailResult = ({ onClose, value, code, similar}) => {
                       조언보기
                     </button>
                   )}
-                  {isReview && <>ai 조언</>}
+                  {isReview && 
+                  (<>{aiReview}</>)}
+                  
                 </td>
                 <td className="fail-comment-similar">
                   {/* {question.map((value, index) => (

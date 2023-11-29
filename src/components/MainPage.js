@@ -16,6 +16,7 @@ const Main_Page_Body = () => {
     axios.get(apiUrl)
     
     .then(response => {
+      console.log("인기게시글",response.data)
       console.log(response.data)
       setBoardList(response.data.list)
     
@@ -26,7 +27,7 @@ const Main_Page_Body = () => {
 
     axios.get('api/v1/question/search/recent')
     .then(response => {
-      console.log(response.data)
+
       setQuestionList(response.data)
     
     })

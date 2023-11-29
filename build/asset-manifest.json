@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e683d061.css",
+    "main.js": "/static/js/main.af7c26b1.js",
+    "static/media/mascot_02.png": "/static/media/mascot_02.d7b32a0e9196c8ef233c.png",
+    "static/media/img_background.png": "/static/media/img_background.01160b92b9bb0e89478e.png",
+    "static/media/mascot_01.png": "/static/media/mascot_01.649ac7223c9c8be49387.png",
+    "static/media/write_editor_background.png": "/static/media/write_editor_background.9faf06d0d7f86a6d2100.png",
+    "static/media/grade_01.jpg": "/static/media/grade_01.4dc7e9ffb7f2faa4fc8b.jpg",
+    "static/media/league_main.png": "/static/media/league_main.6ffc6a961678050f456d.png",
+    "static/media/mypage.png": "/static/media/mypage.902041e85a5b691f772f.png",
+    "static/media/SEcodeVerse_logo.png": "/static/media/SEcodeVerse_logo.97cc941031e3bc1c25e8.png",
+    "static/media/admin_page.png": "/static/media/admin_page.68a71c1ff492ba3fe77c.png",
+    "static/media/codingBadge.png": "/static/media/codingBadge.956eb9f40c30c9a02a56.png",
+    "static/media/x.png": "/static/media/x.a3ff8b661977bb3334e2.png",
+    "index.html": "/index.html",
+    "main.e683d061.css.map": "/static/css/main.e683d061.css.map",
+    "main.af7c26b1.js.map": "/static/js/main.af7c26b1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e683d061.css",
+    "static/js/main.af7c26b1.js"
+  ]
+}

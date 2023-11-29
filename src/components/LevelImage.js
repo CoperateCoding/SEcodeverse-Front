@@ -1,37 +1,24 @@
 import React from 'react';
 
 const LevelImage = ({ level }) => {
-  let imagePath = null;
+  const getImgLevel = (level) => {
+    console.log(level)
+    if (level === 1) {
+      return "https://secodeverse-bucket2.s3.ap-northeast-2.amazonaws.com/coding_badge/%EC%95%8C.jpg";
+    } else if (level === 2) {
+      return "https://secodeverse-bucket2.s3.ap-northeast-2.amazonaws.com/coding_badge/%EC%95%84%EA%B8%B0+%EA%B9%8C%EB%A7%88%EA%B7%80.jpg";
+    } else if (level === 3) {
+      return "https://secodeverse-bucket2.s3.ap-northeast-2.amazonaws.com/coding_badge/%EC%B4%88%EB%94%A9+%EA%B9%8C%EB%A7%88%EA%B7%80.jpg";
+    } else if (level === 4) {
+      return "https://secodeverse-bucket2.s3.ap-northeast-2.amazonaws.com/coding_badge/%EC%82%AC%EC%B6%98%EA%B8%B0+%EA%B9%8C%EB%A7%88%EA%B7%80.jpg";
+    } else if (level === 5) {
+      return "https://secodeverse-bucket2.s3.ap-northeast-2.amazonaws.com/coding_badge/%EB%8C%80%EB%94%A9+%EA%B9%8C%EB%A7%88%EA%B7%80.jpg";
+    } else if (level === 6) {
+      return "https://secodeverse-bucket2.s3.ap-northeast-2.amazonaws.com/coding_badge/%EC%84%9D%EB%B0%95%EC%82%AC+%EA%B9%8C%EB%A7%88%EA%B7%80.jpg";
+    }
+  };
 
-  // 난이도에 따라 이미지 경로 설정
-  switch (level) {
-    case 1:
-      imagePath = '/images/grade_01.jpg';
-      break;
-    case 2:
-      imagePath = '/images/grade_02.jpg';
-      break;
-    case 3:
-      imagePath = '/images/grade_03.jpg';
-      break;
-    case 4:
-      imagePath = '/images/grade_04.jpg';
-      break;
-    case 5:
-      imagePath = '/images/grade_05.jpg';
-      break;
-    case 6:
-      imagePath = '/images/grade_06.jpg';
-      break;
-    default:
-      imagePath = null;
-  }
-
-  if (imagePath) {
-    return <img src={imagePath} alt={level} />;
-  } else {
-    return null; // level이 1에서 6 사이에 해당하지 않으면 null 반환 (이미지를 삽입하지 않음)
-  }
-}
+  return <img src={getImgLevel(level)} alt={level} />;
+};
 
 export default LevelImage;
