@@ -14,7 +14,7 @@ const MyWrongQuestion = () => {
       pageSize: 8,
     };
     axios
-      .get(`/api/v1/question/wrong/user=${userPk}`, {
+      .get(`/api/v1/question/wrong`, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('access')}`
@@ -38,13 +38,13 @@ const MyWrongQuestion = () => {
   }, []);
   
   const getList = (paging) =>{
-    const userPk = localStorage.getItem('access');
+
     const params = {
       page: paging,
       pageSize: 8,
     };
     axios
-      .get(`/api/v1/question/wrong/user=${userPk}`, {
+      .get(`/api/v1/question/wrong`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.getItem('access')}`,
