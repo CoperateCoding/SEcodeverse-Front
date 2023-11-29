@@ -57,17 +57,23 @@ const CodingBadge = ({user}) => {
   const expData = { badgeName: "석박사까마귀", exp: 5317 };
   let limitExp = 0;
 
-  if (expData.exp > 0 && expData.exp <= 100) {
+  if(user.exp === null){
     limitExp = 100;
-  } else if (expData.exp > 100 && expData.exp <= 500) {
-    limitExp = 500;
-  } else if (expData.exp > 500 && expData.exp <= 800) {
-    limitExp = 800;
-  } else if (expData.exp > 1200 && expData.exp <= 5000) {
-    limitExp = 5000;
-  } else if (expData.exp > 5000) {
-    limitExp = 10000;
   }
+  else{
+    if (user.exp > 0 && user.exp <= 100) {
+      limitExp = 100;
+    } else if (user.exp > 100 && user.exp <= 500) {
+      limitExp = 500;
+    } else if (user.exp > 500 && user.exp <= 800) {
+      limitExp = 800;
+    } else if (user.exp > 1200 && user.exp <= 5000) {
+      limitExp = 5000;
+    } else if (user.exp > 5000) {
+      limitExp = 10000;
+    }
+  }
+  
 
   //유사문제 추천 관련
   const questionData = [
@@ -102,28 +108,27 @@ const CodingBadge = ({user}) => {
                 <div className="mypage-codingBadge-info-contents">
                   <div className="mypage-codingBadge-info-img-box">
                     <div className="mypage-codingBadge-info-img">
-                      {/* <img src={user.imgUrl}></img> */}
+                      <img src={user.imgUrl}></img>
                     </div>
                   </div>
                   <div className="mypage-codingBadge-info-box">
                     <div className="mypage-codingBadge-info-text-box">
                       <span className="mypage-codingBadge-info-text-badge-name">
-                        {/* {user.badgeName} */}
+                        {user.badgeName}
                       </span>
-                      {/* <span className="mypage-codingBadge-info-text-exp">
-                        누적 경험치 : 
-                        {user.exp}
-                      </span> */}
-                      {/* <span className="mypage-codingBadge-info-text-remain-exp">
-                        남은 경험치 : 
-                        {user.exp && limitExp - user.exp}
-                      </span> */}
+                      <span className="mypage-codingBadge-info-text-exp">
+                        누적 경험치 : {user && user.exp !== null ? user.exp : 0}
+                      </span>
+                      <span className="mypage-codingBadge-info-text-remain-exp">
+                        남은 경험치 : {user && user.exp !== null ?  limitExp - user.exp : 0}
+                      </span>
                     </div>
-                    {/* <div className="mypage-codingBadge-info-exp-box">
+                    <div className="mypage-codingBadge-info-exp-box">
                       <div className="mypage-codingBadge-info-exp-gage"  style={user.exp && { width: `${((user.exp / limitExp) * 100).toFixed(3)}%` }}>
-                        {user.exp && ((user.exp / limitExp) * 100).toFixed(3)}%
+                        {user.exp && ((user.exp / limitExp) * 100).toFixed(3)}
+                        {user.exp !== null ? "%" : ""}
                       </div>
-                    </div> */}
+                    </div>
                   </div>
                 </div>
               </div>
