@@ -199,5 +199,5 @@ section{
     background-image: url('../../public/images/ctf_none.png');
     background-repeat: no-repeat;
     background-position: top center;
-    background-size: cover;
+    background-size: 90% 90%;
 }

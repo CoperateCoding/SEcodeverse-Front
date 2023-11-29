@@ -32,6 +32,7 @@ const Community = () => {
 
   axios.get(url)
     .then(response => {
+      console.log("boardList",response.data)
       setCommunityLit(response.data.list)
       setTotalpages(response.data.cnt % 8 > 0 ? response.data.cnt/8 + 1 : response.data.cnt/8);
       console.log(response.data)
