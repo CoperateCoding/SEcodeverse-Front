@@ -147,7 +147,7 @@ const SignUp = () => {
     const id = inputID;
 
     axios
-      .get(`api/v1/user/id/${id}/exists`)
+      .get(`${process.env.REACT_APP_DB_HOST}`+`api/v1/user/id/${id}/exists`)
       .then((response) => {
         console.log(response.data);
         if (response.data.exists === true) {
@@ -169,7 +169,7 @@ const SignUp = () => {
   const isNickNamExistence = () => {
     const nickName = inputNickname;
     axios
-      .get(`api/v1/user/nickname/${nickName}/exists`)
+      .get(`${process.env.REACT_APP_DB_HOST}`+`api/v1/user/nickname/${nickName}/exists`)
       .then((response) => {
         console.log(response.data);
 
@@ -198,7 +198,7 @@ const SignUp = () => {
         setIsSamePw(true);
         if (isSamePw && isAcceptPw) {
           axios
-            .post("/api/v1/user/signup", {
+            .post(`${process.env.REACT_APP_DB_HOST}`+"/api/v1/user/signup", {
               id: inputID,
               pw: inputPW,
               name: inputName,

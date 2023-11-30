@@ -13,7 +13,7 @@ const Chatbot = () => {
     const userMessage = { sender: "user", text: value };
     const updatedMessages = [...messages, userMessage];
   
-    axios.get('api/v1/chatbot', {
+    axios.get(`${process.env.REACT_APP_DB_HOST}`+'/api/v1/chatbot', {
       params: {
         input: value
       },

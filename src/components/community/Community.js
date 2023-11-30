@@ -14,7 +14,7 @@ const Community = () => {
   };
 
   useEffect(() => {
-    const apiUrl = '/api/v1/board/';
+    const apiUrl = `${process.env.REACT_APP_DB_HOST}`+'/api/v1/board/';
     const sort="RECENT"
     const categorPk=1
     const page=1
@@ -103,7 +103,7 @@ const Community = () => {
     }
   };
   const getList = (value,selectsort,category,pageing) => {
-    const apiUrl = '/api/v1/board/';
+    const apiUrl = `${process.env.REACT_APP_DB_HOST}`+'/api/v1/board/';
     const sort=selectsort
     const page=pageing
     let params={}

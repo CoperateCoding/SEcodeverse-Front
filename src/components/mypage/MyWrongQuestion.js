@@ -14,7 +14,7 @@ const MyWrongQuestion = () => {
       pageSize: 8,
     };
     axios
-      .get(`/api/v1/question/wrong`, {
+      .get(`${process.env.REACT_APP_DB_HOST}`+`/api/v1/question/wrong`, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('access')}`
@@ -44,7 +44,7 @@ const MyWrongQuestion = () => {
       pageSize: 8,
     };
     axios
-      .get(`/api/v1/question/wrong`, {
+      .get(`${process.env.REACT_APP_DB_HOST}`+`/api/v1/question/wrong`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.getItem('access')}`,

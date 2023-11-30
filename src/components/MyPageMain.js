@@ -17,7 +17,7 @@ const MyPageMain = () => {
   const [user,setUser]=useState();
 
   useEffect(() => {
-    const apiUrl = "/api/v1/user/info/my";
+    const apiUrl = `${process.env.REACT_APP_DB_HOST}`+"/api/v1/user/info/my";
 
     axios
       .get(apiUrl, {

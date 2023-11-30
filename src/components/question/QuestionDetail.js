@@ -28,7 +28,7 @@ const QuestionDetail = () => {
   useEffect(() => {
     console.log(questionPk);
     console.log("pk", questionPk);
-    const apiUrl = `/api/v1/question/detail/${questionPk}`;
+    const apiUrl = `${process.env.REACT_APP_DB_HOST}`+`/api/v1/question/detail/${questionPk}`;
 
     axios
       .get(apiUrl)
@@ -112,7 +112,7 @@ const QuestionDetail = () => {
     await sleep(5000); 
     let similarArr=[]
     try {
-      const response = await axios.get('/api/v1/chatbot/similary', {
+      const response = await axios.get(`${process.env.REACT_APP_DB_HOST}`+'/api/v1/chatbot/similary', {
         params: {
           levelPk: question.levelPk,
           categoryPk: question.categoryPk
@@ -134,7 +134,7 @@ const QuestionDetail = () => {
         try {
           console.log("for문 들어옴 " ,i)
           const similarItem = similarArr[i];
-          const detailResponse = await axios.get(`/api/v1/question/detail/${similarItem}`, {
+          const detailResponse = await axios.get(`${process.env.REACT_APP_DB_HOST}`+`/api/v1/question/detail/${similarItem}`, {
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${localStorage.getItem("access")}`,
@@ -174,7 +174,7 @@ const QuestionDetail = () => {
   const handleExecuteCode = (testcaseValue,compileResult) => {
     console.log("보내기 시도합니다")
     const FormattedCode = code.replace(/\n/g, '\n');
-    const apiUrl = '/api/v1/question/solveQuestion';
+    const apiUrl = `${process.env.REACT_APP_DB_HOST}`+'/api/v1/question/solveQuestion';
     const params = new URLSearchParams();
     
     params.append("userCode", FormattedCode);

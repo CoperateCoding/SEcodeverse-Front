@@ -15,7 +15,7 @@ const MyQuestion = () => {
       pageSize: 8,
     };
     axios
-      .get(`/api/v1/question/post/user=${userPk}`, {
+      .get(`${process.env.REACT_APP_DB_HOST}`+`/api/v1/question/post/user=${userPk}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.getItem('access')}`,
@@ -40,7 +40,7 @@ const MyQuestion = () => {
       pageSize: 8,
     };
     axios
-      .get(`/api/v1/question/post/user=${userPk}`, {
+      .get(`${process.env.REACT_APP_DB_HOST}`+`/api/v1/question/post/user=${userPk}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.getItem('access')}`,

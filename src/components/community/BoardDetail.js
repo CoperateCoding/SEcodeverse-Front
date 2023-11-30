@@ -20,7 +20,7 @@ const BoardDeatil = () => {
     console.log("useEffect");
     console.log(commumityPk);
     console.log("pk", commumityPk);
-    const apiUrl = `/api/v1/board/${commumityPk}`;
+    const apiUrl = `${process.env.REACT_APP_DB_HOST}`+`/api/v1/board/${commumityPk}`;
 
     axios
       .get(apiUrl)
@@ -34,7 +34,7 @@ const BoardDeatil = () => {
         console.error("처음 게시글 정보 가져오는 중 에러남:", error);
       });
 
-    const apiUrl1 = `/api/v1/comment/${commumityPk}`;
+    const apiUrl1 = `${process.env.REACT_APP_DB_HOST}`+`/api/v1/comment/${commumityPk}`;
 
     axios
       .get(apiUrl1)
@@ -58,7 +58,7 @@ const BoardDeatil = () => {
 
   const deletePost = () => {
     axios
-      .delete(`/api/v1/board/${commumityPk}`, {
+      .delete(`${process.env.REACT_APP_DB_HOST}`+`/api/v1/board/${commumityPk}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("access")}`,
@@ -97,7 +97,7 @@ const BoardDeatil = () => {
 
   const likeHandler = () => {
     axios
-      .get(`/api/v1/likes/${commumityPk}`, {
+      .get(`${process.env.REACT_APP_DB_HOST}`+`/api/v1/likes/${commumityPk}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("access")}`,
@@ -108,7 +108,7 @@ const BoardDeatil = () => {
         if (response.data === false) {
           axios
             .post(
-              `/api/v1/likes/${commumityPk}`,
+              `${process.env.REACT_APP_DB_HOST}`+ `/api/v1/likes/${commumityPk}`,
               {},
               {
                 headers: {
@@ -125,7 +125,7 @@ const BoardDeatil = () => {
             });
         } else {
           axios
-            .delete(`/api/v1/likes/${commumityPk}`, {
+            .delete(`${process.env.REACT_APP_DB_HOST}`+`/api/v1/likes/${commumityPk}`, {
               headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${localStorage.getItem("access")}`,
@@ -151,7 +151,7 @@ const BoardDeatil = () => {
       content: writeComment,
     };
     axios
-      .post("/api/v1/comment", data, {
+      .post(`${process.env.REACT_APP_DB_HOST}`+"/api/v1/comment", data, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("access")}`,
