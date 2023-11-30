@@ -364,3 +364,13 @@
   .menu-option:hover {
     background-color: #FEEBB6;
   }
+
+  #menuDropdown a:visited{
+    text-decoration: none;
+    color: #000000;
+  }
+
+  #menuDropdown a{
+    text-decoration: none;
+    color: #000000;
+  }
