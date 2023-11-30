@@ -36,7 +36,7 @@ const WriteEditor = () => {
         console.log(uploadFile);
         try {
           const presignedResponse = await axios.post(
-            "/api/v1/s3/presigned",
+            `${process.env.REACT_APP_DB_HOST}` + "/api/v1/s3/presigned",
             {
               imageName: uploadFile.name,
               folderName: "board",
@@ -126,7 +126,7 @@ const WriteEditor = () => {
       console.log(title);
       console.log(desc);
       axios
-        .post("/api/v1/board/", data, {
+        .post( `${process.env.REACT_APP_DB_HOST}` +"/api/v1/board/", data, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("access")}`,

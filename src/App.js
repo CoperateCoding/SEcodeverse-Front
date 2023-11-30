@@ -29,13 +29,13 @@ function App() {
     
     if(localStorage.getItem('access')!=null){
       const  accessToken=localStorage.getItem('access')
-      axios.get('api/v1/token/validate',{
+      axios.get(`${process.env.REACT_APP_DB_HOST}`+'/api/v1/token/validate',{
         headers: {
           Authorization: `Bearer ${accessToken}`
         }
       }).then(response => {
         // 응답 처리
-        console.log(response.data);
+        console.log("토큰 처리 응담",response.data);
         if(response.data.isTokenValid===true){
           setAuth(true)
         }
@@ -43,9 +43,10 @@ function App() {
       })
       .catch(error => {
         // 오류 처리
-        console.error(error);
+        console.error("리로딩시 토큰 처리 에러",error);
       });
     }
+    console.log("리로딩시 토큰값",localStorage.getItem('access'))
     console.log('로그인 인증값',auth)
   },[auth])
 

@@ -72,6 +72,7 @@ const BoardDeatil = () => {
         console.error("게시글 삭제 중 에러", error);
       });
     alert("삭제를 선택했습니다.");
+    
     toggleMenu(); // 메뉴 닫기
   };
 
