@@ -11,6 +11,7 @@ import axios from 'axios';
 
 const LeagueMain = () => {
   const [league, setLeague] = useState();
+  const [leaguePk, setLeaguePk] = useState();
 
   //dummy
   const leagueData = {
@@ -22,18 +23,18 @@ const LeagueMain = () => {
     description: "description",
   };
 
-  // useEffect(() => {
-  //   const apiUrl = "/api/v1/ctf/league/2";
-  //   axios.get(apiUrl)
-  //     .then((response) => {
+  useEffect(() => {
+    const apiUrl =  `${process.env.REACT_APP_DB_HOST}` +"/api/v1/ctf/league/current";
+    axios.get(apiUrl)
+      .then((response) => {
        
-  //       console.log(response.data);
-  //       setLeague(response.data)
-  //   })
-  //     .catch((error) => {
-  //       console.error("API 호출 중 에러:", error);
-  //     });
-  // }, []);
+        console.log(response.data);
+        setLeague(response.data)
+    })
+      .catch((error) => {
+        console.error("API 호출 중 에러:", error);
+      });
+  }, []);
 
 
   const [isOpen, setIsOpen] = useState(false);
@@ -134,22 +135,48 @@ const LeagueMain = () => {
   };
 
   const handleCreateCheck = () => {
-    if (isName && isPassword) {
-      setTeamName("");
-      setTeamPw("");
+   
+    //   data = {
+    //     leaguePk: leaguePk,
+    //     categoryPk: selectedCategory,
+    //     ctfQuestionType: questionType,
+    //     name: titleValue,
+    //     score: scoreValue,
+    //     description: content,
+    //     answer: answer
+    //   };
+    
+    
+    // axios
+    //   .post(`${process.env.REACT_APP_DB_HOST}` + "/api/v1/admin/ctf/question", data, {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: `Bearer ${localStorage.getItem("access")}`,
+    //     },
+    //   })
+    //   .then((response) => {
+    //     console.log(localStorage.getItem("access"));
+    //     console.log(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.error("리그 등록중 에러:", error);
+    //   });
+    // if (isName && isPassword) {
+    //   setTeamName("");
+    //   setTeamPw("");
 
-      setIsCreate(!isCreate);
-      setIsTeam(true);
-    } else {
-      if (!isName) {
-        alert(
-          "팀 이름은 2~8자 이내의 영어, 한글, 숫자의 조합으로 입력해주세요."
-        );
-      }
-      if (!isPassword) {
-        alert("비밀번호는 4자리의 숫자로 입력해주세요.");
-      }
-    }
+    //   setIsCreate(!isCreate);
+    //   setIsTeam(true);
+    // } else {
+    //   if (!isName) {
+    //     alert(
+    //       "팀 이름은 2~8자 이내의 영어, 한글, 숫자의 조합으로 입력해주세요."
+    //     );
+    //   }
+    //   if (!isPassword) {
+    //     alert("비밀번호는 4자리의 숫자로 입력해주세요.");
+    //   }
+    // }
   };
 
   const handelCreateClick = () => {
