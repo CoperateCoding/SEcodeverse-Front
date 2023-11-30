@@ -375,6 +375,12 @@ int main() {
             >
               초기화
             </div>
+            <div
+              className="question-detail-button-delete"
+              
+            >
+              삭제
+            </div>
           </div>
         </div>
       </div>

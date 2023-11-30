@@ -10,7 +10,9 @@ import TeamView from "./TeamView";
 import axios from 'axios';
 
 const LeagueMain = () => {
-  const [league, setLeague] = useState()
+  const [league, setLeague] = useState();
+
+  //dummy
   const leagueData = {
     name: "CTF League Name",
     openTime: "2023-11-28T05:29:38.541Z",
@@ -20,18 +22,18 @@ const LeagueMain = () => {
     description: "description",
   };
 
-  useEffect(() => {
-    const apiUrl = "/api/v1/ctf/league/2";
-    axios.get(apiUrl)
-      .then((response) => {
+  // useEffect(() => {
+  //   const apiUrl = "/api/v1/ctf/league/2";
+  //   axios.get(apiUrl)
+  //     .then((response) => {
        
-        console.log(response.data);
-        setLeague(response.data)
-    })
-      .catch((error) => {
-        console.error("API 호출 중 에러:", error);
-      });
-  }, []);
+  //       console.log(response.data);
+  //       setLeague(response.data)
+  //   })
+  //     .catch((error) => {
+  //       console.error("API 호출 중 에러:", error);
+  //     });
+  // }, []);
 
 
   const [isOpen, setIsOpen] = useState(false);
@@ -46,9 +48,8 @@ const LeagueMain = () => {
   const [isName, setIsName] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
 
-  // 리그 이벤트의 시작 및 종료 시간 설정(임의)
-  const leagueStartTime = new Date(leagueData.openTime);
-  const leagueEndTime = new Date(leagueData.closeTime);
+  // 리그 이벤트의 시작 및 종료 시간 설정
+
 
   //team 있냐?
   const [isTeamPopup, setIsTeamPopup] = useState(false);
@@ -56,40 +57,41 @@ const LeagueMain = () => {
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-
-  //   // // 현재 시간이 리그 이벤트 시간 내에 있는지 확인
-  //   // const currentTime = new Date();
-
-  //   // if (currentTime >= leagueStartTime && currentTime <= leagueEndTime) {
-  //   //   setIsOpen(true);
-  //   // } else {
-  //   //   setIsOpen(false);
-  //   // }
-  //   const api = 'api/v1/ctf/league/2'
-  //   axios.get(api, {
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${localStorage.getItem("access")}`,
-  //     }
-  //   })
-  //   .then(response => {
-  
-  //     console.log("리그정보", response)
-   
-  //   })
-  //   .catch(error => {
-  //     // 에러 처리
-  //     console.error(error);
-  //   });
-  // }, []);
+  useEffect(() => {
+    const api = 'api/v1/ctf/league/2'
+    axios.get(api, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+      }
+    })
+    .then(response => {
+      console.log("리그정보", response);
+      setLeague(response.data);
+    })
+    .catch(error => {
+      // 에러 처리
+      console.error(error);
+    });
+  }, []);
 
   const handleLeagueCategoryRedirect = () => {
+    const currentTime = new Date();
+
+    const leagueStartTime = new Date(league.openTime);
+    const leagueEndTime = new Date(league.closeTime);
+
+    if (currentTime >= leagueStartTime && currentTime <= leagueEndTime) {
+      setIsOpen(true);
+    } else {
+      setIsOpen(false);
+    }
+
     if (isOpen) {
       navigate("/league/category");
     } else {
       // 리그가 현재 열려 있지 않은 경우 처리
-      // alert("리그는 현재 열려 있지 않습니다");
+      alert("리그는 현재 열려 있지 않습니다");
     }
   };
 
