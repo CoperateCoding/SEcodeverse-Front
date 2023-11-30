@@ -20,6 +20,7 @@ import LeagueCategoryList from './components/league/LeagueCategoryList';
 import LeagueCategoryDetail from './components/league/LeagueCategoryDetail';
 import LeagueResult from './components/league/LeagueResult';
 import axios from 'axios';
+import PostEditor from './components/community/PostEditor';
 
 function App() {
 
@@ -61,6 +62,7 @@ function App() {
       <Route path="/mypage" element={<MyPageMain />} />
       <Route path="/community" element={<Community />} />
       <Route path="/community/write" element={<WriteEditor />} />
+      <Route path="/community/edit/:commumityPk" element={<PostEditor />} />
       <Route path="/community/post/:commumityPk" element={<BoardDeatil />} />
       <Route path="/signUp" element={<SignUp />} />
       <Route path="/login" element={<Login setAuth={setAuth} />} />

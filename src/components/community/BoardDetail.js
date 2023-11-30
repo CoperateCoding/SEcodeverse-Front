@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import "react-quill/dist/quill.snow.css";
 import CommentComponent from "./CommentComponent";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 
 const BoardDeatil = () => {
   const [board, setBoard] = useState();
@@ -52,8 +52,8 @@ const BoardDeatil = () => {
   };
 
   const editPost = () => {
-    alert("수정을 선택했습니다.");
     toggleMenu(); // 메뉴 닫기
+    navigate("/community/wrtite");
   };
 
   const deletePost = () => {
@@ -231,9 +231,11 @@ const BoardDeatil = () => {
                 메뉴
                 {menuVisible && (
                   <div id="menuDropdown" className="board-detail-menu-dropdown">
-                    <div className="menu-option" onClick={editPost}>
+                    <Link  to={`/community/edit/${commumityPk}`}>
+                      <div className="menu-option">
                       수정
-                    </div>
+                      </div>
+                    </Link>
                     <div className="menu-option" onClick={deletePost}>
                       삭제
                     </div>
@@ -263,7 +265,7 @@ const BoardDeatil = () => {
                     <th className="comment-writer">댓쓴이</th>
                     <th className="comment-contents">내용</th>
                     <th className="comment-date">작성 날짜</th>
-                    <th className="comment-modify ">수정</th>
+                    <th className="comment-modify">수정</th>
                     <th className="comment-delete">삭제</th>
                   </tr>
                 </thead>

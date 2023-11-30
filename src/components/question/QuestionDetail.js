@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import SuccessResult from "./SuccessResult";
 import FailResult from "./FailResult";
+import EditQuestion from "./EditQuestion";
 // import { resolveObjectKey } from "chart.js/dist/helpers/helpers.core";
 
 const QuestionDetail = () => {
@@ -25,6 +26,8 @@ const QuestionDetail = () => {
   const [ similar, setSimilar] = useState([]);
   const similarQuestion =[]
   const [fianlSimilarQuestion, setFinalSimilarQuestion] = useState([])
+  const [isEdit, setIsEdit] = useState(false);
+
   useEffect(() => {
     console.log(questionPk);
     console.log("pk", questionPk);
@@ -152,8 +155,6 @@ const QuestionDetail = () => {
           similarQuestion.push(null);
         }
       }
-   
-     
   
       // 상세 정보를 처리하거나 저장할 수 있습니다.
       // 예를 들어, similarQuestions를 state에 저장하거나 처리할 수 있습니다.
@@ -288,6 +289,10 @@ int main() {
 }`);
   };
 
+  const handleQuestionEdit = ()=>{
+    setIsEdit(!isEdit);
+  }
+
   return (
     <section>
       <div className="question-detail-total-container">
@@ -375,9 +380,21 @@ int main() {
             >
               초기화
             </div>
+            <div
+              className="question-detail-button-edit"
+              onClick={handleQuestionEdit}
+            >
+              수정
+            </div>
+            <div
+              className="question-detail-button-delete"
+            >
+              삭제
+            </div>
           </div>
         </div>
-      </div>
+        {isEdit && <EditQuestion onClose = {handleQuestionEdit} question ={question} img = {img} />}
+      </div>   
       {isPopup && isSuccess && <SuccessResult onClose={() => setIsPopup(false)} value ={successResult} code ={code} fianlSimilarQuestion = {fianlSimilarQuestion}/>}
       {isPopup && !isSuccess && <FailResult onClose={() => setIsPopup(false)} value={successResult } code ={code} fianlSimilarQuestion = {fianlSimilarQuestion}/>}
     </section>

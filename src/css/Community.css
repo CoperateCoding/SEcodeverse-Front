@@ -52,6 +52,11 @@
     color: #404040;
 }
 
+.community-page-button-item1:hover{
+    opacity: 1; /* 클릭 시 투명도 증가 */
+    color: #000; /* 클릭 시 글자색 변경 */
+}
+
 .community-page-button-item1-clicked {
     opacity: 1; /* 클릭 시 투명도 증가 */
     color: #000; /* 클릭 시 글자색 변경 */
@@ -73,6 +78,11 @@
     cursor: pointer;
     opacity: 0.60;
     color: #404040;
+}
+
+.community-page-button-item2:hover{
+    opacity: 1; /* 클릭 시 투명도 증가 */
+    color: #000; /* 클릭 시 글자색 변경 */
 }
 
 .community-page-button-item2-clicked {
@@ -99,6 +109,11 @@
     color: #404040;
 }
 
+.community-page-button-item3:hover{
+    opacity: 1; /* 클릭 시 투명도 증가 */
+    color: #000; /* 클릭 시 글자색 변경 */
+}
+
 .community-page-button-item3-clicked {
     opacity: 1; /* 클릭 시 투명도 증가 */
     color: #000; /* 클릭 시 글자색 변경 */
@@ -121,6 +136,11 @@
     cursor: pointer;
     opacity: 0.60;
     color: #404040;
+}
+
+.community-page-button-item4:hover{
+    opacity: 1; /* 클릭 시 투명도 증가 */
+    color: #000; /* 클릭 시 글자색 변경 */
 }
 
 .community-page-button-item4-clicked {
@@ -147,6 +167,11 @@
     color: #404040;
 }
 
+.community-page-button-item5:hover{
+    opacity: 1; /* 클릭 시 투명도 증가 */
+    color: #000; /* 클릭 시 글자색 변경 */
+}
+
 .community-page-button-item5-clicked {
     opacity: 1; /* 클릭 시 투명도 증가 */
     color: #000; /* 클릭 시 글자색 변경 */
@@ -169,6 +194,11 @@
     cursor: pointer;
     opacity: 0.60;
     color: #404040;
+}
+
+.community-page-button-item6:hover{
+    opacity: 1; /* 클릭 시 투명도 증가 */
+    color: #000; /* 클릭 시 글자색 변경 */
 }
 
 .community-page-button-item6-clicked {
