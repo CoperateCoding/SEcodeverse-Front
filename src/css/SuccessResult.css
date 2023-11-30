@@ -202,7 +202,7 @@
     width: 50px;
     height: 50px;
 
-    background-image: url(../../public/images/codingBadge.png);
+    /* background-image: url(../../public/images/codingBadge.png); */
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
@@ -212,6 +212,10 @@
 
     margin-bottom: 0;
     margin-right: 15px;
+  }
+  .success-comment-similar > .recommend-user-wrapper > .recommend-user-img img{
+    width:100%;
+    height:100%;
   }
 
   .success-comment-similar > .recommend-user-title{

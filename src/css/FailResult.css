@@ -25,6 +25,10 @@
     background-color: #9091C0;
     border: 5px solid #ffffff;
 }
+.fail-comment-similar > .recommend-user-wrapper > .recommend-user-img img{
+    width:100%;
+    height:100%;
+  }
 
 .fail-wrapper{
     padding: 20px;

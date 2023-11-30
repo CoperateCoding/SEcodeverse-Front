@@ -13,7 +13,7 @@ const CommentComponent = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const apiUrl = `/api/v1/board/${commumityPk}`;
+    const apiUrl =`${process.env.REACT_APP_DB_HOST}`+ `/api/v1/board/${commumityPk}`;
 
     axios.get(apiUrl)
       .then(response => {
@@ -24,7 +24,7 @@ const CommentComponent = () => {
         console.error('API 호출 중 에러:', error);
       });
   
-    const apiUrl1 = `/api/v1/comment/${commumityPk}`;
+    const apiUrl1 = `${process.env.REACT_APP_DB_HOST}`+`/api/v1/comment/${commumityPk}`;
 
     axios.get(apiUrl1)
       .then(response => {
@@ -39,7 +39,7 @@ const CommentComponent = () => {
 
   const commentDelete = (pk) => {
     axios
-      .delete(`/api/v1/comment/${pk}`, {
+      .delete(`${process.env.REACT_APP_DB_HOST}`+`/api/v1/comment/${pk}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("access")}`,
@@ -69,7 +69,7 @@ const CommentComponent = () => {
     };
     
     axios
-      .patch(`/api/v1/comment/${pk}`, data, {
+      .patch(`${process.env.REACT_APP_DB_HOST}`+`/api/v1/comment/${pk}`, data, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("access")}`,
