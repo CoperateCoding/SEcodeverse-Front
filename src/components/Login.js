@@ -53,6 +53,9 @@ const Login = ({setAuth}) => {
           console.log("이용자의 타입은?",response.data.roleType)
           localStorage.setItem('roleType',response.data.roleType)
           console.log("저장된 유저 타입은 ",localStorage.getItem('roleType'))
+          console.log(localStorage.getItem('nickName'))
+          localStorage.setItem('nickName',response.data.nickName)
+          console.log('유저의 닉네임은', localStorage.getItem('nickName'))
 
           setAuth(true)
           navigate('/');

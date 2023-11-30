@@ -27,6 +27,8 @@ const Header = ({auth, setAuth}) => {
           localStorage.removeItem('access');
           localStorage.removeItem('roleType')
           console.log(localStorage.getItem('access'))
+          localStorage.removeItem('nickName')
+          console.log(localStorage.getItem('nickName'))
           navigate('/')
         })
         .catch(error => {
