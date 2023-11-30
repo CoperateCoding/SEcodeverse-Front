@@ -31,7 +31,7 @@ const FailResult = ({ onClose, value, code, fianlSimilarQuestion}) => {
 
     // console.log(code)
     // console.log("넘어온 SIMILARqUESTION",fianlSimilarQuestion)
-    const apiUrl = "/api/v1/chatbot/codeReview";
+    const apiUrl =`${process.env.REACT_APP_DB_HOST}`+ "/api/v1/chatbot/codeReview";
     axios
       .post(
         apiUrl,

@@ -34,7 +34,7 @@ const QuestionList = () => {
   }
 
   useEffect(() => {
-    const apiUrl = "/api/v1/question/search/";
+    const apiUrl = `${process.env.REACT_APP_DB_HOST}`+"/api/v1/question/search/";
     const params = {
       page: 1,
     };
@@ -83,7 +83,7 @@ const QuestionList = () => {
     return newCategorys;
   }
   const optionList = (paging) => {
-    const apiUrl = "/api/v1/question/search/";
+    const apiUrl = `${process.env.REACT_APP_DB_HOST}`+"/api/v1/question/search/";
     const sort = getSort(sortingOption);
     const categoryPks = getCategoryArr(categoryOptions);
     const levelPks = difficultyOptions;
@@ -140,7 +140,7 @@ const QuestionList = () => {
 
   const onSearchClick = () => {
     const keyword = search;
-    const apiUrl = "/api/v1/question/search/";
+    const apiUrl =`${process.env.REACT_APP_DB_HOST}`+ "/api/v1/question/search/";
     const sort = getSort(sortingOption);
     const categoryPks = getCategoryArr(categoryOptions);
     const levelPks = difficultyOptions;
@@ -329,7 +329,7 @@ const QuestionList = () => {
         console.log(uploadFile);
         try {
           const presignedResponse = await axios.post(
-            "/api/v1/s3/presigned",
+            `${process.env.REACT_APP_DB_HOST}`+"/api/v1/s3/presigned",
             {
               imageName: uploadFile.name,
               folderName: "question",
@@ -428,7 +428,7 @@ const QuestionList = () => {
       // 등록 처리
 
       axios
-        .post("/api/v1/question/post", data, {
+        .post(`${process.env.REACT_APP_DB_HOST}`+"/api/v1/question/post", data, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("access")}`,

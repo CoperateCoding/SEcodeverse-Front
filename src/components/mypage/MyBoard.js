@@ -9,7 +9,7 @@ const MyBorde = () => {
   const [boardList, setBoardList] = useState([])
   const [totalPages,setTotalpages]=useState(0); 
   useEffect(() => {
-    const apiUrl = '/api/v1/my/board';
+    const apiUrl =`${process.env.REACT_APP_DB_HOST}`+ '/api/v1/my/board';
     const page=1
     const params = {
       pageSize:8,
@@ -43,7 +43,7 @@ const MyBorde = () => {
   }, []);
 
   const getList = (paging) => {
-    const apiUrl = '/api/v1/my/board';
+    const apiUrl = `${process.env.REACT_APP_DB_HOST}`+'/api/v1/my/board';
  
     const params = {
       pageSize:8,

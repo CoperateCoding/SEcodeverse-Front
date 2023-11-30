@@ -34,7 +34,7 @@ const Login = ({setAuth}) => {
 
     const handleLogin = () => {
       
-        axios.post('/api/v1/user/login', {
+        axios.post(`${process.env.REACT_APP_DB_HOST}`+'/api/v1/user/login', {
           id: inputID,
           pw: inputPW,
           

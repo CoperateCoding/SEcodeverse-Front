@@ -17,7 +17,7 @@ const SuccessResult = ({ onClose, value, code, fianlSimilarQuestion }) => {
   const onClickReview = () => {
   
 
-    const apiUrl = "/api/v1/chatbot/codeReview";
+    const apiUrl = `${process.env.REACT_APP_DB_HOST}`+"/api/v1/chatbot/codeReview";
     axios
       .post(
         apiUrl,
