@@ -94,7 +94,7 @@ const BoardDeatil = () => {
       setMenuVisible(false);
     }
   };
-
+///
   // 컴포넌트가 마운트되면 클릭 이벤트를 추가
   React.useEffect(() => {
     document.addEventListener("click", handleOutsideClick);
