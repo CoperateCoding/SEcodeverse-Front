@@ -211,7 +211,7 @@
     font-weight: bold;
     font-size: 22px;
 
-    background-image: url(../../public/images/community_004.png);
+    background-image: url(../../public/images/community_005.png);
     background-repeat: no-repeat;
     background-position: top center;
     background-size: 100% 100%;
@@ -232,7 +232,7 @@
     font-weight: bold;
     font-size: 28px;
 
-    background-image: url(../../public/images/community_003.png);
+    background-image: url(../../public/images/community_004.png);
     background-repeat: no-repeat;
     background-position: top center;
     background-size: 100% 100%;
@@ -251,10 +251,36 @@
     font-weight: bold;
     font-size: 24px;
 
+    background-image: url(../../public/images/community_003.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: 100% 100%;
+}
+
+.question-detail-button-edit{
+    width: 200px;
+    height: 60px;
+
+    cursor: pointer;
+
+    margin-left: 20px;
+
+    text-align: center;
+    line-height: 55px;
+    
+    font-family: 'DungGeunMo-Regular';
+    font-weight: bold;
+    font-size: 22px;
+
     background-image: url(../../public/images/community_002.png);
     background-repeat: no-repeat;
     background-position: top center;
     background-size: 100% 100%;
+
+    display: flex;
+    justify-content: center;
+    justify-self: flex-end;
+
 }
 
 .question-detail-button-delete{
