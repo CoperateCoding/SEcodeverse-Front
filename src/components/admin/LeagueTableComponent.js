@@ -1,9 +1,14 @@
-const LeaugeTableComponent = ({isCreateLeague, toggleModifyLeague}) =>{
+import axios from 'axios'
+const LeaugeTableComponent = ({index,isCreateLeague, toggleModifyLeague,value}) =>{
+  const deleteLeague =() => {
+    
+
+  }
     return(
         <tr>
-                <th className="leage-number"></th>
-                <th className="leage-name"></th>
-                <th className="leage-date"></th>
+                <th className="leage-number">{index}</th>
+                <th className="leage-name">{value.name}</th>
+                <th className="leage-date">{value.openTime} ~ {value.closeTime}</th>
                 <th className="admin-league-table-modify" onClick={toggleModifyLeague}>
                   <div className="admin-league-table-modify-img"></div>
                 </th>

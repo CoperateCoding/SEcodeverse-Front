@@ -11,7 +11,7 @@ const Header = ({auth, setAuth}) => {
   const gotoLogout = () => {
       console.log("로그아웃할시 가지고 있는 토큰은",localStorage.getItem("accessToken"))
       if(localStorage.getItem('access')!=null){
-        axios.post('/api/v1/user/logout', {
+        axios.post(`${process.env.REACT_APP_DB_HOST}`+'/api/v1/user/logout', {
 
       
         } ,{
@@ -27,10 +27,12 @@ const Header = ({auth, setAuth}) => {
           localStorage.removeItem('access');
           localStorage.removeItem('roleType')
           console.log(localStorage.getItem('access'))
+          localStorage.removeItem('nickName')
+          console.log(localStorage.getItem('nickName'))
           navigate('/')
         })
         .catch(error => {
-          console.error('API 호출 중 에러:', error);
+          console.error('로그아웃 시 에러', error);
         });
       }
       

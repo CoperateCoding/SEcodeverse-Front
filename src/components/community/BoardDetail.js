@@ -15,6 +15,7 @@ const BoardDeatil = () => {
   const [writeComment, setWriteComment] = useState("");
   const [menuVisible, setMenuVisible] = useState(false);
   const navigate = useNavigate();
+  const [isModifyCommunity,setIsModifyCommunity] = useState(false)
 
   useEffect(() => {
     console.log("useEffect");
@@ -29,6 +30,14 @@ const BoardDeatil = () => {
         console.log("처음 이미지 정보", response.data.imgList);
         setBoard(response.data.board);
         setImgList(response.data.imgList);
+        console.log("현제 내 닉네임:",localStorage.getItem('nickName'))
+        console.log("글쓴이",response.data.board.writer)
+        if(localStorage.getItem('nickName') === response.data.board.writer){
+          setIsModifyCommunity(true)
+          console.log("게시글 수정 권한 줄거임")
+        }
+        
+        console.log("게시글 수정 권한",isModifyCommunity)
       })
       .catch((error) => {
         console.error("처음 게시글 정보 가져오는 중 에러남:", error);
@@ -72,6 +81,7 @@ const BoardDeatil = () => {
         console.error("게시글 삭제 중 에러", error);
       });
     alert("삭제를 선택했습니다.");
+    
     toggleMenu(); // 메뉴 닫기
   };
 
@@ -226,7 +236,7 @@ const BoardDeatil = () => {
               <div className="board-detail-menu-box-write-date">
                 {board && board.createAt}
               </div>
-              <div className="board-detail-menu-box-menu" onClick={toggleMenu}>
+              {isModifyCommunity && <div className="board-detail-menu-box-menu" onClick={toggleMenu}>
                 메뉴
                 {menuVisible && (
                   <div id="menuDropdown" className="board-detail-menu-dropdown">
@@ -240,7 +250,8 @@ const BoardDeatil = () => {
                     </div>
                   </div>
                 )}
-              </div>
+              </div>}
+              
             </div>
 
             <div className="board-detail-bottom-part">
