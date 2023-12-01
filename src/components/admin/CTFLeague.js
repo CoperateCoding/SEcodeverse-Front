@@ -41,7 +41,7 @@ const CTFLeague = () => {
       .then(response => {
         console.log(response.data)
         setLeague(response.data.list)
-      
+        setTotalpages(response.data.cnt % 10 > 0 ? response.data.cnt/10 + 1 : response.data.cnt/10);
       
       })
       .catch(error => {
