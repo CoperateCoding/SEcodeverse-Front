@@ -54,8 +54,8 @@ const SignUp = () => {
     if (inputChar == "" || inputChar == null) {
       ret = false;
     } else {
-      // 영어와 숫자로 이루어진 6~12자리 문자열인지 확인
-      if (/^(?=.*[a-z0-9])[a-z0-9]{6,12}$/u.test(inputChar)) {
+      // 영어와 숫자로 이루어진 4~12자리 문자열인지 확인
+      if (/^(?=.*[a-z])[a-z0-9]{4,12}$/u.test(inputChar)) {
         ret = true;
       } else {
         ret = false;
@@ -64,7 +64,7 @@ const SignUp = () => {
 
     // 에러 메시지 설정
     if (!ret) {
-      setIDsentence("영어와 숫자로 이루어진 6~12자리 ID를 입력해주세요.");
+      setIDsentence("영어와 숫자로 이루어진 4~12자리 ID를 입력해주세요.");
     } else {
       setIDsentence("중복확인 후 회원가입을 시도해주세요");
     }
@@ -102,7 +102,7 @@ const SignUp = () => {
     if (inputChar == "" || inputChar == null) {
       ret = false;
     } else {
-      if (/^(?=.*[a-zA-Z가-힣])[가-힣a-zA-Z0-9]{12,20}$/u.test(inputChar)) {
+      if (/^(?=.*[a-zA-Z가-힣])[가-힣a-zA-Z0-9]{2,8}$/u.test(inputChar)) {
         ret = true;
       } else {
         ret = false;
@@ -111,7 +111,7 @@ const SignUp = () => {
 
     if (!ret) {
       setNickNameSentence(
-        "한글, 영문, 숫자로 이루어진 2~8자리 닉네임을 입력해주세요."
+        "한글 또는 영문으로 이루어진 2~8자리 닉네임을 입력해주세요."
       );
     } else {
       setNickNameSentence("중복확인  후 회원가입을 시도해주세요");
