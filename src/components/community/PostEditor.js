@@ -36,7 +36,7 @@ const PostEditor = () => {
       .catch((error) => {
         console.error("처음 게시글 정보 가져오는 중 에러남:", error);
       });
-  }, );
+  }, []);
 
   const navigate = useNavigate();
 
