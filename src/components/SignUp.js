@@ -199,6 +199,7 @@ const SignUp = () => {
       if (inputPW == checkPW) {
         setIsSamePw(true);
         if (isSamePw && isAcceptPw) {
+          console.log("회원가입 시작함")
           axios
             .post(`${process.env.REACT_APP_DB_HOST}`+"/api/v1/user/signup", {
               id: inputID,
@@ -214,6 +215,7 @@ const SignUp = () => {
               console.error("API 호출 중 에러:", error);
             });
         } else {
+          console.log("여기 걸림")
           if (!isAcceptPw) {
             alert(
               "비밀번호는 영문, 숫자, 특수기호가 포함된 12~20자리로 입력해주세요."
@@ -224,6 +226,7 @@ const SignUp = () => {
           }
         }
       } else {
+        console.log("여기걸림2")
         setIsSamePw(false);
       }
     }

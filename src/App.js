@@ -51,7 +51,7 @@ function App() {
   }, [auth]);
 
   return (
-    <HashRouter>
+    <HashRouter auth = {auth}>
       <div className="App">
         <Header auth={auth} setAuth={setAuth} />
         <Routes>
