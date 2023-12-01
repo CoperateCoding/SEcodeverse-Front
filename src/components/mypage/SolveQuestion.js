@@ -16,7 +16,7 @@ const SolveQuestion = () => {
     };
 
     axios
-      .get(`/api/v1/question/solve/user=${userPk}`, {
+      .get(`${process.env.REACT_APP_DB_HOST}`+`/api/v1/question/solve/user=${userPk}`, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('access')}`
@@ -44,7 +44,7 @@ const SolveQuestion = () => {
     };
 
     axios
-      .get(`/api/v1/question/solve/user=${userPk}`, {
+      .get(`${process.env.REACT_APP_DB_HOST}`+`/api/v1/question/solve/user=${userPk}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.getItem('access')}`,

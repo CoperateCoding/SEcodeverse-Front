@@ -79,8 +79,8 @@ const CTFLeague = () => {
 
     const start = startDate
     const end = endDate
-    console.log(start)
-    console.log(end)
+    console.log("start",start)
+    console.log("end",end)
 
 
     const api ='api/v1/admin/league/post'
@@ -100,7 +100,7 @@ axios
 .then((response) => {
 
   console.log(response.data);
-
+  window.location.reload();
 })
 .catch((error) => {
   console.error("API 호출 중 에러:", error);
@@ -196,39 +196,6 @@ axios
         <h1 className="admin-league-board-rightMain">CTF 리그 관리</h1>
         <div className="admin-league-board-topBar">
           <div name="admin-league-board-category-accordion-wrap">
-            <div
-              className="admin-league-accordion-header"
-              onClick={toggleAccordion}
-            >
-              <sapn className="ctf-league-board-search-order-text">
-                {selectedOption}
-              </sapn>
-              <sapn className="ctf-league-board-search-order-icon">
-                {isOpen ? "▲" : "▼"}
-              </sapn>
-            </div>
-            {/* {isOpen && (
-              <div className="ctf-league-accordion-content">
-                <div
-                  className="ctf-league-board-search-order-text "
-                  onClick={() => changeOrder("최신순")}
-                >
-                  최신순
-                </div>
-                <div
-                  className="ctf-league-board-search-order-text "
-                  onClick={() => changeOrder("점수높은순")}
-                >
-                  점수높은순
-                </div>
-                <div
-                  className="ctf-league-board-search-order-text "
-                  onClick={() => changeOrder("점수낮은순")}
-                >
-                  점수낮은순
-                </div>
-              </div>
-            )} */}
           </div>
           <div
             className="admin-league-board-create-question"

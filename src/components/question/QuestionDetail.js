@@ -6,6 +6,12 @@ import SuccessResult from "./SuccessResult";
 import FailResult from "./FailResult";
 import EditQuestion from "./EditQuestion";
 // import { resolveObjectKey } from "chart.js/dist/helpers/helpers.core";
+function formatTime(seconds) {
+  var date = new Date(null);
+  date.setSeconds(seconds);
+  var timeString = date.toISOString().substr(11, 8);
+  return timeString;
+}
 
 const QuestionDetail = () => {
   const [selectedLanguage, setSelectedLanguage] = useState("Java");
@@ -14,6 +20,7 @@ const QuestionDetail = () => {
   const [img, setImg] = useState([]);
   const [testcase, setTestcase] = useState([]);
   const [successResult , setSuccessResult] = useState({});
+  const [isModify, setIsModify] = useState(false)
   const [code, setCode] = useState(`public class Main {
     public static void main(String args[]) {
       System.out.println("Hello SEcodeVerse");
@@ -29,10 +36,13 @@ const QuestionDetail = () => {
   const [isEdit, setIsEdit] = useState(false);
 
   useEffect(() => {
+    if(localStorage.getItem('roleType')==="ADMIN"){
+      setIsModify(true)
+    }
     console.log(questionPk);
     console.log("pk", questionPk);
     const apiUrl = `${process.env.REACT_APP_DB_HOST}`+`/api/v1/question/detail/${questionPk}`;
-
+    
     axios
       .get(apiUrl)
       .then((response) => {
@@ -79,18 +89,20 @@ const QuestionDetail = () => {
       TestcaseOutput.push(str)
     }
     console.log(compileResult)
-
+    var wrongCount =0
     for(let i =0; i<compileResult.length ; i++){
       const line = compileResult[i].stdout
       console.log("line",line)
-      const lines = line.split('\n');
+      if(line!="null"){ const lines = line.split('\n');
       console.log("lines",lines)
       lines.pop(); 
-      const result = lines.join('\n');
+      const result = lines.join('\n');}
+     
       if(result != TestcaseOutput[i]){
         isSucess=false
         console.log("내 코드 결과",result)
         console.log("내스트케이스 결과",TestcaseOutput[i])
+        wrongCount+=1
       }
       totalmemory=totalmemory+compileResult[i].memory
       totaltime = totaltime+parseFloat(compileResult[i].time)
@@ -104,13 +116,91 @@ const QuestionDetail = () => {
     const roundtIME = time.toFixed(2);
     setSuccessResult({memory:roundMemory,time:roundtIME,lenguage:selectedLanguage})
     console.log("성공여부",isSucess)
+    var seconds = 0.055;
+    var hours = Math.floor(seconds / 3600);
+    var minutes = Math.floor((seconds % 3600) / 60);
+    var remainingSeconds = (seconds % 3600) % 60;
+    
+    var timeString = hours.toString().padStart(2, '0') + ':' +
+                     minutes.toString().padStart(2, '0') + ':' +
+                     remainingSeconds.toFixed(3).padStart(6, '0');
+    
+    console.log(timeString);
+    console.log(code)
+    console.log(roundMemory)
     if(isSucess==true){
       setSuccess(true)
-      
-      
+      const apiUrl = `${process.env.REACT_APP_DB_HOST}`+`/api/v1/code/${questionPk}`;
+      axios.post(apiUrl,{
+        codeState : "TRUE",
+        content : code,
+        compileTime :timeString,
+        memory:roundMemory,
+        accuracy:100
+      },{
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
+      })
+        .then(response => {
+          console.log(response.data)
+       
+        
+        
+        })
+        .catch(error => {
+          console.error('코드 저장 중 에러:', error);
+        });
+
+
+        const params = {
+          questionPk: questionPk
+        };
+        
+        const apiUrl2 = `${process.env.REACT_APP_DB_HOST}/api/v1/question/corret/exp`;
+        
+        axios.post(apiUrl2, null, {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("access")}`
+          },
+          params: params
+        })
+          .then(response => {
+            console.log(response.data);
+          })
+          .catch(error => {
+            console.error('코드 저장 중 에러:', error);
+          });
     }
     else{
       setSuccess(false)
+      const accuracyPercent = (testcase.length - wrongCount)/testcase.length
+      console.log(accuracyPercent)
+      const apiUrl = `${process.env.REACT_APP_DB_HOST}`+`/api/v1/code/${questionPk}`;
+      axios.post(apiUrl,{
+        codeState : "FALSE",
+        content : code,
+        compileTime : timeString,
+        memory:roundMemory,
+        accuracy:100
+      },{
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
+      })
+        .then(response => {
+          console.log(response.data)
+       
+        
+        
+        })
+        .catch(error => {
+          console.error('코드 저장 중 에러:', error);
+        });
+      
     }
     await sleep(5000); 
     let similarArr=[]
@@ -177,9 +267,22 @@ const QuestionDetail = () => {
     const FormattedCode = code.replace(/\n/g, '\n');
     const apiUrl = `${process.env.REACT_APP_DB_HOST}`+'/api/v1/question/solveQuestion';
     const params = new URLSearchParams();
-    
+    var languageNum =0
+    if(selectedLanguage === "Java"){
+      languageNum =2
+    }
+    else if(selectedLanguage ==="Python"){
+      languageNum=1
+    }
+    else if(selectedLanguage === "C"){
+      languageNum=3
+    }
+    else if(selectedLanguage === "C++"){
+      languageNum=4
+    }
+    console.log(selectedLanguage,":",languageNum)
     params.append("userCode", FormattedCode);
-    params.append("languageNum","2");
+    params.append("languageNum",languageNum);
     params.append("testcase",testcaseValue.input);
 
     console.log("보내는 테스트케이스",testcaseValue.input)
@@ -380,17 +483,16 @@ int main() {
             >
               초기화
             </div>
-            <div
+          {isModify &&   <><div
               className="question-detail-button-edit"
               onClick={handleQuestionEdit}
             >
               수정
-            </div>
-            <div
+            </div><div
               className="question-detail-button-delete"
             >
-              삭제
-            </div>
+                삭제
+              </div></>}
           </div>
         </div>
         {isEdit && <EditQuestion onClose = {handleQuestionEdit} question ={question} img = {img} />}

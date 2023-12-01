@@ -12,29 +12,51 @@ import axios from 'axios';
 const LeagueMain = () => {
   const [league, setLeague] = useState();
   const [leaguePk, setLeaguePk] = useState();
-
+  const[isExistNickName,setIsExistNickName] = useState(false)
+  
   //dummy
-  const leagueData = {
-    name: "CTF League Name",
-    openTime: "2023-11-28T05:29:38.541Z",
-    closeTime: "2023-11-30T05:29:38.541Z",
-    memberCnt: 4,
-    notice: "notice",
-    description: "description",
-  };
+  // const leagueData = {
+  //   name: "CTF League Name",
+  //   openTime: "2023-11-28T05:29:38.541Z",
+  //   closeTime: "2023-11-30T05:29:38.541Z",
+  //   memberCnt: 4,
+  //   notice: "notice",
+  //   description: "description",
+  // };
 
   useEffect(() => {
+    var leage =0
     const apiUrl =  `${process.env.REACT_APP_DB_HOST}` +"/api/v1/ctf/league/current";
     axios.get(apiUrl)
       .then((response) => {
-       
-        console.log(response.data);
-        setLeague(response.data)
+        setLeaguePk(response.data)
+        console.log("현재 진행중인 리그 PK",response.data);
+        leage=response.data
+        console.log("리그설정",leage)
+        getListDetail(leage)
     })
       .catch((error) => {
         console.error("API 호출 중 에러:", error);
       });
+    
+    
   }, []);
+
+  const getListDetail = (leage) => {
+    console.log("league",leaguePk)
+    const apiUrl2 =  `${process.env.REACT_APP_DB_HOST}` +`/api/v1/ctf/league/${leage}`;
+    axios.get(apiUrl2)
+      .then((response) => {
+       
+        console.log("현재 진행중인 리그 정보",response.data);
+        setLeague(response.data)
+
+    })
+      .catch((error) => {
+        console.error("API 호출 중 에러:", error);
+      });
+ 
+  }
 
 
   const [isOpen, setIsOpen] = useState(false);
@@ -58,23 +80,6 @@ const LeagueMain = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const api = 'api/v1/ctf/league/2'
-    axios.get(api, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("access")}`,
-      }
-    })
-    .then(response => {
-      console.log("리그정보", response);
-      setLeague(response.data);
-    })
-    .catch(error => {
-      // 에러 처리
-      console.error(error);
-    });
-  }, []);
 
   const handleLeagueCategoryRedirect = () => {
     const currentTime = new Date();
@@ -135,49 +140,53 @@ const LeagueMain = () => {
   };
 
   const handleCreateCheck = () => {
-   
-    //   data = {
-    //     leaguePk: leaguePk,
-    //     categoryPk: selectedCategory,
-    //     ctfQuestionType: questionType,
-    //     name: titleValue,
-    //     score: scoreValue,
-    //     description: content,
-    //     answer: answer
-    //   };
-    
-    
-    // axios
-    //   .post(`${process.env.REACT_APP_DB_HOST}` + "/api/v1/admin/ctf/question", data, {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Authorization: `Bearer ${localStorage.getItem("access")}`,
-    //     },
-    //   })
-    //   .then((response) => {
-    //     console.log(localStorage.getItem("access"));
-    //     console.log(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("리그 등록중 에러:", error);
-    //   });
-    // if (isName && isPassword) {
-    //   setTeamName("");
-    //   setTeamPw("");
-
-    //   setIsCreate(!isCreate);
-    //   setIsTeam(true);
-    // } else {
-    //   if (!isName) {
-    //     alert(
-    //       "팀 이름은 2~8자 이내의 영어, 한글, 숫자의 조합으로 입력해주세요."
-    //     );
-    //   }
-    //   if (!isPassword) {
-    //     alert("비밀번호는 4자리의 숫자로 입력해주세요.");
-    //   }
-    // }
+    console.log("팀 등록 시작")
+    if(isExistNickName === false){
+      console.log("팀 등록 들어옴 ")
+      const apiUrl2= `${process.env.REACT_APP_DB_HOST}`+`/api/v1/ctf/team/name/${teamName}/exists`;
+      axios.post(apiUrl2,{
+        leaguePk: leaguePk,
+        name:teamName,
+        pw:teamPw
+      },{
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
+      })
+        .then(response => {
+          console.log("팀 등록 성공!")
+         
+        })
+        .catch(error => {
+          console.error('팀 등록중 중', error);
+        });
+      
+    }
   };
+  const existsClick = () => {
+    const apiUrl2= `${process.env.REACT_APP_DB_HOST}`+`/api/v1/ctf/team/name/${teamName}/exists`;
+    axios.get(apiUrl2,{
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+      },
+    })
+      .then(response => {
+        console.log(response.data)
+        if(response.data.exists === false){
+          alert("사용가능한 팀이름 입니다")
+          setIsExistNickName(false)
+        }
+        else{
+          alert("사용불가능한 팀이름 입니다")
+        }setIsExistNickName(true)
+      
+      })
+      .catch(error => {
+        console.error('리그 중복 확인 중', error);
+      });
+  }
 
   const handelCreateClick = () => {
     if(isTeam){
@@ -186,6 +195,8 @@ const LeagueMain = () => {
     }
     else{
       setIsCreate(true);
+       
+     
     }
   }
 
@@ -291,7 +302,7 @@ const LeagueMain = () => {
                   value={teamName}
                   onChange={handleNameInput}
                 />
-                <div className="team-name-check-box">중복확인</div>
+                <div className="team-name-check-box" onClick = {existsClick}>중복확인</div>
               </div>
               <div className="create-team-popup-team-password-box">
                 <span>비밀번호</span>
