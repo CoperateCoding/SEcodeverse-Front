@@ -15,6 +15,7 @@ const CTFquestion = () => {
   const[question,setQuestion] = useState('')
   const [totalPages,setTotalpages]=useState(1); 
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortType,setSortType] = useState('HIGH')
   
   useEffect(() => {
     const apiUrl = `${process.env.REACT_APP_DB_HOST}`+'/api/v1/ctf/question/';
@@ -23,6 +24,7 @@ const CTFquestion = () => {
       
       page:page,
       pageSize:10,
+      sort:sortType
 
     };
     const queryString = Object.entries(params)
@@ -73,13 +75,29 @@ const CTFquestion = () => {
       setCurrentPage(pagiging)
     }
   };
-  const getQuestionList= (paging) => {
+  const categoryhigh = () => {
+    console.log("점수높은순 클릭됨")
+    changeOrder("점수 높은순")
+    setSortType("HIGH")
+    getQuestionHigh('HIGH')
+ 
+  }
+  const categoryLow = () => {
+    console.log("점수 낮은순 클릭됨")
+    changeOrder("점수 낮은순")
+    setSortType("LOW")
+    getQuestionHigh('LOW')
+
+  }
+  const getQuestionHigh =(sortType) => {
+    console.log(sortType)
     const apiUrl = `${process.env.REACT_APP_DB_HOST}`+'/api/v1/ctf/question/';
-    const page=paging
+    const page=1
     const params = {
       
       page:page,
       pageSize:10,
+      sort:sortType
 
     };
     const queryString = Object.entries(params)
@@ -95,7 +113,40 @@ const CTFquestion = () => {
       },
     })
       .then(response => {
-        console.log(response.data)
+        console.log("문제 리스트는",response.data)
+        setQuestion(response.data.list)
+      
+      
+      })
+      .catch(error => {
+        console.error('API 호출 중 에러:', error);
+      });
+  }
+  const getQuestionList= (paging) => {
+    console.log(sortType)
+    const apiUrl = `${process.env.REACT_APP_DB_HOST}`+'/api/v1/ctf/question/';
+    const page=paging
+    const params = {
+      
+      page:page,
+      pageSize:10,
+      sort:sortType
+
+    };
+    const queryString = Object.entries(params)
+    .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+    .join('&');
+
+  const url = `${apiUrl}?${queryString}`;
+
+    axios.get(url,{
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+      },
+    })
+      .then(response => {
+        console.log("문제 리스트는",response.data)
         setQuestion(response.data.list)
       
       
@@ -250,7 +301,7 @@ const CTFquestion = () => {
 
   // accrodian
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("최신순");
+  const [selectedOption, setSelectedOption] = useState("점수 높은순");
 
   const toggleAccordion = () => {
     setIsOpen(!isOpen);
@@ -291,19 +342,13 @@ const CTFquestion = () => {
                 <div className="ctf-question-accordion-content">
                   <div
                     className="ctf-question-board-search-order-text "
-                    onClick={() => changeOrder("최신순")}
-                  >
-                    최신순
-                  </div>
-                  <div
-                    className="ctf-question-board-search-order-text "
-                    onClick={() => changeOrder("점수높은순")}
+                    onClick={categoryhigh}
                   >
                     점수높은순
                   </div>
                   <div
                     className="ctf-question-board-search-order-text "
-                    onClick={() => changeOrder("점수낮은순")}
+                    onClick={categoryLow}
                   >
                     점수낮은순
                   </div>

@@ -33,6 +33,8 @@ const Header = ({auth, setAuth}) => {
         })
         .catch(error => {
           console.error('로그아웃 시 에러', error);
+          navigate('/')
+          setAuth(false)
         });
       }
       
