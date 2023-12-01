@@ -65,7 +65,7 @@ const Header = ({auth, setAuth}) => {
                 <li className='header_Benner_item'><Link to="/community">커뮤니티</Link></li>
                 <li className='header_Benner_item'><Link to="/question">문제풀기</Link></li>
                 <li className='header_Benner_item'><Link to="/league">CTF</Link></li>
-                <li className='header_Benner_item' onClick={ goMyPage}>마이페이지</li>
+             {auth &&<li className='header_Benner_item' onClick={ goMyPage}>마이페이지</li> } 
               </ul>
             </div>
             <div className='header_text_btn'>
