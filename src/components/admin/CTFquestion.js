@@ -45,6 +45,7 @@ const CTFquestion = () => {
       if(totalPages<1){
         setTotalpages(1)
       }
+      console.log("ctfQuestion의",totalPages)
     
     })
     .catch(error => {

@@ -144,10 +144,11 @@ const SignUp = () => {
 
   //아이디 중복 체크
   const isIDExistence = () => {
+    console.log("아이디 중복확인 들어감")
     const id = inputID;
 
     axios
-      .get(`${process.env.REACT_APP_DB_HOST}`+`api/v1/user/id/${id}/exists`)
+      .get(`${process.env.REACT_APP_DB_HOST}`+`/api/v1/user/id/${id}/exists`)
       .then((response) => {
         console.log(response.data);
         if (response.data.exists === true) {
@@ -167,9 +168,10 @@ const SignUp = () => {
 
   //닉넴 중복 체크
   const isNickNamExistence = () => {
+    console.log("중복확인 들어감")
     const nickName = inputNickname;
     axios
-      .get(`${process.env.REACT_APP_DB_HOST}`+`api/v1/user/nickname/${nickName}/exists`)
+      .get(`${process.env.REACT_APP_DB_HOST}`+`/api/v1/user/nickname/${nickName}/exists`)
       .then((response) => {
         console.log(response.data);
 
