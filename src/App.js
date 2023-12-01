@@ -53,7 +53,7 @@ function App() {
 
 
   return (
-    <BrowserRouter>
+    <HashRouter>
   <div className="App">
     <Header auth={auth} setAuth={setAuth} />
     <Routes>
@@ -76,7 +76,7 @@ function App() {
     </Routes>
     <Footer />
   </div>
-</BrowserRouter>
+</HashRouter>
   );
 
 
