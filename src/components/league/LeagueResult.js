@@ -1,10 +1,103 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../css/league/LeagueResult.css";
 import BarChart from "./BarChart";
 import RankTableComponent from "./RankTableComponent";
-
+import axios from "axios";
 const LeagueResult = () => {
   //Close 상태 및 시간 지났을 때만 열리는걸로 처리. (useEffect 사용)
+  const [langk,setLank]= useState([])
+  const [teamName,setTeamName] = useState('')
+  const[categoryTeamQuestion,setCategoryTeamQuestion] = useState([])
+  useEffect(() => {
+    var leagePk = 0;
+    axios
+  .get(
+    `${process.env.REACT_APP_DB_HOST}` +
+      `/api/v1/ctf/detail/my/team`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+      },
+    }
+  )
+  .then((response) => {
+    console.log("팀 이름", response.data.name);
+    setTeamName(response.data.name)
+  })
+  .catch((error) => {
+    console.error("팀이름 찾다가", error);
+  });
+
+    axios
+      .get(`${process.env.REACT_APP_DB_HOST}` + `/api/v1/ctf/league/current`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
+      })
+      .then((response) => {
+        console.log("현제 진행중인 leaguePk", response.data);
+        leagePk = response.data;
+        axios
+          .post(
+            `${process.env.REACT_APP_DB_HOST}` +
+              `/api/v1/ctf/team/all/end/${leagePk}`,{},
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("access")}`,
+              },
+            }
+          )
+          .then((response) => {
+            console.log("팀 등수 매기기 성공", response.data);
+            axios
+            .get(
+              `${process.env.REACT_APP_DB_HOST}` +
+                `/api/v1/ctf/team/all/rank_and_score/${leagePk}`,
+              {
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${localStorage.getItem("access")}`,
+                },
+              }
+            )
+            .then((response) => {
+              console.log("상위 10명 유저의 랭크", response.data);
+              setLank(response.data.list)
+            })
+            .catch((error) => {
+              console.error("상위 10명 유저 랭크 찾다가", error);
+            });
+            axios
+            .post(
+              `${process.env.REACT_APP_DB_HOST}/api/v1/ctf/team/category/scores`,{},
+                
+              {
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${localStorage.getItem("access")}`,
+                },
+              }
+            )
+            .then((response) => {
+              console.log("팀별 카테고리별 맞춘 문제", response.data);
+              setCategoryTeamQuestion(response.data.list)
+             
+            })
+            .catch((error) => {
+              console.error("팀별 카테고리 별 맞춘 문제 찾다가", error);
+            });
+          })
+          .catch((error) => {
+            console.error("팀 등수 메기다가", error);
+          });
+      })
+      .catch((error) => {
+        console.error("진행중인 leaguePk찾다고", error);
+      });
+  }, []);
 
   //현재 내가 속한 팀의 pk
   const userTeam = 12;
@@ -53,17 +146,17 @@ const LeagueResult = () => {
   teamRankData.push(...sortedTeams.slice(0, 6));
 
   const categoryData = {
-    labels: getTeamScore.map((item) => item.category),
+    labels: categoryTeamQuestion.map((item) => item.categoryName),
     datasets: [
       {
-        data: getTeamScore.map((item) => item.score),
+        data: categoryTeamQuestion.map((item) => item.score),
         backgroundColor: "rgba(180, 200, 230, 0.7)",
       },
     ],
   };
 
   const teamData = {
-    labels: teamRankData.map((item) => item.name),
+    labels: langk.map((item) => item.name),
     datasets: [
       {
         data: teamRankData.map((item) => item.score),
@@ -93,11 +186,11 @@ const LeagueResult = () => {
                   </tr>
                 </thead>
                 <tbody className="league-result-table-tbody">
-                  {teamDataSorted.map((value, index) => (
+                  {langk.map((value, index) => (
                     <RankTableComponent
                       key={index}
                       rankData={value}
-                      isYou={value.pk === userTeam}
+                      isYou={value.name === teamName}
                     />
                   ))}
                 </tbody>

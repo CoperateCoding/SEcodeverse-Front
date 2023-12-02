@@ -1,6 +1,6 @@
 import "../../css/QuestionDetail.css";
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import SuccessResult from "./SuccessResult";
 import FailResult from "./FailResult";
@@ -14,6 +14,7 @@ function formatTime(seconds) {
 }
 
 const QuestionDetail = () => {
+  const navigate = useNavigate();
   const [selectedLanguage, setSelectedLanguage] = useState("Java");
   const { questionPk } = useParams();
   const [question, setQuestion] = useState([]);
@@ -306,6 +307,24 @@ const QuestionDetail = () => {
   });
   };
 
+  const handleDelete = () => {
+    const apiUrl = `${process.env.REACT_APP_DB_HOST}`+`/api/v1/question/delete/${questionPk}`;
+    axios
+    .delete(apiUrl, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+      },
+    })
+    .then((response) => {
+      navigate('/question')
+    })
+    .catch((error) => {
+ 
+      console.error("문제 삭제 페이지에서 에러남", error);
+    });
+  }
+
   const getCodeLines = () => {
     const lines = code.split("\n");
     console.log(lines);
@@ -490,8 +509,10 @@ int main() {
               수정
             </div><div
               className="question-detail-button-delete"
+              onClick={handleDelete}
             >
                 삭제
+             
               </div></>}
           </div>
         </div>

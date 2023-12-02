@@ -1,15 +1,11 @@
 import "../../css/league/TeamView.css";
+import { useState, useEffect } from "react";
 
-const TeamView = ({ handlePopup, handleWithdraw }) => {
-    
-    //팀 정보
-  const teamName = "세종대왕";
-  const members = [
-    { nickName: "가가" },
-    { nickName: "나나" },
-    { nickName: "다다" },
-    { nickName: "라라" },
-  ];
+const TeamView = ({ handlePopup, handleWithdraw, teams}) => {
+  useEffect(() => {
+    console.log("넘어온 팀", teams);
+
+  }, [teams]);
 
   return (
     <div className="view-team-popup-container">
@@ -21,8 +17,7 @@ const TeamView = ({ handlePopup, handleWithdraw }) => {
       </div>
       <div className="view-team-popup-midle-box">
         <div className="view-team-popup-team-name-box">
-          <span>팀 이름 : </span>
-          <div>{teamName}</div>
+          <span>팀 이름 : {teams && teams.name}</span>
         </div>
         <div className="view-team-popup-team-member-box">
           <div className="view-team-popup-team-member">
@@ -34,10 +29,10 @@ const TeamView = ({ handlePopup, handleWithdraw }) => {
                 </tr>
               </thead>
               <tbody>
-                {members.map((value, index) => (
-                  <tr>
-                    <td>{index+1}</td>
-                    <td>{value.nickName}</td>
+                {teams.memberList.map((value, index) => (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>{value}</td>
                   </tr>
                 ))}
               </tbody>
@@ -46,15 +41,12 @@ const TeamView = ({ handlePopup, handleWithdraw }) => {
         </div>
       </div>
       <div className="join-team-popup-bottom-box">
-        <div className="withdraw-team-button" onClick={handleWithdraw}>
-          탈퇴하기
-        </div>
         <div className="join-team-popup-check-button" onClick={handlePopup}>
           확인
         </div>
-        <join className="join-team-popup-cancel-button" onClick={handlePopup}>
+        <div className="join-team-popup-cancel-button" onClick={handlePopup}>
           취소
-        </join>
+        </div>
       </div>
     </div>
   );
