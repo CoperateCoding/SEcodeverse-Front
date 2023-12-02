@@ -336,7 +336,7 @@ const LeagueMain = () => {
               </div>
               <div
                 className="create-team-popup-cancel"
-                onClick={handelCreateClick}
+                onClick={()=>{setIsCreate(false);}}
               ></div>
             </div>
             <div className="create-team-popup-midle-box">
