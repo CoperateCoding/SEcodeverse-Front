@@ -124,7 +124,7 @@ const CodingBadge = ({user}) => {
                       </span>
                     </div>
                     <div className="mypage-codingBadge-info-exp-box">
-                      <div className="mypage-codingBadge-info-exp-gage"  style={user.exp && { width: `${((user.exp / limitExp) * 100).toFixed(3)}%` }}>
+                    <div className="mypage-codingBadge-info-exp-gage" style={user.exp ? { width: `${((user.exp / limitExp) * 100).toFixed(3)}%` } : {}}>
                         {user.exp && ((user.exp / limitExp) * 100).toFixed(3)}
                         {user.exp !== null ? "%" : ""}
                       </div>
