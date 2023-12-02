@@ -1,18 +1,22 @@
+
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import React, { Suspense, lazy } from "react";
+import axios from "axios";
 import Chatbot from "../Chatbot";
 import "../../css/league/LeagueMain.css";
 import "../../css/league/LeagueJoinPopup.css";
 import "../../css/league/LeagueCreatePopup.css";
 import TeamView from "./TeamView";
 
-import axios from 'axios';
+
+
 
 const LeagueMain = () => {
   const [league, setLeague] = useState();
   const [leaguePk, setLeaguePk] = useState();
-  const[isExistNickName,setIsExistNickName] = useState(false)
+  const [isExistNickName, setIsExistNickName] = useState(false);
 
   //dummy
   const leagueData = {
@@ -23,9 +27,6 @@ const LeagueMain = () => {
     notice: "notice",
     description: "description",
   };
-
-
-
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -41,102 +42,136 @@ const LeagueMain = () => {
 
   // 리그 이벤트의 시작 및 종료 시간 설정
 
-
   //team 있냐?
   const [isTeamPopup, setIsTeamPopup] = useState(false);
   const [isTeam, setIsTeam] = useState(false); //나중에 팀 있는지 없는지 검사 추가좀
-
+  const [teams, setTeams] = useState([]);
+  // var teams=[]
+  var teamNames =""
   const navigate = useNavigate();
+  const [joinTeamName, setJoinTeamName] = useState('')
+  const[joinPw,setJoinPw] = useState('')
 
   useEffect(() => {
-    var leage =0
-    var leageDetail = []
-    var openTime=""
-    var closeTime=""
-    const apiUrl =  `${process.env.REACT_APP_DB_HOST}` +"/api/v1/ctf/league/current";
-    axios.get(apiUrl)
+    var leage = 0;
+    var leageDetail = [];
+    var openTime = "";
+    var closeTime = "";
+    const apiUrl =
+      `${process.env.REACT_APP_DB_HOST}` + "/api/v1/ctf/league/current";
+    axios
+      .get(apiUrl)
       .then((response) => {
-        setLeaguePk(response.data)
-        console.log("현재 진행중인 리그 PK",response.data);
-        leage=response.data
-        console.log("리그설정",leage)
-        const apiUrl2 =  `${process.env.REACT_APP_DB_HOST}` +`/api/v1/ctf/league/${leage}`;
-        axios.get(apiUrl2)
-      .then((response) => {
-       
-        console.log("현재 진행중인 리그 정보",response.data);
-        setLeague(response.data)
-        leageDetail.push(response.data)
-        openTime= response.data.openTime
-        closeTime = response.data.closeTime
-        console.log("리그가져오는동안 openTime과 closeTime",openTime,closeTime)
-        const currentTime = new Date();
-      
-      const leagueStartTime = new Date(openTime);
-      const leagueEndTime = new Date(closeTime);
-      console.log("리그 시작 시간",openTime)
-      console.log("리그 끝나는 시간",closeTime)
-      if (currentTime >= leagueStartTime && currentTime <= leagueEndTime) {
-        setIsOpen(true);
-      } else {
-        setIsOpen(false);
-      }
-      const apiUrl =  `${process.env.REACT_APP_DB_HOST}` +"/api/v1/ctf/team/user/isexist";
-      axios.get(apiUrl,{
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("access")}`,
-        },
-      })
-      .then((response) => {
-        console.log("리그에 참여할수있니?",response.data)
-          if(response.data===true){
-            console.log("팀이 있는지 검사해서 나 팀 있다니깐")
-            setIsTeam(true)
-            
-          }
-          else{
-            setIsTeam(false)
-          }
-          console.log("팀이 있니너",isTeam)
-    })
-      .catch((error) => {
-        console.error("API 호출 중 에러:", error);
-      })
+        setLeaguePk(response.data);
+        console.log("현재 진행중인 리그 PK", response.data);
+        leage = response.data;
+        console.log("리그설정", leage);
+        const apiUrl2 =
+          `${process.env.REACT_APP_DB_HOST}` + `/api/v1/ctf/league/${leage}`;
+        axios
+          .get(apiUrl2)
+          .then((response) => {
+            console.log("현재 진행중인 리그 정보", response.data);
+            setLeague(response.data);
+            leageDetail.push(response.data);
+            openTime = response.data.openTime;
+            closeTime = response.data.closeTime;
+            console.log(
+              "리그가져오는동안 openTime과 closeTime",
+              openTime,
+              closeTime
+            );
+            const currentTime = new Date();
 
-    })
+            const leagueStartTime = new Date(openTime);
+            const leagueEndTime = new Date(closeTime);
+            console.log("리그 시작 시간", openTime);
+            console.log("리그 끝나는 시간", closeTime);
+
+            if (
+              currentTime >= leagueStartTime &&
+              currentTime <= leagueEndTime
+            ) {
+              setIsOpen(true);
+            } else {
+              setIsOpen(false);
+            }
+
+            const apiUrl = `${process.env.REACT_APP_DB_HOST}/api/v1/ctf/team/user/isexist`;
+
+            axios
+              .get(apiUrl, {
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${localStorage.getItem("access")}`,
+                },
+                params: {
+                  leaguePk: leage,
+                },
+              })
+              .then((response) => {
+                console.log("리그에 참여할 수 있니?", response.data);
+                if (response.data === true) {
+                  console.log("팀이 있는지 검사해서 나 팀 있다니깐");
+                  setIsTeam(true);
+                 
+                } else {
+                  setIsTeam(false);
+                }
+              })
+              .catch((error) => {
+                console.error("API 호출 중 에러:", error);
+              });
+          })
+          .catch((error) => {
+            console.error("API 호출 중 에러:", error);
+          });
+      })
       .catch((error) => {
         console.error("API 호출 중 에러:", error);
       });
-  
-
-    })
-      .catch((error) => {
-        console.error("API 호출 중 에러:", error);
-      });
-
-      
-    
-
   }, []);
 
-
   const handleLeagueCategoryRedirect = () => {
-
-
     if (isOpen) {
-      if(isTeam){
-        navigate("/league/category");}else{
-        alert("팀에 먼저 참가해주세요")
+      if (isTeam) {
+        navigate("/league/category");
+      } else {
+        alert("팀에 먼저 참가해주세요");
       }
-      
     } else {
       // 리그가 현재 열려 있지 않은 경우 처리
       alert("리그는 현재 열려 있지 않습니다");
     }
   };
 
-  
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  const TeamJoin = () => {
+    setIsJoin(!isJoin)
+    const apiUrl = `${process.env.REACT_APP_DB_HOST}/api/v1/ctf/team/join`;
+    axios
+      .post(apiUrl,
+        {
+          teamName:joinTeamName,
+          pw:joinPw
+
+        }, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
+      })
+      .then((response) => {
+        console.log("팀 참가 성공")
+
+      })
+      .catch((error) => {
+        console.error("팀 참가 중 에러: ", error);
+      });
+  };
 
   const handleNameInput = (event) => {
     const inputName = event.target.value;
@@ -158,8 +193,6 @@ const LeagueMain = () => {
     setTeamName(inputName);
   };
 
-  
-
   const handlePasswordInput = (event) => {
     const inputPassword = event.target.value;
 
@@ -178,89 +211,124 @@ const LeagueMain = () => {
     setTeamPw(inputPassword);
   };
 
+  const hadleJoinName = (event) => {
+    setJoinTeamName(event.target.value)
+  }
+
+  const handleJoingPw = (event) => {
+    setJoinPw(event.target.value)
+  }
   const handleCreateCheck = () => {
-    console.log("팀 등록 시작")
-    console.log("팀등록할수있는지",isExistNickName)
-    
-    if(isExistNickName === false){
-      console.log("팀 등록 들어옴 ")
-      const apiUrl2= `${process.env.REACT_APP_DB_HOST}`+`/api/v1/ctf/team/post`;
-      axios.post(apiUrl2,{
-        leaguePk: leaguePk,
-        name:teamName,
-        pw:teamPw
-      },{
+    console.log("팀 등록 시작");
+    console.log("팀등록할수있는지", isExistNickName);
+
+    if (isExistNickName === false) {
+      console.log("팀 등록 들어옴 ");
+      const apiUrl2 =
+        `${process.env.REACT_APP_DB_HOST}` + `/api/v1/ctf/team/post`;
+      axios
+        .post(
+          apiUrl2,
+          {
+            leaguePk: leaguePk,
+            name: teamName,
+            pw: teamPw,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("access")}`,
+            },
+          }
+        )
+        .then((response) => {
+          console.log("팀 등록 성공!");
+          setIsCreate(false);
+        })
+        .catch((error) => {
+          console.error("팀 등록중 중", error);
+        });
+    }
+  };
+
+  const existsClick = () => {
+    const apiUrl2 =
+      `${process.env.REACT_APP_DB_HOST}` +
+      `/api/v1/ctf/team/name/${teamName}/exists`;
+    axios
+      .get(apiUrl2, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("access")}`,
         },
       })
-        .then(response => {
-          console.log("팀 등록 성공!")
-            setIsCreate(false);
-         
-        })
-        .catch(error => {
-          console.error('팀 등록중 중', error);
-        });
-      
-    }
-
+      .then((response) => {
+        console.log(response.data);
+        if (response.data.exists === false) {
+          alert("사용가능한 팀이름 입니다");
+          setIsExistNickName(false);
+          console.log("팀등록이 가능한데 ..,?,", isExistNickName);
+        } else {
+          alert("사용불가능한 팀이름 입니다");
+          setIsExistNickName(true);
+          console.log("팀등록이 불가능한데 ,,? ", isExistNickName);
+        }
+      })
+      .catch((error) => {
+        console.error("리그 중복 확인 중", error);
+      });
   };
-
-  const existsClick = () => {
-    const apiUrl2= `${process.env.REACT_APP_DB_HOST}`+`/api/v1/ctf/team/name/${teamName}/exists`;
-    axios.get(apiUrl2,{
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("access")}`,
-      },
-    })
-    .then(response => {
-      console.log(response.data)
-      if(response.data.exists === false){
-        alert("사용가능한 팀이름 입니다")
-        setIsExistNickName(false)
-        console.log("팀등록이 가능한데 ..,?,",isExistNickName)
-      }
-      else{
-        alert("사용불가능한 팀이름 입니다")
-        setIsExistNickName(true)
-      console.log("팀등록이 불가능한데 ,,? ",isExistNickName)
-      }
-    
-    })
-    .catch(error => {
-      console.error('리그 중복 확인 중', error);
-    });
-}
-
-
 
   const handelCreateClick = () => {
-    if(isTeam){
+    if (isTeam) {
       alert("이미 팀에 속해있습니다.");
       setIsCreate(false);
-    }
-    else{
+    } else {
       setIsCreate(true);
     }
-  }
-
-  const handleJoinClick = () => {
-    setIsJoin(!isJoin);
-    setIsTeam(true);
-  }
-
-  const handleViewClick = () => {
-    setIsTeamPopup(!isTeamPopup);
   };
 
+  const handleJoinClick =  () => {
+    setIsJoin(!isJoin);
+    setIsTeam(true);
+  };
+
+  const handleViewClick =async () => {
+    console.log("제팀들은요")
+    const apiUrl2 =
+    `${process.env.REACT_APP_DB_HOST}` +
+    `/api/v1/ctf/detail/my/team`;
+  axios
+    .get(apiUrl2, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem(
+          "access"
+        )}`,
+      },
+    })
+    .then((response) => {
+      // setTeam(response.data);
+      // teams=response.data
+      setTeams(response.data);
+      console.log("내 팀은",teams);
+        
+    })
+    .catch((error) => {
+      console.error("팀 확인중 확인 중", error);
+    });
+
+    await sleep(2000);
+    setIsTeamPopup(!isTeamPopup);
+
+  };
+
+  
   const handleWithdrawClick = () => {
     setIsTeam(false);
     alert("탈퇴되었습니다.");
     setIsTeamPopup(!isTeamPopup);
-  }
+  };
 
   return (
     <section>
@@ -274,14 +342,14 @@ const LeagueMain = () => {
               <div className="league-main-board-description-notice">
                 <span>[공지사항]</span>
                 <br />
-            {league && league.name}
+                {league && league.name}
                 <br />
                 <br />
               </div>
               <div className="league-main-board-description-description">
                 <span>[리그설명]</span>
                 <br />
-                <span>  {league && league.description}</span>
+                <span> {league && league.description}</span>
                 <br />
               </div>
             </div>
@@ -306,7 +374,7 @@ const LeagueMain = () => {
                 {!isTeam && (
                   <div
                     className="league-main-board-team-join"
-                    onClick={()=>setIsJoin(!isJoin)}
+                    onClick={TeamJoin}
                   >
                     <span>팀 참가</span>
                   </div>
@@ -336,7 +404,9 @@ const LeagueMain = () => {
               </div>
               <div
                 className="create-team-popup-cancel"
-                onClick={()=>{setIsCreate(false);}}
+                onClick={() => {
+                  setIsCreate(false);
+                }}
               ></div>
             </div>
             <div className="create-team-popup-midle-box">
@@ -349,7 +419,9 @@ const LeagueMain = () => {
                   value={teamName}
                   onChange={handleNameInput}
                 />
-                <div className="team-name-check-box" onClick={existsClick}>중복확인</div>
+                <div className="team-name-check-box" onClick={existsClick}>
+                  중복확인
+                </div>
               </div>
               <div className="create-team-popup-team-password-box">
                 <span>비밀번호</span>
@@ -377,7 +449,7 @@ const LeagueMain = () => {
               </div>
               <div
                 className="create-team-popup-cancel-button"
-                onClick={()=>setIsCreate(!isCreate)}
+                onClick={() => setIsCreate(!isCreate)}
               >
                 취소
               </div>
@@ -392,17 +464,23 @@ const LeagueMain = () => {
               </div>
               <div
                 className="join-team-popup-cancel"
-                onClick={()=>{setIsJoin(!setIsJoin)}}
+                onClick={() => {
+                  setIsJoin(!setIsJoin);
+                }}
               ></div>
             </div>
             <div className="join-team-popup-midle-box">
               <div className="join-team-popup-team-name-box">
                 <span>팀 이름 : </span>
-                <input type="text" />
+                <input type="text" 
+                value={joinTeamName}
+                onChange={hadleJoinName}/>
               </div>
               <div className="join-team-popup-team-password-box">
                 <span>비밀번호 : </span>
-                <input type="password" />
+                <input type="password"
+                value={joinPw}
+                onChange={handleJoingPw} />
               </div>
               <div className="join-team-popup-team-description-box">
                 <div className="join-team-popup-team-description">
@@ -421,14 +499,20 @@ const LeagueMain = () => {
               </div>
               <div
                 className="join-team-popup-cancel-button"
-                onClick={()=>setIsJoin(!isJoin)}
+                onClick={() => setIsJoin(!isJoin)}
               >
                 취소
               </div>
             </div>
           </div>
         )}
-        {isTeamPopup && <TeamView handlePopup={handleViewClick} handleWithdraw={handleWithdrawClick}></TeamView>}
+        {isTeamPopup && (teams &&
+          <TeamView
+            teams={teams}
+            handlePopup={handleViewClick}
+            handleWithdraw={handleWithdrawClick}
+          ></TeamView>
+        )}
       </div>
       <Chatbot></Chatbot>
     </section>

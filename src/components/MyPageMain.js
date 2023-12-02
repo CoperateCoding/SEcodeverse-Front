@@ -15,6 +15,7 @@ const MyPageMain = () => {
   const [codingBadge, setCodingBadge] = useState("");
   const [codingBadgeImg, setCodingBadgeImg] = useState("");
   const [user,setUser]=useState();
+  const [calendar,setCalener] = useState([])
 
   useEffect(() => {
     const apiUrl = `${process.env.REACT_APP_DB_HOST}`+"/api/v1/user/info/my";
@@ -37,6 +38,24 @@ const MyPageMain = () => {
       .catch((error) => {
         console.error("API 호출 중 에러:", error);
       });
+
+      console.log("달력정보 검사 시작")
+      const url1 = `${process.env.REACT_APP_DB_HOST}`+ '/api/v1/code/calendar';
+      axios.get(url1
+        ,{
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('access')}`
+          }
+        })
+        .then(response => {
+         console.log("달력 정보",response.data.list)
+         setCalener(response.data.list)
+        
+        })
+        .catch(error => {
+          console.error('내 게시물 확인 중 에러:', error);
+        });
   }, []);
 
   const [currentScreen, setCurrentScreen] = useState("codingBadge");
@@ -98,7 +117,7 @@ const MyPageMain = () => {
             내 게시글
           </button>
         </div>
-        {currentScreen === "codingBadge" && user && <CodingBadge user = {user} />}
+        {currentScreen === "codingBadge" && user && <CodingBadge  calendar ={calendar }user = {user} />}
         {currentScreen === "wrongQuestion" && <MyWrongQuestion />}
         {currentScreen === "solveQuestion" && <SolveQuestion />}
         {currentScreen === "createQuestion" && <MyQuestion />}
