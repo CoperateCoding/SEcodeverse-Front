@@ -98,7 +98,7 @@ const MyPageMain = () => {
             내 게시글
           </button>
         </div>
-        {currentScreen === "codingBadge" &&user&& <CodingBadge user = {user} />}
+        {currentScreen === "codingBadge" && user && <CodingBadge user = {user} />}
         {currentScreen === "wrongQuestion" && <MyWrongQuestion />}
         {currentScreen === "solveQuestion" && <SolveQuestion />}
         {currentScreen === "createQuestion" && <MyQuestion />}
