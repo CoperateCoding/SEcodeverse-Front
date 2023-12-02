@@ -27,14 +27,14 @@ const PostEditor = () => {
     axios
       .get(apiUrl)
       .then((response) => {
-        console.log("처음 게시글 정보", response.data.board);
+        console.log("수정 게시글 정보", response.data.board);
         setBoard(response.data.board);
-        setTitle(board.title);
-        setDesc(board.content);
-        setType(board.category.name);
+        setTitle(response.data.board.title);
+        setDesc(response.data.board.content);
+        setType(response.data.board.category.name);
       })
       .catch((error) => {
-        console.error("처음 게시글 정보 가져오는 중 에러남:", error);
+        console.error("수정 게시글 정보 가져오는 중 에러남:", error);
       });
   }, []);
 
