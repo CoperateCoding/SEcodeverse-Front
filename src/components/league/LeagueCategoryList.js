@@ -1,10 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import CategoryComponent from "./CategoryComponent";
 import "../../css/league/LeagueCategoryList.css";
-
+import axios from 'axios'
 const LeagueCategoryList = () => {
+  const [categorys, setCategorys] = useState([])
+  useEffect(() => {
+  
+    axios
+      .get(`${process.env.REACT_APP_DB_HOST}`+`/api/v1/ctf/category/all`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('access')}`,
+        },
+      })
+      .then((response) => {
+        console.log("ctf카테고리",response.data)
+        setCategorys(response.data)
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+  
   // const leagueData = {
   //   name: "CTF League Name",
   //   openTime: "2023-11-28T05:29:38.541Z",
@@ -68,9 +87,9 @@ const LeagueCategoryList = () => {
     <section>
       <div className="league-category-list-container">
         <div className="league-category-list-wrapper">
-          {categoryArray.map((value, index) => (
-            <Link key={index} to={`/league/category-detail/${value.category}`}>
-              <CategoryComponent key={index} category={value.category} count={value.problemCount} />
+          {categorys.map((value, index) => (
+            <Link key={index} to={`/league/category-detail/${value.name}`}>
+              <CategoryComponent key={index} category={value.name} value = {value} count={value.problemCount} />
             </Link>
           ))}
         </div>

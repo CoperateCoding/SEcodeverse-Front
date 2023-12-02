@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import axios from 'axios';
 const EditQuestion = ({onClose, question, img}) => {
 
 const [title, setTitle] = useState("");
@@ -11,20 +11,19 @@ const [title, setTitle] = useState("");
   const [testDesc,setTestDesc]= useState('');
 
   useEffect(() => {
+    
     setTitle(question.title);
-    setDescription(question.description);
-    setCategory(question.category);
+    setDescription(question.testcaseDescription);
+    const c = "c"+question.categoryPk
+    setCategory(c);
     setDesc(question.content);
-    setLevel(question.level);
-    setTestDesc(question.testDesc);
-    setSelectedFiles(img);
+    const l ="l"+question.levelPk
+    setLevel(l);
+    // setTestDesc(question.testDesc);
+
   },[question])
  
 
-  const handleFileChange = (e) => {
-    const files = Array.from(e.target.files);
-    setSelectedFiles(files);
-  };
 
   const handleTypeChange = (e) => {
     setCategory(e.target.value);
@@ -35,7 +34,72 @@ const [title, setTitle] = useState("");
   };
 
   const handleSubmit = () => {
-    // 수정 로직 구현
+    console.log(category)
+    console.log(level)
+    const parseCategory = parseInt(category.replace(/[^\d]/g, ""));
+    const parseLevel = parseInt(level.replace(/[^\d]/g, ""));
+    const testCase1input =
+      document.getElementsByClassName("testcase1input")[0].value;
+    const testCase1output =
+      document.getElementsByClassName("testcase1output")[0].value;
+    const testCase2input =
+      document.getElementsByClassName("testcase2input")[0].value;
+    const testCase2output =
+      document.getElementsByClassName("testcase2output")[0].value;
+    const testCase3input =
+      document.getElementsByClassName("testcase3input")[0].value;
+    const testCase3output =
+      document.getElementsByClassName("testcase3output")[0].value;
+    console.log(parseCategory);
+    console.log(parseLevel);
+    console.log(testCase1input);
+    console.log(testCase1output);
+    console.log(testCase2input);
+    console.log(testCase2output);
+    console.log(testCase3input);
+    console.log(testCase3output);
+    console.log(title);
+    console.log(desc);
+    console.log(description);
+    const testCase = [
+      {
+        input: testCase1input,
+        output: testCase1output,
+      },
+      {
+        input: testCase2input,
+        output: testCase2output,
+      },
+      {
+        input: testCase3input,
+        output: testCase3output,
+      },
+    ];
+    const data = {
+      question: {
+        categoryPk: parseCategory,
+        levelPk: parseLevel,
+        title: title,
+        intro: description,
+        content: desc,
+        testcaseDescription:testDesc,
+        language: "java/python/c++/c",
+      },
+      testCase,
+    };
+    axios
+    .patch(`${process.env.REACT_APP_DB_HOST}`+`/api/v1/question/${question.pk}`, data, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+      },
+    })
+    .then((response) => {
+
+    })
+    .catch((error) => {
+      console.error("API 호출 중 에러:", error);
+    });
     onClose();
   };
 
@@ -185,17 +249,11 @@ const [title, setTitle] = useState("");
                 </table>
               </div>
             </div>
-            <input
-              className="enroll-question-popup-contents-file-input"
-              type="file"
-              accept="image/jpg, image/png, image/jpeg"
-              multiple
-              onChange={handleFileChange}
-            />
+           
           </div>
         </div>
         <div
-          onClick={onClose}
+          onClick={handleSubmit}
           className="enroll-question-popup-yes"
         >
           수정

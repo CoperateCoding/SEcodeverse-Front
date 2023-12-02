@@ -4,7 +4,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import RecommendComponent from "./RecommendComponent";
 
-const CodingBadge = ({user}) => {
+const CodingBadge = ({calendar,user}) => {
   const [currentDate, setCurrentDate] = useState(new Date());
 
 //  const [userInfo, setUserInfo] = useState();
@@ -12,47 +12,54 @@ const CodingBadge = ({user}) => {
  const[exp,setExp] = useState()
  const[badgeName,setBadgeName]=useState()
 
+ const dayList = calendar
+
+ useEffect(() => {
+  console.log("dayList:", dayList);
+}, []);
+
+
   //날짜별로 달력 출력하는거
-  const dayList = [
-    { date: "2023-10-21T05:29:38.541Z", question: 3 },
-    { date: "2023-11-21T05:29:38.541Z", question: 3 },
-    { date: "2023-11-22T05:29:38.541Z", question: 5 },
-    { date: "2023-11-23T05:29:38.541Z", question: 10 },
-    { date: "2023-11-24T05:29:38.541Z", question: 7 },
-    { date: "2023-11-25T05:29:38.541Z", question: 1 },
-  ];
+  // const dayList = [
+  //   { date: "2023-10-21T05:29:38.541Z", question: 3 },
+  //   { date: "2023-11-21T05:29:38.541Z", question: 3 },
+  //   { date: "2023-11-22T05:29:38.541Z", question: 5 },
+  //   { date: "2023-11-23T05:29:38.541Z", question: 10 },
+  //   { date: "2023-11-24T05:29:38.541Z", question: 7 },
+  //   { date: "2023-11-25T05:29:38.541Z", question: 1 },
+  // ];
+
 
   const renderTileContent = ({ date, view }) => {
     if (view === "month") {
       const matchingDay = dayList.find((day) => {
-        const dayDate = new Date(day.date);
+        const dayDate = new Date(day.time);
         return (
           dayDate.getDate() === date.getDate() &&
           dayDate.getMonth() === date.getMonth() &&
           dayDate.getFullYear() === date.getFullYear()
         );
       });
-
+  
       if (matchingDay) {
-        // 특정 날짜에 대한 question 값을 표시
-        if (matchingDay.question > 0 && matchingDay.question <= 3) {
+        // 특정 날짜에 대한 cnt 값을 표시
+        if (matchingDay.cnt > 0 && matchingDay.cnt <= 3) {
           return (
-            <span style={{ color: "black" }}>{matchingDay.question}😊</span>
+            <span style={{ color: "black" }}>{matchingDay.cnt}😊</span>
           );
-        } else if (matchingDay.question > 3 && matchingDay.question <= 7) {
+        } else if (matchingDay.cnt > 3 && matchingDay.cnt <= 7) {
           return (
-            <span style={{ color: "black" }}>{matchingDay.question}😎</span>
+            <span style={{ color: "black" }}>{matchingDay.cnt}😎</span>
           );
-        } else if (matchingDay.question > 7) {
+        } else if (matchingDay.cnt > 7) {
           return (
-            <span style={{ color: "black" }}>{matchingDay.question}😍</span>
+            <span style={{ color: "black" }}>{matchingDay.cnt}😍</span>
           );
         }
       }
     }
     return null;
   };
-
   //경험치 관련
   const expData = { badgeName: "석박사까마귀", exp: 5317 };
   let limitExp = 0;

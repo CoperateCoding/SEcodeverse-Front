@@ -40,6 +40,9 @@ const MyBorde = () => {
       console.error('내 게시물 확인 중 에러:', error);
     });
 
+ 
+
+
   }, []);
 
   const getList = (paging) => {
