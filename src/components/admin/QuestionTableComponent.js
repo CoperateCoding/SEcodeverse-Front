@@ -1,5 +1,5 @@
 import axios from 'axios'
-const QuestionTableComponent = ({ value, isCreateQuestion, toggleCreateQuestion }) =>{
+const QuestionTableComponent = ({ value, isCreate, toggleCreateQuestion }) =>{
   const deleteQuestion =() => {
     axios
       .delete(`${process.env.REACT_APP_DB_HOST}/api/v1/admin/ctf/question/${value.questionPk}`,  {
@@ -15,6 +15,7 @@ const QuestionTableComponent = ({ value, isCreateQuestion, toggleCreateQuestion 
         console.error("ctf 문제 삭제 중:", error);
       });
   }
+
     return(
         <tr>
                 <th className="question-number">{value.questionPk}</th>
