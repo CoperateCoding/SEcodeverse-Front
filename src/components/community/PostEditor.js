@@ -19,7 +19,7 @@ const PostEditor = () => {
   const { commumityPk } = useParams();
 
   useEffect(() => {
-    console.log("useEffect");
+    console.log("수정들어옴");
     console.log(commumityPk);
     console.log("pk", commumityPk);
     const apiUrl = `${process.env.REACT_APP_DB_HOST}`+`/api/v1/board/${commumityPk}`;
@@ -46,64 +46,7 @@ const PostEditor = () => {
   
   
   const handleRegisterClick = async () => {
-    console.log("사용자가 올린 파일 수는", selectedFiles);
-    var imgUrl = [];
-    if (selectedFiles.length > 0) {
-      for (let i = 0; i < selectedFiles.length; i++) {
-        const uploadFile = selectedFiles[i];
-
-        console.log(uploadFile);
-        try {
-          const presignedResponse = await axios.post(
-            "/api/v1/s3/presigned",
-            {
-              imageName: uploadFile.name,
-              folderName: "board",
-            },
-            {
-              headers: {
-                Authorization: localStorage.getItem("accessToken"),
-              },
-            }
-          );
-
-          const presignedUrl = presignedResponse.data.presigned_url;
-          console.log("presignedUrl:", presignedUrl);
-          console.log(uploadFile.type);
-          console.log(uploadFile.name);
-
-          const uploadResponse = await axios.put(presignedUrl, uploadFile, {
-            headers: {
-              "Content-Type": uploadFile.type,
-            },
-          });
-
-          console.log("S3 업로드 성공", uploadResponse);
-
-          const imageUrl = uploadResponse.request.responseURL;
-          var fileName = "";
-          if (uploadFile.type == "image/jpg") {
-            fileName = imageUrl.substring(0, imageUrl.lastIndexOf(".jpg") + 4);
-          } else if (uploadFile.type == "image/png") {
-            fileName = imageUrl.substring(0, imageUrl.lastIndexOf(".png") + 4);
-          } else if (uploadFile.type == "image/jpeg") {
-            fileName = imageUrl.substring(0, imageUrl.lastIndexOf(".jpg") + 4);
-          }
-          console.log(imageUrl);
-          console.log(fileName);
-          imgUrl.push(fileName);
-        } catch (error) {
-          console.error("S3 업로드 실패", error);
-        }
-      }
-    }
-    var imgList = [];
-    for (let i = 0; i < imgUrl.length; i++) {
-      imgList.push({ imgUrl: imgUrl[i] });
-      console.log("imgList넣을게");
-    }
-    console.log("imgUrl", imgUrl);
-    console.log("imgList", imgList);
+ 
     let pk;
     if (type == "자유게시판") {
       pk = 1;
@@ -118,24 +61,14 @@ const PostEditor = () => {
     }
     console.log(pk);
     var data = [];
-    if (imgUrl.length > 0) {
+
       data = {
         board: {
           categoryPk: pk,
           title: title,
           content: desc,
-        },
-        imgList,
-      };
-    } else {
-      data = {
-        board: {
-          categoryPk: pk,
-          title: title,
-          content: desc,
-        },
-      };
-    }
+        },}
+   
 
     if (title.trim() === "" || desc.trim() === "") {
       alert("제목과 내용을 입력해주세요.");
@@ -145,7 +78,7 @@ const PostEditor = () => {
       console.log(title);
       console.log(desc);
       axios
-        .post("/api/v1/board/", data, {
+        .patch(`${process.env.REACT_APP_DB_HOST}`+`/api/v1/board/${commumityPk}`, data, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("access")}`,

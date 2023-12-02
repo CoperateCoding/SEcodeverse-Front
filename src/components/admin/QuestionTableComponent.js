@@ -20,7 +20,7 @@ const QuestionTableComponent = ({ value, isCreateQuestion, toggleCreateQuestion 
                 <th className="question-number">{value.questionPk}</th>
                 <th className="question-name">{value.questionName}</th>
                 <th className="question-score">{value.score}</th>
-                <th className="question-category"></th>
+                <th className="question-category">{value.categoryName}</th>
                 <th className="admin-question-table-modify" onClick={toggleCreateQuestion}>
                   <div className="admin-question-table-modify-img"></div>
                 </th>
