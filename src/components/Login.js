@@ -14,6 +14,7 @@ const Login = ({setAuth}) => {
     
     
     const performInput = () => {
+        handleLogin();
         setinputID('');
         setinputPW('');
     };

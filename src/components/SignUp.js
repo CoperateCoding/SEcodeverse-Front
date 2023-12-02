@@ -36,6 +36,11 @@ const SignUp = () => {
   //PW와 PW확인이 동일한지 check
   const [isSamePw, setIsSamePw] = useState(false);
 
+  //PW sentence
+  const [pwSentence, setPwSentence] = useState("길이: 12~20자, 대소문자영문, 숫자 1개 이상, 특수기호 1개 이상");
+
+  const [isPwBox, setIsPwBox] = useState(false);
+
   //아이디 중복검사까지만 함
   const performInput = () => {
     setinputID("");
@@ -74,6 +79,7 @@ const SignUp = () => {
 
   const handleInputChangePW = (event) => {
     const inputChar = event.target.value;
+    setinputPW(inputChar);
 
     if (inputChar == "" || inputChar == null) {
       setIsAcceptPw(false);
@@ -88,8 +94,6 @@ const SignUp = () => {
         setIsAcceptPw(false);
       }
     }
-
-    setinputPW(inputChar);
   };
 
   const handleInputChangeNickname = (event) => {
@@ -270,6 +274,7 @@ const SignUp = () => {
                       onKeyDown={handleKeyDown}
                       maxLength={20}
                     ></input>
+                    {!isAcceptPw && <h1>{pwSentence}</h1>}
                   </div>
                   <div className="signUp-page-checkPw-input-wrapper">
                     <span className="signUp-page-checkPw-text">PW 확인</span>
