@@ -75,6 +75,32 @@
     line-height: 45px;
 }
 
+.ctf-team-board-search-league-text {
+    text-decoration: none;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 20px;
+
+    height: 45px;
+    text-align: center;
+    line-height: 45px;
+
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.ctf-team-board-search-league-input{
+    width: 160px;
+    margin-right: 15px;
+}
+
+.ctf-team-board-search-league-button{
+    text-decoration: none;
+
+    font-family: 'DungGeunMo-Regular';
+    font-size: 15px;
+}
+
 .ctf-team-board-search-order-icon{
     text-decoration: none;
     margin-left: 20px;
@@ -164,4 +190,14 @@
 .team-score{
     background-color: #fff;
     border: 1px solid #CCD2F0;
+}
+
+.admin-team-league-search{
+    width: 340px;
+    height: 45px;
+
+    background-color: #A8A9CF;
+    border: 3px solid #fff;
+
+    margin-right: 1%;
 }
