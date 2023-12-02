@@ -47,6 +47,8 @@ const CTFLeague = () => {
       .catch(error => {
         console.error('API 호출 중 에러:', error);
       });
+
+ 
   }, []);
 
   const leagueRegister =() => {
@@ -101,6 +103,45 @@ axios
 
   console.log(response.data);
   window.location.reload();
+})
+.catch((error) => {
+  console.error("API 호출 중 에러:", error);
+});
+  }
+// //
+// closeTime
+// : 
+// "2023-12-06T04:58:13"
+// description
+// : 
+// "컴소공 리그 입니다."
+// memberCnt
+// : 
+// 3
+// name
+// : 
+// "컴소공 리그 "
+// notice
+// : 
+// "컴소공 리그 입니다."
+// openTime
+// : 
+// "2023-12-01T04:58:13.799"
+// status
+// : 
+// "OPEN"
+//leagueListPk접근은 value.leaguePk 이런식으로 하면됨!
+  const LeagueDeatil = (leaguePk) => {
+    axios
+.get( `${process.env.REACT_APP_DB_HOST}`+`/api/v1/ctf/league/${leaguePk}`, {
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem("access")}`,
+  },
+})
+.then((response) => {
+
+  console.log(response.data)
 })
 .catch((error) => {
   console.error("API 호출 중 에러:", error);

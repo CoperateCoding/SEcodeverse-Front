@@ -53,6 +53,7 @@ const CTFquestion = () => {
     .catch(error => {
       console.error('API 호출 중 에러:', error);
     });
+ 
 
   }, []);
   const buttonClick = (n) => {
@@ -66,6 +67,43 @@ const CTFquestion = () => {
       setCurrentPage(pagiging)
     }
   };
+
+  // categoryName
+  // : 
+  // "운영체제"
+  // ctfQuestionType
+  // : 
+  // "SUBJECTIVE"
+  // description
+  // : 
+  // "두 개 이상의 작업이 서로 상대방의 작업이 끝나기 만을 기다리고 있기 때문에 결과적으로 아무것도 완료되지 못하는 상태인 것을 뭐라고 할까요?"
+  // imgUrlList
+  // : 
+  // []
+  // questionName
+  // : 
+  // "다음 설명에 대한 답을 적으세요."
+  // score
+  // : 
+  // 5
+  //문제리스트에서 questionPk는 value.questionPk로 접근하면됨
+  const questionDetail = (questionPk) => {
+    const url1 =  `${process.env.REACT_APP_DB_HOST}`+`/api/v1/ctf/question/${questionPk}`;
+
+    axios.get(url1,{
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+      },
+    })
+      .then(response => {
+    console.log(response.data)
+      
+      })
+      .catch(error => {
+        console.error('API 호출 중 에러:', error);
+      });
+  }
 
   const handleNextClick = () => {
    

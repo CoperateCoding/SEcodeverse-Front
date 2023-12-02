@@ -8,7 +8,11 @@ import React, { useState,useEffect } from "react";
 const Main_Page_Body = () => {
   const[boardList,setBoardList] = useState([]);
   const[questionList,setQuestionList] = useState([]);
-
+  const [isLeague,setIsLeage] = useState(false)
+  const[league,setLeague] = useState()
+  const[leagueName, setLeagueName] = useState('')
+  const[leagueOpenTime,setLeagueOpenTime] = useState('')
+  const[leagueCloseTime,setCloseTime] = useState('')
   useEffect(() => {
     
     const apiUrl = `${process.env.REACT_APP_DB_HOST}` +'/api/v1/board/popular';
@@ -36,6 +40,43 @@ const Main_Page_Body = () => {
       console.error('API 호출 중 에러:', error);
     });
 
+    const apiUrl2 = `${process.env.REACT_APP_DB_HOST}` +'/api/v1/ctf/league/current';
+    axios.get(apiUrl2,{
+      headers: {
+        Authorization: localStorage.getItem("accessToken"),
+      },
+    })
+    .then(response => {
+      setIsLeage(true)
+      console.log("현재 진행중인 리그 있음",response.data)
+      const apiUrl3 = `${process.env.REACT_APP_DB_HOST}` +`/api/v1/ctf/league/${response.data}`;
+      axios.get(apiUrl3,{
+      headers: {
+        Authorization: localStorage.getItem("accessToken"),
+      },
+    })
+    .then(response => {
+     
+    setLeague(response.data)
+    setLeagueName(response.data.name)
+    setLeagueOpenTime(response.data.openTime)
+    setCloseTime(response.data.closeTime)
+
+
+    })
+    .catch(error => {
+      console.error("리그 상세조회중 에러",error)
+    });
+    
+    })
+    .catch(error => {
+      console.error('현재 진행중인 리그 받아오는중 에러', error);
+      setIsLeage(false)
+    });
+    
+    
+    
+  
 
   }, []);
 
@@ -85,7 +126,16 @@ const Main_Page_Body = () => {
                   </span>
                 </div>
               </div>
-              <div className="main-page-contents3-img"></div>
+              {
+                isLeague?
+                <div>{leagueName}
+                  <div>{leagueOpenTime} ~ {leagueCloseTime}</div>
+                </div>:
+                // <div className="main-page-contents3-img"></div>
+                <div>리그 없음</div>
+               }
+              
+          
             </div>
           </div>
         </div>
