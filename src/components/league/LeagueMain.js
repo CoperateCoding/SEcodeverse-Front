@@ -336,7 +336,7 @@ const LeagueMain = () => {
               </div>
               <div
                 className="create-team-popup-cancel"
-                onClick={handelCreateClick}
+                onClick={()=>{setIsCreate(false);}}
               ></div>
             </div>
             <div className="create-team-popup-midle-box">
@@ -363,8 +363,8 @@ const LeagueMain = () => {
               <div className="join-team-popup-team-description-box">
                 <div className="join-team-popup-team-description">
                   <p>[주의사항]</p>
-                  <p>{league && league.notice}</p>
-                  {/* <p>2. 팀 이름은 한번 생성하면 바꿀 수 없습니다.</p> */}
+                  <p>팀 이름 : 한글 또는 영문 필수, 숫자 선택. 2~8자리</p>
+                  <p>비밀번호 : 숫자 4자리</p>
                 </div>
               </div>
             </div>

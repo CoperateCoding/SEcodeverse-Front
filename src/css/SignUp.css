@@ -323,6 +323,15 @@
     margin-block-end: 0.55em;
 }
 
+.signUp-page-pw-input-wrapper h1{
+    color:red;
+    font-size:15px;
+    text-align:center;
+    
+    margin-block-start: 0.55em;
+    margin-block-end: 0.55em;
+}
+
 .signUp-page-nickName-input-wrapper h1{
     color:red;
     font-size:15px;
