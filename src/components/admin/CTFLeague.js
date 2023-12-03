@@ -64,9 +64,12 @@ const CTFLeague = () => {
         setLeague(response.data.list);
         setTotalpages(
           response.data.cnt % 10 > 0
-            ? response.data.cnt / 10 + 1
-            : response.data.cnt / 10
+            ? Math.floor(response.data.cnt / 10 + 1)
+            : Math.floor(response.data.cnt / 10)
         );
+        if(response.data.cnt<1){
+          setTotalpages(1)
+        }
       })
       .catch((error) => {
         console.error("API 호출 중 에러:", error);
@@ -177,7 +180,7 @@ const CTFLeague = () => {
       .catch((error) => {
         console.error("리그 수정중 에라", error);
       });
-
+setIsEditLeague(false)
 
   };
 

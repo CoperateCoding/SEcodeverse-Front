@@ -50,10 +50,13 @@ const QuestionList = () => {
         setQuestionList(response.data.list);
         console.log(response.data.list);
         setTotalpages(
-          response.data.cnt % 8 > 0
-            ? response.data.cnt / 8 + 1
-            : response.data.cnt / 8
+          response.data.cnt % 10 > 0
+            ? Math.floor(response.data.cnt / 10 + 1)
+            : Math.floor(response.data.cnt / 10)
         );
+        if(response.data.cnt<1){
+          setTotalpages(1)
+        }
       })
       .catch((error) => {
         console.error("API 호출 중 에러:", error);
@@ -128,9 +131,9 @@ const QuestionList = () => {
         setQuestionList(response.data.list);
         console.log(response.data);
         setTotalpages(
-          response.data.cnt % 8 > 0
-            ? response.data.cnt / 8 + 1
-            : response.data.cnt / 8
+          response.data.cnt % 10 > 0
+            ? Math.floor(response.data.cnt / 10 + 1)
+            : Math.floor(response.data.cnt / 10)
         );
       })
       .catch((error) => {
