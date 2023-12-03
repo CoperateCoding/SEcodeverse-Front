@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 
 const CategoryComponent = (props) => {
     const [isClear, setIsClear] = useState(false);
-    const { category, problemCount } = props;
+    const { category, problemCount,value } = props;
 
     useEffect(() => {
-      setIsClear(problemCount === 0);
+      setIsClear(value.solved);
     }, [problemCount]);
 
     const imageUrl = isClear ? "/images/ctf_clear.png" : "/images/ctf_none_clear.png";

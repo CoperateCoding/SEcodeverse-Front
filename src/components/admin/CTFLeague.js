@@ -13,6 +13,7 @@ const CTFLeague = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [league, setLeague] = useState([]);
   const [selectL, setSelectL] = useState("");
+ const [editLeaguePk, setEditLeaguePk] = useState()
 
   //input 친구 헤헤..
   const [inputValue, setInputValue] = useState("");
@@ -109,7 +110,7 @@ const CTFLeague = () => {
     console.log("start", start);
     console.log("end", end);
 
-    const api = "api/v1/admin/league/post";
+    console.log("수정할 리그pk", editLeaguePk)
     const data = {
       name: inputValue,
       openTime: start,
@@ -119,8 +120,8 @@ const CTFLeague = () => {
       description: contentValue,
     };
     axios
-      .post(
-        `${process.env.REACT_APP_DB_HOST}` + "/api/v1/admin/ctf/league/post",
+      .patch(
+        `${process.env.REACT_APP_DB_HOST}` + `/api/v1/admin/ctf/league/${editLeaguePk}`,
         data,
         {
           headers: {
@@ -140,6 +141,7 @@ const CTFLeague = () => {
 
   const toggleModifyLeague = (leagueIndex) => {
     const leaguePk = league.at(leagueIndex).leaguePk;
+    setEditLeaguePk(leaguePk)
     leagueDetail(leaguePk);
     // setIsEditLeague(!isEditLeague);
     console.log("받은 리그 정보", selectL.name);

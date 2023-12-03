@@ -86,7 +86,8 @@ const QuestionDetail = () => {
     console.log("코드 모두 컴파일 후 "+ result)
     for(let i=0; i<testcase.length;i++){
       let str = testcase[i].output
-      str = str.replace(/[!@#]|[*()]/g, "\n");
+      str = str.replace(/!@#/g, "\n");
+      str= str.replace(/\*\(\)/g, "\n");
       TestcaseOutput.push(str)
     }
     console.log(compileResult)

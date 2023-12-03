@@ -14,6 +14,12 @@ const Main_Page_Body = () => {
   const [leagueOpenTime, setLeagueOpenTime] = useState("");
   const [leagueCloseTime, setCloseTime] = useState("");
   useEffect(() => {
+    const str = "문자열!@#치환*()테스트";
+const replacedStr = str.replace(/!@#/g, "\n");
+const replacedStr1 = replacedStr.replace(/\*\(\)/g, "\n");
+console.log("replacedStr",replacedStr1)
+
+    
     const apiUrl = `${process.env.REACT_APP_DB_HOST}` + "/api/v1/board/popular";
 
     axios
