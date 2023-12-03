@@ -3,7 +3,7 @@ import "../../css/CodingBadge.css";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import RecommendComponent from "./RecommendComponent";
-
+import axios from 'axios'
 const CodingBadge = ({calendar,user}) => {
   const [currentDate, setCurrentDate] = useState(new Date());
 
@@ -11,11 +11,61 @@ const CodingBadge = ({calendar,user}) => {
  const [badgeimg,setBadgeImg] = useState();
  const[exp,setExp] = useState()
  const[badgeName,setBadgeName]=useState()
-
+ const[userQuestion,setUserQuestion] = useState([])
  const dayList = calendar
-
+ let size =0
  useEffect(() => {
   console.log("dayList:", dayList);
+  console.log("유사문제 추천 하는중 ")
+  var questionPks=[]
+  const apiUr2 =`${process.env.REACT_APP_DB_HOST}`+ '/api/v1/chatbot/userRecommend';
+  axios.post(apiUr2
+    ,{},{
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('access')}`
+
+
+      }
+    })
+    .then(response => {
+      console.log("유사문제 추천 데이터",response.data)
+      questionPks=response.data.response
+      console.log("questionPks",questionPks)
+      if(size<5){
+        
+        for(let i =0; i< questionPks.length; i++){
+          const apiUr3 =`${process.env.REACT_APP_DB_HOST}`+ `/api/v1/question/detail/${questionPks[i]}`;
+          axios.get(apiUr3
+            ,{
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('access')}`
+        
+        
+              }
+            })
+            .then(response => {
+              console.log("유사문제 상세조회",size,":",response.data.question)
+
+              setUserQuestion(prevData => [...prevData, response.data.question]);
+ 
+            
+            })
+            .catch(error => {
+              console.error('유사문제 상세 조회중', error);
+            });
+            size+=1
+            
+        }
+      }
+   
+    
+    })
+    .catch(error => {
+      console.error('유사문제 추천 pk 고르는중', error);
+    });
+
 }, []);
 
 
@@ -147,10 +197,10 @@ const CodingBadge = ({calendar,user}) => {
                     사용자 문제 추천
                   </span>
                   <div className="mypage-recommend-question-contents-wrapper">
-                    Coming Soon~
-                    {/* {questionData.map((value, index) => (
+                    {/* Coming Soon~ */}
+                    {userQuestion && userQuestion.map((value, index) => (
                       <RecommendComponent key={index} question={value} />
-                    ))} */}
+                    ))}
                   </div>
                 </div>
               </div>

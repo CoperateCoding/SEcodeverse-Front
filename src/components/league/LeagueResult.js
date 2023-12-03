@@ -71,8 +71,8 @@ const LeagueResult = () => {
               console.error("상위 10명 유저 랭크 찾다가", error);
             });
             axios
-            .post(
-              `${process.env.REACT_APP_DB_HOST}/api/v1/ctf/team/category/scores`,{},
+            .get(
+              `${process.env.REACT_APP_DB_HOST}/api/v1/ctf/team/category/scores`,
                 
               {
                 headers: {
