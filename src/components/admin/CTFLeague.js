@@ -19,6 +19,8 @@ const CTFLeague = () => {
   const [countValue, setCountValue] = useState("");
   const [noticValue, setNoticValue] = useState("");
   const [contentValue, setContentValue] = useState("");
+  const [startTime, setStartTime] = useState();
+  const [endTime, setEndTime] = useState();
 
   const handleInputValue = (e) => {
     setInputValue(e.target.value);
@@ -35,13 +37,6 @@ const CTFLeague = () => {
   const handleContentValue = (e) => {
     setContentValue(e.target.value);
   }
-
-  const toggleModifyLeague = (leagueIndex) => {
-    setIsEditLeague(!isEditLeague);
-    const leaguePk = league.at(leagueIndex).leaguePk;
-    leagueDetail(leaguePk);
-    
-  };
 
   useEffect(() => {
     const apiUrl =
@@ -142,33 +137,22 @@ const CTFLeague = () => {
         console.error("API 호출 중 에러:", error);
       });
   };
-  // //
-  // closeTime
-  // :
-  // "2023-12-06T04:58:13"
-  // description
-  // :
-  // "컴소공 리그 입니다."
-  // memberCnt
-  // :
-  // 3
-  // name
-  // :
-  // "컴소공 리그 "
-  // notice
-  // :
-  // "컴소공 리그 입니다."
-  // openTime
-  // :
-  // "2023-12-01T04:58:13.799"
-  // status
-  // :
-  // "OPEN"
-  //leagueListPk접근은 value.leaguePk 이런식으로 하면됨!
+
+  const toggleModifyLeague = (leagueIndex) => {
+    const leaguePk = league.at(leagueIndex).leaguePk;
+    leagueDetail(leaguePk);
+    // setIsEditLeague(!isEditLeague);
+    console.log("받은 리그 정보", selectL.name);
+    console.log("저장한 시작 시간", startTime);
+  };
+
   const leagueDetail = (leaguePk) => {
+    const url1 =
+      `${process.env.REACT_APP_DB_HOST}` + `/api/v1/ctf/league/${leaguePk}`;
+
     axios
       .get(
-        `${process.env.REACT_APP_DB_HOST}` + `/api/v1/ctf/league/${leaguePk}`,
+        url1,
         {
           headers: {
             "Content-Type": "application/json",
@@ -179,11 +163,20 @@ const CTFLeague = () => {
       .then((response) => {
         console.log("들고온 리그 정보", response.data);
         setSelectL(response.data);
-        console.log("저장한 리그 정보", selectL);
+        setInputValue(response.data.name);
+        setCountValue(response.data.memberCnt);
+        setNoticValue(response.data.notice);
+        setContentValue(response.data.description);
+        setStartTime(response.data.openTime);
+        setEndTime(response.data.closeTime);
       })
       .catch((error) => {
         console.error("API 호출 중 에러:", error);
       });
+
+      setTimeout(()=>{
+        setIsEditLeague(!isEditLeague);
+      },1000)
   };
 
   const toggleCreateLeague = () => {
@@ -210,10 +203,12 @@ const CTFLeague = () => {
   const toggleAccordion = () => {
     setIsOpen(!isOpen);
   };
+
   const buttonClick = (n) => {
     getQuestionList(n);
     setCurrentPage(n);
   };
+
   const getQuestionList = (paging) => {
     const apiUrl =
       `${process.env.REACT_APP_DB_HOST}` + "/api/v1/admin/ctf/league/all";
@@ -447,7 +442,7 @@ const CTFLeague = () => {
                   timeIntervals={15}
                   dateFormat="yyyy-MM-dd HH:mm"
                   timeCaption="Time"
-                  selected={new Date(selectL.openTime)}
+                  selected={new Date(startTime)}
                   onChange={(date) => setStartDate(date)}
                 />
               </div>
@@ -462,7 +457,7 @@ const CTFLeague = () => {
                   timeIntervals={15}
                   dateFormat="yyyy-MM-dd HH:mm"
                   timeCaption="Time"
-                  selected={new Date(selectL.closeTime)}
+                  selected={new Date(endTime)}
                   onChange={(date) => setEndDate(date)}
                 />
               </div>
