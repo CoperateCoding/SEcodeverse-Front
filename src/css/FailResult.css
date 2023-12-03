@@ -218,9 +218,12 @@
     margin-right: 15px;
   }
 
-  .fail-comment-similar > .recommend-user-title{
+
+.fail-comment-similar >.recommend-user-wrapper>.user-recommend-user-title{
     text-overflow: ellipsis;
-}
+    font-size:40%;
+  }
+  
   
 .ai-review-button{
     width: 120px;
