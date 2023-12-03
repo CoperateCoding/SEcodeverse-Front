@@ -176,6 +176,7 @@
 }
 
  /* 사용자문제추천 */
+ 
  .success-comment-similar > .mypage-recommend-question-contents-wrapper{
     width: 100%;
     height: 100px;
@@ -218,9 +219,10 @@
     height:100%;
   }
 
-  .success-comment-similar > .recommend-user-title{
+.success-comment-similar >.recommend-user-wrapper>.user-recommend-user-title{
     text-overflow: ellipsis;
-}
+    font-size:40%;
+  }
   
 .ai-review-button{
     width: 120px;
