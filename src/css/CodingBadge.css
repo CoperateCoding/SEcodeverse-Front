@@ -293,6 +293,14 @@ font-size: 20px;
 
   margin-bottom: 10px;
 }
+.recommend-user-img img{
+  width:100%;
+  height:100%;
+}
 .recommend-user-title{
 text-overflow: ellipsis;
+}
+.user-recommend-user-title{
+  text-overflow: ellipsis;
+  font-size:40%;
 }

@@ -40,7 +40,7 @@ const MyBorde = () => {
     .catch(error => {
       console.error('내 게시물 확인 중 에러:', error);
     });
-
+   
  
 
 
