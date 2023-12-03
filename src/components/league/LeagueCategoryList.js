@@ -6,18 +6,35 @@ import "../../css/league/LeagueCategoryList.css";
 import axios from 'axios'
 const LeagueCategoryList = () => {
   const [categorys, setCategorys] = useState([])
+  const [isAllSolved,setIsAllSolved] = useState([])
   useEffect(() => {
   
     axios
-      .get(`${process.env.REACT_APP_DB_HOST}`+`/api/v1/ctf/category/all`, {
+      .get(`${process.env.REACT_APP_DB_HOST}`+`/api/v1/ctf/league/current`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.getItem('access')}`,
-        },
+        }
       })
       .then((response) => {
-        console.log("ctf카테고리",response.data)
-        setCategorys(response.data)
+        console.log("현재 진행중인 리그 pk",response.data)
+        axios.get(`${process.env.REACT_APP_DB_HOST}/api/v1/ctf/category/all`, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('access')}`,
+          },
+          params: {
+            leaguePk: response.data,
+          },
+        })
+          .then((response) => {
+            console.log("ctf카테고리", response.data);
+            setCategorys(response.data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+        
       })
       .catch((error) => {
         console.error(error);

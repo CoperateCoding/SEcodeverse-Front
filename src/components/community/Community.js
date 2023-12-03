@@ -34,7 +34,11 @@ const Community = () => {
     .then(response => {
       console.log("boardList",response.data)
       setCommunityLit(response.data.list)
-      setTotalpages(response.data.cnt % 8 > 0 ? response.data.cnt/8 + 1 : response.data.cnt/8);
+      setTotalpages(
+        response.data.cnt % 10 > 0
+          ? Math.floor(response.data.cnt / 10 + 1)
+          : Math.floor(response.data.cnt / 10)
+      );
       console.log(response.data)
       if(totalPages<1){
         setTotalpages(1)
@@ -154,7 +158,14 @@ const Community = () => {
   axios.get(url)
     .then(response => {
       setCommunityLit(response.data.list)
-      setTotalpages(response.data.cnt % 10 > 0 ? response.data.cnt/10 + 1 : response.data.cnt/10);
+      setTotalpages(
+        response.data.cnt % 10 > 0
+          ? Math.floor(response.data.cnt / 10 + 1)
+          : Math.floor(response.data.cnt / 10)
+      );
+      if(response.data.cnt<1){
+        setTotalpages(1)
+      }
      
     
     })
