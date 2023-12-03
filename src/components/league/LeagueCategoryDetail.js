@@ -28,21 +28,37 @@ const LeagueCategoryDetail = () => {
         console.log("ctf카테고리Pk",response.data)
         categoryid=response.data
         axios
-        .get(`${process.env.REACT_APP_DB_HOST}/api/v1/ctf/question/`, {
+        .get(`${process.env.REACT_APP_DB_HOST}/api/v1/ctf/league/current`, {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${localStorage.getItem('access')}`,
-          },
-          params: {
-            categoryPk: categoryid,
-          },
+          }
         })
         .then((response) => {
-          console.log("카테고리별 문제", response.data);
-          setProblems(response.data.list);
+          console.log("현재진행중인 리그pk",response.data)
+          const league = response.data
+          axios
+          .get(`${process.env.REACT_APP_DB_HOST}/api/v1/ctf/question/`, {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem('access')}`,
+            },
+            params: {
+              categoryPk: categoryid,
+              leaguePk:league
+            },
+          })
+          .then((response) => {
+            console.log("카테고리별 문제", response.data);
+            setProblems(response.data.list);
+          })
+          .catch((error) => {
+            console.error("카테고리 별 문제찾다가", error);
+          });
+
         })
         .catch((error) => {
-          console.error("카테고리 별 문제찾다가", error);
+          console.error("현재 진행중인 리그 찾다가", error);
         });
       })
       .catch((error) => {
@@ -50,7 +66,7 @@ const LeagueCategoryDetail = () => {
       });
       
   }, []);
-  
+
 
   // const [problems, setProblems] = useState([
   //   { name: "문제 1", score: 5, type: "객관식", submit: false },
@@ -127,10 +143,10 @@ const LeagueCategoryDetail = () => {
           </div>
           <div className="league-category-detail-title-box">
             <span>{category} 문제</span>
-            <div className="league-category-detail-remain-question">
+            {/* <div className="league-category-detail-remain-question">
               <span>남은 문제 : </span>
               <span>{questionCount}개</span>
-            </div>
+            </div> */}
           </div>
           <div className="league-category-detail-question-list">
             <div className="league-category-detail-question-wrap">

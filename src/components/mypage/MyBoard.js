@@ -8,6 +8,7 @@ const MyBorde = () => {
   const itemsPerPage = 8;
   const [boardList, setBoardList] = useState([])
   const [totalPages,setTotalpages]=useState(0); 
+  
   useEffect(() => {
     const apiUrl =`${process.env.REACT_APP_DB_HOST}`+ '/api/v1/my/board';
     const page=1

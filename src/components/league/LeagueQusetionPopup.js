@@ -51,8 +51,7 @@ const LeagueQuestionPopup = ({
               detailQuestion.imgUrlList.map((value, index) => (
                 <img src={value} alt="대충 이미지" key={index} />
               ))}
-            <p>{detailQuestion.description}</p>
-
+            <p style={{whiteSpace:'pre-line'}}>{detailQuestion.description}</p>
             {/* <p>
               Proin et justo et elit bibendum luctus at in nisl. Maecenas
               tristique, leo eu dignissim feugiat, urna turpis ullamcorper

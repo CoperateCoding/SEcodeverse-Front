@@ -40,7 +40,8 @@ const CTFLeague = () => {
     setIsEditLeague(!isEditLeague);
     const leaguePk = league.at(leagueIndex).leaguePk;
     leagueDetail(leaguePk);
-    
+    console.log(selectL.name);
+    console.log(selectL.closeTime);
   };
 
   useEffect(() => {
@@ -447,6 +448,7 @@ const CTFLeague = () => {
                   timeIntervals={15}
                   dateFormat="yyyy-MM-dd HH:mm"
                   timeCaption="Time"
+                  // selected={selectL.openTime}
                   selected={new Date(selectL.openTime)}
                   onChange={(date) => setStartDate(date)}
                 />
