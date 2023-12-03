@@ -41,9 +41,10 @@ const RecommendComponent = ({question}) => {
     return(
         <div className="recommend-user-wrapper" onClick={goQuestion}>
             <div className="recommend-user-img">
-              <img src={getLevelImg(question.level)}/>
+              <img src={getLevelImg(question.levelPk)}/>
             </div>
-            <span className="recommend-user-title">{getProperty(question.title).length> 10 ? `${getProperty(question.title).slice(0, 10)}...` : question.title}</span>
+            <span className="user-recommend-user-title">{getProperty(question.title).length> 10 ? `${getProperty(question.title).slice(0, 10)}...` : question.title}</span>
+            {/* <span className="recommend-user-title">{question.title}</span> */}
         </div>
     );
 }
