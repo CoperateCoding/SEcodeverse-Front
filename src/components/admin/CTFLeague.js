@@ -167,8 +167,8 @@ const CTFLeague = () => {
         setCountValue(response.data.memberCnt);
         setNoticValue(response.data.notice);
         setContentValue(response.data.description);
-        setStartTime(response.data.openTime);
-        setEndTime(response.data.closeTime);
+        setStartDate(new Date(response.data.openTime));
+        setEndDate(new Date(response.data.closeTime));
       })
       .catch((error) => {
         console.error("API 호출 중 에러:", error);
@@ -427,7 +427,7 @@ const CTFLeague = () => {
                 <input
                   className="ctf-league-edit-popup-contents-title-input"
                   type="text"
-                  value={selectL.name}
+                  value={inputValue}
                   onChange={handleInputValue}
                 />
               </div>
@@ -442,7 +442,7 @@ const CTFLeague = () => {
                   timeIntervals={15}
                   dateFormat="yyyy-MM-dd HH:mm"
                   timeCaption="Time"
-                  selected={new Date(startTime)}
+                  selected={startDate}
                   onChange={(date) => setStartDate(date)}
                 />
               </div>
@@ -457,7 +457,7 @@ const CTFLeague = () => {
                   timeIntervals={15}
                   dateFormat="yyyy-MM-dd HH:mm"
                   timeCaption="Time"
-                  selected={new Date(endTime)}
+                  selected={endDate}
                   onChange={(date) => setEndDate(date)}
                 />
               </div>
@@ -468,7 +468,7 @@ const CTFLeague = () => {
                 <input
                   className="ctf-league-edit-popup-contents-count-input"
                   type="number"
-                  value={selectL.memberCnt}
+                  value={countValue}
                   onChange={handleCountValue}
                 />
               </div>
@@ -481,7 +481,7 @@ const CTFLeague = () => {
                     className="ctf-league-edit-popup-contents-description-input"
                     type="text"
                     maxLength={2000}
-                    value={selectL.description}
+                    value={contentValue}
                     onChange={handleContentValue}
                   />
                 </div>
@@ -493,7 +493,7 @@ const CTFLeague = () => {
                     className="ctf-league-edit-popup-contents-description-input"
                     type="text"
                     maxLength={2000}
-                    value={selectL.notice}
+                    value={noticValue}
                     onChange={handleNoticeValue}
                   />
                 </div>
