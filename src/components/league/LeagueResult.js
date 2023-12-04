@@ -144,6 +144,7 @@ const LeagueResult = () => {
                   {langk.map((value, index) => (
                     <RankTableComponent
                       key={index}
+                      rank={index}
                       rankData={value}
                       isYou={value.name === teamName}
                     />
