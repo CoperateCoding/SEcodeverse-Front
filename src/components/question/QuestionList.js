@@ -538,26 +538,6 @@ const QuestionList = () => {
                         6
                       </label>
                     </div>
-                    <div className="question-board-option-box2">
-                      <label className="question-board-option-category">
-                        카테고리 선택 :
-                        <br />
-                        <input
-                          type="checkbox"
-                          value="Category A"
-                          onChange={handleCategoryChange}
-                        />{" "}
-                        자료구조
-                        <br />
-                        <input
-                          type="checkbox"
-                          value="Category B"
-                          onChange={handleCategoryChange}
-                        />{" "}
-                        사칙연산
-                        <br />
-                      </label>
-                    </div>
                     <div className="question-board-option-box3">
                       <label className="question-board-option-sort">
                         정렬 방식 선택 :
