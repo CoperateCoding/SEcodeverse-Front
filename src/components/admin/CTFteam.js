@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../css/AdminCTFTeam.css";
 import TeamTableComponent from "./TeamTableComponent";
 import axios from "axios";
@@ -10,9 +10,32 @@ const CTFteam = () => {
   const [team, setTeam] = useState([]);
   const [totalPages, setTotalpages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
+  const [allLeague,setAllLeague] = useState([]);
+  const[selectedLeague, setSelectedLeague] = useState()
   const toggleAccordion = () => {
     setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    const apiUrl2 = `${process.env.REACT_APP_DB_HOST}` + "/api/v1/admin/ctf/league/all";
+    axios
+      .get(apiUrl2, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
+      })
+      .then((response) => {
+        console.log("전체 리그 조회",response.data);
+        setAllLeague(response.data.list)
+        setSelectedLeague(response.data.list[0].leaguePk)
+
+      })
+      .catch((error) => {
+        console.error("API 호출 중 에러:", error);
+      });
+  }, []);
+
   const high = () => {
     console.log("high 누름");
     changeOrder("점수높은순");
@@ -87,12 +110,16 @@ const CTFteam = () => {
     }
   };
   const leagueSearch = () => {
-    var inputElement = document.querySelector("input");
-    var inputValue = inputElement.value;
-    console.log(inputValue);
-    setLeaguePk(inputValue);
+    console.log("selectedLeague",selectedLeague)
+    setLeaguePk(selectedLeague);
     getTeam(1);
   };
+
+  const handleSelectedLeague=(e) => {
+    setSelectedLeague(e.target.value)
+    console.log(e.target.value)
+  }
+
   const buttonClick = (n) => {
     getTeam(n);
     setCurrentPage(n);
@@ -144,8 +171,14 @@ const CTFteam = () => {
         <h1 className="admin-team-board-rightMain">CTF 팀 관리</h1>
         <div className="admin-team-board-topBar">
           <div className="admin-team-league-search">
-            <span className="ctf-team-board-search-league-text">리그 pk</span>
-            <input className="ctf-team-board-search-league-input"></input>
+          <select className="ctf-question-edit-popup-contents-league"
+                         value={selectedLeague}
+                         onChange={handleSelectedLeague}>
+                  {allLeague &&
+                  allLeague.map((value, index) => (
+                    <option value = {value.leaguePk}>{value.name}</option>
+                  ))}
+                  </select>
             <button className="ctf-team-board-search-league-button" onClick={leagueSearch}>조회</button>
           </div>
           <div className="admin-team-board-category-accordion-wrap">
