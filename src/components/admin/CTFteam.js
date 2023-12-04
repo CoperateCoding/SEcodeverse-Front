@@ -54,9 +54,13 @@ const CTFteam = () => {
         setTeam(response.data.list);
         setTotalpages(
           response.data.cnt % 10 > 0
-            ? response.data.cnt / 10 + 1
-            : response.data.cnt / 10
+            ? Math.floor(response.data.cnt / 10 + 1)
+            : Math.floor(response.data.cnt / 10)
         );
+        console.log("총 페이지는",response.data.cnt)
+        if(response.data.cnt<1){
+          setTotalpages(1)
+        }
       })
       .catch((error) => {
         console.error("team 조회 중 에러:", error);
@@ -121,9 +125,13 @@ const CTFteam = () => {
         setTeam(response.data.list);
         setTotalpages(
           response.data.cnt % 10 > 0
-            ? response.data.cnt / 10 + 1
-            : response.data.cnt / 10
+            ? Math.floor(response.data.cnt / 10 + 1)
+            : Math.floor(response.data.cnt / 10)
         );
+        console.log("총 페이지는",response.data.cnt)
+        if(response.data.cnt<1){
+          setTotalpages(1)
+        }
       })
       .catch((error) => {
         console.error("team 조회 중 에러:", error);

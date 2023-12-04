@@ -15,7 +15,7 @@ const CTFquestion = () => {
   const [totalPages, setTotalpages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortType, setSortType] = useState("HIGH");
-
+  const [editLeaguePk,setEditLeaguePk] = useState()
   //수정
   const [isEdit, setIsEdit] = useState(false);
   const [selectQ, setSelctQ] = useState(false);
@@ -42,15 +42,16 @@ const CTFquestion = () => {
         },
       })
       .then((response) => {
-        console.log(response.data);
+        console.log("문제들",response.data);
         setQuestion(response.data.list);
         setTotalpages(
           response.data.cnt % 10 > 0
-            ? response.data.cnt / 10 + 1
-            : response.data.cnt / 10
+            ? Math.floor(response.data.cnt / 10 + 1)
+            : Math.floor(response.data.cnt / 10)
         );
         console.log(question);
-        if (totalPages < 1) {
+        console.log("totalPage처음에 뭐로 설정하니",Math.floor(response.data.cnt/10),"나머지는", response.data.cnt%10)
+        if (response.data.cnt < 1) {
           setTotalpages(1);
         }
         console.log("ctfQuestion의", totalPages);
@@ -74,6 +75,8 @@ const CTFquestion = () => {
   };
 
   const handleNextClick = () => {
+    console.log("totalPages", totalPages)
+    console.log("currentPage",currentPage)
     if (currentPage < totalPages) {
       const pagiging = currentPage + 1;
       getQuestionList(pagiging);
@@ -189,6 +192,46 @@ const CTFquestion = () => {
     console.log("카테고리 변경됨", e.target.value);
   };
 
+  const edit = () =>{
+    console.log("수정시작")
+    console.log(editLeaguePk)
+    var questionType=""
+    if (selectedType === "objective") {
+      questionType = "OBJECTIVE";
+    } else {
+      questionType = "SUBJECTIVE";
+    }
+    const data = {
+      leaguePk: leaguePk,
+      categoryPk: selectedCategory,
+      ctfQuestionType: questionType,
+      name: titleValue,
+      score: scoreValue,
+      description: content,
+      answer: answer,
+    };
+    axios
+    .patch(
+      `${process.env.REACT_APP_DB_HOST}` + `/api/v1/admin/ctf/question/${editLeaguePk}`,
+      data,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
+      }
+    )
+    .then((response) => {
+      console.log("수정 성공")
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.error("ctf 문제 수정중 에러:", error);
+    });
+    setIsEdit(false)
+
+  }
+
   const onCTFQuestionRegister = async () => {
     console.log("사용자가 올린 파일 수는", selectedFiles);
     var imgUrl = [];
@@ -236,6 +279,7 @@ const CTFquestion = () => {
           console.log(imageUrl);
           console.log(fileName);
           imgUrl.push(fileName);
+          window.location.reload();
         } catch (error) {
           console.error("S3 업로드 실패", error);
         }
@@ -243,7 +287,7 @@ const CTFquestion = () => {
     }
     var imgList = [];
     for (let i = 0; i < imgUrl.length; i++) {
-      imgList.push({ imgUrl: imgUrl[i] });
+      imgList.push(imgUrl[i]);
       console.log("imgList넣을게");
     }
     console.log("imgUrl", imgUrl);
@@ -265,7 +309,7 @@ const CTFquestion = () => {
         score: scoreValue,
         description: content,
         answer: answer,
-        imgList: imgList, // imgUrl이 있는 경우 imgList를 추가합니다.
+        imgUrlList: imgList, // imgUrl이 있는 경우 imgList를 추가합니다.
       };
     } else {
       data = {
@@ -298,6 +342,9 @@ const CTFquestion = () => {
         console.error("리그 등록중 에러:", error);
       });
     setIsCreateQuestion(!isCreateQuestion);
+    setAnswer("")
+    setContent("")
+
   };
 
   const toggleCreateQuestion = () => {
@@ -307,6 +354,7 @@ const CTFquestion = () => {
   const toggleModifyQuestion = (questionIndex) => {
     setIsEdit(!isEdit);
     const questionPk = question.at(questionIndex).questionPk;
+    setEditLeaguePk(questionPk)
     questionDetail(questionPk);
   };
 
@@ -543,7 +591,7 @@ const CTFquestion = () => {
                 <div className="ctf-question-edit-popup-contents-button-wrapper">
                   <div
                     className="ctf-question-edit-popup-contents-button"
-                    onClick={onCTFQuestionRegister}
+                    onClick={edit}
                   >
                     확인
                   </div>

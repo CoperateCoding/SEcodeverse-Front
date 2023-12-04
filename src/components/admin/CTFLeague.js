@@ -21,7 +21,7 @@ const CTFLeague = () => {
   const [contentValue, setContentValue] = useState("");
   const [startTime, setStartTime] = useState();
   const [endTime, setEndTime] = useState();
-
+  const [editLeagePk, setEditLeagePk] = useState()
   const handleInputValue = (e) => {
     setInputValue(e.target.value);
   }
@@ -64,9 +64,12 @@ const CTFLeague = () => {
         setLeague(response.data.list);
         setTotalpages(
           response.data.cnt % 10 > 0
-            ? response.data.cnt / 10 + 1
-            : response.data.cnt / 10
+            ? Math.floor(response.data.cnt / 10 + 1)
+            : Math.floor(response.data.cnt / 10)
         );
+        if(response.data.cnt<1){
+          setTotalpages(1)
+        }
       })
       .catch((error) => {
         console.error("API 호출 중 에러:", error);
@@ -140,11 +143,47 @@ const CTFLeague = () => {
 
   const toggleModifyLeague = (leagueIndex) => {
     const leaguePk = league.at(leagueIndex).leaguePk;
+    setEditLeagePk(leaguePk)
     leagueDetail(leaguePk);
     // setIsEditLeague(!isEditLeague);
     console.log("받은 리그 정보", selectL.name);
     console.log("저장한 시작 시간", startTime);
   };
+
+  const handleEdit = () => {
+    console.log(editLeagePk)
+    const data = {
+      name: inputValue,
+      openTime: startDate,
+      closeTime: endDate,
+      memberCnt: countValue,
+      notice: noticValue,
+      description: contentValue,
+    };
+    const url1 =
+      `${process.env.REACT_APP_DB_HOST}` + `/api/v1/admin/ctf/league/${editLeagePk}`;
+
+    axios
+      .patch(
+        url1,data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("access")}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log("리그 수정 성공 ", response.data);
+   
+      })
+      .catch((error) => {
+        console.error("리그 수정중 에라", error);
+      });
+setIsEditLeague(false)
+
+  };
+
 
   const leagueDetail = (leaguePk) => {
     const url1 =
@@ -502,7 +541,7 @@ const CTFLeague = () => {
             <div className="ctf-league-edit-popup-contents-button-wrapper">
               <div
                 className="ctf-league-edit-popup-contents-button"
-                onClick={leagueRegister}
+                onClick={handleEdit}
               >
                 확인
               </div>
