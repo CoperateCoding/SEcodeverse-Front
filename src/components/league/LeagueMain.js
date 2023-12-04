@@ -151,26 +151,7 @@ const LeagueMain = () => {
 
   const TeamJoin = () => {
     setIsJoin(!isJoin)
-    const apiUrl = `${process.env.REACT_APP_DB_HOST}/api/v1/ctf/team/join`;
-    axios
-      .post(apiUrl,
-        {
-          teamName:joinTeamName,
-          pw:joinPw
-
-        }, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("access")}`,
-        },
-      })
-      .then((response) => {
-        console.log("팀 참가 성공")
-
-      })
-      .catch((error) => {
-        console.error("팀 참가 중 에러: ", error);
-      });
+    
   };
 
   const handleNameInput = (event) => {
@@ -290,6 +271,26 @@ const LeagueMain = () => {
 
   const handleJoinClick =  () => {
     setIsJoin(!isJoin);
+    const apiUrl = `${process.env.REACT_APP_DB_HOST}/api/v1/ctf/team/join`;
+    console.log("joinTeamName:",joinTeamName)
+    console.log("joinpw:",joinPw)
+    axios
+      .post(apiUrl, {
+        teamName: joinTeamName,
+        pw: joinPw
+      }, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
+      })
+      .then((response) => {
+        console.log("팀 참가 성공");
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error("팀 참가 중 에러: ", error);
+      });
     setIsTeam(true);
   };
 
