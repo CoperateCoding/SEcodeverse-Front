@@ -19,6 +19,8 @@ const CTFquestion = () => {
   //수정
   const [isEdit, setIsEdit] = useState(false);
   const [selectQ, setSelctQ] = useState(false);
+  const [allLeague, setAllLeague] = useState([]);
+  const [selectedLeague, setSelectedLeague] = useState('')
 
   useEffect(() => {
     const apiUrl = `${process.env.REACT_APP_DB_HOST}` + "/api/v1/ctf/question/";
@@ -59,6 +61,24 @@ const CTFquestion = () => {
       .catch((error) => {
         console.error("API 호출 중 에러:", error);
       });
+
+      const apiUrl2 = `${process.env.REACT_APP_DB_HOST}` + "/api/v1/admin/ctf/league/all";
+    axios
+      .get(apiUrl2, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
+      })
+      .then((response) => {
+        console.log("전체 리그 조회",response.data);
+        setAllLeague(response.data.list)
+        setSelectedLeague(response.data.list[0].leaguePk)
+
+      })
+      .catch((error) => {
+        console.error("API 호출 중 에러:", error);
+      });
   }, []);
 
   const buttonClick = (n) => {
@@ -73,6 +93,7 @@ const CTFquestion = () => {
       setCurrentPage(pagiging);
     }
   };
+
 
   const handleNextClick = () => {
     console.log("totalPages", totalPages)
@@ -192,6 +213,11 @@ const CTFquestion = () => {
     console.log("카테고리 변경됨", e.target.value);
   };
 
+  const handleSelectedLeague=(e) => {
+    setSelectedLeague(e.target.value)
+    console.log(e.target.value)
+  }
+
   const edit = () =>{
     console.log("수정시작")
     console.log(editLeaguePk)
@@ -292,7 +318,7 @@ const CTFquestion = () => {
     }
     console.log("imgUrl", imgUrl);
     console.log("imgList", imgList);
-
+    console.log("selectedLeaguePk", selectedLeague)
     var data = [];
     var questionType = "";
     if (selectedType === "objective") {
@@ -302,7 +328,7 @@ const CTFquestion = () => {
     }
     if (imgUrl.length > 0) {
       data = {
-        leaguePk: leaguePk,
+        leaguePk: selectedLeague,
         categoryPk: selectedCategory,
         ctfQuestionType: questionType,
         name: titleValue,
@@ -313,7 +339,7 @@ const CTFquestion = () => {
       };
     } else {
       data = {
-        leaguePk: leaguePk,
+        leaguePk: selectedLeague,
         categoryPk: selectedCategory,
         ctfQuestionType: questionType,
         name: titleValue,
@@ -337,6 +363,7 @@ const CTFquestion = () => {
       .then((response) => {
         console.log(localStorage.getItem("access"));
         console.log(response.data);
+        window.location.reload();
       })
       .catch((error) => {
         console.error("리그 등록중 에러:", error);
@@ -514,15 +541,8 @@ const CTFquestion = () => {
                     value={scoreValue}
                     onChange={handleScoreChange}
                   />
-                  <span className="ctf-question-edit-popup-contents-score">
-                    리그 pk
-                  </span>
-                  <input
-                    className="ctf-question-edit-popup-contents-score-input"
-                    type="number"
-                    value={selectQ.leaguePk}
-                    onChange={handleLeaguePk}
-                  />
+                
+                  
                   <span className="ctf-question-edit-popup-contents-category">
                     카테고리
                   </span>
@@ -632,14 +652,14 @@ const CTFquestion = () => {
                     type="number"
                     onChange={handleScoreChange}
                   />
-                  <span className="ctf-question-edit-popup-contents-score">
-                    리그 pk
-                  </span>
-                  <input
-                    className="ctf-question-edit-popup-contents-score-input"
-                    type="number"
-                    onChange={handleLeaguePk}
-                  />
+                    <select className="ctf-question-edit-popup-contents-league"
+                         value={selectedLeague}
+                         onChange={handleSelectedLeague}>
+                  {allLeague &&
+                  allLeague.map((value, index) => (
+                    <option value = {value.leaguePk}>{value.name}</option>
+                  ))}
+                  </select>
                   <span className="ctf-question-edit-popup-contents-category">
                     카테고리
                   </span>
