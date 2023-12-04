@@ -78,34 +78,6 @@ const CTFLeague = () => {
 
   const leagueRegister = () => {
     setIsCreateLeague(!isCreateLeague);
-    // const inputElements = document.getElementsByClassName(
-    //   "ctf-league-edit-popup-contents-title-input"
-    // );
-    // const count = document.getElementsByClassName(
-    //   "ctf-league-edit-popup-contents-count-input"
-    // );
-    // const content = document.getElementsByClassName(
-    //   "ctf-league-edit-popup-contents-description-input"
-    // );
-    // const notic = document.getElementsByClassName(
-    //   "ctf-league-edit-popup-contents-description-input"
-    // );
-
-    // const inputElement = inputElements[0];
-    // const inputValue = inputElement.value;
-    // console.log("name", inputValue);
-
-    // const countElement = count[0];
-    // const countValue = countElement.value;
-    // console.log("인원수", countValue);
-
-    // const contentElement = content[0];
-    // const contentValue = contentElement.value;
-    // console.log("content", contentValue);
-
-    // const noticElement = notic[0];
-    // const noticValue = noticElement.value;
-    // console.log("notic", noticValue);
 
     const start = startDate;
     const end = endDate;
@@ -139,6 +111,8 @@ const CTFLeague = () => {
       .catch((error) => {
         console.error("API 호출 중 에러:", error);
       });
+
+    window.location.reload();
   };
 
   const toggleModifyLeague = (leagueIndex) => {
@@ -180,7 +154,8 @@ const CTFLeague = () => {
       .catch((error) => {
         console.error("리그 수정중 에라", error);
       });
-setIsEditLeague(false)
+setIsEditLeague(false);
+window.location.reload();
 
   };
 
