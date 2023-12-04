@@ -249,6 +249,7 @@ const LeagueMain = () => {
           console.error("팀 등록중 중", error);
         });
     }
+    window.location.reload();
   };
 
   const existsClick = () => {
@@ -335,14 +336,14 @@ const LeagueMain = () => {
       <div className="league-main-board-container">
         <div className="league-main-board-wrapper">
           <div className="league-main-board-title-box">
-            <span className="league-main-board-title">리그이름</span>
+            <span className="league-main-board-title">{league && league.name}</span>
           </div>
           <div className="league-main-board-description-area">
             <div className="league-main-board-description-box">
-              <div className="league-main-board-description-notice">
+              <div className="league-main-board-description-notice" style={{whiteSpace:"pre-line"}}>
                 <span>[공지사항]</span>
                 <br />
-                {league && league.name}
+                {league && league.notice}
                 <br />
                 <br />
               </div>
