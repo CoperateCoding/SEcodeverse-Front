@@ -222,7 +222,7 @@
 
 .success-comment-similar >.recommend-user-wrapper>.user-recommend-user-title{
     text-overflow: ellipsis;
-    font-size:40%;
+    font-size:26px;
   }
   
 .ai-review-button{

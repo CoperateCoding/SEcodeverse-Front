@@ -3,6 +3,7 @@ import "../../css/EnrollQuestion.css";
 import React, { useState, useEffect } from "react";
 import QuestionBoardComponent from "../QuestionBoardComponent";
 import axios from "axios";
+import { isRouteErrorResponse } from "react-router-dom";
 
 const QuestionList = () => {
   //페이징
@@ -98,8 +99,13 @@ const QuestionList = () => {
     console.log("sort", sort);
     console.log("level", difficultyOptions);
     if (sort !== null) {
-      params.sort = sort;
+      if(sort === "RECENT"){
+        console.log("적용됨")
+        params.sort = "RECENT";
+      }
+     
     }
+    console.log( "params.sort" , params.sort )
     if (categoryPks !== null && categoryPks) {
       for (let i = 0; i < categoryPk.length; i++) {
         categoryPk.push(categoryPks[i]);
@@ -154,7 +160,11 @@ const QuestionList = () => {
     console.log("sort", sort);
     console.log("level", difficultyOptions);
     if (sort !== null) {
-      params.sort = sort;
+      if(sort === "RECENT"){
+        console.log("적용됨")
+        params.sort = "RECENT";
+      }
+     
     }
     if (categoryPks !== null) {
       for (let i = 0; i < categoryPk.length; i++) {
