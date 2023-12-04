@@ -8,16 +8,14 @@ const SuccessResult = ({ onClose, value, code, fianlSimilarQuestion }) => {
   const [aiReview, setAIreview] = useState("");
   const [isReview, setIsReview] = useState(false);
 
-
   useEffect(() => {
-    console.log(value)
+    console.log(value);
   }, []);
-  
+
   //조언보기 버튼에 연결해주세용 ~
   const onClickReview = () => {
-  
-
-    const apiUrl = `${process.env.REACT_APP_DB_HOST}`+"/api/v1/chatbot/codeReview";
+    const apiUrl =
+      `${process.env.REACT_APP_DB_HOST}` + "/api/v1/chatbot/codeReview";
     axios
       .post(
         apiUrl,
@@ -38,8 +36,7 @@ const SuccessResult = ({ onClose, value, code, fianlSimilarQuestion }) => {
         // 에러 처리
         console.error("ai조언중 에러남", error);
       });
-      setIsReview(true);
- 
+    setIsReview(true);
   };
 
   return (
@@ -85,16 +82,25 @@ const SuccessResult = ({ onClose, value, code, fianlSimilarQuestion }) => {
               <tr>
                 <td className="success-comment-ai">
                   {!isReview && (
-                    <button className="ai-review-button" onClick={onClickReview}>조언보기</button>
+                    <button
+                      className="ai-review-button"
+                      onClick={onClickReview}
+                    >
+                      조언보기
+                    </button>
                   )}
                   {isReview && (
-                    <>{aiReview}</>
+                    <p>{aiReview}</p>
                   )}
                 </td>
                 <td className="success-comment-similar">
-                  {fianlSimilarQuestion && fianlSimilarQuestion.map((question) => (
-                    <RecommendComponent key={question.pk} question={question} />
-                  ))}
+                  {fianlSimilarQuestion &&
+                    fianlSimilarQuestion.map((question) => (
+                      <RecommendComponent
+                        key={question.pk}
+                        question={question}
+                      />
+                    ))}
                 </td>
               </tr>
             </tbody>
