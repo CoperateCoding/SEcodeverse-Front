@@ -229,6 +229,7 @@ const CTFquestion = () => {
       console.error("ctf 문제 수정중 에러:", error);
     });
     setIsEdit(false)
+
   }
 
   const onCTFQuestionRegister = async () => {
@@ -286,7 +287,7 @@ const CTFquestion = () => {
     }
     var imgList = [];
     for (let i = 0; i < imgUrl.length; i++) {
-      imgList.push({ imgUrl: imgUrl[i] });
+      imgList.push(imgUrl[i]);
       console.log("imgList넣을게");
     }
     console.log("imgUrl", imgUrl);
@@ -308,7 +309,7 @@ const CTFquestion = () => {
         score: scoreValue,
         description: content,
         answer: answer,
-        imgList: imgList, // imgUrl이 있는 경우 imgList를 추가합니다.
+        imgUrlList: imgList, // imgUrl이 있는 경우 imgList를 추가합니다.
       };
     } else {
       data = {
@@ -341,6 +342,8 @@ const CTFquestion = () => {
         console.error("리그 등록중 에러:", error);
       });
     setIsCreateQuestion(!isCreateQuestion);
+    setAnswer("")
+    setContent("")
 
   };
 
