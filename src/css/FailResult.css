@@ -173,6 +173,12 @@
     vertical-align: top;
 }
 
+.fail-comment-ai>p{
+    overflow-wrap: break-word;
+    overflow-y: auto;
+    height: 280px;
+}
+
 .fail-comment-similar{
     width: 40%;
     padding: 10px;
