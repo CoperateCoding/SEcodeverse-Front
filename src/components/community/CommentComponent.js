@@ -28,6 +28,7 @@ const CommentComponent = () => {
 
     axios.get(apiUrl1)
       .then(response => {
+        console.log("댓글 목록",response.data)
         setCommentList(response.data);
         setLoading(false);
       })
@@ -114,7 +115,7 @@ const CommentComponent = () => {
             )}
           </td>
           <td className="comment-date">{new Date(comment.createAt).toLocaleString()}</td>
-          <td className="comment-modify">
+          {localStorage.getItem('nickName')===comment.nickname && <td className="comment-modify">
             {editedCommentIndex === index ? (
               <>
                 <button onClick={handleCancelClick}>취소</button>
@@ -123,10 +124,10 @@ const CommentComponent = () => {
             ) : (
               <button onClick={() => handleEditClick(index)}>수정</button>
             )}
-          </td>
-          <td className="comment-delete"onClick={() => {commentDelete(comment.pk)}}>
+          </td>}
+          {localStorage.getItem('nickName')===comment.nickname && <td className="comment-delete"onClick={() => {commentDelete(comment.pk)}}>
             <button>삭제</button>
-          </td>
+          </td>}
         </tr>
       ))}
     </>
