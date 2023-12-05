@@ -105,7 +105,7 @@ const FailResult = ({ onClose, value, code, fianlSimilarQuestion}) => {
                     </button>
                   )}
                   {isReview && 
-                  (<>{aiReview}</>)}
+                  (<p>{aiReview}</p>)}
                   
                 </td>
                 <td className="fail-comment-similar">

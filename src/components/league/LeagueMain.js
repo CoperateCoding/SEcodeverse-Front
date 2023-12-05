@@ -225,9 +225,10 @@ const LeagueMain = () => {
         .then((response) => {
           console.log("팀 등록 성공!");
           setIsCreate(false);
+         
         })
         .catch((error) => {
-          console.error("팀 등록중 중", error);
+          console.error("팀 등록중 에러", error);
         });
     }
     window.location.reload();
