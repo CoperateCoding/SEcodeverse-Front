@@ -15,13 +15,14 @@ const QuestionList = () => {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("c1");
+  const [category, setCategory] = useState("");
   const [desc, setDesc] = useState("");
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [level, setLevel] = useState("l1");
   const [input1, setInput1] = useState("");
   const [input2, setInput2] = useState("");
   const [input3, setInput3] = useState("");
+  const [allCategorys , setAllCategorys] = useState([])
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
     setSelectedFiles(files);
@@ -62,6 +63,20 @@ const QuestionList = () => {
       .catch((error) => {
         console.error("API 호출 중 에러:", error);
       });
+      const apiUr2 = `${process.env.REACT_APP_DB_HOST}`+"/api/v1/question/search/categorys";
+  
+      axios
+        .get(apiUr2)
+        .then((response) => {
+          console.log("전체 카테고리",response.data)
+          setAllCategorys(response.data)
+          setCategory(response.data[0].pk)
+        })
+        .catch((error) => {
+          console.error("API 호출 중 에러:", error);
+        });
+  
+
   }, []);
 
   function getCategoryNum(num) {
@@ -257,6 +272,7 @@ const QuestionList = () => {
   };
   const handleTypeChange = (e) => {
     setCategory(e.target.value);
+    console.log(e.target.value)
   };
   const handleTypeLevelChange = (e) => {
     setLevel(e.target.value);
@@ -308,7 +324,7 @@ const QuestionList = () => {
   };
 
   const handleRegisterClick = async () => {
-    const parseCategory = parseInt(category.replace(/[^\d]/g, ""));
+    // const parseCategory = parseInt(category.replace(/[^\d]/g, ""));
     const parseLevel = parseInt(level.replace(/[^\d]/g, ""));
     const testCase1input =
       document.getElementsByClassName("testcase1input")[0].value;
@@ -322,7 +338,7 @@ const QuestionList = () => {
       document.getElementsByClassName("testcase3input")[0].value;
     const testCase3output =
       document.getElementsByClassName("testcase3output")[0].value;
-    console.log(parseCategory);
+    // console.log(parseCategory);
     console.log(parseLevel);
     console.log(testCase1input);
     console.log(testCase1output);
@@ -406,10 +422,11 @@ const QuestionList = () => {
     ];
 
     var data = [];
+    console.log("category",category)
     if (imgUrl.length > 0) {
       data = {
         question: {
-          categoryPk: parseCategory,
+          categoryPk: category,
           levelPk: parseLevel,
           title: title,
           intro: desc,
@@ -423,7 +440,7 @@ const QuestionList = () => {
     } else {
       data = {
         question: {
-          categoryPk: parseCategory,
+          categoryPk: category,
           levelPk: parseLevel,
           title: title,
           intro: description,
@@ -644,9 +661,10 @@ const QuestionList = () => {
                       / 카테고리
                     </span>
                     <select value={category} onChange={handleTypeChange}>
-                      <option value="c1">자료구조</option>
-                      <option value="c2">네트워크</option>
-                      <option value="c3">수학</option>
+                    {allCategorys &&
+                  allCategorys.map((value, index) => (
+                    <option value = {value.pk}>{value.categoryName}</option>
+                  ))}
                     </select>
                   </div>
                 </div>
