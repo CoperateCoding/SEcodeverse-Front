@@ -161,7 +161,12 @@
 
 .success-comment-ai{
     width: 60%;
+
+    overflow-wrap: break-word;
+    overflow-y: auto;
+
     height: 320px;
+
 
     padding: 10px;
 

@@ -255,7 +255,7 @@ const CTFquestion = () => {
       console.error("ctf 문제 수정중 에러:", error);
     });
     setIsEdit(false)
-    window.location.reload();
+  
   }
 
   const onCTFQuestionRegister = async () => {

@@ -75,54 +75,67 @@ const QuestionDetail = () => {
     let isSucess=true
     console.log("테스트 케이스 보내기 시작합니다.")
     console.log("테스트케이스의 길이는",testcase.length)
-    for(let i=0; i<testcase.length; i++){
-      console.log("배열들어옴 ")
-      handleExecuteCode(testcase[i],compileResult)
+    if(testcase.length ===0){
+      testCaseNone(compileResult)
       await sleep(5000);
-      console.log("받아온 테스트케이스",testcase)
-      console.log("보내는 테스트케이스2 ",testcase[i].pk, testcase[i].input)
-    }
-    await sleep(5000); 
-    // console.log("코드 모두 컴파일 후 "+ result)
-    for(let i=0; i<testcase.length;i++){
-      let str = testcase[i].output
-      str = str.replace(/!@#/g, "\n");
-      str= str.replace(/\*\(\)/g, "\n");
-      TestcaseOutput.push(str)
-    }
-    console.log(compileResult)
-    var wrongCount =0
-    for(let i =0; i<compileResult.length ; i++){
-      var line = compileResult[i].stdout
-      console.log("line",line)
-      var result=line
-      if(line!="null"){ 
-        if (line.endsWith("\n")) {
-          console.log("마지막에 엔터있다.")
-          line = line.slice(0, -1);
-          console.log("제일 마지막 때버린 line : ",line)
-          result=line
-
-      }
-  
-      
-    }
-     console.log("결과 확인전",isSuccess)
-     console.log("result",result)
-     if(result===TestcaseOutput[i]){
-      console.log("똑같은데")
-     }
-      if(result != TestcaseOutput[i]){
+      console.log("결과확인중에 결과",compileResult)
+      totalmemory=compileResult[0].memory
+        totaltime = parseFloat(compileResult[0].time)
+        console.log("testCase가 없음",totalmemory)
+        console.log("testCase가 없음", totaltime)
         isSucess=false
-        console.log("내 코드 결과",result)
-        console.log("내스트케이스 결과",TestcaseOutput[i])
-        wrongCount+=1
-      }
-      totalmemory=totalmemory+compileResult[i].memory
-      totaltime = totaltime+parseFloat(compileResult[i].time)
-      console.log("parseInt한 값",parseFloat(compileResult[i].time))
-
     }
+    else{
+      for(let i=0; i<testcase.length; i++){
+        console.log("배열들어옴 ")
+        handleExecuteCode(testcase[i],compileResult)
+        await sleep(5000);
+        console.log("받아온 테스트케이스",testcase)
+        console.log("보내는 테스트케이스2 ",testcase[i].pk, testcase[i].input)
+      }
+      await sleep(5000); 
+      // console.log("코드 모두 컴파일 후 "+ result)
+      for(let i=0; i<testcase.length;i++){
+        let str = testcase[i].output
+        str = str.replace(/!@#/g, "\n");
+        str= str.replace(/\*\(\)/g, "\n");
+        TestcaseOutput.push(str)
+      }
+      console.log(compileResult)
+      var wrongCount =0
+      for(let i =0; i<compileResult.length ; i++){
+        var line = compileResult[i].stdout
+        console.log("line",line)
+        var result=line
+        if(line!="null"){ 
+          if (line.endsWith("\n")) {
+            console.log("마지막에 엔터있다.")
+            line = line.slice(0, -1);
+            console.log("제일 마지막 때버린 line : ",line)
+            result=line
+  
+        }
+    
+        
+      }
+       console.log("결과 확인전",isSuccess)
+       console.log("result",result)
+       if(result===TestcaseOutput[i]){
+        console.log("똑같은데")
+       }
+        if(result != TestcaseOutput[i]){
+          isSucess=false
+          console.log("내 코드 결과",result)
+          console.log("내스트케이스 결과",TestcaseOutput[i])
+          wrongCount+=1
+        }
+        totalmemory=totalmemory+compileResult[i].memory
+        totaltime = totaltime+parseFloat(compileResult[i].time)
+        console.log("parseInt한 값",parseFloat(compileResult[i].time))
+  
+      }
+    }
+    
 
     memory =totalmemory/compileResult.length
     time =totaltime/compileResult.length
@@ -275,6 +288,50 @@ const QuestionDetail = () => {
     }
 
 
+  }
+
+  const testCaseNone = (compileResult) => {
+    console.log("보내기 시도합니다")
+    const FormattedCode = code.replace(/\n/g, '\n');
+    const apiUrl = `${process.env.REACT_APP_DB_HOST}`+'/api/v1/question/solveQuestion';
+    const params = new URLSearchParams();
+    var languageNum =0
+    if(selectedLanguage === "Java"){
+      languageNum =2
+    }
+    else if(selectedLanguage ==="Python"){
+      languageNum=1
+    }
+    else if(selectedLanguage === "C"){
+      languageNum=3
+    }
+    else if(selectedLanguage === "C++"){
+      languageNum=4
+    }
+    console.log(selectedLanguage,":",languageNum)
+    params.append("userCode", FormattedCode);
+    params.append("languageNum",languageNum);
+    params.append("testcase",1);
+
+
+
+    axios
+  .get(apiUrl, {
+    params: params,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("access")}`,
+    },
+  })
+  .then((response) => {
+    const result = response.data;
+    console.log("테스트 케이스 결과",result);
+    compileResult.push(result);
+  })
+  .catch((error) => {
+    console.log(localStorage.getItem('access'));
+    console.error("문제 푸는 페이지에서 에러남", error);
+  });
   }
 
   const handleExecuteCode = (testcaseValue,compileResult) => {

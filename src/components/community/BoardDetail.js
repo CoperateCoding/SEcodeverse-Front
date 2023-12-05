@@ -81,6 +81,23 @@ const BoardDeatil = () => {
         console.error("게시글 삭제 중 에러", error);
       });
     alert("삭제를 선택했습니다.");
+    for (let i =0; i< imgList.length; i++) {
+      console.log("삭제할 이미지 리스트 중 한개 ", imgList[i])
+      axios
+      .delete(`${process.env.REACT_APP_DB_HOST}`+`/api/v1/s3/${imgList[i]}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+     
+      })
+      .catch((error) => {
+        console.error("s3삭제중", error);
+      });
+    }
     
     toggleMenu(); // 메뉴 닫기
   };
