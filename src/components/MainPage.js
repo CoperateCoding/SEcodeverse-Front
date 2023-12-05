@@ -44,6 +44,7 @@ console.log("메인페이지에서",str)
       )
       .then((response) => {
         setQuestionList(response.data);
+        console.log(response.data)
       })
       .catch((error) => {
         console.error("API 호출 중 에러:", error);

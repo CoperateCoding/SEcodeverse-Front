@@ -30,6 +30,7 @@ const LeagueCategoryList = () => {
           .then((response) => {
             console.log("ctf카테고리", response.data);
             setCategorys(response.data);
+            // setIsAllSolved(response.data.)
           })
           .catch((error) => {
             console.error(error);
