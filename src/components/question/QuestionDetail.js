@@ -358,17 +358,21 @@ const QuestionDetail = () => {
     const selectedValue = event.target.value;
     setSelectedLanguage(selectedValue)
     const languageCodeMap = {
-      Java: "public class Main {\n  public static void main(String args[]) {\n  System.out.println(1);\n }\n}",
-      Python: "print(1)",
+      Java: `public class Main {
+        public static void main(String args[]) {
+          System.out.println("Hello SEcodeVerse");
+        }
+    }`,
+      Python: 'print("Hello SEcodeVerse")',
       C: `#include <stdio.h>\n
 int main() {
-    printf("Hello SEcodeVerse!");
+    printf("Hello SEcodeVerse");
     return 0;
 }`,
       "C++": `#include <iostream>
 using namespace std;\n
 int main() {
-    cout << "Hello SEcodeVerse!" << endl;
+    cout << "Hello SEcodeVerse" << endl;
     return 0;
 }`,
     };
@@ -420,7 +424,7 @@ int main() {
     setSelectedLanguage("Java");
     setCode(`public class Main {
   public static void main(String args[]) {
-    System.out.println("Hello SEcodeVerse!");
+    System.out.println("Hello SEcodeVerse");
   }
 }`);
   };
@@ -530,7 +534,7 @@ int main() {
               </div></>}
           </div>
         </div>
-        {isEdit && <EditQuestion onClose = {handleQuestionEdit} question ={question} img = {img} />}
+        {isEdit && <EditQuestion onClose = {handleQuestionEdit} question ={question} img = {img} testcaseArray={testcase}/>}
       </div>   
       {isPopup && isSuccess && <SuccessResult onClose={() => setIsPopup(false)} value ={successResult} code ={code} fianlSimilarQuestion = {fianlSimilarQuestion}/>}
       {isPopup && !isSuccess && <FailResult onClose={() => setIsPopup(false)} value={successResult } code ={code} fianlSimilarQuestion = {fianlSimilarQuestion}/>}

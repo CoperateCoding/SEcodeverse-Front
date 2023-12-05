@@ -182,6 +182,12 @@ const BoardDeatil = () => {
     setWriteComment(e.target.value);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      commentRegister();
+    }
+  }
+
   return (
     <section>
       <div className="board-detail-total-container">
@@ -261,6 +267,7 @@ const BoardDeatil = () => {
                   type="text"
                   value={writeComment}
                   onChange={handleCommentChange}
+                  onKeyDown={handleKeyDown}
                 />
                 <button
                   className="board-detail-comment-input-button"
