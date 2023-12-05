@@ -15,7 +15,7 @@ const PostEditor = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [isValidateUser,setIsValidateUser] = useState(false);
   const [loading, setLoading] = useState(true);
-
+  const [imgUrlList,setImgList] = useState([])
   const { commumityPk } = useParams();
 
   useEffect(() => {
@@ -27,11 +27,13 @@ const PostEditor = () => {
     axios
       .get(apiUrl)
       .then((response) => {
+        console.log("게시글 전체 정보",response.data)
         console.log("수정 게시글 정보", response.data.board);
         setBoard(response.data.board);
         setTitle(response.data.board.title);
         setDesc(response.data.board.content);
         setType(response.data.board.category.name);
+        setImgList(response.data.imgList)
       })
       .catch((error) => {
         console.error("수정 게시글 정보 가져오는 중 에러남:", error);
@@ -46,7 +48,11 @@ const PostEditor = () => {
   
   
   const handleRegisterClick = async () => {
- 
+    let imgList =[]
+    for(let i=0 ;i<imgUrlList.length; i++){
+      imgList.push({imgUrl : imgUrlList[i].imgUrl})
+    }
+    console.log("이미지 리스트",imgList)
     let pk;
     if (type == "자유게시판") {
       pk = 1;
@@ -67,7 +73,7 @@ const PostEditor = () => {
           categoryPk: pk,
           title: title,
           content: desc,
-        },}
+        },imgList}
    
 
     if (title.trim() === "" || desc.trim() === "") {
