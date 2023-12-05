@@ -10,14 +10,15 @@ const CTFteam = () => {
   const [team, setTeam] = useState([]);
   const [totalPages, setTotalpages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-  const [allLeague,setAllLeague] = useState([]);
-  const[selectedLeague, setSelectedLeague] = useState()
+  const [allLeague, setAllLeague] = useState([]);
+  const [selectedLeague, setSelectedLeague] = useState();
   const toggleAccordion = () => {
     setIsOpen(!isOpen);
   };
 
   useEffect(() => {
-    const apiUrl2 = `${process.env.REACT_APP_DB_HOST}` + "/api/v1/admin/ctf/league/all";
+    const apiUrl2 =
+      `${process.env.REACT_APP_DB_HOST}` + "/api/v1/admin/ctf/league/all";
     axios
       .get(apiUrl2, {
         headers: {
@@ -26,10 +27,9 @@ const CTFteam = () => {
         },
       })
       .then((response) => {
-        console.log("전체 리그 조회",response.data);
-        setAllLeague(response.data.list)
-        setSelectedLeague(response.data.list[0].leaguePk)
-
+        console.log("전체 리그 조회", response.data);
+        setAllLeague(response.data.list);
+        setSelectedLeague(response.data.list[0].leaguePk);
       })
       .catch((error) => {
         console.error("API 호출 중 에러:", error);
@@ -80,9 +80,9 @@ const CTFteam = () => {
             ? Math.floor(response.data.cnt / 10 + 1)
             : Math.floor(response.data.cnt / 10)
         );
-        console.log("총 페이지는",response.data.cnt)
-        if(response.data.cnt<1){
-          setTotalpages(1)
+        console.log("총 페이지는", response.data.cnt);
+        if (response.data.cnt < 1) {
+          setTotalpages(1);
         }
       })
       .catch((error) => {
@@ -110,15 +110,15 @@ const CTFteam = () => {
     }
   };
   const leagueSearch = () => {
-    console.log("selectedLeague",selectedLeague)
+    console.log("selectedLeague", selectedLeague);
     setLeaguePk(selectedLeague);
     getTeam(1);
   };
 
-  const handleSelectedLeague=(e) => {
-    setSelectedLeague(e.target.value)
-    console.log(e.target.value)
-  }
+  const handleSelectedLeague = (e) => {
+    setSelectedLeague(e.target.value);
+    console.log(e.target.value);
+  };
 
   const buttonClick = (n) => {
     getTeam(n);
@@ -155,9 +155,9 @@ const CTFteam = () => {
             ? Math.floor(response.data.cnt / 10 + 1)
             : Math.floor(response.data.cnt / 10)
         );
-        console.log("총 페이지는",response.data.cnt)
-        if(response.data.cnt<1){
-          setTotalpages(1)
+        console.log("총 페이지는", response.data.cnt);
+        if (response.data.cnt < 1) {
+          setTotalpages(1);
         }
       })
       .catch((error) => {
@@ -171,15 +171,23 @@ const CTFteam = () => {
         <h1 className="admin-team-board-rightMain">CTF 팀 관리</h1>
         <div className="admin-team-board-topBar">
           <div className="admin-team-league-search">
-          <select className="ctf-question-edit-popup-contents-league"
-                         value={selectedLeague}
-                         onChange={handleSelectedLeague}>
-                  {allLeague &&
-                  allLeague.map((value, index) => (
-                    <option value = {value.leaguePk}>{value.name}</option>
-                  ))}
-                  </select>
-            <button className="ctf-team-board-search-league-button" onClick={leagueSearch}>조회</button>
+            <label>리그 : </label>
+            <select
+              className="ctf-question-edit-popup-contents-league"
+              value={selectedLeague}
+              onChange={handleSelectedLeague}
+            >
+              {allLeague &&
+                allLeague.map((value, index) => (
+                  <option value={value.leaguePk}>{value.name}</option>
+                ))}
+            </select>
+            <button
+              className="ctf-team-board-search-league-button"
+              onClick={leagueSearch}
+            >
+              조회
+            </button>
           </div>
           <div className="admin-team-board-category-accordion-wrap">
             <div

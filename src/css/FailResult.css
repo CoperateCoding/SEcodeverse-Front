@@ -166,10 +166,17 @@
 .fail-comment-ai{
     width: 60%;
     overflow-wrap: break-word;
+    overflow-y: auto;
 
     padding: 10px;
 
     vertical-align: top;
+}
+
+.fail-comment-ai>p{
+    overflow-wrap: break-word;
+    overflow-y: auto;
+    height: 280px;
 }
 
 .fail-comment-similar{
