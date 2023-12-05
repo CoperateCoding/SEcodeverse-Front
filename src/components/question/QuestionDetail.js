@@ -35,6 +35,7 @@ const QuestionDetail = () => {
   const similarQuestion =[]
   const [fianlSimilarQuestion, setFinalSimilarQuestion] = useState([])
   const [isEdit, setIsEdit] = useState(false);
+  const [aiReview, setAIreview] = useState("");
 
   useEffect(() => {
     if(localStorage.getItem('roleType')==="ADMIN"){
@@ -65,7 +66,28 @@ const QuestionDetail = () => {
   const [ai,setAI]=useState('')
 
   const compiler = async ()=> {
-   
+    const apiUrl =
+    `${process.env.REACT_APP_DB_HOST}` + "/api/v1/chatbot/codeReview";
+    axios
+    .post(
+      apiUrl,
+      {
+        code: code,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+    .then((response) => {
+      console.log("ai 조언", response.data);
+      setAIreview(response.data.response);
+    })
+    .catch((error) => {
+      // 에러 처리
+      console.error("ai조언중 에러남", error);
+    });
     const compileResult = []
     const TestcaseOutput=[]
     let totalmemory =0
@@ -593,8 +615,8 @@ int main() {
         </div>
         {isEdit && <EditQuestion onClose = {handleQuestionEdit} question ={question} img = {img} testcaseArray={testcase}/>}
       </div>   
-      {isPopup && isSuccess && <SuccessResult onClose={() => setIsPopup(false)} value ={successResult} code ={code} fianlSimilarQuestion = {fianlSimilarQuestion}/>}
-      {isPopup && !isSuccess && <FailResult onClose={() => setIsPopup(false)} value={successResult } code ={code} fianlSimilarQuestion = {fianlSimilarQuestion}/>}
+      {isPopup && isSuccess && <SuccessResult aiReview= {aiReview} onClose={() => setIsPopup(false)} value ={successResult} code ={code} fianlSimilarQuestion = {fianlSimilarQuestion}/>}
+      {isPopup && !isSuccess && <FailResult  aiReview= {aiReview} onClose={() => setIsPopup(false)} value={successResult } code ={code} fianlSimilarQuestion = {fianlSimilarQuestion}/>}
     </section>
   );
 };
