@@ -61,7 +61,7 @@ return "https://secodeverse-bucket2.s3.ap-northeast-2.amazonaws.com/coding_badge
                 <img src={getImg(post.levelPk)}></img>
               </div>
               <div className="myPage-board-upper-wrapper">
-                <span className="myPage-board-name">{getCategory(post.categoryPk)}</span>
+                <span className="myPage-board-name">{post.categoryName}</span>
                 <span className="myPage-board-user">{post.userName}</span>
               </div>
               <span className="myPage-myBoard-post-title">{getProperty(post.title).length> 10 ? `${getProperty(post.title).slice(0, 10)}...` : post.title}</span>
