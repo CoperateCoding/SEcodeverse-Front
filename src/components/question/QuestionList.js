@@ -482,6 +482,12 @@ const QuestionList = () => {
     }
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      onSearchClick();
+    }
+  }
+
   return (
     <section>
       <div className="question-board-container">
@@ -492,6 +498,7 @@ const QuestionList = () => {
               className="question-board-input-box"
               placeholder="검색어를 입력하세요"
               onChange={getSearch}
+              onKeyDown={handleKeyDown}
             ></input>
             <div className="question-board-search" onClick={onSearchClick}>
               검색

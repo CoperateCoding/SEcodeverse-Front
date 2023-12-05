@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-const EditQuestion = ({onClose, question, img}) => {
+const EditQuestion = ({onClose, question, img, testcaseArray}) => {
 
 const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -9,33 +9,40 @@ const [title, setTitle] = useState("");
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [level, setLevel] = useState("l1");
   const [testDesc,setTestDesc]= useState('');
-  const [allCategorys,setAllCategorys] = useState([])
+  const [allCategorys, setAllCategorys] = useState([]);
+
+  console.log("컴포넌트 렌더링됨");
+  console.log("문제 수정 열 때 테스트케이스", testcaseArray);
+
 
   useEffect(() => {
-    
-    setTitle(question.title);
-    setDescription(question.testcaseDescription);
-    const c = "c"+question.categoryPk
-    setCategory(c);
-    setDesc(question.content);
-    const l ="l"+question.levelPk
-    setLevel(l);
-    const apiUr2 = `${process.env.REACT_APP_DB_HOST}`+"/api/v1/question/search/categorys";
-  
+    const fetchData = async () => {
+      
+      setTitle(question.title);
+      setDescription(question.intro);//한줄설명
+      const c = "c" + question.categoryPk;
+      setCategory(c);
+      setDesc(question.content);//문제설명
+      const l = "l" + question.levelPk;
+      setLevel(l);
+      setTestDesc(question.testcaseDescription);
+    };
+    const apiUr2 = `${process.env.REACT_APP_DB_HOST}/api/v1/question/search/categorys`;
     axios
       .get(apiUr2)
       .then((response) => {
-        console.log("전체 카테고리",response.data)
-        setAllCategorys(response.data)
-        setCategory(response.data[0].pk)
+        console.log("전체 카테고리", response.data);
+        setAllCategorys(response.data);
+        setCategory(response.data[0].pk);
       })
       .catch((error) => {
         console.error("API 호출 중 에러:", error);
       });
-    // setTestDesc(question.testDesc);
 
-  },[question])
- 
+  
+    fetchData();
+  }, [question, testcaseArray]);
+  
 
 
   const handleTypeChange = (e) => {
@@ -114,6 +121,7 @@ const [title, setTitle] = useState("");
       console.error("API 호출 중 에러:", error);
     });
     onClose();
+    window.location.reload();
   };
 
   return (
@@ -172,6 +180,7 @@ const [title, setTitle] = useState("");
                   allCategorys.map((value, index) => (
                     <option value = {value.pk}>{value.categoryName}</option>
                   ))}
+
               </select>
             </div>
           </div>
@@ -217,6 +226,7 @@ const [title, setTitle] = useState("");
                           type="text"
                           placeholder="테스트 케이스 1 입력"
                           className="testcase1input"
+                          value={testcaseArray[0].input}
                         ></textarea>
                       </td>
                       <td className="enroll-question-test-case-result">
@@ -224,6 +234,7 @@ const [title, setTitle] = useState("");
                           type="text"
                           placeholder="테스트 케이스 1 결과"
                           className="testcase1output"
+                          value={testcaseArray[0].output}
                         ></textarea>
                       </td>
                     </tr>
@@ -233,6 +244,7 @@ const [title, setTitle] = useState("");
                           type="text"
                           placeholder="테스트 케이스 2 입력"
                           className="testcase2input"
+                          value={testcaseArray[1].input}
                         ></textarea>
                       </td>
                       <td className="enroll-question-test-case-result">
@@ -240,6 +252,7 @@ const [title, setTitle] = useState("");
                           type="text"
                           placeholder="테스트 케이스 2 결과"
                           className="testcase2output"
+                          value={testcaseArray[1].output}
                         ></textarea>
                       </td>
                     </tr>
@@ -249,6 +262,7 @@ const [title, setTitle] = useState("");
                           type="text"
                           placeholder="테스트 케이스 3 입력"
                           className="testcase3input"
+                          value={testcaseArray[2].input}
                         ></textarea>
                       </td>
                       <td className="enroll-question-test-case-result">
@@ -256,6 +270,7 @@ const [title, setTitle] = useState("");
                           type="text"
                           placeholder="테스트 케이스 3 결과"
                           className="testcase3output"
+                          value={testcaseArray[2].output}
                         ></textarea>
                       </td>
                     </tr>
