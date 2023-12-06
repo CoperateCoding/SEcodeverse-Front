@@ -14,16 +14,7 @@ const Main_Page_Body = () => {
   const [leagueOpenTime, setLeagueOpenTime] = useState("");
   const [leagueCloseTime, setCloseTime] = useState("");
   useEffect(() => {
-//     const str = "문자열!@#치환*()테스트";
-// const replacedStr = str.replace(/!@#/g, "\n");
-// const replacedStr1 = replacedStr.replace(/\*\(\)/g, "\n");
-// console.log("replacedStr",replacedStr1)
-var str =  'Hello SEcodeVerse\n';
 
-if (str.endsWith("\n")) {
-  str = str.slice(0, -1);
-}
-console.log("메인페이지에서",str)
     const apiUrl = `${process.env.REACT_APP_DB_HOST}` + "/api/v1/board/popular";
 
     axios
@@ -44,6 +35,7 @@ console.log("메인페이지에서",str)
       )
       .then((response) => {
         setQuestionList(response.data);
+        console.log(response.data)
       })
       .catch((error) => {
         console.error("API 호출 중 에러:", error);
@@ -83,6 +75,7 @@ console.log("메인페이지에서",str)
         console.error("현재 진행중인 리그 받아오는중 에러", error);
         setIsLeage(false);
       });
+      
   }, []);
 
   return (

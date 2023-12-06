@@ -2,40 +2,22 @@ import "../../css/SuccessResult.css";
 import RecommendComponent from "../mypage/RecommendComponent";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-const SuccessResult = ({ onClose, value, code, fianlSimilarQuestion }) => {
+const SuccessResult = ({ aiReview, onClose, value, code, fianlSimilarQuestion }) => {
   // const [questionData, setQuestionData] = useState([]);
   const [question, setQuestion] = useState([]);
-  const [aiReview, setAIreview] = useState("");
+  // const [aiReview, setAIreview] = useState("");
   const [isReview, setIsReview] = useState(false);
 
   useEffect(() => {
     console.log(value);
+    console.log("aiRiview", aiReview)
+  
+
+ 
   }, []);
 
   //조언보기 버튼에 연결해주세용 ~
   const onClickReview = () => {
-    const apiUrl =
-      `${process.env.REACT_APP_DB_HOST}` + "/api/v1/chatbot/codeReview";
-    axios
-      .post(
-        apiUrl,
-        {
-          code: code,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then((response) => {
-        console.log("ai 조언", response.data);
-        setAIreview(response.data.response);
-      })
-      .catch((error) => {
-        // 에러 처리
-        console.error("ai조언중 에러남", error);
-      });
     setIsReview(true);
   };
 

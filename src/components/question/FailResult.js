@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { isCompositeComponent } from "react-dom/test-utils";
 
-const FailResult = ({ onClose, value, code, fianlSimilarQuestion}) => {
+const FailResult = ({aiReview, onClose, value, code, fianlSimilarQuestion}) => {
   // 괄호 수정
   // 유사문제 추천 관련
   // const questionData = [
@@ -15,7 +15,7 @@ const FailResult = ({ onClose, value, code, fianlSimilarQuestion}) => {
   //   { pk: 5, title: "유사문제 5", img: "" },
   // ];
   const [question, setQuestion] = useState([]);
-  const [aiReview, setAIreview] = useState("");
+  // const [aiReview, setAIreview] = useState("");
   const [isReview, setIsReview] = useState(false);
 
   const onClick = () => {
@@ -29,29 +29,29 @@ const FailResult = ({ onClose, value, code, fianlSimilarQuestion}) => {
 
   const onClickReview =  () => {
 
-    // console.log(code)
-    // console.log("넘어온 SIMILARqUESTION",fianlSimilarQuestion)
-    const apiUrl =`${process.env.REACT_APP_DB_HOST}`+ "/api/v1/chatbot/codeReview";
-    axios
-      .post(
-        apiUrl,
-        {
-          code: code,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then((response) => {
-        console.log("ai 조언", response.data);
-        setAIreview(response.data.response);
-      })
-      .catch((error) => {
-        // 에러 처리
-        console.error("ai조언중 에러남", error);
-      });
+    // // console.log(code)
+    // // console.log("넘어온 SIMILARqUESTION",fianlSimilarQuestion)
+    // const apiUrl =`${process.env.REACT_APP_DB_HOST}`+ "/api/v1/chatbot/codeReview";
+    // axios
+    //   .post(
+    //     apiUrl,
+    //     {
+    //       code: code,
+    //     },
+    //     {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //     }
+    //   )
+    //   .then((response) => {
+    //     console.log("ai 조언", response.data);
+    //     setAIreview(response.data.response);
+    //   })
+    //   .catch((error) => {
+    //     // 에러 처리
+    //     console.error("ai조언중 에러남", error);
+    //   });
       setIsReview(true);
     }
   return (

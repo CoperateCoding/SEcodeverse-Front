@@ -1,20 +1,6 @@
 import LevelImage from "./LevelImage";
 import { Link, useNavigate } from "react-router-dom";
-function getCategroy(num) {
-  if (num == 1) {
-    return "자료구조";
-  } else if (num == 2) {
-    return "웹프로그래밍";
-  } else if (num == 3) {
-    return "자바프로그래밍";
-  } else if (num == 4) {
-    return "데이터베이스";
-  } else if (num == 5) {
-    return "c++";
-  } else if (num == 6) {
-    return "python";
-  }
-}
+
 const QuestionTableComponent = ({ questions }) => {
   const navigate = useNavigate();
 
@@ -35,7 +21,7 @@ const QuestionTableComponent = ({ questions }) => {
           <td className="mainPage-question-writer">{question.userName}</td>
           <td className="mainPage-question-grade">{question.levelPk}</td>
           <td className="mainPage-question-category">
-            {getCategroy(question.categoryPk)}
+            {question.categoryName}
           </td>
         </tr>
       ))}
