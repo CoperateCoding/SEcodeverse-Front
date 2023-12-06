@@ -24,6 +24,7 @@ const SolveQuestion = () => {
         params
       })
       .then(response => {
+        console.log("내가 푼 문제",response.data)
         setQuestionList(response.data);
         setTotalPages(
           response.data[0].cnt % 8 > 0
