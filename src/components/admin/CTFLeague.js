@@ -105,14 +105,13 @@ const CTFLeague = () => {
         }
       )
       .then((response) => {
-        console.log(response.data);
         window.location.reload();
+        
       })
       .catch((error) => {
         console.error("API 호출 중 에러:", error);
       });
 
-    window.location.reload();
   };
 
   const toggleModifyLeague = (leagueIndex) => {
@@ -149,13 +148,14 @@ const CTFLeague = () => {
       )
       .then((response) => {
         console.log("리그 수정 성공 ", response.data);
+        window.location.reload();
    
       })
       .catch((error) => {
         console.error("리그 수정중 에라", error);
       });
+      
 setIsEditLeague(false);
-window.location.reload();
 
   };
 

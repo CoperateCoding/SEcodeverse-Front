@@ -23,7 +23,7 @@ const LeaugeTableComponent = ({index,isCreateLeague, toggleModifyLeague,value}) 
   }
     return(
         <tr>
-                <th className="leage-number">{index}</th>
+                <th className="leage-number">{index+1}</th>
                 <th className="leage-name">{value.name}</th>
                 <th className="leage-date">{value.openTime} ~ {value.closeTime}</th>
                 <th className="admin-league-table-modify" onClick={toggleModifyLeague}>
