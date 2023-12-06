@@ -23,7 +23,7 @@ const MyQuestion = () => {
         params,
       })
       .then((response) => {
-        console.log(response.data)
+        console.log("내가 만든 문제",response.data)
         setQuestionList(response.data);
         console.log(response.data[0].cnt)
         setTotalpages(response.data[0].cnt % 8 > 0 ? response.data[0].cnt/8 + 1 : response.data[0].cnt/8);

@@ -66,248 +66,248 @@ const QuestionDetail = () => {
   const [ai,setAI]=useState('')
 
   const compiler = async ()=> {
-    const apiUrl =
-    `${process.env.REACT_APP_DB_HOST}` + "/api/v1/chatbot/codeReview";
-    axios
-    .post(
-      apiUrl,
-      {
-        code: code,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-    .then((response) => {
-      console.log("ai 조언", response.data);
-      setAIreview(response.data.response);
-    })
-    .catch((error) => {
-      // 에러 처리
-      console.error("ai조언중 에러남", error);
-    });
-    const compileResult = []
-    const TestcaseOutput=[]
-    let totalmemory =0
-    let totaltime =0
-    let memory=0
-    let time =0;
-    let isSucess=true
-    console.log("테스트 케이스 보내기 시작합니다.")
-    console.log("테스트케이스의 길이는",testcase.length)
-    if(testcase.length ===0){
-      testCaseNone(compileResult)
-      await sleep(5000);
-      console.log("결과확인중에 결과",compileResult)
-      totalmemory=compileResult[0].memory
-        totaltime = parseFloat(compileResult[0].time)
-        console.log("testCase가 없음",totalmemory)
-        console.log("testCase가 없음", totaltime)
-        isSucess=false
-    }
-    else{
-      for(let i=0; i<testcase.length; i++){
-        console.log("배열들어옴 ")
-        handleExecuteCode(testcase[i],compileResult)
-        await sleep(5000);
-        console.log("받아온 테스트케이스",testcase)
-        console.log("보내는 테스트케이스2 ",testcase[i].pk, testcase[i].input)
-      }
-      await sleep(5000); 
-      // console.log("코드 모두 컴파일 후 "+ result)
-      for(let i=0; i<testcase.length;i++){
-        let str = testcase[i].output
-        str = str.replace(/!@#/g, "\n");
-        str= str.replace(/\*\(\)/g, "\n");
-        TestcaseOutput.push(str)
-      }
-      console.log(compileResult)
-      var wrongCount =0
-      for(let i =0; i<compileResult.length ; i++){
-        var line = compileResult[i].stdout
-        console.log("line",line)
-        var result=line
-        if(line!="null"){ 
-          if (line.endsWith("\n")) {
-            console.log("마지막에 엔터있다.")
-            line = line.slice(0, -1);
-            console.log("제일 마지막 때버린 line : ",line)
-            result=line
+    // const apiUrl =
+    // `${process.env.REACT_APP_DB_HOST}` + "/api/v1/chatbot/codeReview";
+    // axios
+    // .post(
+    //   apiUrl,
+    //   {
+    //     code: code,
+    //   },
+    //   {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   }
+    // )
+    // .then((response) => {
+    //   console.log("ai 조언", response.data);
+    //   setAIreview(response.data.response);
+    // })
+    // .catch((error) => {
+    //   // 에러 처리
+    //   console.error("ai조언중 에러남", error);
+    // });
+    // const compileResult = []
+    // const TestcaseOutput=[]
+    // let totalmemory =0
+    // let totaltime =0
+    // let memory=0
+    // let time =0;
+    // let isSucess=true
+    // console.log("테스트 케이스 보내기 시작합니다.")
+    // console.log("테스트케이스의 길이는",testcase.length)
+    // if(testcase.length ===0){
+    //   testCaseNone(compileResult)
+    //   await sleep(5000);
+    //   console.log("결과확인중에 결과",compileResult)
+    //   totalmemory=compileResult[0].memory
+    //     totaltime = parseFloat(compileResult[0].time)
+    //     console.log("testCase가 없음",totalmemory)
+    //     console.log("testCase가 없음", totaltime)
+    //     isSucess=false
+    // }
+    // else{
+    //   for(let i=0; i<testcase.length; i++){
+    //     console.log("배열들어옴 ")
+    //     handleExecuteCode(testcase[i],compileResult)
+    //     await sleep(5000);
+    //     console.log("받아온 테스트케이스",testcase)
+    //     console.log("보내는 테스트케이스2 ",testcase[i].pk, testcase[i].input)
+    //   }
+    //   await sleep(5000); 
+    //   // console.log("코드 모두 컴파일 후 "+ result)
+    //   for(let i=0; i<testcase.length;i++){
+    //     let str = testcase[i].output
+    //     str = str.replace(/!@#/g, "\n");
+    //     str= str.replace(/\*\(\)/g, "\n");
+    //     TestcaseOutput.push(str)
+    //   }
+    //   console.log(compileResult)
+    //   var wrongCount =0
+    //   for(let i =0; i<compileResult.length ; i++){
+    //     var line = compileResult[i].stdout
+    //     console.log("line",line)
+    //     var result=line
+    //     if(line!="null"){ 
+    //       if (line.endsWith("\n")) {
+    //         console.log("마지막에 엔터있다.")
+    //         line = line.slice(0, -1);
+    //         console.log("제일 마지막 때버린 line : ",line)
+    //         result=line
   
-        }
+    //     }
     
         
-      }
-       console.log("결과 확인전",isSuccess)
-       console.log("result",result)
-       if(result===TestcaseOutput[i]){
-        console.log("똑같은데")
-       }
-        if(result != TestcaseOutput[i]){
-          isSucess=false
-          console.log("내 코드 결과",result)
-          console.log("내스트케이스 결과",TestcaseOutput[i])
-          wrongCount+=1
-        }
-        totalmemory=totalmemory+compileResult[i].memory
-        totaltime = totaltime+parseFloat(compileResult[i].time)
-        console.log("parseInt한 값",parseFloat(compileResult[i].time))
+    //   }
+    //    console.log("결과 확인전",isSuccess)
+    //    console.log("result",result)
+    //    if(result===TestcaseOutput[i]){
+    //     console.log("똑같은데")
+    //    }
+    //     if(result != TestcaseOutput[i]){
+    //       isSucess=false
+    //       console.log("내 코드 결과",result)
+    //       console.log("내스트케이스 결과",TestcaseOutput[i])
+    //       wrongCount+=1
+    //     }
+    //     totalmemory=totalmemory+compileResult[i].memory
+    //     totaltime = totaltime+parseFloat(compileResult[i].time)
+    //     console.log("parseInt한 값",parseFloat(compileResult[i].time))
   
-      }
-    }
+    //   }
+    // }
     
 
-    memory =totalmemory/compileResult.length
-    time =totaltime/compileResult.length
-    const roundMemory = memory.toFixed(2);
-    const roundtIME = time.toFixed(2);
-    setSuccessResult({memory:roundMemory,time:roundtIME,lenguage:selectedLanguage})
-    console.log("성공여부",isSucess)
-    var seconds = 0.055;
-    var hours = Math.floor(seconds / 3600);
-    var minutes = Math.floor((seconds % 3600) / 60);
-    var remainingSeconds = (seconds % 3600) % 60;
+    // memory =totalmemory/compileResult.length
+    // time =totaltime/compileResult.length
+    // const roundMemory = memory.toFixed(2);
+    // const roundtIME = time.toFixed(2);
+    // setSuccessResult({memory:roundMemory,time:roundtIME,lenguage:selectedLanguage})
+    // console.log("성공여부",isSucess)
+    // var seconds = 0.055;
+    // var hours = Math.floor(seconds / 3600);
+    // var minutes = Math.floor((seconds % 3600) / 60);
+    // var remainingSeconds = (seconds % 3600) % 60;
     
-    var timeString = hours.toString().padStart(2, '0') + ':' +
-                     minutes.toString().padStart(2, '0') + ':' +
-                     remainingSeconds.toFixed(3).padStart(6, '0');
+    // var timeString = hours.toString().padStart(2, '0') + ':' +
+    //                  minutes.toString().padStart(2, '0') + ':' +
+    //                  remainingSeconds.toFixed(3).padStart(6, '0');
     
-    console.log(timeString);
-    console.log(code)
-    console.log(roundMemory)
-    if(isSucess==true){
-      setSuccess(true)
-      const apiUrl = `${process.env.REACT_APP_DB_HOST}`+`/api/v1/code/${questionPk}`;
-      axios.post(apiUrl,{
-        codeStatus : "TRUE",
-        content : code,
-        compileTime :timeString,
-        memory:roundMemory,
-        accuracy:100
-      },{
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("access")}`,
-        },
-      })
-        .then(response => {
-          console.log(response.data)
-          console.log("코드 저장 성공")
+    // console.log(timeString);
+    // console.log(code)
+    // console.log(roundMemory)
+    // if(isSucess==true){
+    //   setSuccess(true)
+    //   const apiUrl = `${process.env.REACT_APP_DB_HOST}`+`/api/v1/code/${questionPk}`;
+    //   axios.post(apiUrl,{
+    //     codeStatus : "TRUE",
+    //     content : code,
+    //     compileTime :timeString,
+    //     memory:roundMemory,
+    //     accuracy:100
+    //   },{
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: `Bearer ${localStorage.getItem("access")}`,
+    //     },
+    //   })
+    //     .then(response => {
+    //       console.log(response.data)
+    //       console.log("코드 저장 성공")
        
         
         
-        })
-        .catch(error => {
-          console.error('코드 저장 중 에러:', error);
-        });
+    //     })
+    //     .catch(error => {
+    //       console.error('코드 저장 중 에러:', error);
+    //     });
 
 
-        const params = {
-          questionPk: questionPk
-        };
+    //     const params = {
+    //       questionPk: questionPk
+    //     };
         
-        const apiUrl2 = `${process.env.REACT_APP_DB_HOST}/api/v1/question/corret/exp`;
+    //     const apiUrl2 = `${process.env.REACT_APP_DB_HOST}/api/v1/question/corret/exp`;
         
-        axios.post(apiUrl2, null, {
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("access")}`
-          },
-          params: params
-        })
-          .then(response => {
-            console.log(response.data);
-          })
-          .catch(error => {
-            console.error('코드 저장 중 에러:', error);
-          });
-    }
-    else{
-      setSuccess(false)
-      const accuracyPercent = (testcase.length - wrongCount)/testcase.length
-      console.log(accuracyPercent)
-      const apiUrl = `${process.env.REACT_APP_DB_HOST}`+`/api/v1/code/${questionPk}`;
-      axios.post(apiUrl,{
-        codeStatus : "FALSE",
-        content : code,
-        compileTime : timeString,
-        memory:roundMemory,
-        accuracy:100
-      },{
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("access")}`,
-        },
-      })
-        .then(response => {
-          console.log(response.data)
+    //     axios.post(apiUrl2, null, {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         "Authorization": `Bearer ${localStorage.getItem("access")}`
+    //       },
+    //       params: params
+    //     })
+    //       .then(response => {
+    //         console.log(response.data);
+    //       })
+    //       .catch(error => {
+    //         console.error('코드 저장 중 에러:', error);
+    //       });
+    // }
+    // else{
+    //   setSuccess(false)
+    //   const accuracyPercent = (testcase.length - wrongCount)/testcase.length
+    //   console.log(accuracyPercent)
+    //   const apiUrl = `${process.env.REACT_APP_DB_HOST}`+`/api/v1/code/${questionPk}`;
+    //   axios.post(apiUrl,{
+    //     codeStatus : "FALSE",
+    //     content : code,
+    //     compileTime : timeString,
+    //     memory:roundMemory,
+    //     accuracy:100
+    //   },{
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: `Bearer ${localStorage.getItem("access")}`,
+    //     },
+    //   })
+    //     .then(response => {
+    //       console.log(response.data)
        
         
         
-        })
-        .catch(error => {
-          console.error('코드 저장 중 에러:', error);
-        });
+    //     })
+    //     .catch(error => {
+    //       console.error('코드 저장 중 에러:', error);
+    //     });
       
-    }
-    await sleep(5000); 
-    let similarArr=[]
-    try {
-      const response = await axios.get(`${process.env.REACT_APP_DB_HOST}`+'/api/v1/chatbot/similary', {
-        params: {
-          levelPk: question.levelPk,
-          categoryPk: question.categoryPk
-        },
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("access")}`,
-        }
-      });
+    // }
+    // await sleep(5000); 
+    // let similarArr=[]
+    // try {
+    //   const response = await axios.get(`${process.env.REACT_APP_DB_HOST}`+'/api/v1/chatbot/similary', {
+    //     params: {
+    //       levelPk: question.levelPk,
+    //       categoryPk: question.categoryPk
+    //     },
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: `Bearer ${localStorage.getItem("access")}`,
+    //     }
+    //   });
   
-      console.log("비슷한 문제 받아 왔음similarData", response.data);
-      setSimilar(response.data);
+    //   console.log("비슷한 문제 받아 왔음similarData", response.data);
+    //   setSimilar(response.data);
   
-       similarArr = response.data.response;
-       console.log("similarArrLenght:",similarArr.length)
+    //    similarArr = response.data.response;
+    //    console.log("similarArrLenght:",similarArr.length)
  
   
-      for (let i = 0; i < similarArr.length; i++) {
-        try {
-          console.log("for문 들어옴 " ,i)
-          const similarItem = similarArr[i];
-          const detailResponse = await axios.get(`${process.env.REACT_APP_DB_HOST}`+`/api/v1/question/detail/${similarItem}`, {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("access")}`,
-            }
-          });
+    //   for (let i = 0; i < similarArr.length; i++) {
+    //     try {
+    //       console.log("for문 들어옴 " ,i)
+    //       const similarItem = similarArr[i];
+    //       const detailResponse = await axios.get(`${process.env.REACT_APP_DB_HOST}`+`/api/v1/question/detail/${similarItem}`, {
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //           Authorization: `Bearer ${localStorage.getItem("access")}`,
+    //         }
+    //       });
   
-          console.log("비슷한 문제중 문제 하나 상세조회", detailResponse.data);
+    //       console.log("비슷한 문제중 문제 하나 상세조회", detailResponse.data);
 
-          similarQuestion.push({pk : detailResponse.data.question.pk ,
-            level : detailResponse.data.question.levelPk,
-          title : detailResponse.data.question.title
-         });
-        } catch (error) {
-          console.error("비슷한 문제 상세조회 중 에러", error);
-          similarQuestion.push(null);
-        }
-      }
+    //       similarQuestion.push({pk : detailResponse.data.question.pk ,
+    //         level : detailResponse.data.question.levelPk,
+    //       title : detailResponse.data.question.title
+    //      });
+    //     } catch (error) {
+    //       console.error("비슷한 문제 상세조회 중 에러", error);
+    //       similarQuestion.push(null);
+    //     }
+    //   }
   
-      // 상세 정보를 처리하거나 저장할 수 있습니다.
-      // 예를 들어, similarQuestions를 state에 저장하거나 처리할 수 있습니다.
-    } catch (error) {
-      console.error("비슷한 문제 받아오는 중 에러", error);
-    }
+    //   // 상세 정보를 처리하거나 저장할 수 있습니다.
+    //   // 예를 들어, similarQuestions를 state에 저장하거나 처리할 수 있습니다.
+    // } catch (error) {
+    //   console.error("비슷한 문제 받아오는 중 에러", error);
+    // }
     
    
-    if(similarQuestion.length === similarArr.length){
-      console.log("similRqUESTION",similarQuestion)
-      setFinalSimilarQuestion(similarQuestion)
-      setIsPopup(!isPopup)
-    }
+    // if(similarQuestion.length === similarArr.length){
+    //   console.log("similRqUESTION",similarQuestion)
+    //   setFinalSimilarQuestion(similarQuestion)
+    //   setIsPopup(!isPopup)
+    // }
 
 
   }
